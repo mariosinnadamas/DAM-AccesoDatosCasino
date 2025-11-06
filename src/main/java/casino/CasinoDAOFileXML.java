@@ -22,12 +22,14 @@ public class CasinoDAOFileXML implements CasinoDAO {
     File fileServicio = new File(pathServicio.toString());
 
     private final List<Cliente> clientes = new ArrayList<>();
+    private final List<Servicio> servicios = new ArrayList<>();
+    private final List<Log> logs = new ArrayList<>();
 
     @Override
     public void addCliente(Cliente cliente) {
         try {
             //Si existe el XML, lo cargo
-            if (fileCliente.exists()){
+            if (fileCliente.exists()) {
                 JAXBContext context = JAXBContext.newInstance(ClienteListWrapper.class);
                 Unmarshaller unmarshaller = context.createUnmarshaller();
                 ClienteListWrapper wrapper = (ClienteListWrapper) unmarshaller.unmarshal(fileCliente);
@@ -65,7 +67,40 @@ public class CasinoDAOFileXML implements CasinoDAO {
 
     @Override
     public void addServicio(Servicio servicio) {
+        try {
+            if (fileServicio.exists()){
+                JAXBContext context = JAXBContext.newInstance(ServiciosListWrapper.class);
+                Unmarshaller unmarshaller = context.createUnmarshaller();
+                ServiciosListWrapper wrapper = (ServiciosListWrapper) unmarshaller.unmarshal(fileServicio);
 
+                servicios.clear();
+                servicios.addAll(wrapper.getServicios());
+            }
+
+            //Añado el cliente a la lista creada
+            servicios.add(servicio);
+
+            //Guardo la lista completa en el XML
+            guardarServiciosEnXML();
+        } catch (JAXBException e){
+            e.printStackTrace();
+        }
+    }
+
+    private void guardarServiciosEnXML(){
+        try {
+            JAXBContext context = JAXBContext.newInstance(ServiciosListWrapper.class);
+            Marshaller marshaller = context.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,true);
+
+            ServiciosListWrapper wrapper = new ServiciosListWrapper();
+            wrapper.setServicios(servicios);
+
+            marshaller.marshal(wrapper,fileServicio);
+
+        } catch (JAXBException e){
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -153,7 +188,7 @@ public class CasinoDAOFileXML implements CasinoDAO {
         return List.of();
     }
 
-    //Clase interna para JAXB
+    //Clases interna para JAXB
     @XmlRootElement(name = "clientes")
     private static class ClienteListWrapper {
         private List<Cliente> clientes = new ArrayList<>();
@@ -162,5 +197,25 @@ public class CasinoDAOFileXML implements CasinoDAO {
         public List<Cliente> getClientes() { return clientes; }
 
         public void setClientes(List<Cliente> clientes) { this.clientes = clientes; }
+    }
+
+    @XmlRootElement(name = "servicios")
+    private static class ServiciosListWrapper {
+        private List<Servicio> servicios = new ArrayList<>();
+
+        @XmlElement(name = "servicio")
+        public List<Servicio> getServicios() { return servicios; }
+
+        public void setServicios(List<Servicio> servicios) { this.servicios = servicios; }
+    }
+
+    @XmlRootElement(name = "logs")
+    private static class LogsListWrapper {
+        private List<Log> logs = new ArrayList<>();
+
+        @XmlElement(name = "log")
+        public List<Log> getLogs() { return logs; }
+
+        public void setLogs(List<Log> logs) { this.logs = logs; }
     }
 }
