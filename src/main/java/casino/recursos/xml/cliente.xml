@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<clientes>
+    <cliente>
+        <dni>10155231H</dni>
+        <nombre>Prueba</nombre>
+        <apellidos>Pruebez Probatez</apellidos>
+    </cliente>
+    <cliente>
+        <dni>22041727E</dni>
+        <nombre>Prueba2</nombre>
+        <apellidos>Pruebez2 Probatez2</apellidos>
+    </cliente>
+</clientes>
