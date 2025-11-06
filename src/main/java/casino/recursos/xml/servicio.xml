@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<servicios>
+    <servicio>
+        <codigo>5E948</codigo>
+        <tipo>BAR</tipo>
+        <nombreServicio>BaretoPruebas</nombreServicio>
+        <capacidadMaxima>20</capacidadMaxima>
+    </servicio>
+</servicios>
