@@ -2,6 +2,7 @@ package casino;
 
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
 
 import java.io.Externalizable;
 import java.io.IOException;
@@ -9,11 +10,16 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.Objects;
 
-@XmlRootElement
+@XmlRootElement(name = "cliente")
+@XmlType(propOrder = {"dni", "nombre", "apellidos"})
 public class Cliente implements Externalizable {
     private String dni;
     private String nombre;
     private String apellidos;
+
+    //Constructor vacío obligatorio para JAXB
+    public Cliente() {
+    }
 
     public Cliente(String dni, String nombre, String apellidos){
         setDni(dni);
