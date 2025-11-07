@@ -1,21 +1,34 @@
 package casino;
 
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlTransient;
+import jakarta.xml.bind.annotation.XmlType;
+
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Formatter;
 
+@XmlRootElement(name = "Log")
+@XmlType(propOrder = {"cliente", "servicio", "fechaStr", "horaStr", "concepto", "cantidadConcepto"})
 public class Log implements Externalizable {
     private Cliente cliente;
     private Servicio servicio;
+    @XmlTransient
     private LocalDate fecha;
+
+    @XmlTransient
     private LocalTime hora;
+
     private TipoConcepto concepto;
     private double cantidadConcepto;
 
-    //Constructor vacío para JSON (Serialización)
+    //Constructor vacío para JSON (Serialización) y JAXB
     public Log() {
     }
 
@@ -39,6 +52,7 @@ public class Log implements Externalizable {
         this.hora = hora;
     }
 
+    @XmlElement
     public Cliente getCliente() {
         return cliente;
     }
@@ -50,6 +64,7 @@ public class Log implements Externalizable {
         this.cliente = cliente;
     }
 
+    @XmlElement
     public Servicio getServicio() {
         return servicio;
     }
@@ -61,8 +76,15 @@ public class Log implements Externalizable {
         this.servicio = servicio;
     }
 
+    @XmlTransient
     public LocalDate getFecha() {
         return fecha;
+    }
+
+    //Getter para no tener que adaptar el XML ya que no puede guardar LocalDate
+    @XmlElement(name = "fecha")
+    public String getFechaStr(){
+        return (fecha !=null) ? fecha.toString(): "";
     }
 
     public void setFecha(LocalDate fecha) {
@@ -71,15 +93,26 @@ public class Log implements Externalizable {
         }
         this.fecha = fecha;
     }
-
+    @XmlTransient
     public LocalTime getHora() {
         return hora;
+    }
+
+    //Getter para no tener que adaptar el XML ya que no puede guardar LocalTime
+    @XmlElement(name = "hora")
+    public String getHoraStr(){
+        if(hora != null){
+            DateTimeFormatter formateo = DateTimeFormatter.ofPattern("HH:mm:ss");
+            return hora.format(formateo);
+        }
+        return "";
     }
 
     public void setHora(LocalTime hora) {
         this.hora = hora;
     }
 
+    @XmlElement
     public TipoConcepto getConcepto() {
         return concepto;
     }
@@ -91,6 +124,7 @@ public class Log implements Externalizable {
         this.concepto = concepto;
     }
 
+    @XmlElement
     public double getCantidadConcepto() {
         return cantidadConcepto;
     }
