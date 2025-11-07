@@ -1,7 +1,12 @@
 package casino;
 
+import casino.recursos.DummyGenerator;
+import exceptions.ClientNotFoundException;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CasinoMain {
     public static void main(String[] args) {
@@ -12,6 +17,16 @@ public class CasinoMain {
         Servicio s2 = new Servicio(TipoServicio.MESAPOKER, "Mesa1");
         Log l = new Log(c,s2, TipoConcepto.DARSEDEALTA,20.0);
         Log l2 = new Log(c2,s, TipoConcepto.DARSEDEALTA,30.0);
+
+
+        try{
+            System.out.println(xml.consultaCliente("06690442H"));
+        } catch (ClientNotFoundException e) {
+            System.err.println(e.getMessage());
+        }
+
+
+
         //xml.addCliente(c);
         //xml.addCliente(c2);
         //xml.addServicio(s2);

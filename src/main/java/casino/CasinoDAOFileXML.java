@@ -1,5 +1,6 @@
 package casino;
 
+import exceptions.ClientNotFoundException;
 import jakarta.xml.bind.*;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
@@ -21,10 +22,13 @@ public class CasinoDAOFileXML implements CasinoDAO {
     Path pathServicio = Path.of("src", "main", "java", "casino", "recursos", "xml", "servicio.xml");
     File fileServicio = new File(pathServicio.toString());
 
-    private final List<Cliente> clientes = new ArrayList<>();
+    private List<Cliente> clientes = new ArrayList<>();
     private final List<Servicio> servicios = new ArrayList<>();
     private final List<Log> logs = new ArrayList<>();
 
+    public CasinoDAOFileXML(){
+        clientes = leerListaClientes();
+    }
     @Override
     public void addCliente(Cliente cliente) {
         try {
@@ -159,14 +163,30 @@ public class CasinoDAOFileXML implements CasinoDAO {
     }
 
     @Override
-    public List<Servicio> listaServicios() {
-        return List.of();
+    public List<Servicio> leerListaServicios() {
+        try{
+            JAXBContext context = JAXBContext.newInstance(ServiciosListWrapper.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            ServiciosListWrapper wrapper = (ServiciosListWrapper) unmarshaller.unmarshal(fileServicio);
+
+            for (Servicio s: wrapper.getServicios()){
+                servicios.add(s);
+            }
+
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+        return servicios;
     }
 
     @Override
-    public String consultaCliente(String dni) {
+    public String consultaCliente(String dni) throws ClientNotFoundException {
         if (dni == null || dni.isBlank()) {
-            return "Error: DNI invalido";
+            return "Error: Nulo o vacío";
+        }
+
+        if (!Cliente.validarDni(dni)) {
+            return "Error: DNI no válido";
         }
 
         for(Cliente c: clientes){
@@ -175,25 +195,25 @@ public class CasinoDAOFileXML implements CasinoDAO {
 
             }
         }
-        //ToDo: throw ClientNotFound
-        return"";
+
+        throw new ClientNotFoundException("Cliente no encotrado");
     }
 
     @Override
-    public List<Cliente> listaClientes() {
+    public List<Cliente> leerListaClientes() {
         try{
             JAXBContext context = JAXBContext.newInstance(ClienteListWrapper.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
-            ClienteListWrapper wrapper = (ClienteListWrapper) unmarshaller.unmarshal(fileServicio);
+            ClienteListWrapper wrapper = (ClienteListWrapper) unmarshaller.unmarshal(fileCliente);
 
-            for (Cliente c: wrapper.clientes){
-
+            for (Cliente c: wrapper.getClientes()){
+                clientes.add(c);
             }
 
         } catch (JAXBException e) {
             e.printStackTrace();
         }
-        return List.of();
+        return clientes;
     }
 
     @Override
@@ -215,8 +235,20 @@ public class CasinoDAOFileXML implements CasinoDAO {
     }
 
     @Override
-    public List<Log> listaLog() {
-        return List.of();
+    public List<Log> leerListaLog() {
+        try{
+            JAXBContext context = JAXBContext.newInstance(LogsListWrapper.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            LogsListWrapper wrapper = (LogsListWrapper) unmarshaller.unmarshal(fileCliente);
+
+            for (Log l: wrapper.getLogs()){
+                logs.add(l);
+            }
+
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+        return logs;
     }
 
     @Override

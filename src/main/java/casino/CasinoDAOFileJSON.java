@@ -36,7 +36,7 @@ public class CasinoDAOFileJSON implements CasinoDAO {
     @Override
     public void addCliente(Cliente cliente) {
         //Obtener ArrayList<Cliente> del archivo
-        ArrayList<Cliente> listaClientes = (ArrayList<Cliente>) this.listaClientes();
+        ArrayList<Cliente> listaClientes = (ArrayList<Cliente>) this.leerListaClientes();
 
         //Agregar el objeto cliente
         listaClientes.add(cliente);
@@ -73,7 +73,7 @@ public class CasinoDAOFileJSON implements CasinoDAO {
 
     //Ejemplo de metodo que no está en la interfaz
     public void addCliente(List<Cliente> clientes) {
-        ArrayList<Cliente> listaClient = (ArrayList<Cliente>) this.listaClientes();
+        ArrayList<Cliente> listaClient = (ArrayList<Cliente>) this.leerListaClientes();
 
         for (Cliente cliente : clientes) {
             listaClient.add(cliente);
@@ -119,13 +119,13 @@ public class CasinoDAOFileJSON implements CasinoDAO {
     }
 
     @Override
-    public List<Servicio> listaServicios() {
+    public List<Servicio> leerListaServicios() {
         return List.of();
     }
 
     @Override
     public String consultaCliente(String dni) {
-        ArrayList<Cliente> listaClientes =  (ArrayList<Cliente>) this.listaClientes();
+        ArrayList<Cliente> listaClientes =  (ArrayList<Cliente>) this.leerListaClientes();
 
         for (Cliente cliente : listaClientes) {
             if (cliente.getDni().equals(dni)) {
@@ -142,7 +142,7 @@ public class CasinoDAOFileJSON implements CasinoDAO {
      * @return List<Cliente> del archivo cliente.json
      */
     @Override
-    public List<Cliente> listaClientes() {
+    public List<Cliente> leerListaClientes() {
         List<Cliente> listaClientes = new ArrayList<>();
 
         try (FileReader fileReader = new FileReader(fileCliente);
@@ -174,7 +174,7 @@ public class CasinoDAOFileJSON implements CasinoDAO {
     }
 
     @Override
-    public List<Log> listaLog() {
+    public List<Log> leerListaLog() {
         return List.of();
     }
 

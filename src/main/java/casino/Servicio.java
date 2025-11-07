@@ -14,7 +14,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 @XmlRootElement(name = "servicio")
-@XmlType(propOrder = {"codigo", "tipo", "nombreServicio", "listaClientes","capacidadMaxima"})
+@XmlType(propOrder = {"codigo", "tipo", "nombreServicio", "leerListaClientes","capacidadMaxima"})
 public class Servicio implements Externalizable {
     private String codigo;
     private TipoServicio tipo;
@@ -103,7 +103,7 @@ public class Servicio implements Externalizable {
                 "codigo='" + codigo + '\'' +
                 ", tipo=" + tipo +
                 ", nombreServicio='" + nombreServicio + '\'' +
-                ", listaClientes=" + listaClientes +
+                ", leerListaClientes=" + listaClientes +
                 ", capacidadMaxima=" + capacidadMaxima +
                 '}';
     }
