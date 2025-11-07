@@ -106,11 +106,19 @@ public class Servicio implements Externalizable {
 
     @Override
     public void writeExternal(ObjectOutput out) throws IOException {
-
+        out.writeUTF(codigo);
+        out.writeObject(tipo);
+        out.writeUTF(nombreServicio);
+        out.writeObject(listaClientes);
+        out.writeInt(capacidadMaxima);
     }
 
     @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
-
+        this.codigo = in.readUTF();
+        this.tipo = (TipoServicio) in.readObject();
+        this.nombreServicio = in.readUTF();
+        this.listaClientes = (List<Cliente>) in.readObject();
+        this.capacidadMaxima = in.readInt();
     }
 }

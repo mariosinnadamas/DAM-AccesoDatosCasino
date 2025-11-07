@@ -112,4 +112,13 @@ public class Cliente implements Externalizable {
         this.nombre = in.readUTF();
         this.apellidos = in.readUTF();
     }
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "dni='" + dni + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                '}';
+    }
 }

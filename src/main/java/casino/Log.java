@@ -116,11 +116,23 @@ public class Log implements Externalizable {
 
     @Override
     public void writeExternal(ObjectOutput out) throws IOException {
+        out.writeObject(cliente);
+        out.writeObject(servicio);
+        out.writeObject(fecha);
+        out.writeObject(hora);
+        out.writeObject(concepto);
+        out.writeDouble(cantidadConcepto);
 
     }
 
     @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+        this.cliente = (Cliente) in.readObject();
+        this.servicio = (Servicio) in.readObject();
+        this.fecha = (LocalDate) in.readObject();
+        this.hora = (LocalTime) in.readObject();
+        this.concepto = (TipoConcepto) in.readObject();
+        this.cantidadConcepto = in.readDouble();
 
     }
 }
