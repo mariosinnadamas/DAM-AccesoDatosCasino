@@ -21,9 +21,15 @@ public class CasinoDAOFileXML implements CasinoDAO {
     Path pathServicio = Path.of("src", "main", "java", "casino", "recursos", "xml", "servicio.xml");
     File fileServicio = new File(pathServicio.toString());
 
-    private final List<Cliente> clientes = new ArrayList<>();
-    private final List<Servicio> servicios = new ArrayList<>();
-    private final List<Log> logs = new ArrayList<>();
+    private List<Cliente> clientes = new ArrayList<>();
+    private List<Servicio> servicios = new ArrayList<>();
+    private List<Log> logs = new ArrayList<>();
+
+    public CasinoDAOFileXML(){
+        clientes = listaClientes();
+        servicios = listaServicios();
+        logs = listaLog();
+    }
 
     @Override
     public void addCliente(Cliente cliente) {
@@ -34,8 +40,8 @@ public class CasinoDAOFileXML implements CasinoDAO {
                 Unmarshaller unmarshaller = context.createUnmarshaller();
                 ClienteListWrapper wrapper = (ClienteListWrapper) unmarshaller.unmarshal(fileCliente);
 
-                clientes.clear();
-                clientes.addAll(wrapper.getClientes());
+                clientes.clear(); //Limpio toda la lista
+                clientes.addAll(wrapper.getClientes()); //Vuelco todos los clientes
             }
 
             //Añado el cliente a la lista creada
