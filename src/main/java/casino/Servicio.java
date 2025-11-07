@@ -1,5 +1,9 @@
 package casino;
 
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
+
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
@@ -9,6 +13,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+@XmlRootElement(name = "servicio")
+@XmlType(propOrder = {"codigo", "tipo", "nombreServicio", "listaClientes","capacidadMaxima"})
 public class Servicio implements Externalizable {
     private String codigo;
     private TipoServicio tipo;
@@ -16,10 +22,8 @@ public class Servicio implements Externalizable {
     private List<Cliente> listaClientes;
     private int capacidadMaxima;
 
-    //Constructor serializable
-    public Servicio() {
-
-    }
+    //Constructor vacío obligatorio para JAXB
+    public Servicio() {}
 
     //Constructor para crear Servicio
     public Servicio(TipoServicio tipo, String nombreServicio) {
@@ -44,6 +48,7 @@ public class Servicio implements Externalizable {
         return UUID.randomUUID().toString().substring(0,5).toUpperCase();
     }
 
+    @XmlElement
     public String getCodigo() {
         return codigo;
     }
@@ -54,7 +59,7 @@ public class Servicio implements Externalizable {
         }
         this.codigo = codigo;
     }
-
+    @XmlElement
     public TipoServicio getTipo() {
         return tipo;
     }
@@ -62,7 +67,7 @@ public class Servicio implements Externalizable {
     public void setTipo(TipoServicio tipo) {
         this.tipo = Objects.requireNonNull(tipo, "TipoServicio no puede ser nulo.");
     }
-
+    @XmlElement
     public String getNombreServicio() {
         return nombreServicio;
     }
@@ -75,7 +80,7 @@ public class Servicio implements Externalizable {
 
         this.nombreServicio = nombreServicio;
     }
-
+    @XmlElement
     public List<Cliente> getListaClientes() {
         return listaClientes;
     }
@@ -83,7 +88,7 @@ public class Servicio implements Externalizable {
     public void setListaClientes(List<Cliente> listaClientes) {
         this.listaClientes = listaClientes;
     }
-
+    @XmlElement
     public int getCapacidadMaxima() {
         return capacidadMaxima;
     }
