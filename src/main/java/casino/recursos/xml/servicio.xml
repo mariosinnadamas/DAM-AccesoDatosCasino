@@ -6,4 +6,10 @@
         <nombreServicio>BaretoPruebas</nombreServicio>
         <capacidadMaxima>20</capacidadMaxima>
     </servicio>
+    <servicio>
+        <codigo>574B5</codigo>
+        <tipo>MESAPOKER</tipo>
+        <nombreServicio>Mesa1</nombreServicio>
+        <capacidadMaxima>10</capacidadMaxima>
+    </servicio>
 </servicios>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<logs>
+    <log>
+        <cliente>
+            <dni>10155231H</dni>
+            <nombre>Prueba</nombre>
+            <apellidos>Pruebez Probatez</apellidos>
+        </cliente>
+        <servicio>
+            <codigo>FEFE7</codigo>
+            <tipo>MESAPOKER</tipo>
+            <nombreServicio>Mesa1</nombreServicio>
+            <capacidadMaxima>10</capacidadMaxima>
+        </servicio>
+        <fecha></fecha>
+        <hora></hora>
+        <concepto>DARSEDEALTA</concepto>
+        <cantidadConcepto>20.0</cantidadConcepto>
+    </log>
+    <log>
+        <cliente>
+            <dni>22041727E</dni>
+            <nombre>Prueba2</nombre>
+            <apellidos>Pruebez2 Probatez2</apellidos>
+        </cliente>
+        <servicio>
+            <codigo>3765C</codigo>
+            <tipo>BAR</tipo>
+            <nombreServicio>BaretoPruebas</nombreServicio>
+            <capacidadMaxima>20</capacidadMaxima>
+        </servicio>
+        <fecha>2025-11-07</fecha>
+        <hora>10:58:22</hora>
+        <concepto>DARSEDEALTA</concepto>
+        <cantidadConcepto>30.0</cantidadConcepto>
+    </log>
+</logs>

@@ -105,7 +105,40 @@ public class CasinoDAOFileXML implements CasinoDAO {
 
     @Override
     public void addLog(Log log) {
+        try {
+            if (fileLog.exists()){
+                JAXBContext context = JAXBContext.newInstance(LogsListWrapper.class);
+                Unmarshaller unmarshaller = context.createUnmarshaller();
+                LogsListWrapper wrapper = (LogsListWrapper) unmarshaller.unmarshal(fileLog);
 
+                logs.clear();
+                logs.addAll(wrapper.getLogs());
+            }
+
+            //Añado el cliente a la lista creada
+            logs.add(log);
+
+            //Guardo la lista completa en el XML
+            guardarLogsEnXML();
+        } catch (JAXBException e){
+            e.printStackTrace();
+        }
+    }
+
+    private void guardarLogsEnXML(){
+        try {
+            JAXBContext context = JAXBContext.newInstance(LogsListWrapper.class);
+            Marshaller marshaller = context.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,true);
+
+            LogsListWrapper wrapper = new LogsListWrapper();
+            wrapper.setLogs(logs);
+
+            marshaller.marshal(wrapper,fileLog);
+
+        } catch (JAXBException e){
+            e.printStackTrace();
+        }
     }
 
     @Override
