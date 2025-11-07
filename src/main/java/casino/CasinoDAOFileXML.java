@@ -110,7 +110,19 @@ public class CasinoDAOFileXML implements CasinoDAO {
 
     @Override
     public String consultaServicio(String codigo) {
-        return "";
+        if (codigo == null || codigo.isBlank()) {
+            return "Error: Código invalido";
+        }
+
+        for(Servicio s: servicios){
+            if (s.getCodigo().equals(codigo)){
+                return s.toString();
+
+            }
+        }
+
+        //ToDo: throw ServiceNotFound
+        return"";
     }
 
     @Override
@@ -120,17 +132,53 @@ public class CasinoDAOFileXML implements CasinoDAO {
 
     @Override
     public String consultaCliente(String dni) {
-        return "";
+        if (dni == null || dni.isBlank()) {
+            return "Error: DNI invalido";
+        }
+
+        for(Cliente c: clientes){
+            if (c.getDni().equals(dni)){
+               return c.toString();
+
+            }
+        }
+        //ToDo: throw ClientNotFound
+        return"";
     }
 
     @Override
     public List<Cliente> listaClientes() {
+        try{
+            JAXBContext context = JAXBContext.newInstance(ClienteListWrapper.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            ClienteListWrapper wrapper = (ClienteListWrapper) unmarshaller.unmarshal(fileServicio);
+
+            for (Cliente c: wrapper.clientes){
+
+            }
+
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
         return List.of();
     }
 
     @Override
     public String consultaLog(String codigo, String dni, LocalDate fecha) {
-        return "";
+        if (codigo == null || codigo.isBlank() || dni == null || dni.isBlank() || fecha == null) {
+            return "Error: parámetros inválidos. Asegúrate de introducir un código, un DNI y una fecha válidos.";
+
+        }
+
+        for(Servicio s: servicios){
+            if (s.getCodigo().equals(codigo)){
+                return s.toString();
+
+            }
+        }
+
+        //ToDo: throw ...
+        return"";
     }
 
     @Override
