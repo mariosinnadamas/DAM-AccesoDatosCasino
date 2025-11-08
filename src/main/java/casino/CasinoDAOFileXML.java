@@ -27,9 +27,9 @@ public class CasinoDAOFileXML implements CasinoDAO {
     private List<Log> logs = new ArrayList<>();
 
     public CasinoDAOFileXML(){
-        clientes = listaClientes();
-        servicios = listaServicios();
-        logs = listaLog();
+        clientes = leerListaClientes();
+        servicios = leerListaServicios();
+        logs = leerListaLog();
     }
 
     @Override
