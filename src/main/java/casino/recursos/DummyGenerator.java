@@ -91,7 +91,7 @@ public class DummyGenerator {
             } else {
                 cantidad = 0;
             }
-            listaLogs.add(new Log(listaCliente.get(randomCliente), listaServicio.get(randomServicio), concepto, cantidad));
+            listaLogs.add(new Log(listaCliente.get(randomCliente), listaServicio.get(randomServicio), concepto, Math.floor(cantidad)));
 
 
         }

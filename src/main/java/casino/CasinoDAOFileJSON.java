@@ -446,12 +446,28 @@ public class CasinoDAOFileJSON implements CasinoDAO {
 
     @Override
     public double GanaciasAlimentos(String dni, String concepto) {
+        ArrayList<Log> listaLog = (ArrayList<Log>) this.listaLog();
+        double ganado = 0;
+        for (Log log : listaLog) {
+            if (log.getCliente().getDni().equals(dni) && log.getConcepto().toString().equals(concepto)) {
+                ganado += log.getCantidadConcepto();
+            }
+        }
         return 0;
     }
 
     @Override
     public double dineroGanadoClienteEnDia(String dni, LocalDate fecha) {
-        return 0;
+        ArrayList<Log> listaLog = (ArrayList<Log>) this.listaLog();
+        double ganado = 0;
+        String fechaStr = fecha.toString();
+
+        for (Log log : listaLog) {
+            if (log.getCliente().getDni().equals(dni) && log.getFechaStr().equals(fechaStr) && log.getConcepto().equals(TipoConcepto.APUESTACLIENTEGANA)) {
+                ganado +=  log.getCantidadConcepto();
+            }
+        }
+        return ganado;
     }
 
     @Override
