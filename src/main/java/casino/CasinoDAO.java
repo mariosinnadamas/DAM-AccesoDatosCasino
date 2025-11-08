@@ -54,12 +54,12 @@ public interface CasinoDAO {
 
     /**
      * Consulta un Log específico
-     * @param codigo del servicio
+     * @param codigoServicio del servicio
      * @param dni del cliente
      * @param fecha del log
      * @return String con la informacion
      */
-    public String consultaLog(String codigo, String dni, LocalDate fecha);
+    public String consultaLog(String codigoServicio, String dni, LocalDate fecha);
 
     /**
      * Consulta todos los Log almacenados
@@ -77,9 +77,10 @@ public interface CasinoDAO {
     /**
      * Actualiza la información de un Cliente
      * @param dni único que permite identificar al Cliente
+     * @param clienteActualizado objeto del cliente actualizado
      * @return True si se ha podido actualizar los datos del Cliente
      */
-    public boolean actualizarCliente(String dni);
+    public boolean actualizarCliente(String dni, Cliente clienteActualizado);
 
     /**
      * Borra una mesa

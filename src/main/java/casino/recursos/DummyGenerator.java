@@ -78,7 +78,7 @@ public class DummyGenerator {
     }
 
     //TODO: TEST
-    public List<Log> crearLogs(List<Cliente> listaCliente, List<Servicio> listaServicio, int longitudLista){
+    public List<Log> crearListaLogs(List<Cliente> listaCliente, List<Servicio> listaServicio, int longitudLista){
         List<Log> listaLogs = new ArrayList<>();
 
         for (int i = 0; i < longitudLista; i++){
@@ -92,8 +92,6 @@ public class DummyGenerator {
                 cantidad = 0;
             }
             listaLogs.add(new Log(listaCliente.get(randomCliente), listaServicio.get(randomServicio), concepto, cantidad));
-
-
         }
         return listaLogs;
     }

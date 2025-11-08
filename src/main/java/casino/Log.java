@@ -93,6 +93,14 @@ public class Log implements Externalizable {
         }
         this.fecha = fecha;
     }
+
+    //Setter para convertir de String a LocalDate
+    public void setFechaStr(String fechaStr){
+        if (fechaStr != null && !fechaStr.isEmpty()){
+            this.fecha = LocalDate.parse(fechaStr);
+        }
+    }
+
     @XmlTransient
     public LocalTime getHora() {
         return hora;
@@ -110,6 +118,13 @@ public class Log implements Externalizable {
 
     public void setHora(LocalTime hora) {
         this.hora = hora;
+    }
+
+    //Setter para convertir de String a LocalTime
+    public void setHoraStr(String horaStr){
+        if (horaStr != null && !horaStr.isEmpty()){
+            this.hora = LocalTime.parse(horaStr);
+        }
     }
 
     @XmlElement
