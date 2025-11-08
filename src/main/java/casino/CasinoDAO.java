@@ -1,5 +1,7 @@
 package casino;
 
+import exceptions.ClientNotFoundException;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -35,20 +37,20 @@ public interface CasinoDAO {
      * Consulta todos los servicios almacenados
      * @return List con todos los servicios que tenemos
      */
-    public List<Servicio> listaServicios();
+    public List<Servicio> leerListaServicios();
 
     /**
      * Consulta la información de un cliente
      * @param dni String único de un cliente
      * @return String con toda la información del cliente solicitado
      */
-    public String consultaCliente(String dni);
+    public String consultaCliente(String dni) throws ClientNotFoundException;
 
     /**
      * Consulta todos los clientes registrados
      * @return List con todos los clientes registrados
      */
-    public List<Cliente> listaClientes();
+    public List<Cliente> leerListaClientes();
 
     /**
      * Consulta un Log específico
@@ -63,7 +65,7 @@ public interface CasinoDAO {
      * Consulta todos los Log almacenados
      * @return List con todos los Log
      */
-    public List<Log> listaLog();
+    public List<Log> leerListaLog();
 
     /**
      * Actualiza la información de un Servicio

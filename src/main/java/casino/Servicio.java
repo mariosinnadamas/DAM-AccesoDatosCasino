@@ -14,7 +14,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 @XmlRootElement(name = "servicio")
-@XmlType(propOrder = {"codigo", "tipo", "nombreServicio", "listaClientes","capacidadMaxima"})
+@XmlType(propOrder = {"codigo", "tipo", "nombreServicio", "leerListaClientes","capacidadMaxima"})
 public class Servicio implements Externalizable {
     private String codigo;
     private TipoServicio tipo;
@@ -103,7 +103,7 @@ public class Servicio implements Externalizable {
                 "codigo='" + codigo + '\'' +
                 ", tipo=" + tipo +
                 ", nombreServicio='" + nombreServicio + '\'' +
-                ", listaClientes=" + listaClientes +
+                ", leerListaClientes=" + listaClientes +
                 ", capacidadMaxima=" + capacidadMaxima +
                 '}';
     }
@@ -111,11 +111,19 @@ public class Servicio implements Externalizable {
 
     @Override
     public void writeExternal(ObjectOutput out) throws IOException {
-
+        out.writeUTF(codigo);
+        out.writeObject(tipo);
+        out.writeUTF(nombreServicio);
+        out.writeObject(listaClientes);
+        out.writeInt(capacidadMaxima);
     }
 
     @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
-
+        this.codigo = in.readUTF();
+        this.tipo = (TipoServicio) in.readObject();
+        this.nombreServicio = in.readUTF();
+        this.listaClientes = (List<Cliente>) in.readObject();
+        this.capacidadMaxima = in.readInt();
     }
 }

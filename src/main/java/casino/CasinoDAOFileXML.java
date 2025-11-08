@@ -1,5 +1,6 @@
 package casino;
 
+import exceptions.ClientNotFoundException;
 import jakarta.xml.bind.*;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
@@ -149,32 +150,108 @@ public class CasinoDAOFileXML implements CasinoDAO {
 
     @Override
     public String consultaServicio(String codigo) {
-        return "";
+        if (codigo == null || codigo.isBlank()) {
+            return "Error: Código invalido";
+        }
+
+        for(Servicio s: servicios){
+            if (s.getCodigo().equals(codigo)){
+                return s.toString();
+
+            }
+        }
+
+        //ToDo: throw ServiceNotFound
+        return"";
     }
 
     @Override
-    public List<Servicio> listaServicios() {
-        return List.of();
+    public List<Servicio> leerListaServicios() {
+        try{
+            JAXBContext context = JAXBContext.newInstance(ServiciosListWrapper.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            ServiciosListWrapper wrapper = (ServiciosListWrapper) unmarshaller.unmarshal(fileServicio);
+
+            for (Servicio s: wrapper.getServicios()){
+                servicios.add(s);
+            }
+
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+        return servicios;
     }
 
     @Override
-    public String consultaCliente(String dni) {
-        return "";
+    public String consultaCliente(String dni) throws ClientNotFoundException {
+        if (dni == null || dni.isBlank()) {
+            return "Error: Nulo o vacío";
+        }
+
+        if (!Cliente.validarDni(dni)) {
+            return "Error: DNI no válido";
+        }
+
+        for(Cliente c: clientes){
+            if (c.getDni().equals(dni)){
+               return c.toString();
+
+            }
+        }
+
+        throw new ClientNotFoundException("Cliente no encotrado");
     }
 
     @Override
-    public List<Cliente> listaClientes() {
-        return List.of();
+    public List<Cliente> leerListaClientes() {
+        try{
+            JAXBContext context = JAXBContext.newInstance(ClienteListWrapper.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            ClienteListWrapper wrapper = (ClienteListWrapper) unmarshaller.unmarshal(fileCliente);
+
+            for (Cliente c: wrapper.getClientes()){
+                clientes.add(c);
+            }
+
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+        return clientes;
     }
 
     @Override
     public String consultaLog(String codigo, String dni, LocalDate fecha) {
-        return "";
+        if (codigo == null || codigo.isBlank() || dni == null || dni.isBlank() || fecha == null) {
+            return "Error: parámetros inválidos. Asegúrate de introducir un código, un DNI y una fecha válidos.";
+
+        }
+
+        for(Servicio s: servicios){
+            if (s.getCodigo().equals(codigo)){
+                return s.toString();
+
+            }
+        }
+
+        //ToDo: throw ...
+        return"";
     }
 
     @Override
-    public List<Log> listaLog() {
-        return List.of();
+    public List<Log> leerListaLog() {
+        try{
+            JAXBContext context = JAXBContext.newInstance(LogsListWrapper.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            LogsListWrapper wrapper = (LogsListWrapper) unmarshaller.unmarshal(fileCliente);
+
+            for (Log l: wrapper.getLogs()){
+                logs.add(l);
+            }
+
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+        return logs;
     }
 
     @Override

@@ -68,7 +68,7 @@ public class Cliente implements Externalizable {
         this.apellidos = apellidos;
     }
 
-    private boolean validarDni(String dni){
+    public static boolean validarDni(String dni){
         String[] letras = {"T", "R", "W", "A", "G", "M", "Y", "F", "P", "D", "X","B",
                 "N", "J", "Z", "S", "Q", "V", "H", "L", "C", "K", "E"};
 
@@ -111,5 +111,14 @@ public class Cliente implements Externalizable {
         this.dni = in.readUTF();
         this.nombre = in.readUTF();
         this.apellidos = in.readUTF();
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "dni='" + dni + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                '}';
     }
 }
