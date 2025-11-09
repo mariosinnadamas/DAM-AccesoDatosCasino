@@ -6,6 +6,7 @@ import jakarta.json.stream.JsonGenerator;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -14,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+//ToDo[!1]: Comentar Codigo
 public class CasinoDAOFileJSON implements CasinoDAO {
     //Rutas y Archivos
     //Clientes
@@ -53,10 +55,11 @@ public class CasinoDAOFileJSON implements CasinoDAO {
             System.out.println(e.getMessage());
         }
     }
+
     @Override
-    public void addCliente(Cliente cliente) {
+    public void addCliente(Cliente cliente) throws IOException {
         //Obtener ArrayList<Cliente> del archivo
-        ArrayList<Cliente> listaClientes = (ArrayList<Cliente>) this.listaClientes();
+        ArrayList<Cliente> listaClientes = (ArrayList<Cliente>) this.leerListaClientes();
 
         //Agregar el objeto cliente
         listaClientes.add(cliente);
@@ -65,8 +68,8 @@ public class CasinoDAOFileJSON implements CasinoDAO {
     }
 
     //Ejemplo de metodo que no está en la interfaz
-    public void addCliente(List<Cliente> clientes) {
-        ArrayList<Cliente> listaClient = (ArrayList<Cliente>) this.listaClientes();
+    public void addCliente(List<Cliente> clientes) throws IOException {
+        ArrayList<Cliente> listaClient = (ArrayList<Cliente>) this.leerListaClientes();
 
         for (Cliente cliente : clientes) {
             listaClient.add(cliente);
@@ -75,7 +78,6 @@ public class CasinoDAOFileJSON implements CasinoDAO {
         escribirCliente(listaClient);
 
     }
-
 
     private void escribirServicio(List<Servicio> listaServicio) {
         //Crear el Objeto JsonArrayBuilder
@@ -123,7 +125,7 @@ public class CasinoDAOFileJSON implements CasinoDAO {
     @Override
     public void addServicio(Servicio servicio) {
         //Obtener ArrayList<Servicio> del archivo
-        ArrayList<Servicio> listaServicio = (ArrayList<Servicio>) this.listaServicios();
+        ArrayList<Servicio> listaServicio = (ArrayList<Servicio>) this.leerListaServicios();
 
         //Agregar el objeto cliente
         listaServicio.add(servicio);
@@ -135,7 +137,7 @@ public class CasinoDAOFileJSON implements CasinoDAO {
     public void addServicio(List<Servicio> servicios) {
 
         //Obtener ArrayList<Servicio> del archivo
-        ArrayList<Servicio> listaServicio = (ArrayList<Servicio>) this.listaServicios();
+        ArrayList<Servicio> listaServicio = (ArrayList<Servicio>) this.leerListaServicios();
         //Agregar los objetos Servicio
         for (Servicio ser : servicios) {
             listaServicio.add(ser);
@@ -207,10 +209,11 @@ public class CasinoDAOFileJSON implements CasinoDAO {
             System.out.println(e.getMessage());
         }
     }
+
     @Override
     public void addLog(Log log) {
         //Obtener ArrayList<SLog> del archivo
-        ArrayList<Log> listaLog = (ArrayList<Log>) this.listaLog();
+        ArrayList<Log> listaLog = (ArrayList<Log>) this.leerListaLog();
 
         //Agregar el objeto Log
         listaLog.add(log);
@@ -221,7 +224,7 @@ public class CasinoDAOFileJSON implements CasinoDAO {
 
     public void addLog(List<Log> listaLogAgregar) {
         //Obtener ArrayList<SLog> del archivo
-        ArrayList<Log> listaLog = (ArrayList<Log>) this.listaLog();
+        ArrayList<Log> listaLog = (ArrayList<Log>) this.leerListaLog();
 
         //Agregar los Objetos Log
         for  (Log logFor : listaLogAgregar) {
@@ -237,7 +240,7 @@ public class CasinoDAOFileJSON implements CasinoDAO {
     }
 
     @Override
-    public List<Servicio> listaServicios() {
+    public List<Servicio> leerListaServicios() {
         List<Servicio> listaServicios = new ArrayList<>();
 
         try (FileReader fileReader = new FileReader(fileServicio);
@@ -280,8 +283,8 @@ public class CasinoDAOFileJSON implements CasinoDAO {
     }
 
     @Override
-    public String consultaCliente(String dni) {
-        ArrayList<Cliente> listaClientes =  (ArrayList<Cliente>) this.listaClientes();
+    public String consultaCliente(String dni) throws IOException {
+        ArrayList<Cliente> listaClientes =  (ArrayList<Cliente>) this.leerListaClientes();
 
         for (Cliente cliente : listaClientes) {
             if (cliente.getDni().equals(dni)) {
@@ -291,14 +294,8 @@ public class CasinoDAOFileJSON implements CasinoDAO {
         return "No se ha encontrado el cliente";
     }
 
-
-    /**
-     * Lee el archivo cliente.json y devuelve una Lista con los clientes del archivo
-     *
-     * @return List<Cliente> del archivo cliente.json
-     */
     @Override
-    public List<Cliente> listaClientes() {
+    public List<Cliente> leerListaClientes() throws IOException {
         List<Cliente> listaClientes = new ArrayList<>();
 
         try (FileReader fileReader = new FileReader(fileCliente);
@@ -326,7 +323,7 @@ public class CasinoDAOFileJSON implements CasinoDAO {
 
     @Override
     public String consultaLog(String codigo, String dni, LocalDate fecha) {
-        ArrayList<Log> listaLog = (ArrayList<Log>) this.listaLog();
+        ArrayList<Log> listaLog = (ArrayList<Log>) this.leerListaLog();
         String fechaStr = fecha.toString();
         for (Log log : listaLog) {
             if (log.getCliente().getDni().equals(dni) && log.getServicio().getCodigo().equals(codigo) && log.getFechaStr().equals(fechaStr)) {
@@ -337,7 +334,7 @@ public class CasinoDAOFileJSON implements CasinoDAO {
     }
 
     @Override
-    public List<Log> listaLog() {
+    public List<Log> leerListaLog() {
         List<Log> listaLog = new ArrayList<>();
 
         try (FileReader fileReader = new FileReader(fileLog);
@@ -396,23 +393,22 @@ public class CasinoDAOFileJSON implements CasinoDAO {
         }
 
         return listaLog;
-
     }
 
     @Override
-    public boolean actualizarServicio(String codigo) {
+    public boolean actualizarServicio(String codigo, Servicio servicioActualizado) {
         return false;
     }
 
     @Override
-    public boolean actualizarCliente(String dni) {
+    public boolean actualizarCliente(String dni, Cliente clienteActualizado) {
         return false;
     }
 
     @Override
     public boolean borrarServicio(Servicio servicio) {
         boolean borrado = false;
-        ArrayList<Servicio>  listaServicios = (ArrayList<Servicio>) this.listaServicios();
+        ArrayList<Servicio>  listaServicios = (ArrayList<Servicio>) this.leerListaServicios();
         for (Servicio servicios : listaServicios) {
             if (servicios.equals(servicio)) {
                 borrado = true;
@@ -428,9 +424,9 @@ public class CasinoDAOFileJSON implements CasinoDAO {
     }
 
     @Override
-    public boolean borrarCliente(Cliente cliente) {
+    public boolean borrarCliente(Cliente cliente) throws IOException {
         boolean borrado = false;
-        ArrayList<Cliente> listaClientes = (ArrayList<Cliente>) this.listaClientes();
+        ArrayList<Cliente> listaClientes = (ArrayList<Cliente>) this.leerListaClientes();
         for (Cliente clientes : listaClientes){
             if (clientes.equals(cliente)) {
                 borrado = true;
@@ -445,8 +441,18 @@ public class CasinoDAOFileJSON implements CasinoDAO {
     }
 
     @Override
+    public double ganaciasAlimentos(String dni, String concepto) {
+        return 0;
+    }
+
+    @Override
+    public double dineroInvertidoClienteEnDia(String dni, LocalDate fecha) {
+        return 0;
+    }
+
+    //ToDo: ??
     public double GanaciasAlimentos(String dni, String concepto) {
-        ArrayList<Log> listaLog = (ArrayList<Log>) this.listaLog();
+        ArrayList<Log> listaLog = (ArrayList<Log>) this.leerListaLog();
         double ganado = 0;
         for (Log log : listaLog) {
             if (log.getCliente().getDni().equals(dni) && log.getConcepto().toString().equals(concepto)) {
@@ -456,9 +462,8 @@ public class CasinoDAOFileJSON implements CasinoDAO {
         return 0;
     }
 
-    @Override
     public double dineroGanadoClienteEnDia(String dni, LocalDate fecha) {
-        ArrayList<Log> listaLog = (ArrayList<Log>) this.listaLog();
+        ArrayList<Log> listaLog = (ArrayList<Log>) this.leerListaLog();
         double ganado = 0;
         String fechaStr = fecha.toString();
 
@@ -487,7 +492,7 @@ public class CasinoDAOFileJSON implements CasinoDAO {
 
     @Override
     public List<Servicio> devolverServiciosTipo(TipoServicio tipoServicio) {
-        ArrayList<Servicio> listaServicios = (ArrayList<Servicio>) this.listaServicios();
+        ArrayList<Servicio> listaServicios = (ArrayList<Servicio>) this.leerListaServicios();
 
         ArrayList<Servicio> listaTipoServicios = new ArrayList<>();
         for (Servicio servicios : listaServicios) {

@@ -101,7 +101,7 @@ public interface CasinoDAO {
      * @param cliente, recibe el objeto Cliente
      * @return True si se ha podido eliminar la mesa
      */
-    public boolean borrarCliente(Cliente cliente);
+    public boolean borrarCliente(Cliente cliente) throws IOException;
 
 
 
