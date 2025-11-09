@@ -70,9 +70,10 @@ public interface CasinoDAO {
     /**
      * Actualiza la información de un Servicio
      * @param codigo único de un Servicio
+     * @param servicioActualizado objeto servicio por el que se actualiza
      * @return True si se ha podido actualizar los datos de la mesa
      */
-    public boolean actualizarServicio(String codigo);
+    public boolean actualizarServicio(String codigo, Servicio servicioActualizado);
 
     /**
      * Actualiza la información de un Cliente

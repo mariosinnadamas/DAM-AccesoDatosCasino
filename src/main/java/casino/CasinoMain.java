@@ -21,15 +21,44 @@ public class CasinoMain {
         Log l = new Log(c,s2, TipoConcepto.DARSEDEALTA,20.0);
         Log l2 = new Log(c2,s, TipoConcepto.DARSEDEALTA,30.0);
 
-        //xml.addListaCliente(dg.crearListaCliente(50));
-        //xml.addListaServicios(dg.crearListaServicio(50));
+        //xml.addListaClientes(dg.crearListaCliente(10));
+        //xml.addListaServicios(dg.crearListaServicio(10));
         //xml.addListaLogs(dg.crearListaLogs(xml.leerListaClientes(), xml.leerListaServicios(), 100));
-        //xml.addLog(l);
 
         try{
-            //System.out.println(xml.consultaCliente("10155231H"));
-            //ESTA ROTO, ME QUIERO MORIIIIIIIIIIIIR (LO ESTOY ARREGLANDO LO JURO)
+            //PRUEBAS CLIENTE
+            //Create, si ya existe no lo agrega, FUNCIONA
+            xml.addCliente(c);
+
+            //Read, FUNCIONA
+            System.out.println(xml.consultaCliente("10155231H"));
+            //Update, FUNCIONA
             xml.actualizarCliente("10155231H", cActualizado);
+            for (Cliente temp : xml.leerListaClientes()){
+                System.out.println(temp);
+            }
+            //Delete, funciona
+            xml.borrarCliente(c);
+            for (Cliente temp : xml.leerListaClientes()){
+                System.out.println(temp);
+            }
+
+            //PRUEBAS SERVICIO
+            //Create
+            //TODO: Queremos que la comprobación para crear un servicio sea solo por código? o incluyo el nombre tambien? porque al generar el codigo al crear el objeto nunca va a coincidir el código aunque pongas el mismo nombre
+            xml.addServicio(s);
+            for (Servicio temp : xml.leerListaServicios()){
+                System.out.println(temp);
+            }
+            //Read
+            System.out.println(xml.consultaServicio("01E34"));
+            //Update, al actualizar cambia el código porque s2 al ser creado crea un objeto nuevo
+            xml.actualizarServicio("01E34", s2);
+            //Delete, funciona, pero lo del codigo es una movida jajaja
+            xml.borrarServicio(s2);
+            for (Servicio temp : xml.leerListaServicios()){
+                System.out.println(temp);
+            }
         } catch (ClientNotFoundException e) {
             System.err.println(e.getMessage());
         }

@@ -52,7 +52,7 @@ public class CasinoDAOFile implements CasinoDAO {
     }
 
     @Override
-    public boolean actualizarServicio(String codigo) {
+    public boolean actualizarServicio(String codigo, Servicio servicioActualizado) {
         return false;
     }
 
