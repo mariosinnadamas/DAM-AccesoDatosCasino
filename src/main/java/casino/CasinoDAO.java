@@ -1,5 +1,9 @@
 package casino;
 
+import exceptions.ClientAlreadyExistsException;
+import exceptions.ClientNotFoundException;
+
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -9,8 +13,11 @@ public interface CasinoDAO {
     /**
      * Añade un objeto cliente al almacén
      * @param cliente objeto que recibe como parámetro para agregar al almacén
+     * @throws IllegalArgumentException
+     * @throws ClientAlreadyExistsException
+     * @throws IOException
      */
-    public void addCliente(Cliente cliente);
+    public void addCliente(Cliente cliente) throws IllegalArgumentException, ClientAlreadyExistsException, IOException;
 
     /**
      * Añade un objeto Servicio al almacén
@@ -35,49 +42,52 @@ public interface CasinoDAO {
      * Consulta todos los servicios almacenados
      * @return List con todos los servicios que tenemos
      */
-    public List<Servicio> listaServicios();
+    public List<Servicio> leerListaServicios();
 
     /**
      * Consulta la información de un cliente
      * @param dni String único de un cliente
      * @return String con toda la información del cliente solicitado
      */
-    public String consultaCliente(String dni);
+    public String consultaCliente(String dni) throws ClientNotFoundException, IOException;
 
     /**
      * Consulta todos los clientes registrados
      * @return List con todos los clientes registrados
+     * @throws IOException por posibles errores de entrada al leer el fichero
      */
-    public List<Cliente> listaClientes();
+    public List<Cliente> leerListaClientes() throws IOException;
 
     /**
      * Consulta un Log específico
-     * @param codigo del servicio
+     * @param codigoServicio del servicio
      * @param dni del cliente
      * @param fecha del log
      * @return String con la informacion
      */
-    public String consultaLog(String codigo, String dni, LocalDate fecha);
+    public String consultaLog(String codigoServicio, String dni, LocalDate fecha);
 
     /**
      * Consulta todos los Log almacenados
      * @return List con todos los Log
      */
-    public List<Log> listaLog();
+    public List<Log> leerListaLog();
 
     /**
      * Actualiza la información de un Servicio
      * @param codigo único de un Servicio
+     * @param servicioActualizado objeto servicio por el que se actualiza
      * @return True si se ha podido actualizar los datos de la mesa
      */
-    public boolean actualizarServicio(String codigo);
+    public boolean actualizarServicio(String codigo, Servicio servicioActualizado);
 
     /**
      * Actualiza la información de un Cliente
      * @param dni único que permite identificar al Cliente
+     * @param clienteActualizado objeto del cliente actualizado
      * @return True si se ha podido actualizar los datos del Cliente
      */
-    public boolean actualizarCliente(String dni);
+    public boolean actualizarCliente(String dni, Cliente clienteActualizado);
 
     /**
      * Borra una mesa
@@ -102,14 +112,14 @@ public interface CasinoDAO {
      * @param concepto
      * @return variable gastado en alimentos por cliente
      */
-    public double GanaciasAlimentos(String dni, String concepto);
+    public double ganaciasAlimentos(String dni, String concepto);
 
     /**
      * Devuelve el valor del dinero invertido por un cliente en el casino
      * @param dni a devolver lo invertido en el casino
      * @return Lo gastado en el casino por cliente
      */
-    public double dineroGanadoClienteEnDia(String dni, LocalDate fecha);
+    public double dineroInvertidoClienteEnDia(String dni, LocalDate fecha);
 
     /**
      * Devuelve la cantidad de veces que un cliente ha jugado en una mesa

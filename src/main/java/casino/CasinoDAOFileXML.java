@@ -1,10 +1,15 @@
 package casino;
 
+import exceptions.ClientAlreadyExistsException;
+import exceptions.ClientNotFoundException;
+import exceptions.LogNotFoundException;
+import exceptions.ServiceNotFoundException;
 import jakarta.xml.bind.*;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -21,80 +26,145 @@ public class CasinoDAOFileXML implements CasinoDAO {
     Path pathServicio = Path.of("src", "main", "java", "casino", "recursos", "xml", "servicio.xml");
     File fileServicio = new File(pathServicio.toString());
 
-    private final List<Cliente> clientes = new ArrayList<>();
-    private final List<Servicio> servicios = new ArrayList<>();
-    private final List<Log> logs = new ArrayList<>();
-
     @Override
-    public void addCliente(Cliente cliente) {
-        try {
-            //Si existe el XML, lo cargo
-            if (fileCliente.exists()) {
-                JAXBContext context = JAXBContext.newInstance(ClienteListWrapper.class);
-                Unmarshaller unmarshaller = context.createUnmarshaller();
-                ClienteListWrapper wrapper = (ClienteListWrapper) unmarshaller.unmarshal(fileCliente);
+    public void addCliente(Cliente cliente) throws IllegalArgumentException, ClientAlreadyExistsException, IOException {
+        //Validación de parámetros
+        if (cliente == null) {
+            throw new IllegalArgumentException("El cliente no puede ser nulo");
+        }
+        if (cliente.getDni() == null ||cliente.getDni().isBlank()){
+            throw new IllegalArgumentException("El DNI del cliente no puede ser nulo o vacío");
+        }
+        if (!Cliente.validarDni(cliente.getDni())){
+            throw new IllegalArgumentException("El DNI no tiene un formato válido");
+        }
 
-                clientes.clear();
-                clientes.addAll(wrapper.getClientes());
+        try {
+            //Leo del XML para tener datos actualizados
+            List<Cliente> listaClientes = leerListaClientes();
+
+            boolean existe = listaClientes.stream()
+                    .anyMatch(c -> c.getDni().equalsIgnoreCase(cliente.getDni()));
+
+            if (!existe) {
+                listaClientes.add(cliente);
+                guardarClientesEnXML(listaClientes);
+                System.out.println("Cliente añadido correctamente");
+            } else {
+                throw new ClientAlreadyExistsException("Cliente con DNI " + cliente.getDni() + " ya existe");
+            }
+        } catch (IOException e) {
+            throw new IOException("Error de E/S al acceder al archivo de clientes " + e.getMessage());
+        }
+    }
+
+    //Metodo para añadir una lista de clientes, no estaba en la DAO
+    public void addListaClientes(List<Cliente> nuevosClientes) {
+        try {
+            List<Cliente> listaClientes = leerListaClientes();
+            int clientesAniadidos = 0;
+
+            for (Cliente nuevo : nuevosClientes) {
+                boolean existe = listaClientes.stream()
+                        .anyMatch(c -> c.getDni().equalsIgnoreCase(nuevo.getDni()));
+
+                if (!existe) {
+                    listaClientes.add(nuevo);
+                    clientesAniadidos++;
+                    System.out.println("Cliente " + nuevo.getDni() + " añadido");
+                } else {
+                    System.out.println("Cliente repetido: " + nuevo.getDni());
+                }
             }
 
-            //Añado el cliente a la lista creada
-            clientes.add(cliente);
+            if (clientesAniadidos > 0) {
+                guardarClientesEnXML(listaClientes);
+                System.out.println(clientesAniadidos + " clientes añadidos correctamente");
+            } else {
+                System.out.println("No se añadió ningún cliente nuevo");
+            }
 
-            //Guardo la lista completa en el XML
-            guardarClientesEnXML();
-
-            System.out.println("Cliente añadido correctamente");
-        } catch (JAXBException e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void guardarClientesEnXML(){
+    //Metodo auxiliar para guardar los clientes de una lista al archivo XML
+    private void guardarClientesEnXML(List<Cliente> listaClientes){
         try {
             JAXBContext context = JAXBContext.newInstance(ClienteListWrapper.class);
             Marshaller marshaller = context.createMarshaller();
-            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,true);
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
             ClienteListWrapper wrapper = new ClienteListWrapper();
-            wrapper.setClientes(clientes);
+            wrapper.setClientes(listaClientes);
 
-            marshaller.marshal(wrapper,fileCliente);
-        } catch (JAXBException e){
+            marshaller.marshal(wrapper, fileCliente);
+        } catch (JAXBException e) {
             e.printStackTrace();
         }
     }
 
     @Override
     public void addServicio(Servicio servicio) {
+        //Todo: Exceptions, y ver que pasa con el atributo de listaClientes de la clase Servicio, puesto que el XML no lo guarda porque esta vacío
         try {
-            if (fileServicio.exists()){
-                JAXBContext context = JAXBContext.newInstance(ServiciosListWrapper.class);
-                Unmarshaller unmarshaller = context.createUnmarshaller();
-                ServiciosListWrapper wrapper = (ServiciosListWrapper) unmarshaller.unmarshal(fileServicio);
+            //Leo del XML para tener datos actualizados
+            List<Servicio> listaServicios = leerListaServicios();
 
-                servicios.clear();
-                servicios.addAll(wrapper.getServicios());
+            boolean existe = listaServicios.stream()
+                    .anyMatch(c -> c.getCodigo().equalsIgnoreCase(servicio.getCodigo()) ||
+                            c.getNombreServicio().equalsIgnoreCase(servicio.getNombreServicio()));
+
+            if (!existe) {
+                listaServicios.add(servicio);
+                guardarServiciosEnXML(listaServicios);
+                System.out.println("Servicio añadido correctamente");
+            } else {
+                System.out.println("Servicio con código " + servicio.getCodigo() +" y nombre "+ servicio.getNombreServicio() + " ya existe");
             }
-
-            //Añado el cliente a la lista creada
-            servicios.add(servicio);
-
-            //Guardo la lista completa en el XML
-            guardarServiciosEnXML();
-        } catch (JAXBException e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void guardarServiciosEnXML(){
+    public void addListaServicios(List<Servicio> nuevosServicios){
+        try {
+            List<Servicio> listaServicios = leerListaServicios();
+            int serviciosAniadidos = 0;
+
+            for (Servicio nuevo : nuevosServicios) {
+                boolean existe = listaServicios.stream()
+                        .anyMatch(s -> s.getCodigo().equalsIgnoreCase(nuevo.getCodigo()));
+
+                if (!existe) {
+                    listaServicios.add(nuevo);
+                    serviciosAniadidos++;
+                    System.out.println("Servicio " + nuevo.getCodigo() + " añadido");
+                } else {
+                    System.out.println("Servicio repetido: " + nuevo.getCodigo());
+                }
+            }
+
+            if (serviciosAniadidos > 0) {
+                guardarServiciosEnXML(listaServicios);
+                System.out.println(serviciosAniadidos + " servicios añadidos correctamente");
+            } else {
+                System.out.println("No se añadió ningún servicio nuevo");
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private void guardarServiciosEnXML(List <Servicio> listaServicios){
         try {
             JAXBContext context = JAXBContext.newInstance(ServiciosListWrapper.class);
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,true);
 
             ServiciosListWrapper wrapper = new ServiciosListWrapper();
-            wrapper.setServicios(servicios);
+            wrapper.setServicios(listaServicios);
 
             marshaller.marshal(wrapper,fileServicio);
 
@@ -105,34 +175,27 @@ public class CasinoDAOFileXML implements CasinoDAO {
 
     @Override
     public void addLog(Log log) {
+        //Todo: Exceptions, y ver que pasa con el atributo de listaClientes de la clase Servicio, puesto que el XML no lo guarda porque esta vacío
         try {
-            if (fileLog.exists()){
-                JAXBContext context = JAXBContext.newInstance(LogsListWrapper.class);
-                Unmarshaller unmarshaller = context.createUnmarshaller();
-                LogsListWrapper wrapper = (LogsListWrapper) unmarshaller.unmarshal(fileLog);
+            //Leo del XML para tener datos actualizados
+            List<Log> listaLogs = leerListaLog();
+            listaLogs.add(log);
+            guardarLogsEnXML(listaLogs);
+            System.out.println("Log añadido correctamente");
 
-                logs.clear();
-                logs.addAll(wrapper.getLogs());
-            }
-
-            //Añado el cliente a la lista creada
-            logs.add(log);
-
-            //Guardo la lista completa en el XML
-            guardarLogsEnXML();
-        } catch (JAXBException e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void guardarLogsEnXML(){
+    private void guardarLogsEnXML(List<Log> listaLogs){
         try {
             JAXBContext context = JAXBContext.newInstance(LogsListWrapper.class);
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,true);
 
             LogsListWrapper wrapper = new LogsListWrapper();
-            wrapper.setLogs(logs);
+            wrapper.setLogs(listaLogs);
 
             marshaller.marshal(wrapper,fileLog);
 
@@ -141,87 +204,402 @@ public class CasinoDAOFileXML implements CasinoDAO {
         }
     }
 
-    @Override
-    public String consultaServicio(String codigo) {
-        return "";
+    public void addListaLogs(List<Log> nuevosLogs){
+        //TODO: Test, exceptions, si salen duplicados hay que decir cuales ya existen, igual con Cliente y Servicio
+        try {
+            List<Log> listaLogs = leerListaLog();
+            listaLogs.addAll(nuevosLogs);
+            guardarLogsEnXML(listaLogs);
+            System.out.println("Lista de logs guardada con éxito");
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public List<Servicio> listaServicios() {
-        return List.of();
+    public String consultaServicio(String codigo) throws IllegalArgumentException,ServiceNotFoundException {
+        if (codigo == null || codigo.isBlank()) {
+            throw new IllegalArgumentException ("El codigo no puede ser nulo o estar vacío");
+        }
+
+        List <Servicio> listaServicios = leerListaServicios();
+
+        for (Servicio temp: listaServicios){
+            if (temp.getCodigo().equalsIgnoreCase(codigo)){
+                return temp.toString();
+            }
+        }
+        throw new ServiceNotFoundException("ERROR AL CONSULTAR: No se ha encontrado ningún servicio con el código " + codigo);
     }
 
     @Override
-    public String consultaCliente(String dni) {
-        return "";
+    public List<Servicio> leerListaServicios() {
+        //TODO: Exceptions
+        List<Servicio> serviciosTemporal = new ArrayList<>();
+        try {
+            if (fileServicio.exists()) {
+                JAXBContext context = JAXBContext.newInstance(ServiciosListWrapper.class);
+                Unmarshaller unmarshaller = context.createUnmarshaller();
+                ServiciosListWrapper wrapper = (ServiciosListWrapper) unmarshaller.unmarshal(fileServicio);
+                serviciosTemporal.addAll(wrapper.getServicios());
+            }
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+        return serviciosTemporal;
     }
 
     @Override
-    public List<Cliente> listaClientes() {
-        return List.of();
+    public String consultaCliente(String dni) throws ClientNotFoundException, IOException {
+        //TODO: Exceptions
+        if (dni == null || dni.isBlank()) {
+            throw new IllegalArgumentException("DNI no puede ser nulo o vacío");
+        }
+
+        if (!Cliente.validarDni(dni)) {
+            throw new IllegalArgumentException("DNI no válido");
+        }
+
+        //Siempre consulto datos del XML para tener los más actualizados
+        try {
+            List <Cliente> clientesActuales = leerListaClientes();
+
+            for(Cliente c: clientesActuales){
+                if (c.getDni().equals(dni)){
+                   return c.toString();
+                }
+            }
+        } catch (IOException e) {
+            throw new IOException("Error al leer el fichero de clientes");
+        }
+        throw new ClientNotFoundException("ERROR AL CONSULTAR: Cliente no encontrado");
     }
 
     @Override
-    public String consultaLog(String codigo, String dni, LocalDate fecha) {
-        return "";
+    public List<Cliente> leerListaClientes() throws IOException {
+        List<Cliente> clientesTemporal = new ArrayList<>();
+        try{
+            if (fileCliente.exists()) {
+                JAXBContext context = JAXBContext.newInstance(ClienteListWrapper.class);
+                Unmarshaller unmarshaller = context.createUnmarshaller();
+                ClienteListWrapper wrapper = (ClienteListWrapper) unmarshaller.unmarshal(fileCliente);
+                clientesTemporal.addAll(wrapper.getClientes());
+            }
+        } catch (JAXBException e) {
+            throw new IOException("Error al leer el archivo XML de cliente: " + e.getMessage());
+        } catch (Exception e) {
+            throw new IOException("Error inesperado al leer clientes: " + e.getMessage());
+        }
+        return clientesTemporal;
     }
 
     @Override
-    public List<Log> listaLog() {
-        return List.of();
+    public String consultaLog(String codigoServicio, String dni, LocalDate fecha) {
+        List<Log> listaLogs = leerListaLog();
+        //TODO: Excepciones, Test
+        if (codigoServicio == null || codigoServicio.isBlank() || dni == null || dni.isBlank() || fecha == null) {
+            throw new IllegalArgumentException("Error: parámetros inválidos. Asegúrate de introducir un código, un DNI y una fecha válidos.");
+        }
+
+        for(Log l: listaLogs){
+            // Validar que ningún objeto sea null antes de acceder a sus métodos
+            if (l != null &&
+                    l.getServicio() != null && l.getServicio().getCodigo() != null &&
+                    l.getCliente() != null && l.getCliente().getDni() != null &&
+                    l.getFecha() != null) {
+
+                if (l.getServicio().getCodigo().equals(codigoServicio) &&
+                        l.getCliente().getDni().equals(dni) &&
+                        l.getFecha().equals(fecha)) {
+                    return l.toString();
+                }
+            }
+        }
+        throw new LogNotFoundException("ERROR EN CONSULTA: Log no encontrado");
     }
 
     @Override
-    public boolean actualizarServicio(String codigo) {
-        return false;
+    public List<Log> leerListaLog() {
+        List<Log> logsTemporal = new ArrayList<>();
+        //TODO: Test, Exceptions
+        try{
+            if (fileLog.exists()) {
+                JAXBContext context = JAXBContext.newInstance(LogsListWrapper.class);
+                Unmarshaller unmarshaller = context.createUnmarshaller();
+                LogsListWrapper wrapper = (LogsListWrapper) unmarshaller.unmarshal(fileLog);
+
+                logsTemporal.addAll(wrapper.getLogs());
+            }
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+        return logsTemporal;
     }
 
     @Override
-    public boolean actualizarCliente(String dni) {
-        return false;
+    public boolean actualizarServicio(String codigo, Servicio servicioActualizado) {
+        try {
+            List<Servicio> listaServicios = leerListaServicios();
+            boolean encontrado = false;
+
+            for (int i = 0; i < listaServicios.size(); i++) {
+                Servicio temp = listaServicios.get(i);
+                if (temp.getCodigo().equalsIgnoreCase(codigo)) {
+                    // Reemplazar el cliente completo
+                    listaServicios.set(i, servicioActualizado);
+                    encontrado = true;
+                    break;
+                }
+            }
+
+            if (encontrado) {
+                guardarServiciosEnXML(listaServicios);
+                System.out.println("Servicio actualizado correctamente");
+            } else {
+                throw new ServiceNotFoundException("No se ha encontrado el servicio deseado");
+            }
+            return encontrado;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean actualizarCliente(String dni, Cliente clienteActualizado) {
+        //TODO: Exceptions
+        try {
+            List<Cliente> listaClientes = leerListaClientes();
+            boolean encontrado = false;
+
+            for (int i = 0; i < listaClientes.size(); i++) {
+                Cliente temp = listaClientes.get(i);
+                if (temp.getDni().equalsIgnoreCase(dni)) {
+                    // Reemplazar el cliente completo
+                    listaClientes.set(i, clienteActualizado);
+                    encontrado = true;
+                    break;
+                }
+            }
+
+            if (encontrado) {
+                guardarClientesEnXML(listaClientes);
+                System.out.println("Cliente actualizado correctamente");
+            } else {
+                throw new ClientNotFoundException("No se ha encontrado el cliente deseado");
+            }
+            return encontrado;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
     public boolean borrarServicio(Servicio servicio) {
-        return false;
+        if (servicio == null){
+            throw new IllegalArgumentException("El servicio no puede ser nulo");
+        }
+
+        try {
+            List <Servicio> listaServicios = leerListaServicios();
+            int tamanoInicial = listaServicios.size();
+
+            //Elimino todos los servicios que coincidan en ese codigo, por si hay duplicados
+            boolean eliminado = listaServicios.removeIf(s ->
+                    s.getCodigo().equalsIgnoreCase(servicio.getCodigo()));
+
+            if (eliminado){
+                guardarServiciosEnXML(listaServicios);
+                int serviciosEliminados = tamanoInicial - listaServicios.size();
+                System.out.println(serviciosEliminados + " servicios con codigo " + servicio.getCodigo() +" eliminados");
+                return true;
+            } else {
+                throw new ServiceNotFoundException("ERRROR AL BORRAR: No se ha encontrado ningun servicio con código" + servicio.getCodigo());
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
     public boolean borrarCliente(Cliente cliente) {
-        return false;
+
+        if (cliente == null){
+            throw new IllegalArgumentException("El cliente no puede ser nulo");
+        }
+
+        try {
+            List <Cliente> listaClientes = leerListaClientes();
+            int tamanoInicial = listaClientes.size();
+
+            //Elimino todos los clientes que coincidan en ese DNI, por si hay duplicados
+            boolean eliminado = listaClientes.removeIf(c ->
+                    c.getDni().equalsIgnoreCase(cliente.getDni()));
+
+            if (eliminado){
+                guardarClientesEnXML(listaClientes);
+                int clientesEliminados = tamanoInicial - listaClientes.size();
+                System.out.println(clientesEliminados + " clientes con DNI " + cliente.getDni() +" eliminados");
+                return true;
+            } else {
+                throw new ClientNotFoundException("No se ha encontrado ningun cliente con DNI" + cliente.getDni());
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
-    public double GanaciasAlimentos(String dni, String concepto) {
-        return 0;
+    public double ganaciasAlimentos(String dni, String concepto) {
+        List<Log> listaLog = leerListaLog();
+        double totalGanancias = 0;
+
+        TipoConcepto tipoConcepto = TipoConcepto.valueOf(concepto.toUpperCase());
+
+        if (tipoConcepto != TipoConcepto.COMPRACOMIDA &&
+            tipoConcepto != TipoConcepto.COMPRABEBIDA){
+            //TODO:trow exception
+            return -1;
+        }
+
+        for (Log l : listaLog){
+            if (l.getCliente() != null && l.getCliente().getDni().equals(dni) && l.getConcepto() == tipoConcepto){
+                totalGanancias += l.getCantidadConcepto();
+            }
+        }
+        return totalGanancias;
     }
 
     @Override
-    public double dineroGanadoClienteEnDia(String dni, LocalDate fecha) {
-        return 0;
+    public double dineroInvertidoClienteEnDia(String dni, LocalDate fecha) {
+        //Todo: Exceptions
+        if (dni == null || dni.isBlank() || fecha == null){
+            throw new IllegalArgumentException("DNI y Fecha no pueden ser nulos");
+        }
+
+        List<Log> listaLog = leerListaLog();
+        double totalGanado = 0.0;
+
+        for (Log l : listaLog){
+            //Verifico que el log tenga todos los datos necesarios
+            if (l != null && l.getCliente() != null && l.getCliente().getDni() != null &&
+            l.getFecha() != null && l.getConcepto() != null){
+                //Verificar si el cliente coincide
+                if (l.getCliente().getDni().equalsIgnoreCase(dni) &&
+                l.getFecha().equals(fecha)){
+                    //Sumo segun el tipo de concepto
+                    switch (l.getConcepto()){
+                        case APUESTACLIENTEGANA,DARSEDEBAJA -> totalGanado -= l.getCantidadConcepto();
+                        case COMPRACOMIDA, COMPRABEBIDA, DARSEDEALTA -> totalGanado += l.getCantidadConcepto();
+                    }
+                } else {
+                    throw new LogNotFoundException("No se ha encontrado un log con DNI: " + l.getCliente().getDni() + " y Fecha: " + l.getFecha());
+                }
+            }
+        }
+        return totalGanado;
     }
 
     @Override
     public int vecesClienteJuegaMesa(String dni, String codigo) {
-        return 0;
+        //TODO: Excepciones
+        if (dni == null || dni.isBlank() || codigo == null || codigo.isBlank()){
+            throw new IllegalArgumentException("El DNI y el Código no pueden ser nulos");
+        }
+
+        List<Log> listaLog = leerListaLog();
+        int cantidadJugado = 0;
+        String dniLimpio = dni.trim();
+        String codigoLimpio = codigo.trim();
+
+        for (Log l : listaLog){
+            //Verificaciones de que el XML esté bien
+            if (l != null && l.getCliente() != null && l.getCliente().getDni() != null &&
+                    l.getServicio() != null && l.getServicio().getCodigo() != null && l.getConcepto() != null){
+
+                String logDni = l.getCliente().getDni().trim();
+                String logCodigo = l.getServicio().getCodigo().trim();
+
+                //Comprobar que coincida
+                if (logDni.equalsIgnoreCase(dniLimpio) && logCodigo.equalsIgnoreCase(codigoLimpio)){
+                    if (l.getConcepto() == TipoConcepto.DARSEDEALTA ||
+                            l.getConcepto() == TipoConcepto.APUESTACLIENTEGANA){
+                        cantidadJugado++;
+                    }
+                }
+            }
+        }
+        return cantidadJugado;
     }
 
     @Override
     public double ganadoMesas() {
-        return 0;
+        List<Log> listaLog = leerListaLog();
+        double totalGanado = 0.0;
+
+        for (Log l : listaLog){
+            if (l != null && l.getServicio() != null && l.getServicio().getTipo() != null &&
+                    l.getConcepto() != null) {
+
+                // Verificar que es un servicio de tipo MESA
+                TipoServicio tipo = l.getServicio().getTipo();
+                boolean esMesa = tipo == TipoServicio.MESABLACKJACK || tipo == TipoServicio.MESAPOKER;
+
+                if (esMesa){
+                    switch (l.getConcepto()){
+                        case APUESTACLIENTEGANA,DARSEDEBAJA -> totalGanado -= l.getCantidadConcepto();
+                        case DARSEDEALTA -> totalGanado += l.getCantidadConcepto();
+                    }
+                }
+            }
+        }
+        return totalGanado;
     }
 
     @Override
     public double ganadoEstablecimientos() {
-        return 0;
+        //TODO: Exceptions
+        List <Log> listaLog = leerListaLog();
+        double totalGanado = 0.0;
+
+        for (Log l : listaLog){
+            if (l != null && l.getServicio() != null && l.getServicio().getTipo() != null && l.getConcepto() != null) {
+                TipoServicio tipo = l.getServicio().getTipo();
+
+                boolean esEstablecimiento = tipo == TipoServicio.BAR || tipo == TipoServicio.RESTAURANTE;
+
+                if (esEstablecimiento){
+                    //Sumo según el concepto, no tengo en cuenta las apuestas
+                    switch (l.getConcepto()){
+                        case COMPRABEBIDA, COMPRACOMIDA -> totalGanado += l.getCantidadConcepto();
+                    }
+                }
+            }
+        }
+        return totalGanado;
     }
 
     @Override
     public List<Servicio> devolverServiciosTipo(TipoServicio tipoServicio) {
-        return List.of();
+        if (tipoServicio == null) {
+            throw new IllegalArgumentException("El tipo de servicio no puede ser nulo");
+        }
+
+        List<Servicio> listaServicios = leerListaServicios();
+        List<Servicio> listaDeUnTipoDeServicio = new ArrayList<>();
+
+        for (Servicio temp : listaServicios){
+            if (temp.getTipo().equals(tipoServicio)){
+                listaDeUnTipoDeServicio.add(temp);
+            }
+        }
+        return listaDeUnTipoDeServicio;
     }
 
-    //Clases interna para JAXB
+    //Clases interna para JAXB, contenedora del XML, necesaria porque no se puede agregar un elemento al final del xml
     @XmlRootElement(name = "clientes")
     private static class ClienteListWrapper {
         private List<Cliente> clientes = new ArrayList<>();

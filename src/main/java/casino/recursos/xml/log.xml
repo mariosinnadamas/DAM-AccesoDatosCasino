@@ -7,31 +7,99 @@
             <apellidos>Pruebez Probatez</apellidos>
         </cliente>
         <servicio>
-            <codigo>FEFE7</codigo>
+            <codigo>3B4E9</codigo>
             <tipo>MESAPOKER</tipo>
             <nombreServicio>Mesa1</nombreServicio>
             <capacidadMaxima>10</capacidadMaxima>
         </servicio>
-        <fecha></fecha>
-        <hora></hora>
-        <concepto>DARSEDEALTA</concepto>
+        <fecha>2025-11-09</fecha>
+        <hora>12:28:27</hora>
+        <concepto>COMPRABEBIDA</concepto>
         <cantidadConcepto>20.0</cantidadConcepto>
     </log>
     <log>
         <cliente>
-            <dni>22041727E</dni>
-            <nombre>Prueba2</nombre>
-            <apellidos>Pruebez2 Probatez2</apellidos>
+            <dni>10155231H</dni>
+            <nombre>Prueba</nombre>
+            <apellidos>Pruebez Probatez</apellidos>
         </cliente>
         <servicio>
-            <codigo>3765C</codigo>
+            <codigo>3B4E9</codigo>
+            <tipo>MESAPOKER</tipo>
+            <nombreServicio>Mesa1</nombreServicio>
+            <capacidadMaxima>10</capacidadMaxima>
+        </servicio>
+        <fecha>2025-11-09</fecha>
+        <hora>12:28:27</hora>
+        <concepto>COMPRACOMIDA</concepto>
+        <cantidadConcepto>10.0</cantidadConcepto>
+    </log>
+    <log>
+        <cliente>
+            <dni>10155231H</dni>
+            <nombre>Prueba</nombre>
+            <apellidos>Pruebez Probatez</apellidos>
+        </cliente>
+        <servicio>
+            <codigo>3B4E9</codigo>
+            <tipo>MESAPOKER</tipo>
+            <nombreServicio>Mesa1</nombreServicio>
+            <capacidadMaxima>10</capacidadMaxima>
+        </servicio>
+        <fecha>2025-11-09</fecha>
+        <hora>12:28:27</hora>
+        <concepto>APUESTACLIENTEGANA</concepto>
+        <cantidadConcepto>20.0</cantidadConcepto>
+    </log>
+    <log>
+        <cliente>
+            <dni>10155231H</dni>
+            <nombre>Prueba</nombre>
+            <apellidos>Pruebez Probatez</apellidos>
+        </cliente>
+        <servicio>
+            <codigo>3B4E9</codigo>
+            <tipo>MESAPOKER</tipo>
+            <nombreServicio>Mesa1</nombreServicio>
+            <capacidadMaxima>10</capacidadMaxima>
+        </servicio>
+        <fecha>2025-11-09</fecha>
+        <hora>12:28:27</hora>
+        <concepto>DARSEDEALTA</concepto>
+        <cantidadConcepto>50.0</cantidadConcepto>
+    </log>
+    <log>
+        <cliente>
+            <dni>10155231H</dni>
+            <nombre>Prueba</nombre>
+            <apellidos>Pruebez Probatez</apellidos>
+        </cliente>
+        <servicio>
+            <codigo>3B4E9</codigo>
+            <tipo>MESAPOKER</tipo>
+            <nombreServicio>Mesa1</nombreServicio>
+            <capacidadMaxima>10</capacidadMaxima>
+        </servicio>
+        <fecha>2025-11-09</fecha>
+        <hora>12:28:27</hora>
+        <concepto>DARSEDEBAJA</concepto>
+        <cantidadConcepto>10.0</cantidadConcepto>
+    </log>
+    <log>
+        <cliente>
+            <dni>10155231H</dni>
+            <nombre>Prueba</nombre>
+            <apellidos>Pruebez Probatez</apellidos>
+        </cliente>
+        <servicio>
+            <codigo>9358E</codigo>
             <tipo>BAR</tipo>
             <nombreServicio>BaretoPruebas</nombreServicio>
             <capacidadMaxima>20</capacidadMaxima>
         </servicio>
-        <fecha>2025-11-07</fecha>
-        <hora>10:58:22</hora>
-        <concepto>DARSEDEALTA</concepto>
-        <cantidadConcepto>30.0</cantidadConcepto>
+        <fecha>2025-11-09</fecha>
+        <hora>18:05:31</hora>
+        <concepto>COMPRACOMIDA</concepto>
+        <cantidadConcepto>10.0</cantidadConcepto>
     </log>
 </logs>

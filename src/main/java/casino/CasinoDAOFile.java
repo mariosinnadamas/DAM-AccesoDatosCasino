@@ -7,7 +7,7 @@ public class CasinoDAOFile implements CasinoDAO {
 
     @Override
     public void addCliente(Cliente cliente) {
-        List<Cliente> lista = listaClientes();
+        List<Cliente> lista = leerListaClientes();
 
     }
 
@@ -27,7 +27,7 @@ public class CasinoDAOFile implements CasinoDAO {
     }
 
     @Override
-    public List<Servicio> listaServicios() {
+    public List<Servicio> leerListaServicios() {
         return List.of();
     }
 
@@ -37,7 +37,7 @@ public class CasinoDAOFile implements CasinoDAO {
     }
 
     @Override
-    public List<Cliente> listaClientes() {
+    public List<Cliente> leerListaClientes() {
         return List.of();
     }
 
@@ -47,17 +47,17 @@ public class CasinoDAOFile implements CasinoDAO {
     }
 
     @Override
-    public List<Log> listaLog() {
+    public List<Log> leerListaLog() {
         return List.of();
     }
 
     @Override
-    public boolean actualizarServicio(String codigo) {
+    public boolean actualizarServicio(String codigo, Servicio servicioActualizado) {
         return false;
     }
 
     @Override
-    public boolean actualizarCliente(String dni) {
+    public boolean actualizarCliente(String dni, Cliente clienteActualizado) {
         return false;
     }
 
@@ -72,12 +72,12 @@ public class CasinoDAOFile implements CasinoDAO {
     }
 
     @Override
-    public double GanaciasAlimentos(String dni, String concepto) {
+    public double ganaciasAlimentos(String dni, String concepto) {
         return 0;
     }
 
     @Override
-    public double dineroGanadoClienteEnDia(String dni, LocalDate fecha) {
+    public double dineroInvertidoClienteEnDia(String dni, LocalDate fecha) {
         return 0;
     }
 

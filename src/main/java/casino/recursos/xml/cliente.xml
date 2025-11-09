@@ -1,13 +1,53 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <clientes>
     <cliente>
-        <dni>10155231H</dni>
-        <nombre>Prueba</nombre>
-        <apellidos>Pruebez Probatez</apellidos>
+        <dni>49067119T</dni>
+        <nombre>Carlos</nombre>
+        <apellidos>Albertez</apellidos>
     </cliente>
     <cliente>
-        <dni>22041727E</dni>
-        <nombre>Prueba2</nombre>
-        <apellidos>Pruebez2 Probatez2</apellidos>
+        <dni>50799370Y</dni>
+        <nombre>Alberto</nombre>
+        <apellidos>Carlez</apellidos>
+    </cliente>
+    <cliente>
+        <dni>90301647J</dni>
+        <nombre>Alberto</nombre>
+        <apellidos>Albertez</apellidos>
+    </cliente>
+    <cliente>
+        <dni>44442958N</dni>
+        <nombre>Alberto</nombre>
+        <apellidos>Ernestez</apellidos>
+    </cliente>
+    <cliente>
+        <dni>80059420P</dni>
+        <nombre>Alberto</nombre>
+        <apellidos>Guillermez</apellidos>
+    </cliente>
+    <cliente>
+        <dni>97743142L</dni>
+        <nombre>David</nombre>
+        <apellidos>Beaz</apellidos>
+    </cliente>
+    <cliente>
+        <dni>33261377L</dni>
+        <nombre>Carlos</nombre>
+        <apellidos>Guillermez</apellidos>
+    </cliente>
+    <cliente>
+        <dni>89415052E</dni>
+        <nombre>Guillermo</nombre>
+        <apellidos>Carlez</apellidos>
+    </cliente>
+    <cliente>
+        <dni>26309751M</dni>
+        <nombre>David</nombre>
+        <apellidos>Ernestez</apellidos>
+    </cliente>
+    <cliente>
+        <dni>53191783M</dni>
+        <nombre>Carlos</nombre>
+        <apellidos>Federiquez</apellidos>
     </cliente>
 </clientes>
