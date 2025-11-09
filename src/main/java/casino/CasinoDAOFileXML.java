@@ -1,6 +1,7 @@
 package casino;
 
 import exceptions.ClientNotFoundException;
+import exceptions.LogNotFoundException;
 import exceptions.ServiceNotFoundException;
 import jakarta.xml.bind.*;
 import jakarta.xml.bind.annotation.XmlElement;
@@ -26,8 +27,8 @@ public class CasinoDAOFileXML implements CasinoDAO {
     /*He borrado las listas que hay aqui (O al menos eso estaba haciendo) porque he tomado la decisión de trabajar leyendo el XML continuamente,
     quizás no sea lo más eficiente pero no ahorra muchos problemas, entre ellos no estar pendientes de que la lista que tenemos aqui esté sincronizada
     con los clientes del xml
-     */
-    private List<Servicio> servicios = new ArrayList<>();
+    */
+
     private List<Log> logs = new ArrayList<>();
 
     @Override
@@ -169,35 +170,27 @@ public class CasinoDAOFileXML implements CasinoDAO {
 
     @Override
     public void addLog(Log log) {
-        // Todo: Exceptions
+        //Todo: Exceptions, y ver que pasa con el atributo de listaClientes de la clase Servicio, puesto que el XML no lo guarda porque esta vacío
         try {
-            if (fileLog.exists()){
-                JAXBContext context = JAXBContext.newInstance(LogsListWrapper.class);
-                Unmarshaller unmarshaller = context.createUnmarshaller();
-                LogsListWrapper wrapper = (LogsListWrapper) unmarshaller.unmarshal(fileLog);
+            //Leo del XML para tener datos actualizados
+            List<Log> listaLogs = leerListaLog();
+            listaLogs.add(log);
+            guardarLogsEnXML(listaLogs);
+            System.out.println("Log añadido correctamente");
 
-                logs.clear();
-                logs.addAll(wrapper.getLogs());
-            }
-
-            //Añado el cliente a la lista creada
-            logs.add(log);
-
-            //Guardo la lista completa en el XML
-            guardarLogsEnXML();
-        } catch (JAXBException e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void guardarLogsEnXML(){
+    private void guardarLogsEnXML(List<Log> listaLogs){
         try {
             JAXBContext context = JAXBContext.newInstance(LogsListWrapper.class);
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,true);
 
             LogsListWrapper wrapper = new LogsListWrapper();
-            wrapper.setLogs(logs);
+            wrapper.setLogs(listaLogs);
 
             marshaller.marshal(wrapper,fileLog);
 
@@ -206,46 +199,20 @@ public class CasinoDAOFileXML implements CasinoDAO {
         }
     }
 
-    public void addListaLogs(List<Log> listaLogs){
+    public void addListaLogs(List<Log> nuevosLogs){
         //TODO: Test, exceptions, si salen duplicados hay que decir cuales ya existen, igual con Cliente y Servicio
         try {
-            //Cargo los datos ya existentes en el fichero
-            if (fileLog.exists()){
-                JAXBContext context = JAXBContext.newInstance(LogsListWrapper.class);
-                Unmarshaller unmarshaller = context.createUnmarshaller();
-                LogsListWrapper wrapper = (LogsListWrapper) unmarshaller.unmarshal(fileLog);
-
-                logs.clear();
-                logs.addAll(wrapper.getLogs());
-            }
-
-            //Añadir todos los clientes sin duplicar
-            for (Log nuevo : listaLogs){
-                //Busca dentro de clientes si existe un cliente con el mismo DNI
-                //Stream es una secuencia de elementos que puedes recorrer sin necesidad de bucles
-                boolean existe = logs.stream().anyMatch(l ->
-                        l.getCliente().getDni().equalsIgnoreCase(nuevo.getCliente().getDni()) &&
-                        l.getServicio().getCodigo().equalsIgnoreCase(nuevo.getServicio().getCodigo()) &&
-                        l.getFecha().equals(nuevo.getFecha()));
-
-                if (!existe) {
-                    logs.add(nuevo);
-                } else {
-                    System.out.println("Log repetido");
-                }
-            }
-
-            //Guardo la lista en el XML
-            guardarLogsEnXML();
-
+            List<Log> listaLogs = leerListaLog();
+            listaLogs.addAll(nuevosLogs);
+            guardarLogsEnXML(listaLogs);
             System.out.println("Lista de logs guardada con éxito");
-        } catch (JAXBException e){
+        } catch (Exception e){
             e.printStackTrace();
         }
     }
 
     @Override
-    public String consultaServicio(String codigo) throws ServiceNotFoundException {
+    public String consultaServicio(String codigo) throws IllegalArgumentException,ServiceNotFoundException {
         if (codigo == null || codigo.isBlank()) {
             throw new IllegalArgumentException ("El codigo no puede ser nulo o estar vacío");
         }
@@ -301,7 +268,6 @@ public class CasinoDAOFileXML implements CasinoDAO {
     @Override
     public List<Cliente> leerListaClientes() {
         //TODO: Exceptions
-        //Usamos una nueva lista para no modificar la principal
         List<Cliente> clientesTemporal = new ArrayList<>();
         try{
             if (fileCliente.exists()) {
@@ -318,37 +284,45 @@ public class CasinoDAOFileXML implements CasinoDAO {
 
     @Override
     public String consultaLog(String codigoServicio, String dni, LocalDate fecha) {
-        //TODO: Test
+        List<Log> listaLogs = leerListaLog();
+        //TODO: Excepciones, Test
         if (codigoServicio == null || codigoServicio.isBlank() || dni == null || dni.isBlank() || fecha == null) {
-            return "Error: parámetros inválidos. Asegúrate de introducir un código, un DNI y una fecha válidos."; //TODO: Cambiar mensaje por excepción
+            throw new IllegalArgumentException("Error: parámetros inválidos. Asegúrate de introducir un código, un DNI y una fecha válidos.");
         }
 
-        for(Log l: logs){
-            if (l.getServicio().getCodigo().equals(codigoServicio)){
-                return l.toString();
+        for(Log l: listaLogs){
+            // Validar que ningún objeto sea null antes de acceder a sus métodos
+            if (l != null &&
+                    l.getServicio() != null && l.getServicio().getCodigo() != null &&
+                    l.getCliente() != null && l.getCliente().getDni() != null &&
+                    l.getFecha() != null) {
+
+                if (l.getServicio().getCodigo().equals(codigoServicio) &&
+                        l.getCliente().getDni().equals(dni) &&
+                        l.getFecha().equals(fecha)) {
+                    return l.toString();
+                }
             }
         }
-
-        //ToDo: throw ...
-        return"";
+        throw new LogNotFoundException("ERROR EN CONSULTA: Log no encontrado");
     }
 
     @Override
     public List<Log> leerListaLog() {
+        List<Log> logsTemporal = new ArrayList<>();
         //TODO: Test, Exceptions
         try{
-            JAXBContext context = JAXBContext.newInstance(LogsListWrapper.class);
-            Unmarshaller unmarshaller = context.createUnmarshaller();
-            LogsListWrapper wrapper = (LogsListWrapper) unmarshaller.unmarshal(fileCliente);
+            if (fileLog.exists()) {
+                JAXBContext context = JAXBContext.newInstance(LogsListWrapper.class);
+                Unmarshaller unmarshaller = context.createUnmarshaller();
+                LogsListWrapper wrapper = (LogsListWrapper) unmarshaller.unmarshal(fileLog);
 
-            for (Log l: wrapper.getLogs()){
-                logs.add(l);
+                logsTemporal.addAll(wrapper.getLogs());
             }
-
         } catch (JAXBException e) {
             e.printStackTrace();
         }
-        return logs;
+        return logsTemporal;
     }
 
     @Override
@@ -468,23 +442,110 @@ public class CasinoDAOFileXML implements CasinoDAO {
     }
 
     @Override
-    public double GanaciasAlimentos(String dni, String concepto) {
-        return 0;
+    public double ganaciasAlimentos(String dni, String concepto) {
+        List<Log> listaLog = leerListaLog();
+        double totalGanancias = 0;
+
+        TipoConcepto tipoConcepto = TipoConcepto.valueOf(concepto.toUpperCase());
+
+        if (tipoConcepto != TipoConcepto.COMPRACOMIDA &&
+            tipoConcepto != TipoConcepto.COMPRABEBIDA){
+            //TODO:trow exception
+            return -1;
+        }
+
+        for (Log l : listaLog){
+            if (l.getCliente() != null && l.getCliente().getDni().equals(dni) && l.getConcepto() == tipoConcepto){
+                totalGanancias += l.getCantidadConcepto();
+            }
+        }
+        return totalGanancias;
     }
 
     @Override
-    public double dineroGanadoClienteEnDia(String dni, LocalDate fecha) {
-        return 0;
+    public double dineroInvertidoClienteEnDia(String dni, LocalDate fecha) {
+        //Todo: Exceptions
+        if (dni == null || dni.isBlank() || fecha == null){
+            throw new IllegalArgumentException("DNI y Fecha no pueden ser nulos");
+        }
+
+        List<Log> listaLog = leerListaLog();
+        double totalGanado = 0.0;
+
+        for (Log l : listaLog){
+            //Verifico que el log tenga todos los datos necesarios
+            if (l != null && l.getCliente() != null && l.getCliente().getDni() != null &&
+            l.getFecha() != null && l.getConcepto() != null){
+                //Verificar si el cliente coincide
+                if (l.getCliente().getDni().equalsIgnoreCase(dni) &&
+                l.getFecha().equals(fecha)){
+                    //Sumo segun el tipo de concepto
+                    switch (l.getConcepto()){
+                        case APUESTACLIENTEGANA,DARSEDEBAJA -> totalGanado -= l.getCantidadConcepto();
+                        case COMPRACOMIDA, COMPRABEBIDA, DARSEDEALTA -> totalGanado += l.getCantidadConcepto();
+                    }
+                } else {
+                    throw new LogNotFoundException("No se ha encontrado un log con DNI: " + l.getCliente().getDni() + " y Fecha: " + l.getFecha());
+                }
+            }
+        }
+        return totalGanado;
     }
 
     @Override
     public int vecesClienteJuegaMesa(String dni, String codigo) {
-        return 0;
+        //TODO: Excepciones
+        if (dni == null || dni.isBlank() || codigo == null || codigo.isBlank()){
+            throw new IllegalArgumentException("El DNI y el Código no pueden ser nulos");
+        }
+
+        List<Log> listaLog = leerListaLog();
+        int cantidadJugado = 0;
+        String dniLimpio = dni.trim();
+        String codigoLimpio = codigo.trim();
+
+        for (Log l : listaLog){
+            //Verificaciones de que el XML esté bien
+            if (l != null && l.getCliente() != null && l.getCliente().getDni() != null &&
+                    l.getServicio() != null && l.getServicio().getCodigo() != null && l.getConcepto() != null){
+
+                String logDni = l.getCliente().getDni().trim();
+                String logCodigo = l.getServicio().getCodigo().trim();
+
+                //Comprobar que coincida
+                if (logDni.equalsIgnoreCase(dniLimpio) && logCodigo.equalsIgnoreCase(codigoLimpio)){
+                    if (l.getConcepto() == TipoConcepto.DARSEDEALTA ||
+                            l.getConcepto() == TipoConcepto.APUESTACLIENTEGANA){
+                        cantidadJugado++;
+                    }
+                }
+            }
+        }
+        return cantidadJugado;
     }
 
     @Override
     public double ganadoMesas() {
-        return 0;
+        List<Log> listaLog = leerListaLog();
+        double totalGanado = 0.0;
+
+        for (Log l : listaLog){
+            if (l != null && l.getServicio() != null && l.getServicio().getTipo() != null &&
+                    l.getConcepto() != null) {
+
+                // Verificar que es un servicio de tipo MESA
+                TipoServicio tipo = l.getServicio().getTipo();
+                boolean esMesa = tipo == TipoServicio.MESABLACKJACK || tipo == TipoServicio.MESAPOKER;
+
+                if (esMesa){
+                    switch (l.getConcepto()){
+                        case APUESTACLIENTEGANA,DARSEDEBAJA -> totalGanado -= l.getCantidadConcepto();
+                        case DARSEDEALTA -> totalGanado += l.getCantidadConcepto();
+                    }
+                }
+            }
+        }
+        return totalGanado;
     }
 
     @Override

@@ -72,12 +72,12 @@ public class CasinoDAOFile implements CasinoDAO {
     }
 
     @Override
-    public double GanaciasAlimentos(String dni, String concepto) {
+    public double ganaciasAlimentos(String dni, String concepto) {
         return 0;
     }
 
     @Override
-    public double dineroGanadoClienteEnDia(String dni, LocalDate fecha) {
+    public double dineroInvertidoClienteEnDia(String dni, LocalDate fecha) {
         return 0;
     }
 

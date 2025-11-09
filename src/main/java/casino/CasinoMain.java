@@ -18,14 +18,18 @@ public class CasinoMain {
         Cliente c2 = new Cliente("22041727E", "Prueba2", "Pruebez2 Probatez2");
         Servicio s = new Servicio(TipoServicio.BAR, "BaretoPruebas");
         Servicio s2 = new Servicio(TipoServicio.MESAPOKER, "Mesa1");
-        Log l = new Log(c,s2, TipoConcepto.DARSEDEALTA,20.0);
-        Log l2 = new Log(c2,s, TipoConcepto.DARSEDEALTA,30.0);
+        Log l = new Log(c,s2, TipoConcepto.COMPRABEBIDA,20.0);
+        Log l2 = new Log(c,s2, TipoConcepto.COMPRACOMIDA,10.0);
+        Log l3 = new Log(c,s2, TipoConcepto.APUESTACLIENTEGANA,20.0);
+        Log l4 = new Log(c,s2, TipoConcepto.DARSEDEALTA,30.0);
+        Log l5 = new Log(c,s2, TipoConcepto.DARSEDEBAJA,10.0);
 
         //xml.addListaClientes(dg.crearListaCliente(10));
         //xml.addListaServicios(dg.crearListaServicio(10));
         //xml.addListaLogs(dg.crearListaLogs(xml.leerListaClientes(), xml.leerListaServicios(), 100));
 
         try{
+            /*
             //PRUEBAS CLIENTE
             //Create, si ya existe no lo agrega, FUNCIONA
             xml.addCliente(c);
@@ -59,8 +63,28 @@ public class CasinoMain {
             for (Servicio temp : xml.leerListaServicios()){
                 System.out.println(temp);
             }
+            */
+            //PRUEBAS LOG
+            //Create
+            /*xml.addLog(l);
+            xml.addLog(l2);
+            xml.addLog(l3);
+            xml.addLog(l4);
+            xml.addLog(l5);
+             */
+
+            //xml.addListaLogs(dg.crearListaLogs(xml.leerListaClientes(),xml.leerListaServicios(),20));
+            //Read
+            //System.out.println(xml.consultaLog("17105", "10155231H",LocalDate.parse("2025-11-09")));
+
+            //PRUEBAS NO CRUD
+            System.out.println(xml.ganaciasAlimentos("10155231H", "COMPRABEBIDA"));
+            System.out.println("TOTAL GANADO: " + xml.dineroInvertidoClienteEnDia("10155231H", LocalDate.parse("2025-11-09")));
+            System.out.println("VECES JUGADA UNA MESA: " + xml.vecesClienteJuegaMesa("10155231H", "3B4E9"));
+            System.out.println("TOTAL GANADO EN MESAS: " + xml.ganadoMesas());
         } catch (ClientNotFoundException e) {
             System.err.println(e.getMessage());
         }
     }
 }
+

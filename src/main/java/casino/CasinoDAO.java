@@ -106,14 +106,14 @@ public interface CasinoDAO {
      * @param concepto
      * @return variable gastado en alimentos por cliente
      */
-    public double GanaciasAlimentos(String dni, String concepto);
+    public double ganaciasAlimentos(String dni, String concepto);
 
     /**
      * Devuelve el valor del dinero invertido por un cliente en el casino
      * @param dni a devolver lo invertido en el casino
      * @return Lo gastado en el casino por cliente
      */
-    public double dineroGanadoClienteEnDia(String dni, LocalDate fecha);
+    public double dineroInvertidoClienteEnDia(String dni, LocalDate fecha);
 
     /**
      * Devuelve la cantidad de veces que un cliente ha jugado en una mesa
