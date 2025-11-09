@@ -85,4 +85,21 @@
         <concepto>DARSEDEBAJA</concepto>
         <cantidadConcepto>10.0</cantidadConcepto>
     </log>
+    <log>
+        <cliente>
+            <dni>10155231H</dni>
+            <nombre>Prueba</nombre>
+            <apellidos>Pruebez Probatez</apellidos>
+        </cliente>
+        <servicio>
+            <codigo>9358E</codigo>
+            <tipo>BAR</tipo>
+            <nombreServicio>BaretoPruebas</nombreServicio>
+            <capacidadMaxima>20</capacidadMaxima>
+        </servicio>
+        <fecha>2025-11-09</fecha>
+        <hora>18:05:31</hora>
+        <concepto>COMPRACOMIDA</concepto>
+        <cantidadConcepto>10.0</cantidadConcepto>
+    </log>
 </logs>

@@ -24,13 +24,6 @@ public class CasinoDAOFileXML implements CasinoDAO {
     Path pathServicio = Path.of("src", "main", "java", "casino", "recursos", "xml", "servicio.xml");
     File fileServicio = new File(pathServicio.toString());
 
-    /*He borrado las listas que hay aqui (O al menos eso estaba haciendo) porque he tomado la decisión de trabajar leyendo el XML continuamente,
-    quizás no sea lo más eficiente pero no ahorra muchos problemas, entre ellos no estar pendientes de que la lista que tenemos aqui esté sincronizada
-    con los clientes del xml
-    */
-
-    private List<Log> logs = new ArrayList<>();
-
     @Override
     public void addCliente(Cliente cliente) {
         //Todo: Exceptions
@@ -550,12 +543,42 @@ public class CasinoDAOFileXML implements CasinoDAO {
 
     @Override
     public double ganadoEstablecimientos() {
-        return 0;
+        //TODO: Exceptions
+        List <Log> listaLog = leerListaLog();
+        double totalGanado = 0.0;
+
+        for (Log l : listaLog){
+            if (l != null && l.getServicio() != null && l.getServicio().getTipo() != null && l.getConcepto() != null) {
+                TipoServicio tipo = l.getServicio().getTipo();
+
+                boolean esEstablecimiento = tipo == TipoServicio.BAR || tipo == TipoServicio.RESTAURANTE;
+
+                if (esEstablecimiento){
+                    //Sumo según el concepto, no tengo en cuenta las apuestas
+                    switch (l.getConcepto()){
+                        case COMPRABEBIDA, COMPRACOMIDA -> totalGanado += l.getCantidadConcepto();
+                    }
+                }
+            }
+        }
+        return totalGanado;
     }
 
     @Override
     public List<Servicio> devolverServiciosTipo(TipoServicio tipoServicio) {
-        return List.of();
+        if (tipoServicio == null) {
+            throw new IllegalArgumentException("El tipo de servicio no puede ser nulo");
+        }
+
+        List<Servicio> listaServicios = leerListaServicios();
+        List<Servicio> listaDeUnTipoDeServicio = new ArrayList<>();
+
+        for (Servicio temp : listaServicios){
+            if (temp.getTipo().equals(tipoServicio)){
+                listaDeUnTipoDeServicio.add(temp);
+            }
+        }
+        return listaDeUnTipoDeServicio;
     }
 
     //Clases interna para JAXB, contenedora del XML, necesaria porque no se puede agregar un elemento al final del xml

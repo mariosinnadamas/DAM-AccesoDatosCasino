@@ -22,7 +22,7 @@ public class CasinoMain {
         Log l2 = new Log(c,s2, TipoConcepto.COMPRACOMIDA,10.0);
         Log l3 = new Log(c,s2, TipoConcepto.APUESTACLIENTEGANA,20.0);
         Log l4 = new Log(c,s2, TipoConcepto.DARSEDEALTA,30.0);
-        Log l5 = new Log(c,s2, TipoConcepto.DARSEDEBAJA,10.0);
+        Log l5 = new Log(c,s, TipoConcepto.DARSEDEBAJA,10.0);
 
         //xml.addListaClientes(dg.crearListaCliente(10));
         //xml.addListaServicios(dg.crearListaServicio(10));
@@ -49,7 +49,7 @@ public class CasinoMain {
 
             //PRUEBAS SERVICIO
             //Create
-            //TODO: Queremos que la comprobación para crear un servicio sea solo por código? o incluyo el nombre tambien? porque al generar el codigo al crear el objeto nunca va a coincidir el código aunque pongas el mismo nombre
+            //Queremos que la comprobación para crear un servicio sea solo por código? o incluyo el nombre tambien? porque al generar el codigo al crear el objeto nunca va a coincidir el código aunque pongas el mismo nombre
             xml.addServicio(s);
             for (Servicio temp : xml.leerListaServicios()){
                 System.out.println(temp);
@@ -73,15 +73,21 @@ public class CasinoMain {
             xml.addLog(l5);
              */
 
+
+
             //xml.addListaLogs(dg.crearListaLogs(xml.leerListaClientes(),xml.leerListaServicios(),20));
             //Read
             //System.out.println(xml.consultaLog("17105", "10155231H",LocalDate.parse("2025-11-09")));
 
-            //PRUEBAS NO CRUD
+            //PRUEBAS NO CRUD XML
             System.out.println(xml.ganaciasAlimentos("10155231H", "COMPRABEBIDA"));
             System.out.println("TOTAL GANADO: " + xml.dineroInvertidoClienteEnDia("10155231H", LocalDate.parse("2025-11-09")));
             System.out.println("VECES JUGADA UNA MESA: " + xml.vecesClienteJuegaMesa("10155231H", "3B4E9"));
             System.out.println("TOTAL GANADO EN MESAS: " + xml.ganadoMesas());
+            System.out.println("TOTAL GANADO EN ESTABLECIMIENTOS: " + xml.ganadoEstablecimientos());
+            for (Servicio temp: xml.devolverServiciosTipo(TipoServicio.BAR)){
+                System.out.println(temp);
+            }
         } catch (ClientNotFoundException e) {
             System.err.println(e.getMessage());
         }
