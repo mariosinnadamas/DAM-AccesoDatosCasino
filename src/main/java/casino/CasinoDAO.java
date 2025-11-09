@@ -1,7 +1,9 @@
 package casino;
 
+import exceptions.ClientAlreadyExistsException;
 import exceptions.ClientNotFoundException;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -11,8 +13,11 @@ public interface CasinoDAO {
     /**
      * Añade un objeto cliente al almacén
      * @param cliente objeto que recibe como parámetro para agregar al almacén
+     * @throws IllegalArgumentException
+     * @throws ClientAlreadyExistsException
+     * @throws IOException
      */
-    public void addCliente(Cliente cliente);
+    public void addCliente(Cliente cliente) throws IllegalArgumentException, ClientAlreadyExistsException, IOException;
 
     /**
      * Añade un objeto Servicio al almacén
@@ -44,13 +49,14 @@ public interface CasinoDAO {
      * @param dni String único de un cliente
      * @return String con toda la información del cliente solicitado
      */
-    public String consultaCliente(String dni) throws ClientNotFoundException;
+    public String consultaCliente(String dni) throws ClientNotFoundException, IOException;
 
     /**
      * Consulta todos los clientes registrados
      * @return List con todos los clientes registrados
+     * @throws IOException por posibles errores de entrada al leer el fichero
      */
-    public List<Cliente> leerListaClientes();
+    public List<Cliente> leerListaClientes() throws IOException;
 
     /**
      * Consulta un Log específico

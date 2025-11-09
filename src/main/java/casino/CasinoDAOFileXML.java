@@ -1,5 +1,6 @@
 package casino;
 
+import exceptions.ClientAlreadyExistsException;
 import exceptions.ClientNotFoundException;
 import exceptions.LogNotFoundException;
 import exceptions.ServiceNotFoundException;
@@ -8,6 +9,7 @@ import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -25,8 +27,18 @@ public class CasinoDAOFileXML implements CasinoDAO {
     File fileServicio = new File(pathServicio.toString());
 
     @Override
-    public void addCliente(Cliente cliente) {
-        //Todo: Exceptions
+    public void addCliente(Cliente cliente) throws IllegalArgumentException, ClientAlreadyExistsException, IOException {
+        //Validación de parámetros
+        if (cliente == null) {
+            throw new IllegalArgumentException("El cliente no puede ser nulo");
+        }
+        if (cliente.getDni() == null ||cliente.getDni().isBlank()){
+            throw new IllegalArgumentException("El DNI del cliente no puede ser nulo o vacío");
+        }
+        if (!Cliente.validarDni(cliente.getDni())){
+            throw new IllegalArgumentException("El DNI no tiene un formato válido");
+        }
+
         try {
             //Leo del XML para tener datos actualizados
             List<Cliente> listaClientes = leerListaClientes();
@@ -39,10 +51,10 @@ public class CasinoDAOFileXML implements CasinoDAO {
                 guardarClientesEnXML(listaClientes);
                 System.out.println("Cliente añadido correctamente");
             } else {
-                System.out.println("Cliente con DNI " + cliente.getDni() + " ya existe");
+                throw new ClientAlreadyExistsException("Cliente con DNI " + cliente.getDni() + " ya existe");
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            throw new IOException("Error de E/S al acceder al archivo de clientes " + e.getMessage());
         }
     }
 
@@ -238,7 +250,8 @@ public class CasinoDAOFileXML implements CasinoDAO {
     }
 
     @Override
-    public String consultaCliente(String dni) throws ClientNotFoundException {
+    public String consultaCliente(String dni) throws ClientNotFoundException, IOException {
+        //TODO: Exceptions
         if (dni == null || dni.isBlank()) {
             throw new IllegalArgumentException("DNI no puede ser nulo o vacío");
         }
@@ -248,19 +261,22 @@ public class CasinoDAOFileXML implements CasinoDAO {
         }
 
         //Siempre consulto datos del XML para tener los más actualizados
-        List <Cliente> clientesActuales = leerListaClientes();
+        try {
+            List <Cliente> clientesActuales = leerListaClientes();
 
-        for(Cliente c: clientesActuales){
-            if (c.getDni().equals(dni)){
-               return c.toString();
+            for(Cliente c: clientesActuales){
+                if (c.getDni().equals(dni)){
+                   return c.toString();
+                }
             }
+        } catch (IOException e) {
+            throw new IOException("Error al leer el fichero de clientes");
         }
         throw new ClientNotFoundException("ERROR AL CONSULTAR: Cliente no encontrado");
     }
 
     @Override
-    public List<Cliente> leerListaClientes() {
-        //TODO: Exceptions
+    public List<Cliente> leerListaClientes() throws IOException {
         List<Cliente> clientesTemporal = new ArrayList<>();
         try{
             if (fileCliente.exists()) {
@@ -270,7 +286,9 @@ public class CasinoDAOFileXML implements CasinoDAO {
                 clientesTemporal.addAll(wrapper.getClientes());
             }
         } catch (JAXBException e) {
-            e.printStackTrace();
+            throw new IOException("Error al leer el archivo XML de cliente: " + e.getMessage());
+        } catch (Exception e) {
+            throw new IOException("Error inesperado al leer clientes: " + e.getMessage());
         }
         return clientesTemporal;
     }
