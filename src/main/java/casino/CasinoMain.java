@@ -3,6 +3,7 @@ package casino;
 import casino.recursos.DummyGenerator;
 import exceptions.ClientNotFoundException;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -21,8 +22,8 @@ public class CasinoMain {
         Log l = new Log(c,s2, TipoConcepto.COMPRABEBIDA,20.0);
         Log l2 = new Log(c,s2, TipoConcepto.COMPRACOMIDA,10.0);
         Log l3 = new Log(c,s2, TipoConcepto.APUESTACLIENTEGANA,20.0);
-        Log l4 = new Log(c,s2, TipoConcepto.DARSEDEALTA,30.0);
-        Log l5 = new Log(c,s, TipoConcepto.DARSEDEBAJA,10.0);
+        Log l4 = new Log(c,s2, TipoConcepto.RETIRADA,30.0);
+        Log l5 = new Log(c,s, TipoConcepto.RETIRADA,10.0);
 
         //xml.addListaClientes(dg.crearListaCliente(10));
         //xml.addListaServicios(dg.crearListaServicio(10));
@@ -80,15 +81,15 @@ public class CasinoMain {
             //System.out.println(xml.consultaLog("17105", "10155231H",LocalDate.parse("2025-11-09")));
 
             //PRUEBAS NO CRUD XML
-            System.out.println(xml.ganaciasAlimentos("10155231H", "COMPRABEBIDA"));
-            System.out.println("TOTAL GANADO: " + xml.dineroInvertidoClienteEnDia("10155231H", LocalDate.parse("2025-11-09")));
+            System.out.println("TOTAL GANANCIAS ALIMENTOS: " + xml.gananciasAlimentos("10155231H"));
+            System.out.println("DINERO INVERTIDO DE UN CLIENTE EN UN DÍA: " + xml.dineroInvertidoClienteEnDia("10155231H", LocalDate.parse("2025-11-09")));
             System.out.println("VECES JUGADA UNA MESA: " + xml.vecesClienteJuegaMesa("10155231H", "3B4E9"));
             System.out.println("TOTAL GANADO EN MESAS: " + xml.ganadoMesas());
             System.out.println("TOTAL GANADO EN ESTABLECIMIENTOS: " + xml.ganadoEstablecimientos());
             for (Servicio temp: xml.devolverServiciosTipo(TipoServicio.BAR)){
                 System.out.println(temp);
             }
-        } catch (ClientNotFoundException e) {
+        } catch (ClientNotFoundException | IOException e) {
             System.err.println(e.getMessage());
         }
     }

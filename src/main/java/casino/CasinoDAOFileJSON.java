@@ -441,7 +441,7 @@ public class CasinoDAOFileJSON implements CasinoDAO {
     }
 
     @Override
-    public double ganaciasAlimentos(String dni, String concepto) {
+    public double gananciasAlimentos(String dni) throws IllegalArgumentException, IOException {
         return 0;
     }
 
