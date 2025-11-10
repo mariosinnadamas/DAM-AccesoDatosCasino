@@ -50,7 +50,7 @@ public class Cliente implements Externalizable {
     }
 
     public void setNombre(String nombre) {
-        if (nombre == null || nombre.trim().isEmpty()) {
+        if (nombre == null || nombre.isBlank()) {
             throw new IllegalArgumentException("Nombre no puede estar vacío o ser nulo.");
         }
         this.nombre = nombre;
@@ -62,7 +62,7 @@ public class Cliente implements Externalizable {
     }
 
     public void setApellidos(String apellidos) {
-        if (apellidos == null || apellidos.trim().isEmpty()) {
+        if (apellidos == null || apellidos.isBlank()) {
             throw new IllegalArgumentException("Apellidos no puede estar vacío o ser nulo.");
         }
         this.apellidos = apellidos;
