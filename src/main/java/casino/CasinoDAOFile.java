@@ -1,5 +1,6 @@
 package casino;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -72,9 +73,10 @@ public class CasinoDAOFile implements CasinoDAO {
     }
 
     @Override
-    public double gananciasAlimentos(String dni) {
+    public double gananciasAlimentos(String dni) throws IllegalArgumentException, IOException {
         return 0;
     }
+
 
     @Override
     public double dineroInvertidoClienteEnDia(String dni, LocalDate fecha) {
