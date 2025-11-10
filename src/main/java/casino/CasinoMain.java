@@ -1,13 +1,11 @@
 package casino;
 
 import casino.recursos.DummyGenerator;
-import exceptions.ClientNotFoundException;
+import exceptions.*;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.List;
 
 public class CasinoMain {
     public static void main(String[] args) {
@@ -25,15 +23,16 @@ public class CasinoMain {
         Log l4 = new Log(c,s2, TipoConcepto.RETIRADA,30.0);
         Log l5 = new Log(c,s, TipoConcepto.RETIRADA,10.0);
 
-        //xml.addListaClientes(dg.crearListaCliente(10));
-        //xml.addListaServicios(dg.crearListaServicio(10));
-        //xml.addListaLogs(dg.crearListaLogs(xml.leerListaClientes(), xml.leerListaServicios(), 100));
-
+        ArrayList ls = new ArrayList();
+        ls.add(s);
         try{
-            /*
+            //xml.addListaClientes(dg.crearListaCliente(50));
+            //xml.addListaServicios(dg.crearListaServicio(50));
+            //xml.addListaLogs(dg.crearLogs(xml.leerListaClientes(), xml.leerListaServicios(), 100));
+
             //PRUEBAS CLIENTE
             //Create, si ya existe no lo agrega, FUNCIONA
-            xml.addCliente(c);
+            //xml.addCliente(c);
 
             //Read, FUNCIONA
             System.out.println(xml.consultaCliente("10155231H"));
@@ -64,15 +63,15 @@ public class CasinoMain {
             for (Servicio temp : xml.leerListaServicios()){
                 System.out.println(temp);
             }
-            */
+
             //PRUEBAS LOG
             //Create
-            /*xml.addLog(l);
+            xml.addLog(l);
             xml.addLog(l2);
             xml.addLog(l3);
             xml.addLog(l4);
             xml.addLog(l5);
-             */
+
 
 
 
@@ -89,9 +88,11 @@ public class CasinoMain {
             for (Servicio temp: xml.devolverServiciosTipo(TipoServicio.BAR)){
                 System.out.println(temp);
             }
-        } catch (ClientNotFoundException | IOException e) {
+        } catch (ClientNotFoundException | ClientAlreadyExistsException | LogNotFoundException |
+                 ServiceNotFoundException | ServiceAlreadyExistsException | TooManyPlayersException e) {
+            System.err.println(e.getMessage());
+        } catch (IOException e){
             System.err.println(e.getMessage());
         }
     }
 }
-
