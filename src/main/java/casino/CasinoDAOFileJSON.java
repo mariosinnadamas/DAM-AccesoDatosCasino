@@ -441,25 +441,21 @@ public class CasinoDAOFileJSON implements CasinoDAO {
     }
 
     @Override
-    public double ganaciasAlimentos(String dni, String concepto) {
-        return 0;
-    }
-
-    @Override
     public double dineroInvertidoClienteEnDia(String dni, LocalDate fecha) {
         return 0;
     }
 
     //ToDo: ??
-    public double GanaciasAlimentos(String dni, String concepto) {
+    public double gananciasAlimentos(String dni) {
         ArrayList<Log> listaLog = (ArrayList<Log>) this.leerListaLog();
         double ganado = 0;
         for (Log log : listaLog) {
-            if (log.getCliente().getDni().equals(dni) && log.getConcepto().toString().equals(concepto)) {
+            if (log.getCliente().getDni().equals(dni) &&
+                    (log.getConcepto().equals(TipoConcepto.COMPRABEBIDA)) || log.getConcepto().equals(TipoConcepto.COMPRACOMIDA)){
                 ganado += log.getCantidadConcepto();
             }
         }
-        return 0;
+        return ganado;
     }
 
     public double dineroGanadoClienteEnDia(String dni, LocalDate fecha) {
@@ -477,17 +473,34 @@ public class CasinoDAOFileJSON implements CasinoDAO {
 
     @Override
     public int vecesClienteJuegaMesa(String dni, String codigo) {
-        return 0;
+        ArrayList<Log> listaLogs = (ArrayList<Log>) this.leerListaLog();
+        int contador = 0;
+        for (Log lo : listaLogs){
+
+        }
+        return contador;
     }
 
     @Override
     public double ganadoMesas() {
-        return 0;
+        ArrayList<Log> listaLogs = (ArrayList<Log>) this.leerListaLog();
+        double totalGanado = 0;
+        for (Log lo : listaLogs) {
+            //if ()
+        }
+        return totalGanado;
     }
 
     @Override
     public double ganadoEstablecimientos() {
-        return 0;
+        ArrayList<Log> listaLogs = (ArrayList<Log>) this.leerListaLog();
+        double totalGanado = 0;
+        for (Log lo : listaLogs) {
+            if (lo.getConcepto().equals(TipoConcepto.COMPRACOMIDA) || lo.getConcepto().equals(TipoConcepto.COMPRABEBIDA)) {
+                totalGanado += lo.getCantidadConcepto();
+            }
+        }
+        return totalGanado;
     }
 
     @Override

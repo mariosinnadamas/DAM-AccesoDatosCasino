@@ -1,952 +1,952 @@
 [
     {
         "cliente": {
-            "dni": "38567133C",
-            "nombre": "Carlos",
-            "apellido": "Beaz"
+            "dni": "62372700N",
+            "nombre": "Guillermo",
+            "apellido": "Federiquez"
         },
         "servicio": {
-            "codigo": "0EADB",
-            "tipoServicio": "MESAPOKER",
-            "nombreServicio": "Servicio4",
-            "listaClientes": [
-            ],
-            "capacidadMaxima": 10
-        },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 391.05705995424677
-    },
-    {
-        "cliente": {
-            "dni": "97489328X",
-            "nombre": "Federico",
-            "apellido": "Beaz"
-        },
-        "servicio": {
-            "codigo": "C490A",
+            "codigo": "EFF90",
             "tipoServicio": "MESABLACKJACK",
-            "nombreServicio": "Servicio5",
-            "listaClientes": [
-            ],
-            "capacidadMaxima": 7
-        },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 757.3187230600213
-    },
-    {
-        "cliente": {
-            "dni": "38567133C",
-            "nombre": "Carlos",
-            "apellido": "Beaz"
-        },
-        "servicio": {
-            "codigo": "C490A",
-            "tipoServicio": "MESABLACKJACK",
-            "nombreServicio": "Servicio5",
-            "listaClientes": [
-            ],
-            "capacidadMaxima": 7
-        },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 83.18501590691719
-    },
-    {
-        "cliente": {
-            "dni": "78565039Y",
-            "nombre": "Carlos",
-            "apellido": "Davidez"
-        },
-        "servicio": {
-            "codigo": "0EADB",
-            "tipoServicio": "MESAPOKER",
-            "nombreServicio": "Servicio4",
-            "listaClientes": [
-            ],
-            "capacidadMaxima": 10
-        },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 212.08729617093735
-    },
-    {
-        "cliente": {
-            "dni": "78565039Y",
-            "nombre": "Carlos",
-            "apellido": "Davidez"
-        },
-        "servicio": {
-            "codigo": "0EADB",
-            "tipoServicio": "MESAPOKER",
-            "nombreServicio": "Servicio4",
-            "listaClientes": [
-            ],
-            "capacidadMaxima": 10
-        },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 658.4191571770239
-    },
-    {
-        "cliente": {
-            "dni": "97489328X",
-            "nombre": "Federico",
-            "apellido": "Beaz"
-        },
-        "servicio": {
-            "codigo": "0EADB",
-            "tipoServicio": "MESAPOKER",
-            "nombreServicio": "Servicio4",
-            "listaClientes": [
-            ],
-            "capacidadMaxima": 10
-        },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 965.7694028074133
-    },
-    {
-        "cliente": {
-            "dni": "88832710V",
-            "nombre": "Ernesto",
-            "apellido": "Carlez"
-        },
-        "servicio": {
-            "codigo": "0EADB",
-            "tipoServicio": "MESAPOKER",
-            "nombreServicio": "Servicio4",
-            "listaClientes": [
-            ],
-            "capacidadMaxima": 10
-        },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 692.2733539053585
-    },
-    {
-        "cliente": {
-            "dni": "88832710V",
-            "nombre": "Ernesto",
-            "apellido": "Carlez"
-        },
-        "servicio": {
-            "codigo": "0F007",
-            "tipoServicio": "MESAPOKER",
-            "nombreServicio": "Servicio2",
-            "listaClientes": [
-            ],
-            "capacidadMaxima": 10
-        },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 368.93792611502397
-    },
-    {
-        "cliente": {
-            "dni": "78565039Y",
-            "nombre": "Carlos",
-            "apellido": "Davidez"
-        },
-        "servicio": {
-            "codigo": "B423A",
-            "tipoServicio": "MESAPOKER",
-            "nombreServicio": "Servicio1",
-            "listaClientes": [
-            ],
-            "capacidadMaxima": 10
-        },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 555.1164899385109
-    },
-    {
-        "cliente": {
-            "dni": "97489328X",
-            "nombre": "Federico",
-            "apellido": "Beaz"
-        },
-        "servicio": {
-            "codigo": "C490A",
-            "tipoServicio": "MESABLACKJACK",
-            "nombreServicio": "Servicio5",
-            "listaClientes": [
-            ],
-            "capacidadMaxima": 7
-        },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 549.8799982392349
-    },
-    {
-        "cliente": {
-            "dni": "88832710V",
-            "nombre": "Ernesto",
-            "apellido": "Carlez"
-        },
-        "servicio": {
-            "codigo": "6D744",
-            "tipoServicio": "MESAPOKER",
             "nombreServicio": "Servicio3",
             "listaClientes": [
             ],
-            "capacidadMaxima": 10
+            "capacidadMaxima": 7
         },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
         "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 408.8509017505455
+        "cantidadConcepto": 414.0
     },
     {
         "cliente": {
-            "dni": "88832710V",
-            "nombre": "Ernesto",
-            "apellido": "Carlez"
+            "dni": "99847579W",
+            "nombre": "Carlos",
+            "apellido": "Beaz"
         },
         "servicio": {
-            "codigo": "B423A",
-            "tipoServicio": "MESAPOKER",
+            "codigo": "D08E1",
+            "tipoServicio": "BAR",
             "nombreServicio": "Servicio1",
             "listaClientes": [
             ],
-            "capacidadMaxima": 10
+            "capacidadMaxima": 20
         },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 663.1368932315542
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "COMPRABEBIDA",
+        "cantidadConcepto": 17.0
     },
     {
         "cliente": {
-            "dni": "78565039Y",
-            "nombre": "Carlos",
-            "apellido": "Davidez"
+            "dni": "97929680G",
+            "nombre": "Bea",
+            "apellido": "Albertez"
         },
         "servicio": {
-            "codigo": "6D744",
-            "tipoServicio": "MESAPOKER",
-            "nombreServicio": "Servicio3",
+            "codigo": "59BC6",
+            "tipoServicio": "RESTAURANTE",
+            "nombreServicio": "Servicio7",
             "listaClientes": [
             ],
-            "capacidadMaxima": 10
+            "capacidadMaxima": 50
         },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 540.3216614812513
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "COMPRACOMIDA",
+        "cantidadConcepto": 9.0
     },
     {
         "cliente": {
-            "dni": "78565039Y",
-            "nombre": "Carlos",
-            "apellido": "Davidez"
+            "dni": "44658716F",
+            "nombre": "Alberto",
+            "apellido": "Guillermez"
         },
         "servicio": {
-            "codigo": "B423A",
-            "tipoServicio": "MESAPOKER",
+            "codigo": "D08E1",
+            "tipoServicio": "BAR",
             "nombreServicio": "Servicio1",
             "listaClientes": [
             ],
-            "capacidadMaxima": 10
+            "capacidadMaxima": 20
         },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 547.040461744522
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "COMPRACOMIDA",
+        "cantidadConcepto": 14.0
     },
     {
         "cliente": {
-            "dni": "88832710V",
-            "nombre": "Ernesto",
-            "apellido": "Carlez"
+            "dni": "28076426G",
+            "nombre": "Bea",
+            "apellido": "Federiquez"
         },
         "servicio": {
-            "codigo": "C490A",
+            "codigo": "EFF90",
             "tipoServicio": "MESABLACKJACK",
-            "nombreServicio": "Servicio5",
+            "nombreServicio": "Servicio3",
             "listaClientes": [
             ],
             "capacidadMaxima": 7
         },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
         "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 988.4880780150763
+        "cantidadConcepto": 622.0
     },
     {
         "cliente": {
-            "dni": "38567133C",
-            "nombre": "Carlos",
-            "apellido": "Beaz"
+            "dni": "62372700N",
+            "nombre": "Guillermo",
+            "apellido": "Federiquez"
         },
         "servicio": {
-            "codigo": "6D744",
-            "tipoServicio": "MESAPOKER",
+            "codigo": "EFF90",
+            "tipoServicio": "MESABLACKJACK",
             "nombreServicio": "Servicio3",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 7
+        },
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 485.0
+    },
+    {
+        "cliente": {
+            "dni": "44658716F",
+            "nombre": "Alberto",
+            "apellido": "Guillermez"
+        },
+        "servicio": {
+            "codigo": "EFF90",
+            "tipoServicio": "MESABLACKJACK",
+            "nombreServicio": "Servicio3",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 7
+        },
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 933.0
+    },
+    {
+        "cliente": {
+            "dni": "62372700N",
+            "nombre": "Guillermo",
+            "apellido": "Federiquez"
+        },
+        "servicio": {
+            "codigo": "909A2",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Servicio6",
             "listaClientes": [
             ],
             "capacidadMaxima": 10
         },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
         "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 372.2776025115828
+        "cantidadConcepto": 966.0
     },
     {
         "cliente": {
-            "dni": "38567133C",
-            "nombre": "Carlos",
+            "dni": "86922847M",
+            "nombre": "Guillermo",
+            "apellido": "Ernestez"
+        },
+        "servicio": {
+            "codigo": "A43D2",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Servicio9",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 519.0
+    },
+    {
+        "cliente": {
+            "dni": "36942733H",
+            "nombre": "Ernesto",
             "apellido": "Beaz"
         },
         "servicio": {
-            "codigo": "0EADB",
+            "codigo": "A43D2",
             "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Servicio9",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 337.0
+    },
+    {
+        "cliente": {
+            "dni": "62372700N",
+            "nombre": "Guillermo",
+            "apellido": "Federiquez"
+        },
+        "servicio": {
+            "codigo": "A6CC2",
+            "tipoServicio": "MESABLACKJACK",
             "nombreServicio": "Servicio4",
             "listaClientes": [
             ],
-            "capacidadMaxima": 10
-        },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 672.3886447385319
-    },
-    {
-        "cliente": {
-            "dni": "97489328X",
-            "nombre": "Federico",
-            "apellido": "Beaz"
-        },
-        "servicio": {
-            "codigo": "0F007",
-            "tipoServicio": "MESAPOKER",
-            "nombreServicio": "Servicio2",
-            "listaClientes": [
-            ],
-            "capacidadMaxima": 10
-        },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 113.51356897860043
-    },
-    {
-        "cliente": {
-            "dni": "38567133C",
-            "nombre": "Carlos",
-            "apellido": "Beaz"
-        },
-        "servicio": {
-            "codigo": "C490A",
-            "tipoServicio": "MESABLACKJACK",
-            "nombreServicio": "Servicio5",
-            "listaClientes": [
-            ],
             "capacidadMaxima": 7
         },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
         "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 476.9308898565674
+        "cantidadConcepto": 564.0
     },
     {
         "cliente": {
-            "dni": "78565039Y",
-            "nombre": "Carlos",
-            "apellido": "Davidez"
+            "dni": "97929680G",
+            "nombre": "Bea",
+            "apellido": "Albertez"
         },
         "servicio": {
-            "codigo": "B423A",
-            "tipoServicio": "MESAPOKER",
-            "nombreServicio": "Servicio1",
-            "listaClientes": [
-            ],
-            "capacidadMaxima": 10
-        },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 926.1057774464109
-    },
-    {
-        "cliente": {
-            "dni": "97489328X",
-            "nombre": "Federico",
-            "apellido": "Beaz"
-        },
-        "servicio": {
-            "codigo": "6D744",
-            "tipoServicio": "MESAPOKER",
-            "nombreServicio": "Servicio3",
-            "listaClientes": [
-            ],
-            "capacidadMaxima": 10
-        },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 3.5367395075114327
-    },
-    {
-        "cliente": {
-            "dni": "78565039Y",
-            "nombre": "Carlos",
-            "apellido": "Davidez"
-        },
-        "servicio": {
-            "codigo": "C490A",
+            "codigo": "A6CC2",
             "tipoServicio": "MESABLACKJACK",
-            "nombreServicio": "Servicio5",
-            "listaClientes": [
-            ],
-            "capacidadMaxima": 7
-        },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 759.939131158014
-    },
-    {
-        "cliente": {
-            "dni": "78565039Y",
-            "nombre": "Carlos",
-            "apellido": "Davidez"
-        },
-        "servicio": {
-            "codigo": "B423A",
-            "tipoServicio": "MESAPOKER",
-            "nombreServicio": "Servicio1",
-            "listaClientes": [
-            ],
-            "capacidadMaxima": 10
-        },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 942.6755871645557
-    },
-    {
-        "cliente": {
-            "dni": "78565039Y",
-            "nombre": "Carlos",
-            "apellido": "Davidez"
-        },
-        "servicio": {
-            "codigo": "B423A",
-            "tipoServicio": "MESAPOKER",
-            "nombreServicio": "Servicio1",
-            "listaClientes": [
-            ],
-            "capacidadMaxima": 10
-        },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 792.4141914136726
-    },
-    {
-        "cliente": {
-            "dni": "78565039Y",
-            "nombre": "Carlos",
-            "apellido": "Davidez"
-        },
-        "servicio": {
-            "codigo": "B423A",
-            "tipoServicio": "MESAPOKER",
-            "nombreServicio": "Servicio1",
-            "listaClientes": [
-            ],
-            "capacidadMaxima": 10
-        },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 275.3154932988666
-    },
-    {
-        "cliente": {
-            "dni": "38567133C",
-            "nombre": "Carlos",
-            "apellido": "Beaz"
-        },
-        "servicio": {
-            "codigo": "C490A",
-            "tipoServicio": "MESABLACKJACK",
-            "nombreServicio": "Servicio5",
-            "listaClientes": [
-            ],
-            "capacidadMaxima": 7
-        },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 512.6194262143524
-    },
-    {
-        "cliente": {
-            "dni": "78565039Y",
-            "nombre": "Carlos",
-            "apellido": "Davidez"
-        },
-        "servicio": {
-            "codigo": "0F007",
-            "tipoServicio": "MESAPOKER",
-            "nombreServicio": "Servicio2",
-            "listaClientes": [
-            ],
-            "capacidadMaxima": 10
-        },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 760.324224504561
-    },
-    {
-        "cliente": {
-            "dni": "38567133C",
-            "nombre": "Carlos",
-            "apellido": "Beaz"
-        },
-        "servicio": {
-            "codigo": "0F007",
-            "tipoServicio": "MESAPOKER",
-            "nombreServicio": "Servicio2",
-            "listaClientes": [
-            ],
-            "capacidadMaxima": 10
-        },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 538.7187706592285
-    },
-    {
-        "cliente": {
-            "dni": "38567133C",
-            "nombre": "Carlos",
-            "apellido": "Beaz"
-        },
-        "servicio": {
-            "codigo": "0F007",
-            "tipoServicio": "MESAPOKER",
-            "nombreServicio": "Servicio2",
-            "listaClientes": [
-            ],
-            "capacidadMaxima": 10
-        },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 414.851174458819
-    },
-    {
-        "cliente": {
-            "dni": "38567133C",
-            "nombre": "Carlos",
-            "apellido": "Beaz"
-        },
-        "servicio": {
-            "codigo": "C490A",
-            "tipoServicio": "MESABLACKJACK",
-            "nombreServicio": "Servicio5",
-            "listaClientes": [
-            ],
-            "capacidadMaxima": 7
-        },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 500.58579665291694
-    },
-    {
-        "cliente": {
-            "dni": "38567133C",
-            "nombre": "Carlos",
-            "apellido": "Beaz"
-        },
-        "servicio": {
-            "codigo": "6D744",
-            "tipoServicio": "MESAPOKER",
-            "nombreServicio": "Servicio3",
-            "listaClientes": [
-            ],
-            "capacidadMaxima": 10
-        },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 944.7216598505339
-    },
-    {
-        "cliente": {
-            "dni": "78565039Y",
-            "nombre": "Carlos",
-            "apellido": "Davidez"
-        },
-        "servicio": {
-            "codigo": "C490A",
-            "tipoServicio": "MESABLACKJACK",
-            "nombreServicio": "Servicio5",
-            "listaClientes": [
-            ],
-            "capacidadMaxima": 7
-        },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 569.7157484998943
-    },
-    {
-        "cliente": {
-            "dni": "88832710V",
-            "nombre": "Ernesto",
-            "apellido": "Carlez"
-        },
-        "servicio": {
-            "codigo": "C490A",
-            "tipoServicio": "MESABLACKJACK",
-            "nombreServicio": "Servicio5",
-            "listaClientes": [
-            ],
-            "capacidadMaxima": 7
-        },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 331.87434307813015
-    },
-    {
-        "cliente": {
-            "dni": "38567133C",
-            "nombre": "Carlos",
-            "apellido": "Beaz"
-        },
-        "servicio": {
-            "codigo": "C490A",
-            "tipoServicio": "MESABLACKJACK",
-            "nombreServicio": "Servicio5",
-            "listaClientes": [
-            ],
-            "capacidadMaxima": 7
-        },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 468.4465407760937
-    },
-    {
-        "cliente": {
-            "dni": "97489328X",
-            "nombre": "Federico",
-            "apellido": "Beaz"
-        },
-        "servicio": {
-            "codigo": "B423A",
-            "tipoServicio": "MESAPOKER",
-            "nombreServicio": "Servicio1",
-            "listaClientes": [
-            ],
-            "capacidadMaxima": 10
-        },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 35.873803841170336
-    },
-    {
-        "cliente": {
-            "dni": "88832710V",
-            "nombre": "Ernesto",
-            "apellido": "Carlez"
-        },
-        "servicio": {
-            "codigo": "B423A",
-            "tipoServicio": "MESAPOKER",
-            "nombreServicio": "Servicio1",
-            "listaClientes": [
-            ],
-            "capacidadMaxima": 10
-        },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 40.52029543010238
-    },
-    {
-        "cliente": {
-            "dni": "78565039Y",
-            "nombre": "Carlos",
-            "apellido": "Davidez"
-        },
-        "servicio": {
-            "codigo": "6D744",
-            "tipoServicio": "MESAPOKER",
-            "nombreServicio": "Servicio3",
-            "listaClientes": [
-            ],
-            "capacidadMaxima": 10
-        },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 516.5286314467716
-    },
-    {
-        "cliente": {
-            "dni": "88832710V",
-            "nombre": "Ernesto",
-            "apellido": "Carlez"
-        },
-        "servicio": {
-            "codigo": "C490A",
-            "tipoServicio": "MESABLACKJACK",
-            "nombreServicio": "Servicio5",
-            "listaClientes": [
-            ],
-            "capacidadMaxima": 7
-        },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 715.0161494254988
-    },
-    {
-        "cliente": {
-            "dni": "97489328X",
-            "nombre": "Federico",
-            "apellido": "Beaz"
-        },
-        "servicio": {
-            "codigo": "C490A",
-            "tipoServicio": "MESABLACKJACK",
-            "nombreServicio": "Servicio5",
-            "listaClientes": [
-            ],
-            "capacidadMaxima": 7
-        },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 34.64705250487232
-    },
-    {
-        "cliente": {
-            "dni": "38567133C",
-            "nombre": "Carlos",
-            "apellido": "Beaz"
-        },
-        "servicio": {
-            "codigo": "C490A",
-            "tipoServicio": "MESABLACKJACK",
-            "nombreServicio": "Servicio5",
-            "listaClientes": [
-            ],
-            "capacidadMaxima": 7
-        },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 445.68626005404724
-    },
-    {
-        "cliente": {
-            "dni": "88832710V",
-            "nombre": "Ernesto",
-            "apellido": "Carlez"
-        },
-        "servicio": {
-            "codigo": "0EADB",
-            "tipoServicio": "MESAPOKER",
             "nombreServicio": "Servicio4",
             "listaClientes": [
             ],
-            "capacidadMaxima": 10
+            "capacidadMaxima": 7
         },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
         "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 937.9608607141415
+        "cantidadConcepto": 732.0
     },
     {
         "cliente": {
-            "dni": "88832710V",
-            "nombre": "Ernesto",
-            "apellido": "Carlez"
+            "dni": "97929680G",
+            "nombre": "Bea",
+            "apellido": "Albertez"
         },
         "servicio": {
-            "codigo": "0F007",
-            "tipoServicio": "MESAPOKER",
-            "nombreServicio": "Servicio2",
-            "listaClientes": [
-            ],
-            "capacidadMaxima": 10
-        },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 957.725597670251
-    },
-    {
-        "cliente": {
-            "dni": "88832710V",
-            "nombre": "Ernesto",
-            "apellido": "Carlez"
-        },
-        "servicio": {
-            "codigo": "0EADB",
-            "tipoServicio": "MESAPOKER",
+            "codigo": "A6CC2",
+            "tipoServicio": "MESABLACKJACK",
             "nombreServicio": "Servicio4",
             "listaClientes": [
             ],
-            "capacidadMaxima": 10
+            "capacidadMaxima": 7
         },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
         "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 889.2490003108982
+        "cantidadConcepto": 698.0
     },
     {
         "cliente": {
-            "dni": "38567133C",
-            "nombre": "Carlos",
-            "apellido": "Beaz"
+            "dni": "44658716F",
+            "nombre": "Alberto",
+            "apellido": "Guillermez"
         },
         "servicio": {
-            "codigo": "0EADB",
+            "codigo": "C48BB",
             "tipoServicio": "MESAPOKER",
-            "nombreServicio": "Servicio4",
+            "nombreServicio": "Servicio5",
             "listaClientes": [
             ],
             "capacidadMaxima": 10
         },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
         "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 384.0071922066657
+        "cantidadConcepto": 749.0
     },
     {
         "cliente": {
-            "dni": "38567133C",
-            "nombre": "Carlos",
-            "apellido": "Beaz"
+            "dni": "44658716F",
+            "nombre": "Alberto",
+            "apellido": "Guillermez"
         },
         "servicio": {
-            "codigo": "B423A",
+            "codigo": "59BC6",
+            "tipoServicio": "RESTAURANTE",
+            "nombreServicio": "Servicio7",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 50
+        },
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "COMPRABEBIDA",
+        "cantidadConcepto": 12.0
+    },
+    {
+        "cliente": {
+            "dni": "86922847M",
+            "nombre": "Guillermo",
+            "apellido": "Ernestez"
+        },
+        "servicio": {
+            "codigo": "A43D2",
             "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Servicio9",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 907.0
+    },
+    {
+        "cliente": {
+            "dni": "34710081E",
+            "nombre": "Guillermo",
+            "apellido": "Carlez"
+        },
+        "servicio": {
+            "codigo": "6EB51",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Servicio10",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "COMPRABEBIDA",
+        "cantidadConcepto": 5.0
+    },
+    {
+        "cliente": {
+            "dni": "34710081E",
+            "nombre": "Guillermo",
+            "apellido": "Carlez"
+        },
+        "servicio": {
+            "codigo": "D08E1",
+            "tipoServicio": "BAR",
             "nombreServicio": "Servicio1",
             "listaClientes": [
             ],
-            "capacidadMaxima": 10
+            "capacidadMaxima": 20
         },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 743.6923670949564
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "COMPRABEBIDA",
+        "cantidadConcepto": 21.0
     },
     {
         "cliente": {
-            "dni": "97489328X",
+            "dni": "53525405N",
             "nombre": "Federico",
-            "apellido": "Beaz"
+            "apellido": "Guillermez"
         },
         "servicio": {
-            "codigo": "6D744",
-            "tipoServicio": "MESAPOKER",
-            "nombreServicio": "Servicio3",
+            "codigo": "6EB51",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Servicio10",
             "listaClientes": [
             ],
-            "capacidadMaxima": 10
+            "capacidadMaxima": 20
         },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 622.8140267174995
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "COMPRABEBIDA",
+        "cantidadConcepto": 21.0
     },
     {
         "cliente": {
-            "dni": "88832710V",
+            "dni": "97929680G",
+            "nombre": "Bea",
+            "apellido": "Albertez"
+        },
+        "servicio": {
+            "codigo": "6EB51",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Servicio10",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "COMPRABEBIDA",
+        "cantidadConcepto": 13.0
+    },
+    {
+        "cliente": {
+            "dni": "36942733H",
             "nombre": "Ernesto",
-            "apellido": "Carlez"
-        },
-        "servicio": {
-            "codigo": "6D744",
-            "tipoServicio": "MESAPOKER",
-            "nombreServicio": "Servicio3",
-            "listaClientes": [
-            ],
-            "capacidadMaxima": 10
-        },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 32.4904111949631
-    },
-    {
-        "cliente": {
-            "dni": "97489328X",
-            "nombre": "Federico",
             "apellido": "Beaz"
         },
         "servicio": {
-            "codigo": "0F007",
-            "tipoServicio": "MESAPOKER",
+            "codigo": "1AE85",
+            "tipoServicio": "MESABLACKJACK",
             "nombreServicio": "Servicio2",
             "listaClientes": [
             ],
-            "capacidadMaxima": 10
+            "capacidadMaxima": 7
         },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
         "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 999.0986110105515
+        "cantidadConcepto": 792.0
     },
     {
         "cliente": {
-            "dni": "38567133C",
+            "dni": "53525405N",
+            "nombre": "Federico",
+            "apellido": "Guillermez"
+        },
+        "servicio": {
+            "codigo": "A6CC2",
+            "tipoServicio": "MESABLACKJACK",
+            "nombreServicio": "Servicio4",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 7
+        },
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 133.0
+    },
+    {
+        "cliente": {
+            "dni": "53525405N",
+            "nombre": "Federico",
+            "apellido": "Guillermez"
+        },
+        "servicio": {
+            "codigo": "A43D2",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Servicio9",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 329.0
+    },
+    {
+        "cliente": {
+            "dni": "44658716F",
+            "nombre": "Alberto",
+            "apellido": "Guillermez"
+        },
+        "servicio": {
+            "codigo": "EFF90",
+            "tipoServicio": "MESABLACKJACK",
+            "nombreServicio": "Servicio3",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 7
+        },
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 749.0
+    },
+    {
+        "cliente": {
+            "dni": "44658716F",
+            "nombre": "Alberto",
+            "apellido": "Guillermez"
+        },
+        "servicio": {
+            "codigo": "A6CC2",
+            "tipoServicio": "MESABLACKJACK",
+            "nombreServicio": "Servicio4",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 7
+        },
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 127.0
+    },
+    {
+        "cliente": {
+            "dni": "99847579W",
             "nombre": "Carlos",
             "apellido": "Beaz"
         },
         "servicio": {
-            "codigo": "0F007",
-            "tipoServicio": "MESAPOKER",
-            "nombreServicio": "Servicio2",
+            "codigo": "6EB51",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Servicio10",
             "listaClientes": [
             ],
-            "capacidadMaxima": 10
+            "capacidadMaxima": 20
         },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
-        "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 259.7716344783659
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "COMPRABEBIDA",
+        "cantidadConcepto": 21.0
     },
     {
         "cliente": {
-            "dni": "97489328X",
-            "nombre": "Federico",
-            "apellido": "Beaz"
+            "dni": "44658716F",
+            "nombre": "Alberto",
+            "apellido": "Guillermez"
         },
         "servicio": {
-            "codigo": "0F007",
+            "codigo": "D08E1",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Servicio1",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "COMPRABEBIDA",
+        "cantidadConcepto": 11.0
+    },
+    {
+        "cliente": {
+            "dni": "28076426G",
+            "nombre": "Bea",
+            "apellido": "Federiquez"
+        },
+        "servicio": {
+            "codigo": "C48BB",
             "tipoServicio": "MESAPOKER",
-            "nombreServicio": "Servicio2",
+            "nombreServicio": "Servicio5",
             "listaClientes": [
             ],
             "capacidadMaxima": 10
         },
-        "fecha": "2025-11-07",
-        "hora": "22:03:37",
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
         "tipoConcepto": "APUESTACLIENTEGANA",
-        "cantidadConcepto": 61.30171918765992
+        "cantidadConcepto": 33.0
+    },
+    {
+        "cliente": {
+            "dni": "62372700N",
+            "nombre": "Guillermo",
+            "apellido": "Federiquez"
+        },
+        "servicio": {
+            "codigo": "1AE85",
+            "tipoServicio": "MESABLACKJACK",
+            "nombreServicio": "Servicio2",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 7
+        },
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 929.0
+    },
+    {
+        "cliente": {
+            "dni": "28076426G",
+            "nombre": "Bea",
+            "apellido": "Federiquez"
+        },
+        "servicio": {
+            "codigo": "A43D2",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Servicio9",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 531.0
+    },
+    {
+        "cliente": {
+            "dni": "34710081E",
+            "nombre": "Guillermo",
+            "apellido": "Carlez"
+        },
+        "servicio": {
+            "codigo": "D08E1",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Servicio1",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "COMPRACOMIDA",
+        "cantidadConcepto": 23.0
+    },
+    {
+        "cliente": {
+            "dni": "99847579W",
+            "nombre": "Carlos",
+            "apellido": "Beaz"
+        },
+        "servicio": {
+            "codigo": "D08E1",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Servicio1",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "COMPRABEBIDA",
+        "cantidadConcepto": 17.0
+    },
+    {
+        "cliente": {
+            "dni": "53525405N",
+            "nombre": "Federico",
+            "apellido": "Guillermez"
+        },
+        "servicio": {
+            "codigo": "909A2",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Servicio6",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 740.0
+    },
+    {
+        "cliente": {
+            "dni": "34710081E",
+            "nombre": "Guillermo",
+            "apellido": "Carlez"
+        },
+        "servicio": {
+            "codigo": "59BC6",
+            "tipoServicio": "RESTAURANTE",
+            "nombreServicio": "Servicio7",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 50
+        },
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "COMPRABEBIDA",
+        "cantidadConcepto": 21.0
+    },
+    {
+        "cliente": {
+            "dni": "28076426G",
+            "nombre": "Bea",
+            "apellido": "Federiquez"
+        },
+        "servicio": {
+            "codigo": "1AE85",
+            "tipoServicio": "MESABLACKJACK",
+            "nombreServicio": "Servicio2",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 7
+        },
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 56.0
+    },
+    {
+        "cliente": {
+            "dni": "62372700N",
+            "nombre": "Guillermo",
+            "apellido": "Federiquez"
+        },
+        "servicio": {
+            "codigo": "66CB3",
+            "tipoServicio": "MESABLACKJACK",
+            "nombreServicio": "Servicio8",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 7
+        },
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 416.0
+    },
+    {
+        "cliente": {
+            "dni": "44658716F",
+            "nombre": "Alberto",
+            "apellido": "Guillermez"
+        },
+        "servicio": {
+            "codigo": "C48BB",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Servicio5",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 196.0
+    },
+    {
+        "cliente": {
+            "dni": "28076426G",
+            "nombre": "Bea",
+            "apellido": "Federiquez"
+        },
+        "servicio": {
+            "codigo": "EFF90",
+            "tipoServicio": "MESABLACKJACK",
+            "nombreServicio": "Servicio3",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 7
+        },
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 700.0
+    },
+    {
+        "cliente": {
+            "dni": "28076426G",
+            "nombre": "Bea",
+            "apellido": "Federiquez"
+        },
+        "servicio": {
+            "codigo": "1AE85",
+            "tipoServicio": "MESABLACKJACK",
+            "nombreServicio": "Servicio2",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 7
+        },
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 450.0
+    },
+    {
+        "cliente": {
+            "dni": "86922847M",
+            "nombre": "Guillermo",
+            "apellido": "Ernestez"
+        },
+        "servicio": {
+            "codigo": "C48BB",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Servicio5",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 79.0
+    },
+    {
+        "cliente": {
+            "dni": "62372700N",
+            "nombre": "Guillermo",
+            "apellido": "Federiquez"
+        },
+        "servicio": {
+            "codigo": "66CB3",
+            "tipoServicio": "MESABLACKJACK",
+            "nombreServicio": "Servicio8",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 7
+        },
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 344.0
+    },
+    {
+        "cliente": {
+            "dni": "86922847M",
+            "nombre": "Guillermo",
+            "apellido": "Ernestez"
+        },
+        "servicio": {
+            "codigo": "6EB51",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Servicio10",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "COMPRABEBIDA",
+        "cantidadConcepto": 20.0
+    },
+    {
+        "cliente": {
+            "dni": "86922847M",
+            "nombre": "Guillermo",
+            "apellido": "Ernestez"
+        },
+        "servicio": {
+            "codigo": "66CB3",
+            "tipoServicio": "MESABLACKJACK",
+            "nombreServicio": "Servicio8",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 7
+        },
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 472.0
+    },
+    {
+        "cliente": {
+            "dni": "86922847M",
+            "nombre": "Guillermo",
+            "apellido": "Ernestez"
+        },
+        "servicio": {
+            "codigo": "6EB51",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Servicio10",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "COMPRACOMIDA",
+        "cantidadConcepto": 2.0
+    },
+    {
+        "cliente": {
+            "dni": "44658716F",
+            "nombre": "Alberto",
+            "apellido": "Guillermez"
+        },
+        "servicio": {
+            "codigo": "C48BB",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Servicio5",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 185.0
+    },
+    {
+        "cliente": {
+            "dni": "99847579W",
+            "nombre": "Carlos",
+            "apellido": "Beaz"
+        },
+        "servicio": {
+            "codigo": "EFF90",
+            "tipoServicio": "MESABLACKJACK",
+            "nombreServicio": "Servicio3",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 7
+        },
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 677.0
+    },
+    {
+        "cliente": {
+            "dni": "28076426G",
+            "nombre": "Bea",
+            "apellido": "Federiquez"
+        },
+        "servicio": {
+            "codigo": "A43D2",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Servicio9",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 414.0
+    },
+    {
+        "cliente": {
+            "dni": "99847579W",
+            "nombre": "Carlos",
+            "apellido": "Beaz"
+        },
+        "servicio": {
+            "codigo": "59BC6",
+            "tipoServicio": "RESTAURANTE",
+            "nombreServicio": "Servicio7",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 50
+        },
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "COMPRACOMIDA",
+        "cantidadConcepto": 16.0
+    },
+    {
+        "cliente": {
+            "dni": "70743203X",
+            "nombre": "Federico",
+            "apellido": "Guillermez"
+        },
+        "servicio": {
+            "codigo": "1AE85",
+            "tipoServicio": "MESABLACKJACK",
+            "nombreServicio": "Servicio2",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 7
+        },
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 466.0
+    },
+    {
+        "cliente": {
+            "dni": "44658716F",
+            "nombre": "Alberto",
+            "apellido": "Guillermez"
+        },
+        "servicio": {
+            "codigo": "D08E1",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Servicio1",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-10",
+        "hora": "10:32:52",
+        "tipoConcepto": "COMPRABEBIDA",
+        "cantidadConcepto": 20.0
     }
 ]

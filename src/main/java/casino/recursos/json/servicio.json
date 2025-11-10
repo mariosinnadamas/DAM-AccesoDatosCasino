@@ -1,42 +1,82 @@
 [
     {
-        "codigo": "B423A",
-        "tipoServicio": "MESAPOKER",
+        "codigo": "D08E1",
+        "tipoServicio": "BAR",
         "nombreServicio": "Servicio1",
         "listaClientes": [
         ],
-        "capacidadMaxima": 10
+        "capacidadMaxima": 20
     },
     {
-        "codigo": "0F007",
-        "tipoServicio": "MESAPOKER",
+        "codigo": "1AE85",
+        "tipoServicio": "MESABLACKJACK",
         "nombreServicio": "Servicio2",
         "listaClientes": [
         ],
-        "capacidadMaxima": 10
+        "capacidadMaxima": 7
     },
     {
-        "codigo": "6D744",
-        "tipoServicio": "MESAPOKER",
+        "codigo": "EFF90",
+        "tipoServicio": "MESABLACKJACK",
         "nombreServicio": "Servicio3",
         "listaClientes": [
         ],
-        "capacidadMaxima": 10
+        "capacidadMaxima": 7
     },
     {
-        "codigo": "0EADB",
-        "tipoServicio": "MESAPOKER",
+        "codigo": "A6CC2",
+        "tipoServicio": "MESABLACKJACK",
         "nombreServicio": "Servicio4",
         "listaClientes": [
         ],
-        "capacidadMaxima": 10
+        "capacidadMaxima": 7
     },
     {
-        "codigo": "C490A",
-        "tipoServicio": "MESABLACKJACK",
+        "codigo": "C48BB",
+        "tipoServicio": "MESAPOKER",
         "nombreServicio": "Servicio5",
         "listaClientes": [
         ],
+        "capacidadMaxima": 10
+    },
+    {
+        "codigo": "909A2",
+        "tipoServicio": "MESAPOKER",
+        "nombreServicio": "Servicio6",
+        "listaClientes": [
+        ],
+        "capacidadMaxima": 10
+    },
+    {
+        "codigo": "59BC6",
+        "tipoServicio": "RESTAURANTE",
+        "nombreServicio": "Servicio7",
+        "listaClientes": [
+        ],
+        "capacidadMaxima": 50
+    },
+    {
+        "codigo": "66CB3",
+        "tipoServicio": "MESABLACKJACK",
+        "nombreServicio": "Servicio8",
+        "listaClientes": [
+        ],
         "capacidadMaxima": 7
+    },
+    {
+        "codigo": "A43D2",
+        "tipoServicio": "MESAPOKER",
+        "nombreServicio": "Servicio9",
+        "listaClientes": [
+        ],
+        "capacidadMaxima": 10
+    },
+    {
+        "codigo": "6EB51",
+        "tipoServicio": "BAR",
+        "nombreServicio": "Servicio10",
+        "listaClientes": [
+        ],
+        "capacidadMaxima": 20
     }
 ]

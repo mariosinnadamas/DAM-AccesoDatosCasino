@@ -2,22 +2,40 @@ package casino;
 
 import casino.recursos.DummyGenerator;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class JsonMain {
-    public static void main(String[] args) {
+    public static ArrayList<ArrayList> initListas(){
         DummyGenerator dg = new DummyGenerator();
-//        ArrayList<Cliente> testListaClientes = (ArrayList<Cliente>) dg.crearListaCliente(4);
-//        ArrayList<Servicio> testListaServicio =  (ArrayList<Servicio>) dg.crearListaServicio(5);
-//        ArrayList<Log> testListaLog = (ArrayList<Log>) dg.crearLogs(testListaClientes, testListaServicio, 50);
+        ArrayList<Cliente> testListaClientes = (ArrayList<Cliente>) dg.crearListaCliente(10);
+        ArrayList<Servicio> testListaServicio =  (ArrayList<Servicio>) dg.crearListaServicio(10);
+        ArrayList<Log> testListaLog = (ArrayList<Log>) dg.crearLogs(testListaClientes, testListaServicio, 50);
 
-        CasinoDAOFileJSON Daojson = new CasinoDAOFileJSON();
-//        Daojson.addCliente(testListaClientes);
-//        Daojson.addServicio(testListaServicio);
-//        Daojson.addLog(testListaLog);
+        ArrayList<ArrayList> listaListas = new ArrayList<>();
+        listaListas.add(testListaClientes);
+        listaListas.add(testListaServicio);
+        listaListas.add(testListaLog);
 
-        System.out.println(Daojson.dineroGanadoClienteEnDia("88832710V", LocalDate.of(2025, 11, 7)));
+        return listaListas;
+
+    }
+
+    public static void initDaojson(CasinoDAOFileJSON daojson, ArrayList<ArrayList> lista) throws IOException {
+        daojson.addCliente(lista.get(0));
+        daojson.addServicio(lista.get(1));
+        daojson.addLog(lista.get(2));
+    }
+
+    public static void main(String[] args) throws IOException {
+
+        CasinoDAOFileJSON daojson = new CasinoDAOFileJSON();
+        //ArrayList<ArrayList> listas = initListas();
+        //initDaojson(daojson, listas);
+
+        System.out.println(daojson.ganadoEstablecimientos());
+        System.out.println(daojson.ganadoMesas());
 
     }
 }

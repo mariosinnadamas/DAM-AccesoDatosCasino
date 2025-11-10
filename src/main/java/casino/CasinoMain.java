@@ -80,7 +80,7 @@ public class CasinoMain {
             //System.out.println(xml.consultaLog("17105", "10155231H",LocalDate.parse("2025-11-09")));
 
             //PRUEBAS NO CRUD XML
-            System.out.println(xml.ganaciasAlimentos("10155231H", "COMPRABEBIDA"));
+            System.out.println(xml.gananciasAlimentos("10155231H"));
             System.out.println("TOTAL GANADO: " + xml.dineroInvertidoClienteEnDia("10155231H", LocalDate.parse("2025-11-09")));
             System.out.println("VECES JUGADA UNA MESA: " + xml.vecesClienteJuegaMesa("10155231H", "3B4E9"));
             System.out.println("TOTAL GANADO EN MESAS: " + xml.ganadoMesas());

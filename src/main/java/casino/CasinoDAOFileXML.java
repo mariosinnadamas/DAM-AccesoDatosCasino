@@ -453,25 +453,29 @@ public class CasinoDAOFileXML implements CasinoDAO {
     }
 
     @Override
-    public double ganaciasAlimentos(String dni, String concepto) {
-        List<Log> listaLog = leerListaLog();
-        double totalGanancias = 0;
-
-        TipoConcepto tipoConcepto = TipoConcepto.valueOf(concepto.toUpperCase());
-
-        if (tipoConcepto != TipoConcepto.COMPRACOMIDA &&
-            tipoConcepto != TipoConcepto.COMPRABEBIDA){
-            //TODO:trow exception
-            return -1;
-        }
-
-        for (Log l : listaLog){
-            if (l.getCliente() != null && l.getCliente().getDni().equals(dni) && l.getConcepto() == tipoConcepto){
-                totalGanancias += l.getCantidadConcepto();
-            }
-        }
-        return totalGanancias;
+    public double gananciasAlimentos(String dni) {
+        return 0;
     }
+    //    @Override
+//    public double ganaciasAlimentos(String dni, String concepto) {
+//        List<Log> listaLog = leerListaLog();
+//        double totalGanancias = 0;
+//
+//        TipoConcepto tipoConcepto = TipoConcepto.valueOf(concepto.toUpperCase());
+//
+//        if (tipoConcepto != TipoConcepto.COMPRACOMIDA &&
+//            tipoConcepto != TipoConcepto.COMPRABEBIDA){
+//            //TODO:trow exception
+//            return -1;
+//        }
+//
+//        for (Log l : listaLog){
+//            if (l.getCliente() != null && l.getCliente().getDni().equals(dni) && l.getConcepto() == tipoConcepto){
+//                totalGanancias += l.getCantidadConcepto();
+//            }
+//        }
+//        return totalGanancias;
+//    }
 
     @Override
     public double dineroInvertidoClienteEnDia(String dni, LocalDate fecha) {
