@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<clientes>
+    <cliente>
+        <dni>12345678Z</dni>
+        <nombre>Juan Carlos</nombre>
+        <apellidos>García Pérez</apellidos>
+    </cliente>
+    <cliente>
+        <dni>87654321X</dni>
+        <nombre>María</nombre>
+        <apellidos>López Sánchez</apellidos>
+    </cliente>
+</clientes>

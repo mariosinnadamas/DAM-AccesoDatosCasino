@@ -96,7 +96,7 @@ public class Log implements Externalizable {
 
     //Setter para convertir de String a LocalDate
     public void setFechaStr(String fechaStr){
-        if (fechaStr != null && !fechaStr.isEmpty()){
+        if (fechaStr != null && !fechaStr.isBlank()){
             this.fecha = LocalDate.parse(fechaStr);
         }
     }
@@ -122,7 +122,7 @@ public class Log implements Externalizable {
 
     //Setter para convertir de String a LocalTime
     public void setHoraStr(String horaStr){
-        if (horaStr != null && !horaStr.isEmpty()){
+        if (horaStr != null && !horaStr.isBlank()){
             this.hora = LocalTime.parse(horaStr);
         }
     }
