@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//ToDo[!1#1]: Comentar Codigo
+
 public class CasinoDAOFileJSON implements CasinoDAO {
     //Rutas y Archivos
     //Clientes
@@ -131,7 +131,7 @@ public class CasinoDAOFileJSON implements CasinoDAO {
      * @throws IOException
      * @throws ClientAlreadyExistsException Lanza la excepción si un cliente ya estaba en el archivo
      */
-    public void addCliente(List<Cliente> clientes) throws IOException, ClientAlreadyExistsException {
+    public void addListaClientes(List<Cliente> clientes) throws IOException, ClientAlreadyExistsException {
         ArrayList<Cliente> listaClient = (ArrayList<Cliente>) this.leerListaClientes();
 
         for (Cliente cliente : clientes) {
@@ -269,7 +269,7 @@ public class CasinoDAOFileJSON implements CasinoDAO {
      * @throws IOException
      * @throws ServiceAlreadyExistsException Lanza excepción si ya está presente en el json
      */
-    public void addServicio(List<Servicio> servicios) throws IOException, ServiceAlreadyExistsException {
+    public void addListaServicios(List<Servicio> servicios) throws IOException, ServiceAlreadyExistsException {
 
         //Obtener ArrayList<Servicio> del archivo
         ArrayList<Servicio> listaServicio = (ArrayList<Servicio>) this.leerListaServicios();
@@ -442,7 +442,7 @@ public class CasinoDAOFileJSON implements CasinoDAO {
      * @param logs Lista de log a agregar al archivo
      * @throws IOException
      */
-    public void addLog(List<Log> logs) throws IOException{
+    public void addListaLogs(List<Log> logs) throws IOException{
         //Obtener ArrayList<SLog> del archivo
         ArrayList<Log> listaLog = (ArrayList<Log>) this.leerListaLog();
 

@@ -54,4 +54,32 @@ public class CasinoDAOFile {
         } catch (Exception e) {
             System.out.println(e.getMessage());}
     }
+
+    /**
+     * Este metodo sincroniza los XML para que tenga los datos del JSON.
+     * Para sincronizarlo se borra el contenido del XML y se sobreescribe por el del JSON
+     * @throws IOException
+     */
+    public void sincronizarXML() throws IOException{
+        try(FileWriter fw = new FileWriter(xml.fileCliente)){
+             xml.fileCliente.delete();
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        xml.addListaClientes(json.leerListaClientes());
+    }
+
+    /**
+     * Sincroniza los JSON para que tenga los datos del XML
+     * Para sincronizarlo se borra el contenido del JSON y se sobreescribe por el del XML
+     * @throws IOException
+     */
+    public void sincronizarJSON() throws IOException{
+        try(FileWriter fw = new FileWriter(json.fileCliente)){
+            fw.write("");
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        json.addListaClientes(xml.leerListaClientes());
+    }
 }

@@ -1,14 +1,14 @@
 [
     {
-        "codigo": "7DC88",
-        "tipoServicio": "MESABLACKJACK",
+        "codigo": "A80FE",
+        "tipoServicio": "MESAPOKER",
         "nombreServicio": "Servicio1",
         "listaClientes": [
         ],
-        "capacidadMaxima": 7
+        "capacidadMaxima": 10
     },
     {
-        "codigo": "6ED98",
+        "codigo": "F63A3",
         "tipoServicio": "MESABLACKJACK",
         "nombreServicio": "Servicio2",
         "listaClientes": [
@@ -16,7 +16,7 @@
         "capacidadMaxima": 7
     },
     {
-        "codigo": "1DFE1",
+        "codigo": "0AE99",
         "tipoServicio": "MESAPOKER",
         "nombreServicio": "Servicio3",
         "listaClientes": [
@@ -24,7 +24,7 @@
         "capacidadMaxima": 10
     },
     {
-        "codigo": "92DB9",
+        "codigo": "B0586",
         "tipoServicio": "MESAPOKER",
         "nombreServicio": "Servicio4",
         "listaClientes": [
@@ -32,7 +32,7 @@
         "capacidadMaxima": 10
     },
     {
-        "codigo": "C33B2",
+        "codigo": "AD209",
         "tipoServicio": "BAR",
         "nombreServicio": "Servicio5",
         "listaClientes": [
@@ -40,23 +40,23 @@
         "capacidadMaxima": 20
     },
     {
-        "codigo": "9D420",
-        "tipoServicio": "BAR",
+        "codigo": "F0311",
+        "tipoServicio": "MESABLACKJACK",
         "nombreServicio": "Servicio6",
         "listaClientes": [
         ],
-        "capacidadMaxima": 20
+        "capacidadMaxima": 7
     },
     {
-        "codigo": "282E7",
-        "tipoServicio": "BAR",
+        "codigo": "08633",
+        "tipoServicio": "MESAPOKER",
         "nombreServicio": "Servicio7",
         "listaClientes": [
         ],
-        "capacidadMaxima": 20
+        "capacidadMaxima": 10
     },
     {
-        "codigo": "0D40B",
+        "codigo": "A430D",
         "tipoServicio": "MESABLACKJACK",
         "nombreServicio": "Servicio8",
         "listaClientes": [
@@ -64,19 +64,19 @@
         "capacidadMaxima": 7
     },
     {
-        "codigo": "51EBF",
-        "tipoServicio": "MESAPOKER",
+        "codigo": "73010",
+        "tipoServicio": "MESABLACKJACK",
         "nombreServicio": "Servicio9",
         "listaClientes": [
         ],
-        "capacidadMaxima": 10
+        "capacidadMaxima": 7
     },
     {
-        "codigo": "CEAEC",
-        "tipoServicio": "MESABLACKJACK",
+        "codigo": "3442F",
+        "tipoServicio": "MESAPOKER",
         "nombreServicio": "Servicio10",
         "listaClientes": [
         ],
-        "capacidadMaxima": 7
+        "capacidadMaxima": 10
     }
 ]

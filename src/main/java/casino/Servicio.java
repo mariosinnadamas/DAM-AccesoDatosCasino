@@ -34,7 +34,6 @@ public class Servicio implements Externalizable {
         this.capacidadMaxima = tipo.getCapacidadMaxima();
     }
 
-    //TODO: Para que coño es este constructor, si no guardamos lista de clientes en el XML
     public Servicio(String codigo, TipoServicio tipo, String nombreServicio, List<Cliente> listaClientes, int capacidadMaxima) {
         setCodigo(codigo);
         setTipo(tipo);

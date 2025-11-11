@@ -10,7 +10,7 @@ public class JsonMain {
         DummyGenerator dg = new DummyGenerator();
         ArrayList<Cliente> testListaClientes = (ArrayList<Cliente>) dg.crearListaCliente(10);
         ArrayList<Servicio> testListaServicio =  (ArrayList<Servicio>) dg.crearListaServicio(10);
-        ArrayList<Log> testListaLog = (ArrayList<Log>) dg.crearLogs(testListaClientes, testListaServicio, 5000);
+        ArrayList<Log> testListaLog = (ArrayList<Log>) dg.crearLogs(testListaClientes, testListaServicio, 500);
 
         ArrayList<ArrayList> listaListas = new ArrayList<>();
         listaListas.add(testListaClientes);
@@ -22,12 +22,12 @@ public class JsonMain {
     }
 
     public static void initDaojson(CasinoDAOFileJSON daojson, ArrayList<ArrayList> lista) throws IOException {
-        daojson.addCliente(lista.get(0));
-        daojson.addServicio(lista.get(1));
-        daojson.addLog(lista.get(2));
+        daojson.addListaClientes(lista.get(0));
+        daojson.addListaServicios(lista.get(1));
+        daojson.addListaLogs(lista.get(2));
     }
 
-    public static void borrarArchvios(CasinoDAOFileJSON daojson){
+    public static void borrarArchivos(CasinoDAOFileJSON daojson){
         try (FileWriter fwc = new FileWriter(daojson.fileCliente)) {
             fwc.write("");
         } catch (Exception e){
@@ -46,9 +46,12 @@ public class JsonMain {
     }
 
     public static void main(String[] args) throws IOException {
+        CasinoDAOFileJSON daojson = new CasinoDAOFileJSON();
+        borrarArchivos(daojson);
+        initDaojson(new CasinoDAOFileJSON(), initListas());
         CasinoDAOFile daofile = new CasinoDAOFile();
-        Path prueba = Path.of("src", "main", "java", "casino", "prueba");
-        daofile.crearCopiaSeguridad(prueba.toString());
+        CasinoDAOFileXML daoxml = new CasinoDAOFileXML();
+        daofile.sincronizarXML();
 
     }
 }
