@@ -78,7 +78,7 @@ public class Servicio implements Externalizable {
             throw new IllegalArgumentException("Nombre no puede estar vacío.");
         }
 
-        this.nombreServicio = nombreServicio;
+        this.nombreServicio = nombreServicio.trim();
     }
     @XmlElement
     public List<Cliente> getListaClientes() {

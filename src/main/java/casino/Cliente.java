@@ -51,9 +51,9 @@ public class Cliente implements Externalizable {
 
     public void setNombre(String nombre) {
         if (nombre == null || nombre.isBlank()) {
-            throw new IllegalArgumentException("Nombre no puede estar vacío o ser nulo.");
+            throw new IllegalArgumentException("ERROR: Nombre no puede estar vacío o ser nulo");
         }
-        this.nombre = nombre;
+        this.nombre = nombre.trim();
     }
 
     @XmlElement
@@ -63,9 +63,9 @@ public class Cliente implements Externalizable {
 
     public void setApellidos(String apellidos) {
         if (apellidos == null || apellidos.isBlank()) {
-            throw new IllegalArgumentException("Apellidos no puede estar vacío o ser nulo.");
+            throw new IllegalArgumentException("ERROR: Apellidos no puede estar vacío o ser nulo");
         }
-        this.apellidos = apellidos;
+        this.apellidos = apellidos.trim();
     }
 
     public static boolean validarDni(String dni){
