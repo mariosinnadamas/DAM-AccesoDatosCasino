@@ -42,7 +42,6 @@ public class Servicio implements Externalizable {
         this.capacidadMaxima = capacidadMaxima;
     }
 
-    //TODO: Hacer comprobación de que el código no existiese ya en la clase CasinoDAOFileXML
     private String generarCodigo(){
         return UUID.randomUUID().toString().substring(0,5).toUpperCase();
     }

@@ -50,4 +50,14 @@
         <nombre>Ernesto</nombre>
         <apellidos>Federiquez</apellidos>
     </cliente>
+    <cliente>
+        <dni>12345678Z</dni>
+        <nombre>Juan Carlos</nombre>
+        <apellidos>García Pérez</apellidos>
+    </cliente>
+    <cliente>
+        <dni>87654321X</dni>
+        <nombre>María</nombre>
+        <apellidos>López Sánchez</apellidos>
+    </cliente>
 </clientes>

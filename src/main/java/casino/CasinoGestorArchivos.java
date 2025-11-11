@@ -1,10 +1,9 @@
 package casino;
 
 import java.io.*;
-import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class CasinoDAOFile {
+public class CasinoGestorArchivos {
     CasinoDAOFileJSON json = new CasinoDAOFileJSON();
     CasinoDAOFileXML xml = new CasinoDAOFileXML();
 
@@ -29,7 +28,7 @@ public class CasinoDAOFile {
             destino.mkdir();
             File[] archivos = archivo.listFiles();
             for (File file : archivos) {
-                Path nuevaRuta =  Path.of(String.valueOf(destino), file.getName());
+                Path nuevaRuta =  Path.of(String.valueOf(destino), "copia-" + file.getName());
                 copiar(file, new File(nuevaRuta.toString()));
             }
         }
