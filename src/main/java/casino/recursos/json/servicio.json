@@ -1,0 +1,82 @@
+[
+    {
+        "codigo": "7DC88",
+        "tipoServicio": "MESABLACKJACK",
+        "nombreServicio": "Servicio1",
+        "listaClientes": [
+        ],
+        "capacidadMaxima": 7
+    },
+    {
+        "codigo": "6ED98",
+        "tipoServicio": "MESABLACKJACK",
+        "nombreServicio": "Servicio2",
+        "listaClientes": [
+        ],
+        "capacidadMaxima": 7
+    },
+    {
+        "codigo": "1DFE1",
+        "tipoServicio": "MESAPOKER",
+        "nombreServicio": "Servicio3",
+        "listaClientes": [
+        ],
+        "capacidadMaxima": 10
+    },
+    {
+        "codigo": "92DB9",
+        "tipoServicio": "MESAPOKER",
+        "nombreServicio": "Servicio4",
+        "listaClientes": [
+        ],
+        "capacidadMaxima": 10
+    },
+    {
+        "codigo": "C33B2",
+        "tipoServicio": "BAR",
+        "nombreServicio": "Servicio5",
+        "listaClientes": [
+        ],
+        "capacidadMaxima": 20
+    },
+    {
+        "codigo": "9D420",
+        "tipoServicio": "BAR",
+        "nombreServicio": "Servicio6",
+        "listaClientes": [
+        ],
+        "capacidadMaxima": 20
+    },
+    {
+        "codigo": "282E7",
+        "tipoServicio": "BAR",
+        "nombreServicio": "Servicio7",
+        "listaClientes": [
+        ],
+        "capacidadMaxima": 20
+    },
+    {
+        "codigo": "0D40B",
+        "tipoServicio": "MESABLACKJACK",
+        "nombreServicio": "Servicio8",
+        "listaClientes": [
+        ],
+        "capacidadMaxima": 7
+    },
+    {
+        "codigo": "51EBF",
+        "tipoServicio": "MESAPOKER",
+        "nombreServicio": "Servicio9",
+        "listaClientes": [
+        ],
+        "capacidadMaxima": 10
+    },
+    {
+        "codigo": "CEAEC",
+        "tipoServicio": "MESABLACKJACK",
+        "nombreServicio": "Servicio10",
+        "listaClientes": [
+        ],
+        "capacidadMaxima": 7
+    }
+]
