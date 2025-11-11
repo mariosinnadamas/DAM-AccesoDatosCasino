@@ -1,6 +1,4 @@
-package casino.recursos;
-
-import casino.*;
+package casino;
 
 import java.util.ArrayList;
 import java.util.List;
