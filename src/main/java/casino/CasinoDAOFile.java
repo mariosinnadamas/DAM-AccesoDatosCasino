@@ -42,12 +42,12 @@ public class CasinoDAOFile {
             Path rutaPadre = json.pathCliente.getParent().getParent();
             File carpetaPadre = new File(rutaPadre.toString());
 
-            Path rutaDestino = Path.of(ruta);
+            Path rutaDestino = Path.of(ruta, "Copia de Seguridad");
             File destino = new File(String.valueOf(rutaDestino));
 
 
             if  (!destino.exists()) {
-                destino.mkdir();
+                destino.mkdirs();
             }
             copiar(carpetaPadre, destino);
 

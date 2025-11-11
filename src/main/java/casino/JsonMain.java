@@ -2,13 +2,9 @@ package casino;
 
 import casino.recursos.DummyGenerator;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class JsonMain {
