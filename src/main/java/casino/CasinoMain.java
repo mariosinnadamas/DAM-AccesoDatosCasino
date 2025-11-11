@@ -111,9 +111,8 @@ public class CasinoMain {
             dao.addCliente(c2);
             dao.addCliente(c3);
 
-            System.out.println("✓ Clientes añadidos correctamente\n");
+            System.out.println("Clientes añadidos correctamente\n");
         } catch (Exception e) {
-            System.err.println("✗ Error: " + e.getMessage() + "\n");
             e.printStackTrace();
         }
     }
@@ -123,11 +122,11 @@ public class CasinoMain {
         try {
             Cliente c1 = new Cliente("12345678Z", "Juan Paco", "García Pérez");
             dao.addCliente(c1);
-            System.err.println("✗ ERROR: Debería haber lanzado ClientAlreadyExistsException\n");
+            System.err.println("ERROR: Debería haber lanzado ClientAlreadyExistsException\n");
         } catch (ClientAlreadyExistsException e) {
-            System.out.println("✓ Excepción capturada correctamente: " + e.getMessage() + "\n");
+            System.out.println("Excepción capturada correctamente: " + e.getMessage() + "\n");
         } catch (Exception e) {
-            System.err.println("✗ Excepción incorrecta: " + e.getMessage() + "\n");
+            System.err.println("Excepción incorrecta: " + e.getMessage() + "\n");
         }
     }
 
@@ -135,11 +134,11 @@ public class CasinoMain {
         System.out.println("--- Test 3: Añadir cliente nulo ---");
         try {
             dao.addCliente(null);
-            System.err.println("✗ ERROR: Debería haber lanzado IllegalArgumentException\n");
+            System.err.println("ERROR: Debería haber lanzado IllegalArgumentException\n");
         } catch (IllegalArgumentException e) {
-            System.out.println("✓ Excepción capturada correctamente: " + e.getMessage() + "\n");
+            System.out.println("Excepción capturada correctamente: " + e.getMessage() + "\n");
         } catch (Exception e) {
-            System.err.println("✗ Excepción incorrecta: " + e.getMessage() + "\n");
+            System.err.println("Excepción incorrecta: " + e.getMessage() + "\n");
         }
     }
 
@@ -147,9 +146,9 @@ public class CasinoMain {
         System.out.println("--- Test 4: Consultar cliente existente ---");
         try {
             String resultado = dao.consultaCliente("12345678Z");
-            System.out.println("✓ Cliente encontrado: " + resultado + "\n");
+            System.out.println("Cliente encontrado: " + resultado + "\n");
         } catch (Exception e) {
-            System.err.println("✗ Error: " + e.getMessage() + "\n");
+            System.err.println("Error: " + e.getMessage() + "\n");
         }
     }
 
@@ -157,11 +156,11 @@ public class CasinoMain {
         System.out.println("--- Test 5: Consultar cliente inexistente ---");
         try {
             dao.consultaCliente("99999999R");
-            System.err.println("✗ ERROR: Debería haber lanzado ClientNotFoundException\n");
+            System.err.println("ERROR: Debería haber lanzado ClientNotFoundException\n");
         } catch (ClientNotFoundException e) {
-            System.out.println("✓ Excepción capturada correctamente: " + e.getMessage() + "\n");
+            System.out.println("Excepción capturada correctamente: " + e.getMessage() + "\n");
         } catch (Exception e) {
-            System.err.println("✗ Excepción incorrecta: " + e.getMessage() + "\n");
+            System.err.println("Excepción incorrecta: " + e.getMessage() + "\n");
         }
     }
 
@@ -178,9 +177,9 @@ public class CasinoMain {
             dao.addServicio(s3);
             dao.addServicio(s4);
 
-            System.out.println("✓ Servicios añadidos correctamente\n");
+            System.out.println("Servicios añadidos correctamente\n");
         } catch (Exception e) {
-            System.err.println("✗ Error: " + e.getMessage() + "\n");
+            System.err.println("Error: " + e.getMessage() + "\n");
             e.printStackTrace();
         }
     }
@@ -195,9 +194,9 @@ public class CasinoMain {
                 System.err.println("✗ ERROR: Debería haber lanzado ServiceAlreadyExistsException\n");
             }
         } catch (ServiceAlreadyExistsException e) {
-            System.out.println("✓ Excepción capturada correctamente: " + e.getMessage() + "\n");
+            System.out.println("Excepción capturada correctamente: " + e.getMessage() + "\n");
         } catch (Exception e) {
-            System.err.println("✗ Excepción incorrecta: " + e.getMessage() + "\n");
+            System.err.println("Excepción incorrecta: " + e.getMessage() + "\n");
         }
     }
 
@@ -208,10 +207,10 @@ public class CasinoMain {
             if (!servicios.isEmpty()) {
                 String codigo = servicios.get(0).getCodigo();
                 String resultado = dao.consultaServicio(codigo);
-                System.out.println("✓ Servicio encontrado: " + resultado + "\n");
+                System.out.println("Servicio encontrado: " + resultado + "\n");
             }
         } catch (Exception e) {
-            System.err.println("✗ Error: " + e.getMessage() + "\n");
+            System.err.println("Error: " + e.getMessage() + "\n");
         }
     }
 
@@ -248,12 +247,12 @@ public class CasinoMain {
                 dao.addLog(log4);
                 dao.addLog(log5);
 
-                System.out.println("✓ Logs añadidos correctamente\n");
+                System.out.println("Logs añadidos correctamente\n");
             } else {
-                System.out.println("⚠ No hay clientes o servicios para crear logs\n");
+                System.out.println("No hay clientes o servicios para crear logs\n");
             }
         } catch (Exception e) {
-            System.err.println("✗ Error: " + e.getMessage() + "\n");
+            System.err.println("Error: " + e.getMessage() + "\n");
             e.printStackTrace();
         }
     }
@@ -269,10 +268,10 @@ public class CasinoMain {
                         log.getCliente().getDni(),
                         log.getFecha()
                 );
-                System.out.println("✓ Log encontrado: " + resultado + "\n");
+                System.out.println("Log encontrado: " + resultado + "\n");
             }
         } catch (Exception e) {
-            System.err.println("✗ Error: " + e.getMessage() + "\n");
+            System.err.println("Error: " + e.getMessage() + "\n");
         }
     }
 
@@ -281,9 +280,9 @@ public class CasinoMain {
         try {
             Cliente clienteActualizado = new Cliente("12345678Z", "Juan Carlos", "García Pérez");
             boolean resultado = dao.actualizarCliente("12345678Z", clienteActualizado);
-            System.out.println("✓ Cliente actualizado: " + resultado + "\n");
+            System.out.println("Cliente actualizado: " + resultado + "\n");
         } catch (Exception e) {
-            System.err.println("✗ Error: " + e.getMessage() + "\n");
+            System.err.println("Error: " + e.getMessage() + "\n");
         }
     }
 
@@ -301,10 +300,10 @@ public class CasinoMain {
                         servicio.getCapacidadMaxima()
                 );
                 boolean resultado = dao.actualizarServicio(servicio.getCodigo(), servicioActualizado);
-                System.out.println("✓ Servicio actualizado: " + resultado + "\n");
+                System.out.println("Servicio actualizado: " + resultado + "\n");
             }
         } catch (Exception e) {
-            System.err.println("✗ Error: " + e.getMessage() + "\n");
+            System.err.println("Error: " + e.getMessage() + "\n");
         }
     }
 
@@ -312,9 +311,9 @@ public class CasinoMain {
         System.out.println("--- Test 13: Ganancias de alimentos ---");
         try {
             double ganancias = dao.gananciasAlimentos("12345678Z");
-            System.out.println("✓ Ganancias de alimentos: €" + ganancias + "\n");
+            System.out.println("Ganancias de alimentos: €" + ganancias + "\n");
         } catch (Exception e) {
-            System.err.println("✗ Error: " + e.getMessage() + "\n");
+            System.err.println("Error: " + e.getMessage() + "\n");
         }
     }
 
@@ -323,9 +322,9 @@ public class CasinoMain {
         try {
             LocalDate hoy = LocalDate.now();
             double dinero = dao.dineroInvertidoClienteEnDia("12345678Z", hoy);
-            System.out.println("✓ Dinero invertido hoy: €" + dinero + "\n");
+            System.out.println("Dinero invertido hoy: €" + dinero + "\n");
         } catch (Exception e) {
-            System.err.println("✗ Error: " + e.getMessage() + "\n");
+            System.err.println("Error: " + e.getMessage() + "\n");
         }
     }
 
@@ -340,10 +339,10 @@ public class CasinoMain {
 
             if (mesa != null) {
                 int veces = dao.vecesClienteJuegaMesa("12345678Z", mesa.getCodigo());
-                System.out.println("✓ Veces jugadas: " + veces + "\n");
+                System.out.println("Veces jugadas: " + veces + "\n");
             }
         } catch (Exception e) {
-            System.err.println("✗ Error: " + e.getMessage() + "\n");
+            System.err.println("Error: " + e.getMessage() + "\n");
         }
     }
 
@@ -351,9 +350,9 @@ public class CasinoMain {
         System.out.println("--- Test 16: Ganado en mesas ---");
         try {
             double ganado = dao.ganadoMesas();
-            System.out.println("✓ Total ganado en mesas: €" + ganado + "\n");
+            System.out.println("Total ganado en mesas: €" + ganado + "\n");
         } catch (Exception e) {
-            System.err.println("✗ Error: " + e.getMessage() + "\n");
+            System.err.println("Error: " + e.getMessage() + "\n");
         }
     }
 
@@ -361,9 +360,9 @@ public class CasinoMain {
         System.out.println("--- Test 17: Ganado en establecimientos ---");
         try {
             double ganado = dao.ganadoEstablecimientos();
-            System.out.println("✓ Total ganado en establecimientos: €" + ganado + "\n");
+            System.out.println("Total ganado en establecimientos: €" + ganado + "\n");
         } catch (Exception e) {
-            System.err.println("✗ Error: " + e.getMessage() + "\n");
+            System.err.println("Error: " + e.getMessage() + "\n");
         }
     }
 
@@ -371,9 +370,9 @@ public class CasinoMain {
         System.out.println("--- Test 18: Devolver servicios por tipo ---");
         try {
             List<Servicio> mesas = dao.devolverServiciosTipo(TipoServicio.MESAPOKER);
-            System.out.println("✓ Servicios de tipo MESAPOKER encontrados: " + mesas.size() + "\n");
+            System.out.println("Servicios de tipo MESAPOKER encontrados: " + mesas.size() + "\n");
         } catch (Exception e) {
-            System.err.println("✗ Error: " + e.getMessage() + "\n");
+            System.err.println("Error: " + e.getMessage() + "\n");
         }
     }
 
@@ -382,9 +381,9 @@ public class CasinoMain {
         try {
             Cliente cliente = new Cliente("11111111H", "Pedro", "Martínez Ruiz");
             boolean resultado = dao.borrarCliente(cliente);
-            System.out.println("✓ Cliente borrado: " + resultado + "\n");
+            System.out.println("Cliente borrado: " + resultado + "\n");
         } catch (Exception e) {
-            System.err.println("✗ Error: " + e.getMessage() + "\n");
+            System.err.println("Error: " + e.getMessage() + "\n");
         }
     }
 
@@ -395,10 +394,10 @@ public class CasinoMain {
             if (servicios.size() > 1) {
                 Servicio servicio = servicios.get(servicios.size() - 1);
                 boolean resultado = dao.borrarServicio(servicio);
-                System.out.println("✓ Servicio borrado: " + resultado + "\n");
+                System.out.println("Servicio borrado: " + resultado + "\n");
             }
         } catch (Exception e) {
-            System.err.println("✗ Error: " + e.getMessage() + "\n");
+            System.err.println("Error: " + e.getMessage() + "\n");
         }
     }
 
@@ -409,11 +408,11 @@ public class CasinoMain {
             List<Servicio> servicios = dao.leerListaServicios();
             List<Log> logs = dao.leerListaLog();
 
-            System.out.println("✓ Total clientes: " + clientes.size());
-            System.out.println("✓ Total servicios: " + servicios.size());
-            System.out.println("✓ Total logs: " + logs.size() + "\n");
+            System.out.println("Total clientes: " + clientes.size());
+            System.out.println("Total servicios: " + servicios.size());
+            System.out.println("Total logs: " + logs.size() + "\n");
         } catch (Exception e) {
-            System.err.println("✗ Error: " + e.getMessage() + "\n");
+            System.err.println("Error: " + e.getMessage() + "\n");
         }
     }
 
@@ -421,11 +420,11 @@ public class CasinoMain {
         System.out.println("--- Test 22: DNI inválido ---");
         try {
             Cliente c = new Cliente("12345678A", "Test", "Test");
-            System.err.println("✗ ERROR: Debería haber lanzado IllegalArgumentException\n");
+            System.err.println("ERROR: Debería haber lanzado IllegalArgumentException\n");
         } catch (IllegalArgumentException e) {
-            System.out.println("✓ Excepción capturada correctamente: " + e.getMessage() + "\n");
+            System.out.println("Excepción capturada correctamente: " + e.getMessage() + "\n");
         } catch (Exception e) {
-            System.err.println("✗ Excepción incorrecta: " + e.getMessage() + "\n");
+            System.err.println("Excepción incorrecta: " + e.getMessage() + "\n");
         }
     }
 
