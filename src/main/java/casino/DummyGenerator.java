@@ -1,6 +1,4 @@
-package casino.recursos;
-
-import casino.*;
+package casino;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +25,7 @@ public class DummyGenerator {
         return surnamePool[randomInt];
     }
 
-    //TODO: TEST
+
     public TipoServicio randomTipoServicio(){
         int randomInt = (int) (Math.random() * 9);
         TipoServicio tipoServicio;
@@ -44,21 +42,25 @@ public class DummyGenerator {
     }
 
 
-    //TODO: TEST
     public TipoConcepto randomTipoConcepto(){
-        String[] conceptoPool = {"APUESTACLIENTEGANA"};
+        String[] conceptoPool = {"APOSTAR", "RETIRADA","APUESTACLIENTEGANA", "COMPRACOMIDA", "COMPRABEBIDA"};
         int randomConcepto = (int) (Math.random() * (conceptoPool.length));
         TipoConcepto tipoConcepto;
         if (randomConcepto == 0){
             tipoConcepto = TipoConcepto.APUESTACLIENTEGANA;
-        } else {
+        } else if (randomConcepto == 1){
+            tipoConcepto = TipoConcepto.APOSTAR;
+        } else if (randomConcepto == 2){
+            tipoConcepto = TipoConcepto.COMPRABEBIDA;
+        } else if (randomConcepto == 3){
             tipoConcepto = TipoConcepto.COMPRACOMIDA;
+        } else {
+            tipoConcepto  = TipoConcepto.RETIRADA;
         }
-
         return tipoConcepto;
     }
 
-    //TODO: TEST
+
     public List<Cliente> crearListaCliente(int longitudLista){
         List<Cliente> listaClientes = new ArrayList<>();
         for (int i = 0; i < longitudLista; i++) {
@@ -68,7 +70,7 @@ public class DummyGenerator {
         return listaClientes;
     }
 
-    //TODO: TEST
+
     public List<Servicio> crearListaServicio(int longitudLista){
         List<Servicio> listaServicio = new ArrayList<>();
         for (int i = 0; i < longitudLista; i++) {
@@ -77,23 +79,52 @@ public class DummyGenerator {
         return listaServicio;
     }
 
-    //TODO: TEST
+
     public List<Log> crearLogs(List<Cliente> listaCliente, List<Servicio> listaServicio, int longitudLista){
         List<Log> listaLogs = new ArrayList<>();
 
         for (int i = 0; i < longitudLista; i++){
-            int randomCliente = (int) (Math.random() * (listaCliente.size()));
-            int randomServicio = (int) (Math.random() * (listaServicio.size()));
+            int randomClienteIndex = (int) (Math.random() * (listaCliente.size()));
+            int randomServicioIndex = (int) (Math.random() * (listaServicio.size()));
+
+            Cliente randomCliente = listaCliente.get(randomClienteIndex);
+            Servicio randomServicio = listaServicio.get(randomServicioIndex);
+
+            boolean conceptoValido = false;
             TipoConcepto concepto = randomTipoConcepto();
+            while (!conceptoValido) {
+                concepto = randomTipoConcepto();
+                if (
+                        (
+                                randomServicio.getTipo().equals(TipoServicio.MESAPOKER) ||
+                                        randomServicio.getTipo().equals(TipoServicio.MESABLACKJACK)
+                        ) && (
+                                concepto.equals(TipoConcepto.APUESTACLIENTEGANA) ||
+                                        concepto.equals(TipoConcepto.APOSTAR) ||
+                                        concepto.equals(TipoConcepto.RETIRADA)
+                                )
+                ) {
+                    conceptoValido = true;
+                } else if ((randomServicio.getTipo().equals(TipoServicio.RESTAURANTE) ||
+                randomServicio.getTipo().equals(TipoServicio.BAR)) && (
+                concepto.equals(TipoConcepto.COMPRACOMIDA) ||
+                concepto.equals(TipoConcepto.COMPRABEBIDA)
+                )) {
+                    conceptoValido = true;
+                }
+            }
+
             double cantidad;
-            if (concepto.equals(TipoConcepto.APUESTACLIENTEGANA)){
-                cantidad =  (double) (Math.random() * 1000);
+            if (concepto.equals(TipoConcepto.APUESTACLIENTEGANA)) {
+                cantidad =  (Math.random() * 500);
+            } else if (concepto.equals(TipoConcepto.APOSTAR)) {
+                cantidad =  (Math.random() * 1000);
+            } else if (concepto.equals(TipoConcepto.COMPRABEBIDA) || concepto.equals(TipoConcepto.COMPRACOMIDA)) {
+                cantidad = Math.random() * 25;
             } else {
                 cantidad = 0;
             }
-            listaLogs.add(new Log(listaCliente.get(randomCliente), listaServicio.get(randomServicio), concepto, Math.floor(cantidad)));
-
-
+            listaLogs.add(new Log (randomCliente, randomServicio, concepto, Math.floor(cantidad)+1));
         }
         return listaLogs;
     }

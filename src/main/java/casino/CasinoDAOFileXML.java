@@ -40,7 +40,6 @@ public class CasinoDAOFileXML implements CasinoDAO {
             if (!existe) {
                 listaClientes.add(cliente);
                 guardarClientesEnXML(listaClientes);
-                System.out.println("Cliente añadido correctamente");
             } else {
                 throw new ClientAlreadyExistsException("ERROR AL CREAR: Cliente con DNI " + cliente.getDni() + " ya existe");
             }
@@ -70,16 +69,14 @@ public class CasinoDAOFileXML implements CasinoDAO {
                 if (!existe) {
                     listaClientes.add(nuevo);
                     clientesAniadidos++;
-                    System.out.println("Cliente con dni: " + nuevo.getDni() + " añadido");
                 }
             }
 
             //Si se ha añadido 1 cliente o más escribe en el fichero y lo actualiza
             if (clientesAniadidos > 0) {
                 guardarClientesEnXML(listaClientes);
-                System.out.println(clientesAniadidos + " clientes añadidos correctamente"); //Mensaje para pruebas
             } else {
-                System.out.println("No se añadió ningún cliente nuevo");
+                System.out.println("No se añadió ningún cliente nuevo"); //Mensaje de pruebas
             }
 
         } catch (IOException e) {
@@ -121,7 +118,6 @@ public class CasinoDAOFileXML implements CasinoDAO {
             if (!existe) {
                 listaServicios.add(servicio);
                 guardarServiciosEnXML(listaServicios);
-                System.out.println("Servicio añadido correctamente");
             } else {
                 throw new ServiceAlreadyExistsException("Servicio con código " + servicio.getCodigo() +" y nombre "+ servicio.getNombreServicio() + " ya existe");
             }
@@ -147,13 +143,11 @@ public class CasinoDAOFileXML implements CasinoDAO {
                 if (!existe) {
                     listaServicios.add(nuevo);
                     serviciosAniadidos++;
-                    System.out.println("Servicio " + nuevo.getCodigo() + " añadido");
                 }
             }
 
             if (serviciosAniadidos > 0) {
                 guardarServiciosEnXML(listaServicios);
-                System.out.println(serviciosAniadidos + " servicios añadidos correctamente");
             }
         } catch (IOException e){
             throw new IOException("Error al añadir la lista de servicios en el archivo XML: ", e);
@@ -192,7 +186,6 @@ public class CasinoDAOFileXML implements CasinoDAO {
             List<Log> listaLogs = leerListaLog();
             listaLogs.add(log);
             guardarLogsEnXML(listaLogs);
-            System.out.println("Log añadido correctamente");
 
         } catch (IOException e) {
             throw new IOException("Error de E/S al acceder al archivo de log", e);
@@ -229,7 +222,6 @@ public class CasinoDAOFileXML implements CasinoDAO {
             List<Log> listaLogs = leerListaLog();
             listaLogs.addAll(nuevosLogs);
             guardarLogsEnXML(listaLogs);
-            System.out.println("Lista de logs guardada con éxito");
         } catch (IOException e){
             throw new IOException("Error al añadir lista de logs al XML", e);
         }
@@ -393,9 +385,8 @@ public class CasinoDAOFileXML implements CasinoDAO {
 
             if (encontrado) {
                 guardarServiciosEnXML(listaServicios);
-                System.out.println("Servicio actualizado correctamente");
             } else {
-                throw new ServiceNotFoundException("No se ha encontrado el servicio deseado");
+                throw new ServiceNotFoundException("ERROR: No se ha encontrado el servicio deseado");
             }
             return encontrado;
         } catch (IOException e) {
@@ -450,7 +441,6 @@ public class CasinoDAOFileXML implements CasinoDAO {
 
         try {
             List <Servicio> listaServicios = leerListaServicios();
-            int tamanoInicial = listaServicios.size();
 
             //Elimino todos los servicios que coincidan en ese codigo, por si hay duplicados
             boolean eliminado = listaServicios.removeIf(s ->
@@ -458,11 +448,9 @@ public class CasinoDAOFileXML implements CasinoDAO {
 
             if (eliminado){
                 guardarServiciosEnXML(listaServicios);
-                int serviciosEliminados = tamanoInicial - listaServicios.size();
-                System.out.println(serviciosEliminados + " servicios con codigo " + servicio.getCodigo() +" eliminados");
                 return true;
             } else {
-                throw new ServiceNotFoundException("ERRROR AL BORRAR: No se ha encontrado ningun servicio con código" + servicio.getCodigo());
+                throw new ServiceNotFoundException("ERROR AL BORRAR: No se ha encontrado ningun servicio con código" + servicio.getCodigo());
             }
         } catch (IOException e){
             throw new IOException("Error al borrar el servicio: ", e);
@@ -478,7 +466,6 @@ public class CasinoDAOFileXML implements CasinoDAO {
 
         try {
             List <Cliente> listaClientes = leerListaClientes();
-            int tamanoInicial = listaClientes.size();
 
             //Elimino todos los clientes que coincidan en ese DNI, por si hay duplicados
             boolean eliminado = listaClientes.removeIf(c ->
@@ -486,8 +473,6 @@ public class CasinoDAOFileXML implements CasinoDAO {
 
             if (eliminado){
                 guardarClientesEnXML(listaClientes);
-                int clientesEliminados = tamanoInicial - listaClientes.size();
-                System.out.println(clientesEliminados + " clientes con DNI " + cliente.getDni() +" eliminados");
                 return true;
             } else {
                 throw new ClientNotFoundException("No se ha encontrado ningun cliente con DNI" + cliente.getDni());
@@ -499,9 +484,8 @@ public class CasinoDAOFileXML implements CasinoDAO {
 
     @Override
     public double gananciasAlimentos(String dni) throws IllegalArgumentException, IOException {
-        Boolean encontrado = false;
+        boolean encontrado = false;
 
-        // TODO: Test, test dni = ""
         if (dni == null || dni.isBlank()) {
             throw new IllegalArgumentException("DNI no puede ser nulo o vacío");
         }

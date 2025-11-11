@@ -1,5 +1,6 @@
 package casino;
 
+import exceptions.*;
 import jakarta.json.*;
 import jakarta.json.stream.JsonGenerator;
 
@@ -15,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//ToDo[!1]: Comentar Codigo
+
 public class CasinoDAOFileJSON implements CasinoDAO {
     //Rutas y Archivos
     //Clientes
@@ -30,9 +31,56 @@ public class CasinoDAOFileJSON implements CasinoDAO {
     Path pathServicio = Path.of("src", "main", "java", "casino", "recursos", "json", "servicio.json");
     File fileServicio = new File(pathServicio.toString());
 
+    public void setFileCliente(File fileCliente) {
+        this.fileCliente = fileCliente;
+    }
 
+    public void setFileLog(File fileLog) {
+        this.fileLog = fileLog;
+    }
 
-    private void escribirCliente(List<Cliente> listaClientes) {
+    public void setFileServicio(File fileServicio) {
+        this.fileServicio = fileServicio;
+    }
+
+    /**
+     * Devuelve una lista de clientes del archivo clientes.json
+     * @return List de Cliente del archivo cliente.json
+     * @throws IOException
+     */
+    @Override
+    public List<Cliente> leerListaClientes() throws IOException {
+        List<Cliente> listaClientes = new ArrayList<>();
+
+        try (FileReader fileReader = new FileReader(fileCliente);
+             JsonReader jsonReader = Json.createReader(fileReader)) {
+
+            var jsonArray = jsonReader.readArray();
+
+            jsonArray.forEach(jsonValue -> {
+                JsonObject jsonObject = jsonValue.asJsonObject();
+
+                Cliente auxCliente = new Cliente(
+                        jsonObject.getString("dni"),
+                        jsonObject.getString("nombre"),
+                        jsonObject.getString("apellido")
+                );
+                listaClientes.add(auxCliente);
+            });
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return listaClientes;
+    }
+
+    /**
+     * Sobreescribe en el archivo cliente.json por los clientes introducidos por parámetros.
+     * @param listaClientes ArrayList de clientes
+     * @throws IOException cuando no se en
+     */
+    private void escribirCliente(List<Cliente> listaClientes) throws IOException {
         JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();
         for (Cliente cliente : listaClientes) {
             JsonObject jobj = Json.createObjectBuilder()
@@ -56,22 +104,44 @@ public class CasinoDAOFileJSON implements CasinoDAO {
         }
     }
 
+    /**
+     * Añade un cliente al archivo json, no sobreescribe los clientes del archivo
+     * @param cliente objeto que recibe como parámetro para agregar al almacén
+     * @throws IOException
+     * @throws ClientAlreadyExistsException Lanza excepción si el cliente ya estaba en el archivo
+     */
     @Override
-    public void addCliente(Cliente cliente) throws IOException {
+    public void addCliente(Cliente cliente) throws IOException, ClientAlreadyExistsException, IllegalArgumentException {
+        //Validación de parámetros
+        if (cliente == null) {
+            throw new IllegalArgumentException("ERROR: El cliente no puede ser nulo");
+        }
         //Obtener ArrayList<Cliente> del archivo
         ArrayList<Cliente> listaClientes = (ArrayList<Cliente>) this.leerListaClientes();
 
-        //Agregar el objeto cliente
-        listaClientes.add(cliente);
+        if (listaClientes.contains(cliente)) {
+            throw new ClientAlreadyExistsException("Cliente existente");
+        } else {
+            //Agregar el objeto cliente
+            listaClientes.add(cliente);
 
-        escribirCliente(listaClientes);
+            escribirCliente(listaClientes);
+        }
     }
 
-    //Ejemplo de metodo que no está en la interfaz
-    public void addCliente(List<Cliente> clientes) throws IOException {
+    /**
+     * Añade una lista de clientes al archivo json, no sobreescribe los clientes del archivo
+     * @param clientes Lista de clientes a agregar al json
+     * @throws IOException
+     * @throws ClientAlreadyExistsException Lanza la excepción si un cliente ya estaba en el archivo
+     */
+    public void addListaClientes(List<Cliente> clientes) throws IOException, ClientAlreadyExistsException {
         ArrayList<Cliente> listaClient = (ArrayList<Cliente>) this.leerListaClientes();
 
         for (Cliente cliente : clientes) {
+            if (listaClient.contains(cliente)) {
+                throw new  ClientAlreadyExistsException("El cliente ya está en el archivo");
+            }
             listaClient.add(cliente);
         }
 
@@ -79,7 +149,60 @@ public class CasinoDAOFileJSON implements CasinoDAO {
 
     }
 
-    private void escribirServicio(List<Servicio> listaServicio) {
+    /**
+     * Devuelve una lista de servicios del archivo servicios.json
+     * @return Lista de servicios del archivo servicios.json
+     * @throws IOException
+     */
+    @Override
+    public List<Servicio> leerListaServicios() throws IOException{
+        List<Servicio> listaServicios = new ArrayList<>();
+
+        try (FileReader fileReader = new FileReader(fileServicio);
+             JsonReader jsonReader = Json.createReader(fileReader)) {
+
+            var jsonArray = jsonReader.readArray();
+
+            jsonArray.forEach(jsonValue -> {
+                JsonObject jsonObject = jsonValue.asJsonObject();
+
+                String codigo =  jsonObject.getString("codigo");
+                TipoServicio tipoServicio = TipoServicio.valueOf(jsonObject.getString("tipoServicio"));
+                String nombreServicio =  jsonObject.getString("nombreServicio");
+
+                //Lista CLientes
+                ArrayList<Cliente> clientesServicios = new ArrayList<>();
+                JsonArray arr = jsonObject.getJsonArray("listaClientes");
+                for (int i = 0; i < arr.size(); i++) {
+                    JsonObject jobjCliente = arr.getJsonObject(i);
+                    String dni = jobjCliente.getString("dni");
+                    String nombre = jobjCliente.getString("nombre");
+                    String apellido = jobjCliente.getString("apellido");
+                    clientesServicios.add(new  Cliente(dni, nombre, apellido));
+                }
+
+                int capacidadMaxima = jsonObject.getInt("capacidadMaxima");
+
+
+                Servicio auxServicio = new Servicio(
+                        codigo, tipoServicio, nombreServicio, clientesServicios, capacidadMaxima
+                );
+                listaServicios.add(auxServicio);
+            });
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return listaServicios;
+    }
+
+    /**
+     * Escribe una lista de servicios en el archivo servicios. Sobreescribe el contenido
+     * @param listaServicio Lista de servicios a escribir en el json
+     * @throws IOException
+     */
+    private void escribirServicio(List<Servicio> listaServicio) throws IOException {
         //Crear el Objeto JsonArrayBuilder
         JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();
 
@@ -122,31 +245,121 @@ public class CasinoDAOFileJSON implements CasinoDAO {
         }
     }
 
+    /**
+     * Añade un Servicio al archivo json de servicios. No sobreescribe los existentes
+     * @param servicio objeto que recibe como parámetro para agregar al almacén
+     * @throws IOException
+     * @throws ServiceAlreadyExistsException Lanza la excepción si el servicio está presente en el archivo
+     */
     @Override
-    public void addServicio(Servicio servicio) {
+    public void addServicio(Servicio servicio) throws IOException, ServiceAlreadyExistsException{
         //Obtener ArrayList<Servicio> del archivo
         ArrayList<Servicio> listaServicio = (ArrayList<Servicio>) this.leerListaServicios();
+        boolean existe = listaServicio.stream()
+                .anyMatch(c -> c.getCodigo().equalsIgnoreCase(servicio.getCodigo()));
 
-        //Agregar el objeto cliente
-        listaServicio.add(servicio);
-
-        escribirServicio(listaServicio);
-
+        if (existe){
+            throw new ServiceAlreadyExistsException("Servicio existente");
+        } else {
+            listaServicio.add(servicio);
+            escribirServicio(listaServicio);
+        }
     }
 
-    public void addServicio(List<Servicio> servicios) {
+    /**
+     * Añade una lista de servicios al archivo json. No sobreescribe el archivo
+     * @param servicios Lista de servicios a agregar en el json
+     * @throws IOException
+     * @throws ServiceAlreadyExistsException Lanza excepción si ya está presente en el json
+     */
+    public void addListaServicios(List<Servicio> servicios) throws IOException, ServiceAlreadyExistsException {
 
         //Obtener ArrayList<Servicio> del archivo
         ArrayList<Servicio> listaServicio = (ArrayList<Servicio>) this.leerListaServicios();
         //Agregar los objetos Servicio
         for (Servicio ser : servicios) {
+            if (listaServicio.contains(ser)){
+                throw new ServiceAlreadyExistsException("Servicio ya existente");
+            }
             listaServicio.add(ser);
         }
 
         escribirServicio(listaServicio);
     }
 
-    private void escribirLog(List<Log> listaLog){
+    /**
+     * Devuelve una lista de logs del archivo log.json
+     * @return List de log del archivo log.json
+     * @throws IOException
+     */
+    @Override
+    public List<Log> leerListaLog() throws IOException{
+        List<Log> listaLog = new ArrayList<>();
+
+        try (FileReader fileReader = new FileReader(fileLog);
+             JsonReader jsonReader = Json.createReader(fileReader)) {
+
+            var jsonArray = jsonReader.readArray();
+
+            jsonArray.forEach(jsonValue -> {
+                JsonObject jsonObject = jsonValue.asJsonObject();
+
+                JsonObject jsonCliente =  jsonObject.getJsonObject("cliente");
+
+                String dni =  jsonCliente.getString("dni");
+                String nombre =  jsonCliente.getString("nombre");
+                String apellido =  jsonCliente.getString("apellido");
+
+
+                JsonObject jsonServicio = jsonObject.getJsonObject("servicio");
+
+                String codigo  =  jsonServicio.getString("codigo");
+                TipoServicio tipoServicio = TipoServicio.valueOf(jsonServicio.getString("tipoServicio"));
+                String nombreServicio =  jsonServicio.getString("nombreServicio");
+
+                //Lista CLientes
+                ArrayList<Cliente> clientesServicios = new ArrayList<>();
+                JsonArray arr = jsonObject.getJsonObject("servicio").getJsonArray("listaClientes");
+                for (int i = 0; i < arr.size(); i++) {
+                    JsonObject jobjCliente = arr.getJsonObject(i);
+                    String dniCli = jobjCliente.getString("dni");
+                    String nombreCli = jobjCliente.getString("nombre");
+                    String apellidoCli = jobjCliente.getString("apellido");
+                    clientesServicios.add(new Cliente(dniCli, nombreCli, apellidoCli));
+                }
+                int capacidadMaxima = jsonServicio.getInt("capacidadMaxima");
+
+                Cliente clie = new Cliente(dni, nombre, apellido);
+                Servicio serv = new Servicio(
+                        codigo, tipoServicio, nombreServicio, clientesServicios, capacidadMaxima
+                );
+
+                String fechastr = jsonObject.getString("fecha");
+                LocalDate fecha = LocalDate.parse(fechastr);
+
+                String horastr = jsonObject.getString("hora");
+                LocalTime hora= LocalTime.parse(horastr);
+
+                TipoConcepto tipoConcepto = TipoConcepto.valueOf(jsonObject.getString("tipoConcepto"));
+                double cantidadConcepto = jsonObject.getJsonNumber("cantidadConcepto").doubleValue();
+
+                Log auxLog = new Log(clie, serv, fecha, hora, tipoConcepto, cantidadConcepto);
+                listaLog.add(auxLog);
+            });
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return listaLog;
+    }
+
+    /**
+     * Escribe una lista de log en el archivo json. Sobreescribe el contenido
+     * @param listaLog Lista de log a escribir en el archivo
+     * @throws IOException
+     */
+    private void escribirLog(List<Log> listaLog) throws IOException {
         //Crear el Objeto JsonArrayBuilder
         JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();
 
@@ -210,8 +423,13 @@ public class CasinoDAOFileJSON implements CasinoDAO {
         }
     }
 
+    /**
+     * Añade un log al archivo json. No sobreeescribe el contenido
+     * @param log objeto que recibe como parámetro para agregar al almacén
+     * @throws IOException
+     */
     @Override
-    public void addLog(Log log) {
+    public void addLog(Log log) throws IOException{
         //Obtener ArrayList<SLog> del archivo
         ArrayList<Log> listaLog = (ArrayList<Log>) this.leerListaLog();
 
@@ -222,68 +440,33 @@ public class CasinoDAOFileJSON implements CasinoDAO {
 
     }
 
-    public void addLog(List<Log> listaLogAgregar) {
+    /**
+     * Añade una lista de logs al archivo json. No sobreescribe el contenido.
+     * @param logs Lista de log a agregar al archivo
+     * @throws IOException
+     */
+    public void addListaLogs(List<Log> logs) throws IOException{
         //Obtener ArrayList<SLog> del archivo
         ArrayList<Log> listaLog = (ArrayList<Log>) this.leerListaLog();
 
         //Agregar los Objetos Log
-        for  (Log logFor : listaLogAgregar) {
+        for  (Log logFor : logs) {
             listaLog.add(logFor);
         }
 
         escribirLog(listaLog);
     }
 
+
+    /**
+     * Consulta los datos de un objeto cliente
+     * @param dni String único de un cliente
+     * @return El cliente en formato String
+     * @throws IOException
+     * @throws ClientNotFoundException Si no se encuentra el dni del cliente en el archivo
+     */
     @Override
-    public String consultaServicio(String codigo) {
-        return "";
-    }
-
-    @Override
-    public List<Servicio> leerListaServicios() {
-        List<Servicio> listaServicios = new ArrayList<>();
-
-        try (FileReader fileReader = new FileReader(fileServicio);
-             JsonReader jsonReader = Json.createReader(fileReader)) {
-
-            var jsonArray = jsonReader.readArray();
-
-            jsonArray.forEach(jsonValue -> {
-                JsonObject jsonObject = jsonValue.asJsonObject();
-
-                String codigo =  jsonObject.getString("codigo");
-                TipoServicio tipoServicio = TipoServicio.valueOf(jsonObject.getString("tipoServicio"));
-                String nombreServicio =  jsonObject.getString("nombreServicio");
-
-                //Lista CLientes
-                ArrayList<Cliente> clientesServicios = new ArrayList<>();
-                JsonArray arr = jsonObject.getJsonArray("listaClientes");
-                for (int i = 0; i < arr.size(); i++) {
-                    JsonObject jobjCliente = arr.getJsonObject(i);
-                    String dni = jobjCliente.getString("dni");
-                    String nombre = jobjCliente.getString("nombre");
-                    String apellido = jobjCliente.getString("apellido");
-                    clientesServicios.add(new  Cliente(dni, nombre, apellido));
-                }
-
-                int capacidadMaxima = jsonObject.getInt("capacidadMaxima");
-
-
-                Servicio auxServicio = new Servicio(
-                        codigo, tipoServicio, nombreServicio, clientesServicios, capacidadMaxima
-                );
-                listaServicios.add(auxServicio);
-            });
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-        return listaServicios;
-    }
-
-    @Override
-    public String consultaCliente(String dni) throws IOException {
+    public String consultaCliente(String dni) throws IOException, ClientNotFoundException {
         ArrayList<Cliente> listaClientes =  (ArrayList<Cliente>) this.leerListaClientes();
 
         for (Cliente cliente : listaClientes) {
@@ -291,38 +474,39 @@ public class CasinoDAOFileJSON implements CasinoDAO {
                 return cliente.toString();
             }
         }
-        return "No se ha encontrado el cliente";
+        throw new ClientNotFoundException("Cliente no encontrado");
     }
 
+    /**
+     * Consulta los datos de un objeto servicio
+     * @param codigo único del servicio del que se quiere consultar la información
+     * @return El servicio en formato String
+     * @throws IOException
+     * @throws ServiceNotFoundException Si no se encuentra el código del servicio en el archivo
+     */
     @Override
-    public List<Cliente> leerListaClientes() throws IOException {
-        List<Cliente> listaClientes = new ArrayList<>();
-
-        try (FileReader fileReader = new FileReader(fileCliente);
-             JsonReader jsonReader = Json.createReader(fileReader)) {
-
-            var jsonArray = jsonReader.readArray();
-
-            jsonArray.forEach(jsonValue -> {
-                JsonObject jsonObject = jsonValue.asJsonObject();
-
-                Cliente auxCliente = new Cliente(
-                        jsonObject.getString("dni"),
-                        jsonObject.getString("nombre"),
-                        jsonObject.getString("apellido")
-                );
-                listaClientes.add(auxCliente);
-            });
+    public String consultaServicio(String codigo) throws IOException, ServiceNotFoundException {
+        ArrayList<Servicio> listaServicio = (ArrayList<Servicio>) this.leerListaServicios();
+        for (Servicio servicio : listaServicio){
+            if (servicio.getCodigo().equals(codigo)){
+                return servicio.toString();
+            }
         }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-        return listaClientes;
+        throw new ServiceNotFoundException("Servicio no encontrado");
     }
 
+
+    /**
+     * Consulta el primer log de un cliente en un servicio específico en un dia
+     * @param codigo del servicio a buscar
+     * @param dni del cliente a buscar en el log
+     * @param fecha del log
+     * @return log encontrado en formato String
+     * @throws IOException
+     * @throws LogNotFoundException Si no se encuentra el log especificado
+     */
     @Override
-    public String consultaLog(String codigo, String dni, LocalDate fecha) {
+    public String consultaLog(String codigo, String dni, LocalDate fecha) throws IOException, LogNotFoundException{
         ArrayList<Log> listaLog = (ArrayList<Log>) this.leerListaLog();
         String fechaStr = fecha.toString();
         for (Log log : listaLog) {
@@ -330,168 +514,296 @@ public class CasinoDAOFileJSON implements CasinoDAO {
                 return log.toString();
             }
         }
-        return "No se ha encontrado el log";
+        throw new LogNotFoundException("No se ha encontrado el log especificado");
     }
 
+    /**
+     * Actualiza un cliente de la lista clientes
+     * @param dni único que permite identificar al Cliente
+     * @param clienteActualizado objeto del cliente actualizado
+     * @return
+     * @throws IOException
+     * @throws ClientNotFoundException
+     */
     @Override
-    public List<Log> leerListaLog() {
-        List<Log> listaLog = new ArrayList<>();
+    public boolean actualizarCliente(String dni, Cliente clienteActualizado) throws IOException, ClientNotFoundException{
+        ArrayList<Cliente> listaCliente = (ArrayList<Cliente>) this.leerListaClientes();
 
-        try (FileReader fileReader = new FileReader(fileLog);
-             JsonReader jsonReader = Json.createReader(fileReader)) {
-
-            var jsonArray = jsonReader.readArray();
-
-            jsonArray.forEach(jsonValue -> {
-                JsonObject jsonObject = jsonValue.asJsonObject();
-
-                JsonObject jsonCliente =  jsonObject.getJsonObject("cliente");
-
-                String dni =  jsonCliente.getString("dni");
-                String nombre =  jsonCliente.getString("nombre");
-                String apellido =  jsonCliente.getString("apellido");
-
-
-                JsonObject jsonServicio = jsonObject.getJsonObject("servicio");
-
-                String codigo  =  jsonServicio.getString("codigo");
-                TipoServicio tipoServicio = TipoServicio.valueOf(jsonServicio.getString("tipoServicio"));
-                String nombreServicio =  jsonServicio.getString("nombreServicio");
-
-                //Lista CLientes
-                ArrayList<Cliente> clientesServicios = new ArrayList<>();
-                JsonArray arr = jsonObject.getJsonObject("servicio").getJsonArray("listaClientes");
-                for (int i = 0; i < arr.size(); i++) {
-                    JsonObject jobjCliente = arr.getJsonObject(i);
-                    String dniCli = jobjCliente.getString("dni");
-                    String nombreCli = jobjCliente.getString("nombre");
-                    String apellidoCli = jobjCliente.getString("apellido");
-                    clientesServicios.add(new Cliente(dniCli, nombreCli, apellidoCli));
-                }
-                int capacidadMaxima = jsonServicio.getInt("capacidadMaxima");
-
-                Cliente clie = new Cliente(dni, nombre, apellido);
-                Servicio serv = new Servicio(
-                        codigo, tipoServicio, nombreServicio, clientesServicios, capacidadMaxima
-                );
-
-                String fechastr = jsonObject.getString("fecha");
-                LocalDate fecha = LocalDate.parse(fechastr);
-
-                String horastr = jsonObject.getString("hora");
-                LocalTime hora= LocalTime.parse(horastr);
-
-                TipoConcepto tipoConcepto = TipoConcepto.valueOf(jsonObject.getString("tipoConcepto"));
-                double cantidadConcepto = jsonObject.getJsonNumber("cantidadConcepto").doubleValue();
-
-                Log auxLog = new Log(clie, serv, fecha, hora, tipoConcepto, cantidadConcepto);
-                listaLog.add(auxLog);
-            });
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-        return listaLog;
-    }
-
-    @Override
-    public boolean actualizarServicio(String codigo, Servicio servicioActualizado) {
-        return false;
-    }
-
-    @Override
-    public boolean actualizarCliente(String dni, Cliente clienteActualizado) {
-        return false;
-    }
-
-    @Override
-    public boolean borrarServicio(Servicio servicio) {
-        boolean borrado = false;
-        ArrayList<Servicio>  listaServicios = (ArrayList<Servicio>) this.leerListaServicios();
-        for (Servicio servicios : listaServicios) {
-            if (servicios.equals(servicio)) {
-                borrado = true;
-                int index =  listaServicios.indexOf(servicios);
+        int index = -1;
+        for (Cliente cliente : listaCliente) {
+            if (cliente.getDni().equals(dni)){
+                index = listaCliente.indexOf(cliente);
             }
         }
-        if (borrado) {
-            listaServicios.remove(servicio);
-            escribirServicio(listaServicios);
-
+        if (index == -1){
+            throw new ClientNotFoundException("Cliente no encontrado");
+        } else {
+            listaCliente.set(index, clienteActualizado);
+            escribirCliente(listaCliente);
+            return true;
         }
-        return borrado;
     }
 
+    /**
+     * Actualiza un servicio de la lista servicios
+     * @param codigo único de un Servicio
+     * @param servicioActualizado objeto servicio por el que se actualiza
+     * @return True si el servicio ha sido actualizado
+     * @throws IOException
+     * @throws ServiceNotFoundException Lanza excepción si no se encuentra el servicio
+     */
     @Override
-    public boolean borrarCliente(Cliente cliente) throws IOException {
+    public boolean actualizarServicio(String codigo, Servicio servicioActualizado) throws IOException, ServiceNotFoundException{
+        ArrayList<Servicio> listaServicio = (ArrayList<Servicio>) this.leerListaServicios();
+
+        int index = -1;
+        for (Servicio servicio : listaServicio) {
+            if (servicio.getCodigo().equals(codigo)){
+                index = listaServicio.indexOf(servicio);
+            }
+        }
+        if (index == -1){
+            throw new ServiceNotFoundException("Servicio no encontrado");
+        } else {
+            listaServicio.set(index, servicioActualizado);
+            escribirServicio(listaServicio);
+            return true;
+        }
+    }
+
+
+    /**
+     * Borra un servicio del archivo servicio.json
+     * @param servicio recibe el objeto Mesa
+     * @return True si el servicio ha sido borrado
+     * @throws IOException
+     * @throws ServiceNotFoundException
+     */
+    @Override
+    public boolean borrarServicio(Servicio servicio) throws IOException, ServiceNotFoundException{
+        try {
+            List <Servicio> listaServicios = leerListaServicios();
+
+            //Elimino todos los servicios que coincidan en ese codigo, por si hay duplicados
+            boolean eliminado = listaServicios.removeIf(s ->
+                    s.getCodigo().equalsIgnoreCase(servicio.getCodigo()));
+
+            if (eliminado){
+                escribirServicio(listaServicios);
+                return true;
+            } else {
+                throw new ServiceNotFoundException("ERROR AL BORRAR: No se ha encontrado ningun servicio con código" + servicio.getCodigo());
+            }
+        } catch (IOException e){
+            throw new IOException("Error al borrar el servicio: ", e);
+        }
+    }
+
+    /**
+     * Borra un cliente del archivo cliente.json
+     * @param cliente Cliente a borrar del archivo json
+     * @return true si el cliente es borrado
+     * @throws IOException
+     * @throws ClientNotFoundException Lanza excepción si el cliente no se encuentra en el archivo
+     */
+    @Override
+    public boolean borrarCliente(Cliente cliente) throws IOException, ClientNotFoundException{
         boolean borrado = false;
         ArrayList<Cliente> listaClientes = (ArrayList<Cliente>) this.leerListaClientes();
         for (Cliente clientes : listaClientes){
             if (clientes.equals(cliente)) {
                 borrado = true;
-                int index = listaClientes.indexOf(clientes);
             }
         }
         if (borrado) {
             listaClientes.remove(cliente);
             escribirCliente(listaClientes);
+        } else {
+            throw new ClientNotFoundException("Cliente no encontrado");
         }
         return borrado;
     }
 
+    /**
+     * Devuelve lo invertido por un cliente en un dia en concreto
+     * @param dni del cliente del que se quiere consultar la información
+     * @param fecha del dia que se quiera consultar la información
+     * @return Total de lo invertido por el cliente restando lo ganado.
+     * @throws IOException
+     * @throws ClientNotFoundException
+     */
     @Override
-    public double gananciasAlimentos(String dni) throws IllegalArgumentException, IOException {
-        return 0;
-    }
-
-    @Override
-    public double dineroInvertidoClienteEnDia(String dni, LocalDate fecha) {
-        return 0;
-    }
-
-    //ToDo: ??
-    public double GanaciasAlimentos(String dni, String concepto) {
+    public double dineroInvertidoClienteEnDia(String dni, LocalDate fecha) throws IOException, ClientNotFoundException{
         ArrayList<Log> listaLog = (ArrayList<Log>) this.leerListaLog();
-        double ganado = 0;
-        for (Log log : listaLog) {
-            if (log.getCliente().getDni().equals(dni) && log.getConcepto().toString().equals(concepto)) {
-                ganado += log.getCantidadConcepto();
+
+        boolean clienteExiste = false;
+        double totalInvertido = 0;
+        for (Log log : listaLog){
+            if (log.getCliente().getDni().equals(dni) ) {
+                clienteExiste = true;
+                if (log.getFecha().equals(fecha)) {
+                    if (log.getConcepto().equals(TipoConcepto.COMPRABEBIDA) ||
+                            (log.getConcepto().equals(TipoConcepto.COMPRACOMIDA)) ||
+                            log.getConcepto().equals(TipoConcepto.APOSTAR)) {
+                        totalInvertido += log.getCantidadConcepto();
+                    } else if (log.getConcepto().equals(TipoConcepto.APUESTACLIENTEGANA) ||
+                            log.getConcepto().equals(TipoConcepto.RETIRADA)) {
+                        totalInvertido -= log.getCantidadConcepto();
+                    }
+                }
             }
         }
-        return 0;
+
+        if (!clienteExiste) {
+            throw new  ClientNotFoundException("Cliente no encontrado");
+        } else {
+            return totalInvertido;
+        }
+
+
     }
 
-    public double dineroGanadoClienteEnDia(String dni, LocalDate fecha) {
+    /**
+     * Devuelve lo invertido por un cliente en bebida y comida
+     * @param dni Del cliente del que queremos saber la información
+     * @return Lo invertido por un cliente en alimento
+     * @throws IOException
+     * @throws ClientNotFoundException Lanza excepción si no encuentra el cliente
+     */
+    public double gananciasAlimentos(String dni) throws IOException, ClientNotFoundException {
         ArrayList<Log> listaLog = (ArrayList<Log>) this.leerListaLog();
+        boolean clienteExiste = false;
         double ganado = 0;
-        String fechaStr = fecha.toString();
-
         for (Log log : listaLog) {
-            if (log.getCliente().getDni().equals(dni) && log.getFechaStr().equals(fechaStr) && log.getConcepto().equals(TipoConcepto.APUESTACLIENTEGANA)) {
-                ganado +=  log.getCantidadConcepto();
+            if (log.getCliente().getDni().equals(dni)) {
+                clienteExiste = true;
+                if (log.getConcepto().equals(TipoConcepto.COMPRABEBIDA)
+                    || log.getConcepto().equals(TipoConcepto.COMPRACOMIDA)) {
+                    ganado += log.getCantidadConcepto();
+                }
             }
+
+        }
+        if (!clienteExiste) {
+            throw new ClientNotFoundException("Cliente no encontrado");
         }
         return ganado;
     }
 
-    @Override
-    public int vecesClienteJuegaMesa(String dni, String codigo) {
-        return 0;
+    /**
+     * Devuelve lo ganado por un cliente en un dia en concreto
+     * @param dni Dni del cliente
+     * @param fecha fecha del dia a buscar
+     * @return Lo ganado apostado menos lo perdido apostando
+     * @throws IOException
+     * @throws ClientNotFoundException Lanza la excepción si no se encuentra el cliente
+     */
+    public double dineroGanadoClienteEnDia(String dni, LocalDate fecha) throws IOException, ClientNotFoundException {
+        ArrayList<Log> listaLog = (ArrayList<Log>) this.leerListaLog();
+        boolean  clienteExiste = false;
+        double perdidoApuesta = 0;
+        double ganadoApuesta = 0;
+        String fechaStr = fecha.toString();
+
+        for (Log log : listaLog) {
+            if (log.getCliente().getDni().equals(dni)) {
+                clienteExiste = true;
+                if (log.getFechaStr().equals(fechaStr) && log.getConcepto().equals(TipoConcepto.APUESTACLIENTEGANA)) {
+                    ganadoApuesta +=  log.getCantidadConcepto();
+                } else if (log.getFechaStr().equals(fechaStr) && log.getConcepto().equals(TipoConcepto.APOSTAR)){
+                    perdidoApuesta +=  log.getCantidadConcepto();
+                }
+
+            }
+        }
+        if (!clienteExiste) {
+            throw new ClientNotFoundException("Cliente no encontrado");
+        }
+        return ganadoApuesta -  perdidoApuesta;
     }
 
+    /**
+     * Devuelve la cantidad de veces que un cliente ha jugado en una mesa
+     * @param dni Del cliente del que se quiere consultar la información
+     * @param codigo De la mesa en la que ha jugado el cliente
+     * @return La cantidad de veces que un cliente ha apostado en una mesa
+     * @throws IOException
+     * @throws ClientNotFoundException Lanza la excepción si no se encuentra el cliente
+     * @throws ServiceNotFoundException Lanza la excepción si no se encuentra el servicio
+     */
     @Override
-    public double ganadoMesas() {
-        return 0;
+    public int vecesClienteJuegaMesa(String dni, String codigo) throws  IOException, ClientNotFoundException, ServiceNotFoundException {
+        ArrayList<Log> listaLogs = (ArrayList<Log>) this.leerListaLog();
+        boolean clienteExiste = false;
+        boolean servicioExiste = false;
+        int contador = 0;
+        for (Log lo : listaLogs){
+            if (lo.getCliente().getDni().equals(dni)){
+                clienteExiste = true;
+                if (lo.getServicio().getCodigo().equals(codigo)){
+                    servicioExiste = true;
+                    if (lo.getConcepto().equals(TipoConcepto.APOSTAR) || lo.getConcepto().equals(TipoConcepto.APUESTACLIENTEGANA)){
+                        contador++;
+                    }
+                }
+            }
+        }
+        if (!clienteExiste) {
+            throw new ClientNotFoundException("Cliente no encontrado");
+        } else if (!servicioExiste) {
+            throw new ServiceNotFoundException("Servicio no encontrado");
+        }
+        return contador;
     }
 
+    /**
+     * Devuelve el total ganado por las mesas
+     * @return Lo ganado por las apuesta menos lo que han ganado los clientes
+     * @throws IOException
+     */
     @Override
-    public double ganadoEstablecimientos() {
-        return 0;
+    public double ganadoMesas() throws IOException{
+        ArrayList<Log> listaLogs = (ArrayList<Log>) this.leerListaLog();
+        double totalApostado = 0;
+        double totalPerdido = 0;
+        for (Log lo : listaLogs) {
+            if (lo.getServicio().getTipo().equals(TipoServicio.MESABLACKJACK) ||
+            lo.getServicio().getTipo().equals(TipoServicio.MESAPOKER)) {
+                if (lo.getConcepto().equals(TipoConcepto.APOSTAR)) {
+                    totalApostado += lo.getCantidadConcepto();
+                } else if (lo.getConcepto().equals(TipoConcepto.APUESTACLIENTEGANA)) {
+                    totalPerdido += lo.getCantidadConcepto();
+                }
+            }
+        }
+        return totalApostado - totalPerdido;
     }
 
+    /**
+     * Devuelve lo ganado por los bares y restaurantes
+     * @return La suma de lo ganado por las bebidas y las comidas
+     * @throws IOException
+     */
     @Override
-    public List<Servicio> devolverServiciosTipo(TipoServicio tipoServicio) {
+    public double ganadoEstablecimientos() throws IOException{
+        ArrayList<Log> listaLogs = (ArrayList<Log>) this.leerListaLog();
+        double totalGanado = 0;
+        for (Log lo : listaLogs) {
+            if (lo.getConcepto().equals(TipoConcepto.COMPRACOMIDA) || lo.getConcepto().equals(TipoConcepto.COMPRABEBIDA)) {
+                totalGanado += lo.getCantidadConcepto();
+            }
+        }
+        return totalGanado;
+    }
+
+    /**
+     * Devuelve una lista de servicios del tipo que se haya especificado
+     * @param tipoServicio a buscar en el archivo
+     * @return Lista de servicios del tipo especificado
+     * @throws IOException
+     */
+    @Override
+    public List<Servicio> devolverServiciosTipo(TipoServicio tipoServicio) throws IOException{
         ArrayList<Servicio> listaServicios = (ArrayList<Servicio>) this.leerListaServicios();
 
         ArrayList<Servicio> listaTipoServicios = new ArrayList<>();
