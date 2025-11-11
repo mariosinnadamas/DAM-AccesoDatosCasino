@@ -23,8 +23,7 @@ public class CasinoMain {
         Log l4 = new Log(c,s2, TipoConcepto.RETIRADA,30.0);
         Log l5 = new Log(c,s, TipoConcepto.RETIRADA,10.0);
 
-        ArrayList ls = new ArrayList();
-        ls.add(s);
+    
         try{
             //xml.addListaClientes(dg.crearListaCliente(50));
             //xml.addListaServicios(dg.crearListaServicio(50));
