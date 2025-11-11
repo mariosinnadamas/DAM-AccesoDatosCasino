@@ -64,7 +64,7 @@ public class DummyGenerator {
 
 
     public List<Cliente> crearListaCliente(int longitudLista){
-        List<Cliente> listaClientes = new ArrayList<Cliente>();
+        List<Cliente> listaClientes = new ArrayList<>();
         for (int i = 0; i < longitudLista; i++) {
             listaClientes.add(new Cliente(randomDNI(), randomName(), randomSurname() ) );
         }

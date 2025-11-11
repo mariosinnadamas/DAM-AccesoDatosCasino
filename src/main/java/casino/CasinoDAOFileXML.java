@@ -503,6 +503,8 @@ public class CasinoDAOFileXML implements CasinoDAO {
 
     @Override
     public double gananciasAlimentos(String dni) throws IllegalArgumentException, IOException {
+        Boolean encontrado = false;
+
         // TODO: Test, test dni = ""
         if (dni == null || dni.isBlank()) {
             throw new IllegalArgumentException("DNI no puede ser nulo o vacío");
@@ -518,10 +520,15 @@ public class CasinoDAOFileXML implements CasinoDAO {
 
             for (Log l : listaLog){
                 if (l.getCliente() != null && l.getCliente().getDni().equals(dni)){
+                    encontrado = true;
                     if (l.getConcepto() == TipoConcepto.COMPRABEBIDA || l.getConcepto() == TipoConcepto.COMPRACOMIDA) {
                         totalGanancias += l.getCantidadConcepto();
                     }
                 }
+            }
+
+            if(!encontrado){
+                throw new IllegalArgumentException("DNI no encontrado");
             }
 
             return totalGanancias;
