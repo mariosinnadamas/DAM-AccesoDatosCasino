@@ -53,7 +53,8 @@ public class JsonMain {
 
     public static void main(String[] args) throws IOException {
         CasinoDAOFile daofile = new CasinoDAOFile();
-        Paths prueba = Path.of("src", "main", "java", "casino", "prueba");
+        Path prueba = Path.of("src", "main", "java", "casino", "prueba");
+        daofile.crearCopiaSeguridad(prueba.toString());
 
     }
 }
