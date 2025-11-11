@@ -1,5 +1,6 @@
 package casino;
 
+import exceptions.ClientAlreadyExistsException;
 import jakarta.json.*;
 import jakarta.json.stream.JsonGenerator;
 
@@ -15,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//ToDo[!1]: Comentar Codigo
+//ToDo[!1#1]: Comentar Codigo
 public class CasinoDAOFileJSON implements CasinoDAO {
     //Rutas y Archivos
     //Clientes
@@ -31,8 +32,12 @@ public class CasinoDAOFileJSON implements CasinoDAO {
     File fileServicio = new File(pathServicio.toString());
 
 
-
-    private void escribirCliente(List<Cliente> listaClientes) {
+    /**
+     * Sobreescribe en el archivo cliente.json por los clientes introducidos por parámetros.
+     * @param listaClientes ArrayList de clientes
+     * @throws IOException cuando no se en
+     */
+    private void escribirCliente(List<Cliente> listaClientes) throws IOException {
         JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();
         for (Cliente cliente : listaClientes) {
             JsonObject jobj = Json.createObjectBuilder()
@@ -56,18 +61,23 @@ public class CasinoDAOFileJSON implements CasinoDAO {
         }
     }
 
+    //ToDo[!2#3]: Agregar Excepciones
     @Override
-    public void addCliente(Cliente cliente) throws IOException {
+    public void addCliente(Cliente cliente) throws IOException, ClientAlreadyExistsException {
         //Obtener ArrayList<Cliente> del archivo
         ArrayList<Cliente> listaClientes = (ArrayList<Cliente>) this.leerListaClientes();
 
-        //Agregar el objeto cliente
-        listaClientes.add(cliente);
+        if (listaClientes.contains(cliente)) {
+            throw new ClientAlreadyExistsException("Cliente existente");
+        } else {
+            //Agregar el objeto cliente
+            listaClientes.add(cliente);
 
-        escribirCliente(listaClientes);
+            escribirCliente(listaClientes);
+        }
     }
 
-    //Ejemplo de metodo que no está en la interfaz
+    //ToDo[!2#4]: Agregar Excepciones
     public void addCliente(List<Cliente> clientes) throws IOException {
         ArrayList<Cliente> listaClient = (ArrayList<Cliente>) this.leerListaClientes();
 
@@ -79,6 +89,7 @@ public class CasinoDAOFileJSON implements CasinoDAO {
 
     }
 
+    //ToDo[!2#5]: Agregar Excepciones
     private void escribirServicio(List<Servicio> listaServicio) {
         //Crear el Objeto JsonArrayBuilder
         JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();
@@ -122,6 +133,7 @@ public class CasinoDAOFileJSON implements CasinoDAO {
         }
     }
 
+    //ToDo[!2#6]: Agregar Excepciones
     @Override
     public void addServicio(Servicio servicio) {
         //Obtener ArrayList<Servicio> del archivo
@@ -134,6 +146,7 @@ public class CasinoDAOFileJSON implements CasinoDAO {
 
     }
 
+    //ToDo[!2#7]: Agregar Excepciones
     public void addServicio(List<Servicio> servicios) {
 
         //Obtener ArrayList<Servicio> del archivo
@@ -146,6 +159,7 @@ public class CasinoDAOFileJSON implements CasinoDAO {
         escribirServicio(listaServicio);
     }
 
+    //ToDo[!2#8]: Agregar Excepciones
     private void escribirLog(List<Log> listaLog){
         //Crear el Objeto JsonArrayBuilder
         JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();
@@ -210,6 +224,7 @@ public class CasinoDAOFileJSON implements CasinoDAO {
         }
     }
 
+    //ToDo[!2#9]: Agregar Excepciones
     @Override
     public void addLog(Log log) {
         //Obtener ArrayList<SLog> del archivo
@@ -222,6 +237,7 @@ public class CasinoDAOFileJSON implements CasinoDAO {
 
     }
 
+    //ToDo[!2#10]: Agregar Excepciones
     public void addLog(List<Log> listaLogAgregar) {
         //Obtener ArrayList<SLog> del archivo
         ArrayList<Log> listaLog = (ArrayList<Log>) this.leerListaLog();
@@ -234,11 +250,13 @@ public class CasinoDAOFileJSON implements CasinoDAO {
         escribirLog(listaLog);
     }
 
+    //ToDo[!1#11]: Hacer Método
     @Override
     public String consultaServicio(String codigo) {
         return "";
     }
 
+    //ToDo[!2#12]: Agregar Excepciones
     @Override
     public List<Servicio> leerListaServicios() {
         List<Servicio> listaServicios = new ArrayList<>();
@@ -282,6 +300,7 @@ public class CasinoDAOFileJSON implements CasinoDAO {
         return listaServicios;
     }
 
+    //ToDo[!2#13]: Agregar Excepciones
     @Override
     public String consultaCliente(String dni) throws IOException {
         ArrayList<Cliente> listaClientes =  (ArrayList<Cliente>) this.leerListaClientes();
@@ -294,6 +313,7 @@ public class CasinoDAOFileJSON implements CasinoDAO {
         return "No se ha encontrado el cliente";
     }
 
+    //ToDo[!2#14]: Agregar Excepciones
     @Override
     public List<Cliente> leerListaClientes() throws IOException {
         List<Cliente> listaClientes = new ArrayList<>();
@@ -321,6 +341,7 @@ public class CasinoDAOFileJSON implements CasinoDAO {
         return listaClientes;
     }
 
+    //ToDo[!2#15]: Agregar Excepciones
     @Override
     public String consultaLog(String codigo, String dni, LocalDate fecha) {
         ArrayList<Log> listaLog = (ArrayList<Log>) this.leerListaLog();
@@ -333,6 +354,7 @@ public class CasinoDAOFileJSON implements CasinoDAO {
         return "No se ha encontrado el log";
     }
 
+    //ToDo[!2#16]: Agregar Excepciones
     @Override
     public List<Log> leerListaLog() {
         List<Log> listaLog = new ArrayList<>();
@@ -395,16 +417,19 @@ public class CasinoDAOFileJSON implements CasinoDAO {
         return listaLog;
     }
 
+    //ToDo[!1#17]: Hacer Método
     @Override
     public boolean actualizarServicio(String codigo, Servicio servicioActualizado) {
         return false;
     }
 
+    //ToDo[!1#18]: Hacer Método
     @Override
     public boolean actualizarCliente(String dni, Cliente clienteActualizado) {
         return false;
     }
 
+    //ToDo[!2#19]: Agregar Excepciones
     @Override
     public boolean borrarServicio(Servicio servicio) {
         boolean borrado = false;
@@ -423,6 +448,7 @@ public class CasinoDAOFileJSON implements CasinoDAO {
         return borrado;
     }
 
+    //ToDo[!2#20]: Agregar Excepciones
     @Override
     public boolean borrarCliente(Cliente cliente) throws IOException {
         boolean borrado = false;
@@ -440,12 +466,13 @@ public class CasinoDAOFileJSON implements CasinoDAO {
         return borrado;
     }
 
+    //ToDo[!1#21]: Hacer Método
     @Override
     public double dineroInvertidoClienteEnDia(String dni, LocalDate fecha) {
         return 0;
     }
 
-    //ToDo: ??
+    //ToDo[!2#22]: Agregar Excepciones
     public double gananciasAlimentos(String dni) {
         ArrayList<Log> listaLog = (ArrayList<Log>) this.leerListaLog();
         double ganado = 0;
@@ -458,39 +485,58 @@ public class CasinoDAOFileJSON implements CasinoDAO {
         return ganado;
     }
 
+    //ToDo[!1#23]: Agregar Excepciones
     public double dineroGanadoClienteEnDia(String dni, LocalDate fecha) {
         ArrayList<Log> listaLog = (ArrayList<Log>) this.leerListaLog();
-        double ganado = 0;
+        double perdidoApuesta = 0;
+        double ganadoApuesta = 0;
         String fechaStr = fecha.toString();
 
         for (Log log : listaLog) {
             if (log.getCliente().getDni().equals(dni) && log.getFechaStr().equals(fechaStr) && log.getConcepto().equals(TipoConcepto.APUESTACLIENTEGANA)) {
-                ganado +=  log.getCantidadConcepto();
+                ganadoApuesta +=  log.getCantidadConcepto();
+            } else if (log.getCliente().getDni().equals(dni) && log.getFechaStr().equals(fechaStr) && log.getConcepto().equals(TipoConcepto.APOSTAR)){
+                perdidoApuesta +=  log.getCantidadConcepto();
             }
         }
-        return ganado;
+        return ganadoApuesta -  perdidoApuesta;
     }
 
+    //ToDo[!2#24]: Agregar Excepciones
     @Override
     public int vecesClienteJuegaMesa(String dni, String codigo) {
         ArrayList<Log> listaLogs = (ArrayList<Log>) this.leerListaLog();
         int contador = 0;
         for (Log lo : listaLogs){
-
+            if (lo.getCliente().getDni().equals(dni) &&
+                    lo.getServicio().getCodigo().equals(codigo) &&
+                    lo.getConcepto().equals(TipoConcepto.APOSTAR)) {
+                contador++;
+            }
         }
         return contador;
     }
 
+    //ToDo[!1#25]: Hacer Método
     @Override
     public double ganadoMesas() {
         ArrayList<Log> listaLogs = (ArrayList<Log>) this.leerListaLog();
-        double totalGanado = 0;
+        double totalApostado = 0;
+        double totalPerdido = 0;
         for (Log lo : listaLogs) {
-            //if ()
+            if (lo.getServicio().getTipo().equals(TipoServicio.MESABLACKJACK) ||
+            lo.getServicio().getTipo().equals(TipoServicio.MESAPOKER)) {
+                if (lo.getConcepto().equals(TipoConcepto.APOSTAR)) {
+                    totalApostado += lo.getCantidadConcepto();
+                } else if (lo.getConcepto().equals(TipoConcepto.APUESTACLIENTEGANA)) {
+                    totalPerdido += lo.getCantidadConcepto();
+                }
+            }
         }
-        return totalGanado;
+        return totalApostado - totalPerdido;
     }
 
+    //ToDo[!2#26]: Agregar Excepciones
     @Override
     public double ganadoEstablecimientos() {
         ArrayList<Log> listaLogs = (ArrayList<Log>) this.leerListaLog();
@@ -503,6 +549,7 @@ public class CasinoDAOFileJSON implements CasinoDAO {
         return totalGanado;
     }
 
+    //ToDo[!2#27]: Agregar Excepciones
     @Override
     public List<Servicio> devolverServiciosTipo(TipoServicio tipoServicio) {
         ArrayList<Servicio> listaServicios = (ArrayList<Servicio>) this.leerListaServicios();

@@ -45,17 +45,20 @@ public class DummyGenerator {
 
 
     public TipoConcepto randomTipoConcepto(){
-        String[] conceptoPool = {"APUESTACLIENTEGANA", "COMPRACOMIDA", "COMPRABEBIDA"};
+        String[] conceptoPool = {"APOSTAR", "RETIRADA","APUESTACLIENTEGANA", "COMPRACOMIDA", "COMPRABEBIDA"};
         int randomConcepto = (int) (Math.random() * (conceptoPool.length));
         TipoConcepto tipoConcepto;
         if (randomConcepto == 0){
             tipoConcepto = TipoConcepto.APUESTACLIENTEGANA;
         } else if (randomConcepto == 1){
+            tipoConcepto = TipoConcepto.APOSTAR;
+        } else if (randomConcepto == 2){
+            tipoConcepto = TipoConcepto.COMPRABEBIDA;
+        } else if (randomConcepto == 3){
             tipoConcepto = TipoConcepto.COMPRACOMIDA;
         } else {
-            tipoConcepto = TipoConcepto.COMPRABEBIDA;
+            tipoConcepto  = TipoConcepto.RETIRADA;
         }
-
         return tipoConcepto;
     }
 
@@ -93,9 +96,16 @@ public class DummyGenerator {
             TipoConcepto concepto = randomTipoConcepto();
             while (!conceptoValido) {
                 concepto = randomTipoConcepto();
-                if ((randomServicio.getTipo().equals(TipoServicio.MESAPOKER) ||
-                randomServicio.getTipo().equals(TipoServicio.MESABLACKJACK)) &&
-                concepto.equals(TipoConcepto.APUESTACLIENTEGANA)) {
+                if (
+                        (
+                                randomServicio.getTipo().equals(TipoServicio.MESAPOKER) ||
+                                        randomServicio.getTipo().equals(TipoServicio.MESABLACKJACK)
+                        ) && (
+                                concepto.equals(TipoConcepto.APUESTACLIENTEGANA) ||
+                                        concepto.equals(TipoConcepto.APOSTAR) ||
+                                        concepto.equals(TipoConcepto.RETIRADA)
+                                )
+                ) {
                     conceptoValido = true;
                 } else if ((randomServicio.getTipo().equals(TipoServicio.RESTAURANTE) ||
                 randomServicio.getTipo().equals(TipoServicio.BAR)) && (
@@ -107,14 +117,16 @@ public class DummyGenerator {
             }
 
             double cantidad;
-            if (concepto.equals(TipoConcepto.APUESTACLIENTEGANA)){
+            if (concepto.equals(TipoConcepto.APUESTACLIENTEGANA)) {
+                cantidad =  (Math.random() * 500);
+            } else if (concepto.equals(TipoConcepto.APOSTAR)) {
                 cantidad =  (Math.random() * 1000);
             } else if (concepto.equals(TipoConcepto.COMPRABEBIDA) || concepto.equals(TipoConcepto.COMPRACOMIDA)) {
                 cantidad = Math.random() * 25;
             } else {
                 cantidad = 0;
             }
-            listaLogs.add(new Log (randomCliente, randomServicio, concepto, Math.floor(cantidad)));
+            listaLogs.add(new Log (randomCliente, randomServicio, concepto, Math.floor(cantidad)+1));
         }
         return listaLogs;
     }

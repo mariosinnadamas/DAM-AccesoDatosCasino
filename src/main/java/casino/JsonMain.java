@@ -9,9 +9,9 @@ import java.util.ArrayList;
 public class JsonMain {
     public static ArrayList<ArrayList> initListas(){
         DummyGenerator dg = new DummyGenerator();
-        ArrayList<Cliente> testListaClientes = (ArrayList<Cliente>) dg.crearListaCliente(10);
-        ArrayList<Servicio> testListaServicio =  (ArrayList<Servicio>) dg.crearListaServicio(10);
-        ArrayList<Log> testListaLog = (ArrayList<Log>) dg.crearLogs(testListaClientes, testListaServicio, 50);
+        ArrayList<Cliente> testListaClientes = (ArrayList<Cliente>) dg.crearListaCliente(20);
+        ArrayList<Servicio> testListaServicio =  (ArrayList<Servicio>) dg.crearListaServicio(20);
+        ArrayList<Log> testListaLog = (ArrayList<Log>) dg.crearLogs(testListaClientes, testListaServicio, 400);
 
         ArrayList<ArrayList> listaListas = new ArrayList<>();
         listaListas.add(testListaClientes);
@@ -31,11 +31,11 @@ public class JsonMain {
     public static void main(String[] args) throws IOException {
 
         CasinoDAOFileJSON daojson = new CasinoDAOFileJSON();
-        //ArrayList<ArrayList> listas = initListas();
-        //initDaojson(daojson, listas);
+        ArrayList<ArrayList> listas = initListas();
+        initDaojson(daojson, listas);
 
-        System.out.println(daojson.ganadoEstablecimientos());
         System.out.println(daojson.ganadoMesas());
+        System.out.println(daojson.ganadoEstablecimientos());
 
     }
 }
