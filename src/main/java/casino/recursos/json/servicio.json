@@ -1,0 +1,42 @@
+[
+    {
+        "codigo": "B423A",
+        "tipoServicio": "MESAPOKER",
+        "nombreServicio": "Servicio1",
+        "listaClientes": [
+        ],
+        "capacidadMaxima": 10
+    },
+    {
+        "codigo": "0F007",
+        "tipoServicio": "MESAPOKER",
+        "nombreServicio": "Servicio2",
+        "listaClientes": [
+        ],
+        "capacidadMaxima": 10
+    },
+    {
+        "codigo": "6D744",
+        "tipoServicio": "MESAPOKER",
+        "nombreServicio": "Servicio3",
+        "listaClientes": [
+        ],
+        "capacidadMaxima": 10
+    },
+    {
+        "codigo": "0EADB",
+        "tipoServicio": "MESAPOKER",
+        "nombreServicio": "Servicio4",
+        "listaClientes": [
+        ],
+        "capacidadMaxima": 10
+    },
+    {
+        "codigo": "C490A",
+        "tipoServicio": "MESABLACKJACK",
+        "nombreServicio": "Servicio5",
+        "listaClientes": [
+        ],
+        "capacidadMaxima": 7
+    }
+]

@@ -34,7 +34,7 @@ public class Servicio implements Externalizable {
         this.capacidadMaxima = tipo.getCapacidadMaxima();
     }
 
-    //Constructor para leer XML
+    //TODO: Para que coño es este constructor, si no guardamos lista de clientes en el XML
     public Servicio(String codigo, TipoServicio tipo, String nombreServicio, List<Cliente> listaClientes, int capacidadMaxima) {
         setCodigo(codigo);
         setTipo(tipo);
@@ -43,7 +43,7 @@ public class Servicio implements Externalizable {
         this.capacidadMaxima = capacidadMaxima;
     }
 
-    //Hacer comprobación de que el código no existiese ya en la clase CasinoDAOFileXML
+    //TODO: Hacer comprobación de que el código no existiese ya en la clase CasinoDAOFileXML
     private String generarCodigo(){
         return UUID.randomUUID().toString().substring(0,5).toUpperCase();
     }
@@ -78,7 +78,7 @@ public class Servicio implements Externalizable {
             throw new IllegalArgumentException("Nombre no puede estar vacío.");
         }
 
-        this.nombreServicio = nombreServicio;
+        this.nombreServicio = nombreServicio.trim();
     }
     @XmlElement
     public List<Cliente> getListaClientes() {
@@ -103,7 +103,7 @@ public class Servicio implements Externalizable {
                 "codigo='" + codigo + '\'' +
                 ", tipo=" + tipo +
                 ", nombreServicio='" + nombreServicio + '\'' +
-                ", listaClientes=" + listaClientes +
+                ", leerListaClientes=" + listaClientes +
                 ", capacidadMaxima=" + capacidadMaxima +
                 '}';
     }
@@ -111,11 +111,19 @@ public class Servicio implements Externalizable {
 
     @Override
     public void writeExternal(ObjectOutput out) throws IOException {
-
+        out.writeUTF(codigo);
+        out.writeObject(tipo);
+        out.writeUTF(nombreServicio);
+        out.writeObject(listaClientes);
+        out.writeInt(capacidadMaxima);
     }
 
     @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
-
+        this.codigo = in.readUTF();
+        this.tipo = (TipoServicio) in.readObject();
+        this.nombreServicio = in.readUTF();
+        this.listaClientes = (List<Cliente>) in.readObject();
+        this.capacidadMaxima = in.readInt();
     }
 }

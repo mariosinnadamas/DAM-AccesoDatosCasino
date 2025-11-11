@@ -50,10 +50,10 @@ public class Cliente implements Externalizable {
     }
 
     public void setNombre(String nombre) {
-        if (nombre == null || nombre.trim().isEmpty()) {
-            throw new IllegalArgumentException("Nombre no puede estar vacío o ser nulo.");
+        if (nombre == null || nombre.isBlank()) {
+            throw new IllegalArgumentException("ERROR: Nombre no puede estar vacío o ser nulo");
         }
-        this.nombre = nombre;
+        this.nombre = nombre.trim();
     }
 
     @XmlElement
@@ -62,13 +62,13 @@ public class Cliente implements Externalizable {
     }
 
     public void setApellidos(String apellidos) {
-        if (apellidos == null || apellidos.trim().isEmpty()) {
-            throw new IllegalArgumentException("Apellidos no puede estar vacío o ser nulo.");
+        if (apellidos == null || apellidos.isBlank()) {
+            throw new IllegalArgumentException("ERROR: Apellidos no puede estar vacío o ser nulo");
         }
-        this.apellidos = apellidos;
+        this.apellidos = apellidos.trim();
     }
 
-    private boolean validarDni(String dni){
+    public static boolean validarDni(String dni){
         String[] letras = {"T", "R", "W", "A", "G", "M", "Y", "F", "P", "D", "X","B",
                 "N", "J", "Z", "S", "Q", "V", "H", "L", "C", "K", "E"};
 
@@ -111,5 +111,14 @@ public class Cliente implements Externalizable {
         this.dni = in.readUTF();
         this.nombre = in.readUTF();
         this.apellidos = in.readUTF();
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "dni='" + dni + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                '}';
     }
 }

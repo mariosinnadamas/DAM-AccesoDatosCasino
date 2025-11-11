@@ -1,8 +1,8 @@
 package casino;
 
 public enum TipoConcepto {
-    DARSEDEALTA,
-    DARSEDEBAJA,
+    APOSTAR,
+    RETIRADA,
     APUESTACLIENTEGANA,
     COMPRABEBIDA,
     COMPRACOMIDA
