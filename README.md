@@ -15,8 +15,8 @@
 - //ToDo\[!2#5]: "Me he quedado calvo"
 
 # PRUEBAS
-## CLIENTE
-### ADD Y CREAR OBJETO
+## XML
+### ADD Y CREAR CLIENTE
 - Crear el objeto completo 
 - No creo el objeto con un DNI inválido
 - No crea objeto con nombre/apellido vacío
@@ -35,7 +35,7 @@
 - Con Duplicados salta la excepción
 
 ### CONSULTAR SERVICIO
--
+- 
 
 ### ADD Y CREAR LOG
 - Con valores válidos lo crea

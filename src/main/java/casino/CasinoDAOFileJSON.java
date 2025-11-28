@@ -111,7 +111,11 @@ public class CasinoDAOFileJSON implements CasinoDAO {
      * @throws ClientAlreadyExistsException Lanza excepción si el cliente ya estaba en el archivo
      */
     @Override
-    public void addCliente(Cliente cliente) throws IOException, ClientAlreadyExistsException {
+    public void addCliente(Cliente cliente) throws IOException, ClientAlreadyExistsException, IllegalArgumentException {
+        //Validación de parámetros
+        if (cliente == null) {
+            throw new IllegalArgumentException("ERROR: El cliente no puede ser nulo");
+        }
         //Obtener ArrayList<Cliente> del archivo
         ArrayList<Cliente> listaClientes = (ArrayList<Cliente>) this.leerListaClientes();
 
@@ -251,16 +255,15 @@ public class CasinoDAOFileJSON implements CasinoDAO {
     public void addServicio(Servicio servicio) throws IOException, ServiceAlreadyExistsException{
         //Obtener ArrayList<Servicio> del archivo
         ArrayList<Servicio> listaServicio = (ArrayList<Servicio>) this.leerListaServicios();
+        boolean existe = listaServicio.stream()
+                .anyMatch(c -> c.getCodigo().equalsIgnoreCase(servicio.getCodigo()));
 
-        //Agregar el objeto cliente
-        listaServicio.add(servicio);
-
-        if (listaServicio.contains(servicio)){
+        if (existe){
             throw new ServiceAlreadyExistsException("Servicio existente");
+        } else {
+            listaServicio.add(servicio);
+            escribirServicio(listaServicio);
         }
-
-        escribirServicio(listaServicio);
-
     }
 
     /**
@@ -578,20 +581,22 @@ public class CasinoDAOFileJSON implements CasinoDAO {
      */
     @Override
     public boolean borrarServicio(Servicio servicio) throws IOException, ServiceNotFoundException{
-        boolean borrado = false;
-        ArrayList<Servicio>  listaServicios = (ArrayList<Servicio>) this.leerListaServicios();
-        for (Servicio servicios : listaServicios) {
-            if (servicios.equals(servicio)) {
-                borrado = true;
+        try {
+            List <Servicio> listaServicios = leerListaServicios();
+
+            //Elimino todos los servicios que coincidan en ese codigo, por si hay duplicados
+            boolean eliminado = listaServicios.removeIf(s ->
+                    s.getCodigo().equalsIgnoreCase(servicio.getCodigo()));
+
+            if (eliminado){
+                escribirServicio(listaServicios);
+                return true;
+            } else {
+                throw new ServiceNotFoundException("ERROR AL BORRAR: No se ha encontrado ningun servicio con código" + servicio.getCodigo());
             }
+        } catch (IOException e){
+            throw new IOException("Error al borrar el servicio: ", e);
         }
-        if (borrado) {
-            listaServicios.remove(servicio);
-            escribirServicio(listaServicios);
-        } else {
-            throw new ServiceNotFoundException("Servicio no encontrado");
-        }
-        return borrado;
     }
 
     /**
@@ -737,7 +742,7 @@ public class CasinoDAOFileJSON implements CasinoDAO {
                 clienteExiste = true;
                 if (lo.getServicio().getCodigo().equals(codigo)){
                     servicioExiste = true;
-                    if (lo.getConcepto().equals(TipoConcepto.APOSTAR)){
+                    if (lo.getConcepto().equals(TipoConcepto.APOSTAR) || lo.getConcepto().equals(TipoConcepto.APUESTACLIENTEGANA)){
                         contador++;
                     }
                 }
