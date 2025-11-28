@@ -1,0 +1,26 @@
+[
+    {
+        "codigo": "88227",
+        "tipoServicio": "MESAPOKER",
+        "nombreServicio": "Nombre Actualizado",
+        "listaClientes": [
+        ],
+        "capacidadMaxima": 10
+    },
+    {
+        "codigo": "B2938",
+        "tipoServicio": "MESABLACKJACK",
+        "nombreServicio": "Mesa BlackJack Premium",
+        "listaClientes": [
+        ],
+        "capacidadMaxima": 7
+    },
+    {
+        "codigo": "2F022",
+        "tipoServicio": "BAR",
+        "nombreServicio": "Bar Casino",
+        "listaClientes": [
+        ],
+        "capacidadMaxima": 20
+    }
+]
