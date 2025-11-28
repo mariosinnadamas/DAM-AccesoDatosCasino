@@ -1,4 +1,6 @@
-package casino;
+package casino.util;
+
+import casino.model.*;
 
 import java.util.ArrayList;
 import java.util.List;

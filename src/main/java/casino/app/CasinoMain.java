@@ -1,5 +1,10 @@
-package casino;
+package casino.app;
 
+import casino.dao.impl.CasinoDAOFileJSON;
+import casino.dao.impl.CasinoDAOFileXML;
+import casino.dao.helper.CasinoGestorArchivos;
+import casino.model.*;
+import casino.util.DummyGenerator;
 import exceptions.*;
 
 import java.nio.file.Path;
@@ -466,7 +471,7 @@ public class CasinoMain {
     // ===== MÉTODOS DE PRUEBA CasinoGestorArchivos =====
     private static void testCarpetaSeguridad(){
         CasinoGestorArchivos cga = new CasinoGestorArchivos();
-        Path rutaArchivo = Path.of("src", "main", "java", "casino");
+        Path rutaArchivo = Path.of("src", "main", "resources", "backup");
         try {
             cga.crearCopiaSeguridad(String.valueOf(rutaArchivo));
         } catch (Exception e) {

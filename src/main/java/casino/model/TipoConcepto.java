@@ -1,4 +1,4 @@
-package casino;
+package casino.model;
 
 public enum TipoConcepto {
     APOSTAR,

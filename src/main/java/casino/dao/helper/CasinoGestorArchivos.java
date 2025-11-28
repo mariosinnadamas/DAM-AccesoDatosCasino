@@ -1,4 +1,7 @@
-package casino;
+package casino.dao.helper;
+
+import casino.dao.impl.CasinoDAOFileJSON;
+import casino.dao.impl.CasinoDAOFileXML;
 
 import java.io.*;
 import java.nio.file.Path;
@@ -6,7 +9,7 @@ import java.nio.file.Path;
 public class CasinoGestorArchivos {
     CasinoDAOFileJSON json = new CasinoDAOFileJSON();
     CasinoDAOFileXML xml = new CasinoDAOFileXML();
-
+    //Todo: Modificar para que elimine la copia de seguridad anterior por esta y establezca en solo lectura o modificar los permisos de lectura y escritura
     private void copiar(File archivo, File destino) throws IOException {
         if (!archivo.isDirectory()) {
             try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
@@ -41,7 +44,7 @@ public class CasinoGestorArchivos {
             Path rutaPadre = json.pathCliente.getParent().getParent();
             File carpetaPadre = new File(rutaPadre.toString());
 
-            Path rutaDestino = Path.of(ruta, "Copia de Seguridad");
+            Path rutaDestino = Path.of(ruta);
             File destino = new File(String.valueOf(rutaDestino));
 
 

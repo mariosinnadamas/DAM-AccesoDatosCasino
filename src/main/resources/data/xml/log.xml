@@ -7,13 +7,13 @@
             <apellidos>García Pérez</apellidos>
         </cliente>
         <servicio>
-            <codigo>4C2D7</codigo>
+            <codigo>62249</codigo>
             <tipo>MESAPOKER</tipo>
             <nombreServicio>Mesa Poker VIP</nombreServicio>
             <capacidadMaxima>10</capacidadMaxima>
         </servicio>
-        <fecha>2025-11-11</fecha>
-        <hora>22:20:49</hora>
+        <fecha>2025-11-28</fecha>
+        <hora>10:02:55</hora>
         <concepto>APOSTAR</concepto>
         <cantidadConcepto>100.0</cantidadConcepto>
     </log>
@@ -24,13 +24,13 @@
             <apellidos>García Pérez</apellidos>
         </cliente>
         <servicio>
-            <codigo>4C2D7</codigo>
+            <codigo>62249</codigo>
             <tipo>MESAPOKER</tipo>
             <nombreServicio>Mesa Poker VIP</nombreServicio>
             <capacidadMaxima>10</capacidadMaxima>
         </servicio>
-        <fecha>2025-11-11</fecha>
-        <hora>22:20:49</hora>
+        <fecha>2025-11-28</fecha>
+        <hora>10:02:55</hora>
         <concepto>APUESTACLIENTEGANA</concepto>
         <cantidadConcepto>200.0</cantidadConcepto>
     </log>
@@ -41,13 +41,13 @@
             <apellidos>García Pérez</apellidos>
         </cliente>
         <servicio>
-            <codigo>4C2D7</codigo>
+            <codigo>62249</codigo>
             <tipo>MESAPOKER</tipo>
             <nombreServicio>Mesa Poker VIP</nombreServicio>
             <capacidadMaxima>10</capacidadMaxima>
         </servicio>
-        <fecha>2025-11-11</fecha>
-        <hora>22:20:49</hora>
+        <fecha>2025-11-28</fecha>
+        <hora>10:02:55</hora>
         <concepto>APOSTAR</concepto>
         <cantidadConcepto>50.0</cantidadConcepto>
     </log>
@@ -58,13 +58,13 @@
             <apellidos>García Pérez</apellidos>
         </cliente>
         <servicio>
-            <codigo>72901</codigo>
+            <codigo>45CBA</codigo>
             <tipo>BAR</tipo>
             <nombreServicio>Bar Casino</nombreServicio>
             <capacidadMaxima>20</capacidadMaxima>
         </servicio>
-        <fecha>2025-11-11</fecha>
-        <hora>22:20:49</hora>
+        <fecha>2025-11-28</fecha>
+        <hora>10:02:55</hora>
         <concepto>COMPRABEBIDA</concepto>
         <cantidadConcepto>15.0</cantidadConcepto>
     </log>
@@ -75,13 +75,13 @@
             <apellidos>García Pérez</apellidos>
         </cliente>
         <servicio>
-            <codigo>72901</codigo>
+            <codigo>45CBA</codigo>
             <tipo>BAR</tipo>
             <nombreServicio>Bar Casino</nombreServicio>
             <capacidadMaxima>20</capacidadMaxima>
         </servicio>
-        <fecha>2025-11-11</fecha>
-        <hora>22:20:49</hora>
+        <fecha>2025-11-28</fecha>
+        <hora>10:02:55</hora>
         <concepto>COMPRACOMIDA</concepto>
         <cantidadConcepto>35.0</cantidadConcepto>
     </log>

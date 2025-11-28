@@ -1,4 +1,4 @@
-package casino;
+package casino.model;
 
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
@@ -12,7 +12,6 @@ import java.io.ObjectOutput;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Formatter;
 
 @XmlRootElement(name = "Log")
 @XmlType(propOrder = {"cliente", "servicio", "fechaStr", "horaStr", "concepto", "cantidadConcepto"})

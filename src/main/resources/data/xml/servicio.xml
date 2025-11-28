@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <servicios>
     <servicio>
-        <codigo>4C2D7</codigo>
+        <codigo>62249</codigo>
         <tipo>MESAPOKER</tipo>
         <nombreServicio>Nombre Actualizado</nombreServicio>
         <capacidadMaxima>10</capacidadMaxima>
     </servicio>
     <servicio>
-        <codigo>0B2C3</codigo>
+        <codigo>655D9</codigo>
         <tipo>MESABLACKJACK</tipo>
         <nombreServicio>Mesa BlackJack Premium</nombreServicio>
         <capacidadMaxima>7</capacidadMaxima>
     </servicio>
     <servicio>
-        <codigo>72901</codigo>
+        <codigo>45CBA</codigo>
         <tipo>BAR</tipo>
         <nombreServicio>Bar Casino</nombreServicio>
         <capacidadMaxima>20</capacidadMaxima>
