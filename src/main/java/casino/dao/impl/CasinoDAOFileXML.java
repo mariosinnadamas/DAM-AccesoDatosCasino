@@ -1,5 +1,7 @@
-package casino;
+package casino.dao.impl;
 
+import casino.dao.CasinoDAO;
+import casino.model.*;
 import exceptions.*;
 import jakarta.xml.bind.*;
 import jakarta.xml.bind.annotation.XmlElement;
@@ -14,13 +16,13 @@ import java.util.List;
 
 public class CasinoDAOFileXML implements CasinoDAO {
 
-    Path pathCliente = Path.of("src", "main", "java", "casino", "recursos", "xml", "cliente.xml");
-    File fileCliente = new File(pathCliente.toString());
+    Path pathCliente = Path.of("src", "main", "resources", "data", "xml", "cliente.xml");
+    public File fileCliente = new File(pathCliente.toString());
 
-    Path pathLog = Path.of("src", "main", "java", "casino", "recursos", "xml", "log.xml");
+    Path pathLog = Path.of("src", "main", "resources", "data", "xml", "log.xml");
     File fileLog = new File(pathLog.toString());
 
-    Path pathServicio = Path.of("src", "main", "java", "casino", "recursos", "xml", "servicio.xml");
+    Path pathServicio = Path.of("src", "main", "resources", "data", "xml", "servicio.xml");
     File fileServicio = new File(pathServicio.toString());
 
     @Override

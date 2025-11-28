@@ -1,5 +1,9 @@
-package casino;
+package casino.dao;
 
+import casino.model.Cliente;
+import casino.model.Log;
+import casino.model.Servicio;
+import casino.model.TipoServicio;
 import exceptions.ClientAlreadyExistsException;
 import exceptions.ClientNotFoundException;
 import exceptions.LogNotFoundException;

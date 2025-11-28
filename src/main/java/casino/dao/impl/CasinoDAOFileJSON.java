@@ -1,5 +1,7 @@
-package casino;
+package casino.dao.impl;
 
+import casino.dao.CasinoDAO;
+import casino.model.*;
 import exceptions.*;
 import jakarta.json.*;
 import jakarta.json.stream.JsonGenerator;
@@ -20,15 +22,15 @@ import java.util.Map;
 public class CasinoDAOFileJSON implements CasinoDAO {
     //Rutas y Archivos
     //Clientes
-    Path pathCliente = Path.of("src", "main", "java", "casino", "recursos", "json", "cliente.json");
-    File fileCliente = new File(pathCliente.toString());
+    public Path pathCliente = Path.of("src", "main", "resources", "data", "json", "cliente.json");
+    public File fileCliente = new File(pathCliente.toString());
 
     //Log
-    Path pathLog = Path.of("src", "main", "java", "casino","recursos", "json", "log.json");
+    Path pathLog = Path.of("src", "main", "resources", "data", "json", "log.json");
     File fileLog = new File(pathLog.toString());
 
     //Servicio
-    Path pathServicio = Path.of("src", "main", "java", "casino", "recursos", "json", "servicio.json");
+    Path pathServicio = Path.of("src", "main", "resources", "data", "json", "servicio.json");
     File fileServicio = new File(pathServicio.toString());
 
     public void setFileCliente(File fileCliente) {
