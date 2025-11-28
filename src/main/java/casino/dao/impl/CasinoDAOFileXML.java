@@ -25,6 +25,18 @@ public class CasinoDAOFileXML implements CasinoDAO {
     Path pathServicio = Path.of("src", "main", "resources", "data", "xml", "servicio.xml");
     File fileServicio = new File(pathServicio.toString());
 
+    public void setFileCliente(File fileCliente) {
+        this.fileCliente = fileCliente;
+    }
+
+    public void setFileLog(File fileLog) {
+        this.fileLog = fileLog;
+    }
+
+    public void setFileServicio(File fileServicio) {
+        this.fileServicio = fileServicio;
+    }
+
     @Override
     public void addCliente(Cliente cliente) throws IllegalArgumentException, ClientAlreadyExistsException, IOException {
         //Validación de parámetros
