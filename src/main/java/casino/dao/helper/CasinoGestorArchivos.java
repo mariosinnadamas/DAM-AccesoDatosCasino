@@ -9,7 +9,6 @@ import java.nio.file.Path;
 public class CasinoGestorArchivos {
     CasinoDAOFileJSON json = new CasinoDAOFileJSON();
     CasinoDAOFileXML xml = new CasinoDAOFileXML();
-    //Todo: Modificar para que elimine la copia de seguridad anterior por esta y establezca en solo lectura o modificar los permisos de lectura y escritura
     private void copiar(File archivo, File destino) throws IOException {
         if (!archivo.isDirectory()) {
             try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
@@ -20,7 +19,6 @@ public class CasinoGestorArchivos {
                         bw.newLine();
                     }
                     bw.flush();
-                    destino.setReadOnly();
                 } catch (Exception ex) {
                     System.out.println(ex.getMessage());
                 }
@@ -38,6 +36,36 @@ public class CasinoGestorArchivos {
 
     }
 
+    /**
+     * Establece los archivos y un único nivel de subcarpetas como ReadOnly o Writeable
+     * @param ruta Ruta del directorio a modificar
+     * @param bool True para hacerlos Writeable, False para hacerlos SetReadOnly
+     * @throws IOException
+     */
+    public void setDirectoryWriteable(String ruta, boolean bool) {
+        File directorio = new File(ruta);
+        File[] directories = directorio.listFiles();
+        for (File subdirectory : directories) {
+            if (subdirectory.isFile()) {
+                if (!bool){
+                    subdirectory.setReadOnly();
+                } else {
+                    subdirectory.setWritable(true);
+                }
+            }
+            File[] files = subdirectory.listFiles();
+            for (File file: files){
+                if (!bool){
+                    file.setReadOnly();
+                } else {
+                    file.setWritable(true);
+                }
+
+            }
+        }
+    }
+
+
     public void crearCopiaSeguridad(String ruta) throws IOException {
         try {
             //Path a carpeta recursos
@@ -48,10 +76,12 @@ public class CasinoGestorArchivos {
             File destino = new File(String.valueOf(rutaDestino));
 
 
+            setDirectoryWriteable(String.valueOf(rutaDestino), true);
             if  (!destino.exists()) {
                 destino.mkdirs();
             }
             copiar(carpetaPadre, destino);
+            setDirectoryWriteable(String.valueOf(rutaDestino), false);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());}
