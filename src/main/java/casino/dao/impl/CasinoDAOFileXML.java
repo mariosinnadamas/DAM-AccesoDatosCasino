@@ -115,7 +115,7 @@ public class CasinoDAOFileXML implements CasinoDAO {
     }
 
     @Override
-    public void addServicio(Servicio servicio) throws IllegalArgumentException, IOException{
+    public void addServicio(Servicio servicio) throws IllegalArgumentException, IOException, ServiceAlreadyExistsException{
 
         if (servicio == null){
             throw new IllegalArgumentException("El servicio no puede ser nulo");
@@ -282,7 +282,7 @@ public class CasinoDAOFileXML implements CasinoDAO {
     }
 
     @Override
-    public String consultaCliente(String dni) throws IllegalArgumentException,ClientNotFoundException, IOException {
+    public String consultaCliente(String dni) throws IllegalArgumentException, ClientNotFoundException, IOException {
 
         if (dni == null || dni.isBlank()) {
             throw new IllegalArgumentException("ERROR: DNI no puede ser nulo o vacío");
