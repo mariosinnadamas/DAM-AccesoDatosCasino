@@ -25,6 +25,18 @@ public class CasinoDAOFileXML implements CasinoDAO {
     Path pathServicio = Path.of("src", "main", "resources", "data", "xml", "servicio.xml");
     File fileServicio = new File(pathServicio.toString());
 
+    public void setFileCliente(File fileCliente) {
+        this.fileCliente = fileCliente;
+    }
+
+    public void setFileLog(File fileLog) {
+        this.fileLog = fileLog;
+    }
+
+    public void setFileServicio(File fileServicio) {
+        this.fileServicio = fileServicio;
+    }
+
     @Override
     public void addCliente(Cliente cliente) throws IllegalArgumentException, ClientAlreadyExistsException, IOException {
         //Validación de parámetros
@@ -103,7 +115,7 @@ public class CasinoDAOFileXML implements CasinoDAO {
     }
 
     @Override
-    public void addServicio(Servicio servicio) throws IllegalArgumentException, IOException{
+    public void addServicio(Servicio servicio) throws IllegalArgumentException, IOException, ServiceAlreadyExistsException{
 
         if (servicio == null){
             throw new IllegalArgumentException("El servicio no puede ser nulo");
@@ -270,7 +282,7 @@ public class CasinoDAOFileXML implements CasinoDAO {
     }
 
     @Override
-    public String consultaCliente(String dni) throws IllegalArgumentException,ClientNotFoundException, IOException {
+    public String consultaCliente(String dni) throws IllegalArgumentException, ClientNotFoundException, IOException {
 
         if (dni == null || dni.isBlank()) {
             throw new IllegalArgumentException("ERROR: DNI no puede ser nulo o vacío");

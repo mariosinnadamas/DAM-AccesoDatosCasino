@@ -4,10 +4,7 @@ import casino.model.Cliente;
 import casino.model.Log;
 import casino.model.Servicio;
 import casino.model.TipoServicio;
-import exceptions.ClientAlreadyExistsException;
-import exceptions.ClientNotFoundException;
-import exceptions.LogNotFoundException;
-import exceptions.ServiceNotFoundException;
+import exceptions.*;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -31,7 +28,7 @@ public interface CasinoDAO {
      * @throws IllegalArgumentException si el servicio o alguno de sus parámetros es nulo o está mal
      * @throws IOException Si ha habido algun problema de E/S en el fichero Servicio
      */
-    public void addServicio(Servicio servicio) throws IllegalArgumentException, IOException;
+    public void addServicio(Servicio servicio) throws IllegalArgumentException, ServiceAlreadyExistsException,  IOException;
 
     /**
      * Añade un objeto Log al almacén
