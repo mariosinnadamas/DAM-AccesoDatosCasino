@@ -254,7 +254,7 @@ class CasinoDAOFileXMLTest {
     }
 
     @Test
-    void test17_actualizarCliente_Excepciones() throws IOException {
+    void test17_actualizarCliente_excepciones() throws IOException {
         Cliente c = new Cliente("06690442H", "Jose", "Cruz");
         xml.addCliente(c);
         assertAll("Validaciones de argumentos",
@@ -278,7 +278,7 @@ class CasinoDAOFileXMLTest {
     }
 
     @Test
-    void test19_actualizarServicio_Excepciones() throws IOException {
+    void test19_actualizarServicio_excepciones() throws IOException {
         assertAll("Validaciones de argumentos",
                 () -> assertThrows(ValidacionException.class, () -> xml.actualizarServicio(null,ser001)),
                 () -> assertThrows(ValidacionException.class, () -> xml.actualizarServicio("",ser001)),
@@ -294,8 +294,8 @@ class CasinoDAOFileXMLTest {
     }
 
     @Test
-    void test21_borrarCliente_Excepciones() throws IOException {
-        Cliente c = new Cliente("06690442H", "Jose", "Cruz");
+    void test21_borrarCliente_excepciones() throws IOException {
+        Cliente c = new Cliente("06690442H", "jojo", "Cruz");
 
         assertThrows(ValidacionException.class, () -> xml.borrarCliente(null));
         assertThrows(ClientNotFoundException.class, () -> xml.borrarCliente(c));
@@ -310,7 +310,7 @@ class CasinoDAOFileXMLTest {
     }
 
     @Test
-    void test23_borrarServicio_Excepciones() throws IOException {
+    void test23_borrarServicio_excepciones() throws IOException {
         Servicio s = new Servicio(TipoServicio.RESTAURANTE,"Resutaurante VIP");
         xml.addServicio(s);
 
@@ -322,5 +322,79 @@ class CasinoDAOFileXMLTest {
 
     @Test
     void test24_gananciasAlimentos() throws IOException {
+        double ganancias = xml.gananciasAlimentos("12345678Z");
+
+        assertEquals(50, ganancias);
+    }
+
+    @Test
+    void test25_gananciaAliementos_excepciones() {
+        assertAll(
+                () -> assertThrows(ValidacionException.class, () -> xml.gananciasAlimentos(" ")),
+                () -> assertThrows(ValidacionException.class, () -> xml.gananciasAlimentos(null)),
+                () -> assertThrows(ValidacionException.class, () -> xml.gananciasAlimentos("00000000A")), // DNI no valido
+                () -> assertThrows(ValidacionException.class, () -> xml.gananciasAlimentos("06690442H")) // DNI no encontrado
+        );
+    }
+
+    @Test
+    void test26_dineroInvertidoDia() throws IOException {
+        double ganancias = xml.dineroInvertidoClienteEnDia("12345678Z", dateFecha);
+
+        assertEquals(0, ganancias);
+    }
+
+    @Test
+    void test26_dineroInvertidoDia_excepciones() {
+        LocalDate fechaTest = LocalDate.of(1999, 12, 1);
+        assertAll(
+                () -> assertThrows(ValidacionException.class, () -> xml.dineroInvertidoClienteEnDia("null", dateFecha)),
+                () -> assertThrows(ValidacionException.class, () -> xml.dineroInvertidoClienteEnDia(" ", dateFecha)),
+                () -> assertThrows(ValidacionException.class, () -> xml.dineroInvertidoClienteEnDia("12345678Z", null)),
+                () -> assertThrows(LogNotFoundException.class, () -> xml.dineroInvertidoClienteEnDia("06690442H",  fechaTest))
+        );
+    }
+
+    @Test
+    void test27_vecesClienteJuega() throws IOException {
+        int jugadas = xml.vecesClienteJuegaMesa("12345678Z", "163C5");
+
+        assertEquals(3, jugadas);
+    }
+
+    @Test
+    void test28_vecesClienteJuega_excepciones() {
+        assertAll(
+                () -> assertThrows(ValidacionException.class, () -> xml.vecesClienteJuegaMesa(" ", "163C5")),
+                () -> assertThrows(ValidacionException.class, () -> xml.vecesClienteJuegaMesa("12345678Z", " ")),
+                () -> assertThrows(ValidacionException.class, () -> xml.vecesClienteJuegaMesa(null, "163C5")),
+                () -> assertThrows(ValidacionException.class, () -> xml.vecesClienteJuegaMesa("12345678Z", null))
+        );
+    }
+
+    @Test
+    void test29_ganadoMesas() throws IOException {
+        double ganancias = xml.ganadoMesas();
+
+        assertEquals(-50, ganancias);
+    }
+
+    @Test
+    void test30_ganadoEstablecimiento() throws IOException {
+        double ganancias = xml.ganadoEstablecimientos();
+
+        assertEquals(50, ganancias);
+    }
+
+    @Test
+    void test30_devolverServiciosTipo() throws IOException {
+        List<Servicio> lista = xml.devolverServiciosTipo(TipoServicio.MESAPOKER);
+
+        assertEquals(1, lista.size());
+    }
+
+    @Test
+    void test31_devolverServiciosTipo_excepciones() {
+        assertThrows(ValidacionException.class, () -> xml.devolverServiciosTipo(null));
     }
 }

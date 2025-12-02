@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<clientes>
+    <cliente>
+        <dni>06690442H</dni>
+        <nombre>Jojo</nombre>
+        <apellidos>Viyuela</apellidos>
+    </cliente>
+</clientes>

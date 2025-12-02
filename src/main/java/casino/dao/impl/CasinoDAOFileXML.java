@@ -537,6 +537,10 @@ public class CasinoDAOFileXML implements CasinoDAO {
             throw new ValidacionException("DNI/Fecha no pueden ser nulos");
         }
 
+        if (!Cliente.validarDni(dni)) {
+            throw new ValidacionException("DNI no válido");
+        }
+
         try {
             List<Log> listaLog = leerListaLog();
             double totalGanado = 0;

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<servicios>
+    <servicio>
+        <codigo>30270</codigo>
+        <tipo>MESAPOKER</tipo>
+        <nombreServicio>Mesa Poker VIP</nombreServicio>
+        <capacidadMaxima>10</capacidadMaxima>
+    </servicio>
+</servicios>
