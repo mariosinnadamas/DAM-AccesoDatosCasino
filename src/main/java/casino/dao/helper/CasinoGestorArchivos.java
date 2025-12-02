@@ -9,7 +9,7 @@ import java.nio.file.Path;
 public class CasinoGestorArchivos {
     CasinoDAOFileJSON json = new CasinoDAOFileJSON();
     CasinoDAOFileXML xml = new CasinoDAOFileXML();
-    //Todo: Modificar para que elimine la copia de seguridad anterior por esta y establezca en solo lectura o modificar los permisos de lectura y escritura
+    //Todo[!3#1]: Modificar para que elimine la copia de seguridad anterior por esta y establezca en solo lectura o modificar los permisos de lectura y escritura
     private void copiar(File archivo, File destino) throws IOException {
         if (!archivo.isDirectory()) {
             try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
