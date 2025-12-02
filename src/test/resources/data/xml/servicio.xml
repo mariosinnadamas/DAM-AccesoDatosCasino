@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <servicios>
     <servicio>
-        <codigo>F1DA9</codigo>
+        <codigo>163C5</codigo>
         <tipo>MESAPOKER</tipo>
         <nombreServicio>Mesa Poker VIP</nombreServicio>
         <capacidadMaxima>10</capacidadMaxima>
@@ -13,7 +13,7 @@
         <capacidadMaxima>7</capacidadMaxima>
     </servicio>
     <servicio>
-        <codigo>8F61A</codigo>
+        <codigo>C0C45</codigo>
         <tipo>BAR</tipo>
         <nombreServicio>Bar Casino</nombreServicio>
         <capacidadMaxima>20</capacidadMaxima>

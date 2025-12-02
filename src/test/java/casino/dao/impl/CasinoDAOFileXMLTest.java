@@ -200,6 +200,7 @@ class CasinoDAOFileXMLTest {
     @Test
     void test12_consultaServicio() throws IOException {
         String resultado = xml.consultaServicio(ser001.getCodigo());
+
         assertNotNull(resultado, "La consulta no deberia devolver null");
         assertTrue(resultado.contains(TipoServicio.MESAPOKER.toString()));
         assertTrue(resultado.contains("Mesa Poker VIP"));
