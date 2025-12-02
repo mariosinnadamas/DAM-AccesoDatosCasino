@@ -430,5 +430,29 @@
         "listaClientes": [
         ],
         "capacidadMaxima": 20
+    },
+    {
+        "codigo": "F044F",
+        "tipoServicio": "MESAPOKER",
+        "nombreServicio": "Mesa Poker VIP",
+        "listaClientes": [
+        ],
+        "capacidadMaxima": 10
+    },
+    {
+        "codigo": "782CF",
+        "tipoServicio": "MESABLACKJACK",
+        "nombreServicio": "Mesa BlackJack Premium",
+        "listaClientes": [
+        ],
+        "capacidadMaxima": 7
+    },
+    {
+        "codigo": "B9AEB",
+        "tipoServicio": "BAR",
+        "nombreServicio": "Bar Casino",
+        "listaClientes": [
+        ],
+        "capacidadMaxima": 20
     }
 ]

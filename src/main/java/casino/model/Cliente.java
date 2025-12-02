@@ -1,5 +1,6 @@
 package casino.model;
 
+import exceptions.ValidacionException;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlType;
@@ -33,13 +34,13 @@ public class Cliente implements Externalizable {
 
     public void setDni(String dni) {
         if (dni == null) {
-            throw new IllegalArgumentException("ERROR: El DNI no puede estar vacio");
+            throw new ValidacionException("ERROR: El DNI no puede estar vacio");
         }
 
         dni = dni.trim().toUpperCase();
 
         if(!validarDni(dni)){
-            throw new IllegalArgumentException("ERROR: DNI no valido");
+            throw new ValidacionException("ERROR: DNI no valido");
         }
         this.dni = dni;
     }
@@ -49,9 +50,9 @@ public class Cliente implements Externalizable {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
+    public void setNombre(String nombre) throws ValidacionException {
         if (nombre == null || nombre.isBlank()) {
-            throw new IllegalArgumentException("ERROR: Nombre no puede estar vacío o ser nulo");
+            throw new ValidacionException("ERROR: Nombre no puede estar vacío o ser nulo");
         }
         this.nombre = nombre.trim();
     }
@@ -63,7 +64,7 @@ public class Cliente implements Externalizable {
 
     public void setApellidos(String apellidos) {
         if (apellidos == null || apellidos.isBlank()) {
-            throw new IllegalArgumentException("ERROR: Apellidos no puede estar vacío o ser nulo");
+            throw new ValidacionException("ERROR: Apellidos no puede estar vacío o ser nulo");
         }
         this.apellidos = apellidos.trim();
     }

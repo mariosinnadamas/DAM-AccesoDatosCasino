@@ -1708,5 +1708,100 @@
         "hora": "11:02:48",
         "tipoConcepto": "COMPRACOMIDA",
         "cantidadConcepto": 35.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-12-02",
+        "hora": "10:51:46",
+        "tipoConcepto": "APOSTAR",
+        "cantidadConcepto": 100.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-12-02",
+        "hora": "10:51:46",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 200.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-12-02",
+        "hora": "10:51:46",
+        "tipoConcepto": "APOSTAR",
+        "cantidadConcepto": 50.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "B9EAE",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Bar Casino",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-12-02",
+        "hora": "10:51:46",
+        "tipoConcepto": "COMPRABEBIDA",
+        "cantidadConcepto": 15.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "B9EAE",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Bar Casino",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-12-02",
+        "hora": "10:51:46",
+        "tipoConcepto": "COMPRACOMIDA",
+        "cantidadConcepto": 35.0
     }
 ]

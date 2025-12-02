@@ -38,10 +38,10 @@ public class CasinoDAOFileXML implements CasinoDAO {
     }
 
     @Override
-    public void addCliente(Cliente cliente) throws IllegalArgumentException, ClientAlreadyExistsException, IOException {
+    public void addCliente(Cliente cliente) throws ValidacionException, ClientAlreadyExistsException, IOException {
         //Validación de parámetros
         if (cliente == null) {
-            throw new IllegalArgumentException("ERROR: El cliente no puede ser nulo");
+            throw new ValidacionException("ERROR: El cliente no puede ser nulo");
         }
 
         try {
@@ -63,10 +63,10 @@ public class CasinoDAOFileXML implements CasinoDAO {
     }
 
     //Metodo para añadir una lista de clientes (para pruebas), no estaba en la DAO
-    public void addListaClientes(List<Cliente> nuevosClientes) throws IllegalArgumentException,IOException{
+    public void addListaClientes(List<Cliente> nuevosClientes) throws ValidacionException,IOException{
         //Validación de la lista
         if (nuevosClientes == null){
-            throw new IllegalArgumentException("La lista no puede ser nulo o estar vacía");
+            throw new ValidacionException("La lista no puede ser nulo o estar vacía");
         }
 
         try {
@@ -115,10 +115,10 @@ public class CasinoDAOFileXML implements CasinoDAO {
     }
 
     @Override
-    public void addServicio(Servicio servicio) throws IllegalArgumentException, IOException, ServiceAlreadyExistsException{
+    public void addServicio(Servicio servicio) throws ValidacionException, IOException, ServiceAlreadyExistsException{
 
         if (servicio == null){
-            throw new IllegalArgumentException("El servicio no puede ser nulo");
+            throw new ValidacionException("El servicio no puede ser nulo");
         }
 
         try {
@@ -140,10 +140,10 @@ public class CasinoDAOFileXML implements CasinoDAO {
         }
     }
 
-    public void addListaServicios(List<Servicio> nuevosServicios) throws IllegalArgumentException, IOException{
+    public void addListaServicios(List<Servicio> nuevosServicios) throws ValidacionException, IOException{
 
         if (nuevosServicios == null){
-            throw new IllegalArgumentException("La lista de los nuevos servicios no puede ser nula");
+            throw new ValidacionException("La lista de los nuevos servicios no puede ser nula");
         }
 
         try {
@@ -190,9 +190,9 @@ public class CasinoDAOFileXML implements CasinoDAO {
     }
 
     @Override
-    public void addLog(Log log) throws IllegalArgumentException, IOException{
+    public void addLog(Log log) throws ValidacionException, IOException{
         if (log == null){
-            throw new IllegalArgumentException("El log no puede ser nulo");
+            throw new ValidacionException("El log no puede ser nulo");
         }
 
         try {
@@ -206,9 +206,9 @@ public class CasinoDAOFileXML implements CasinoDAO {
         }
     }
 
-    private void guardarLogsEnXML(List<Log> listaLogs) throws IllegalArgumentException,IOException{
+    private void guardarLogsEnXML(List<Log> listaLogs) throws ValidacionException,IOException{
         if (listaLogs == null){
-            throw new IllegalArgumentException("Lista logs no puede ser nula");
+            throw new ValidacionException("Lista logs no puede ser nula");
         }
 
         try {
@@ -226,10 +226,10 @@ public class CasinoDAOFileXML implements CasinoDAO {
         }
     }
 
-    public void addListaLogs(List<Log> nuevosLogs) throws IllegalArgumentException, IOException{
+    public void addListaLogs(List<Log> nuevosLogs) throws ValidacionException, IOException{
 
         if (nuevosLogs == null){
-            throw new IllegalArgumentException("La lista de nuevos logs no puede ser nulo");
+            throw new ValidacionException("La lista de nuevos logs no puede ser nulo");
         }
 
         try {
@@ -242,9 +242,9 @@ public class CasinoDAOFileXML implements CasinoDAO {
     }
 
     @Override
-    public String consultaServicio(String codigo) throws IllegalArgumentException, ServiceNotFoundException, IOException {
+    public String consultaServicio(String codigo) throws ValidacionException, ServiceNotFoundException, IOException {
         if (codigo == null || codigo.isBlank()) {
-            throw new IllegalArgumentException ("El codigo no puede ser nulo o estar vacío");
+            throw new ValidacionException ("El codigo no puede ser nulo o estar vacío");
         }
         String codigoLimpio = codigo.trim();
 
@@ -282,14 +282,14 @@ public class CasinoDAOFileXML implements CasinoDAO {
     }
 
     @Override
-    public String consultaCliente(String dni) throws IllegalArgumentException, ClientNotFoundException, IOException {
+    public String consultaCliente(String dni) throws ValidacionException, ClientNotFoundException, IOException {
 
         if (dni == null || dni.isBlank()) {
-            throw new IllegalArgumentException("ERROR: DNI no puede ser nulo o vacío");
+            throw new ValidacionException("ERROR: DNI no puede ser nulo o vacío");
         }
 
         if (!Cliente.validarDni(dni)) {
-            throw new IllegalArgumentException("ERROR AL VALIDAR: DNI no válido");
+            throw new ValidacionException("ERROR AL VALIDAR: DNI no válido");
         }
 
         //Siempre consulto datos del XML para tener los más actualizados
@@ -325,10 +325,10 @@ public class CasinoDAOFileXML implements CasinoDAO {
     }
 
     @Override
-    public String consultaLog(String codigoServicio, String dni, LocalDate fecha) throws IllegalArgumentException, LogNotFoundException, IOException {
+    public String consultaLog(String codigoServicio, String dni, LocalDate fecha) throws ValidacionException, LogNotFoundException, IOException {
 
         if (codigoServicio == null || codigoServicio.isBlank() || dni == null || dni.isBlank() || fecha == null) {
-            throw new IllegalArgumentException("Error: parámetros inválidos. Asegúrate de introducir un código, un DNI y una fecha válidos.");
+            throw new ValidacionException("Error: parámetros inválidos. Asegúrate de introducir un código, un DNI y una fecha válidos.");
         }
 
         try {
@@ -371,14 +371,14 @@ public class CasinoDAOFileXML implements CasinoDAO {
     }
 
     @Override
-    public boolean actualizarServicio(String codigo, Servicio servicioActualizado) throws IllegalArgumentException, ServiceNotFoundException, IOException {
+    public boolean actualizarServicio(String codigo, Servicio servicioActualizado) throws ValidacionException, ServiceNotFoundException, IOException {
 
         if (codigo == null || codigo.isBlank()){
-            throw new IllegalArgumentException("El codigo no puede ser nulo");
+            throw new ValidacionException("El codigo no puede ser nulo");
         }
 
         if (servicioActualizado == null){
-            throw new IllegalArgumentException("El servicio no puede ser nulo");
+            throw new ValidacionException("El servicio no puede ser nulo");
         }
 
         String codigoLimpio = codigo.trim();
@@ -409,17 +409,17 @@ public class CasinoDAOFileXML implements CasinoDAO {
     }
 
     @Override
-    public boolean actualizarCliente(String dni, Cliente clienteActualizado) throws IllegalArgumentException, ClientNotFoundException, IOException {
+    public boolean actualizarCliente(String dni, Cliente clienteActualizado) throws ValidacionException, ClientNotFoundException, IOException {
 
         if (dni == null || dni.isBlank() || clienteActualizado == null){
-            throw new IllegalArgumentException("El dni/cliente no puede ser nulo");
+            throw new ValidacionException("El dni/cliente no puede ser nulo");
         }
 
         String dniLimpio = dni.trim();
 
         //En caso de que nos pasen un DNI que no coincida con el dni del cliente pasado
         if (!dniLimpio.equalsIgnoreCase(clienteActualizado.getDni().trim())) {
-            throw new IllegalArgumentException("El DNI del cliente actualizado no coincide con el DNI buscado");
+            throw new ClientNotFoundException("El DNI del cliente actualizado no coincide con el DNI buscado");
         }
 
         try {
@@ -448,9 +448,9 @@ public class CasinoDAOFileXML implements CasinoDAO {
     }
 
     @Override
-    public boolean borrarServicio(Servicio servicio) throws IllegalArgumentException,ServiceNotFoundException,IOException{
+    public boolean borrarServicio(Servicio servicio) throws ValidacionException,ServiceNotFoundException,IOException{
         if (servicio == null){
-            throw new IllegalArgumentException("El servicio no puede ser nulo");
+            throw new ValidacionException("El servicio no puede ser nulo");
         }
 
         try {
@@ -464,7 +464,7 @@ public class CasinoDAOFileXML implements CasinoDAO {
                 guardarServiciosEnXML(listaServicios);
                 return true;
             } else {
-                throw new ServiceNotFoundException("ERROR AL BORRAR: No se ha encontrado ningun servicio con código" + servicio.getCodigo());
+                throw new ServiceNotFoundException("ERROR AL BORRAR: No se ha encontrado ningun servicio con código " + servicio.getCodigo());
             }
         } catch (IOException e){
             throw new IOException("Error al borrar el servicio: ", e);
@@ -472,10 +472,10 @@ public class CasinoDAOFileXML implements CasinoDAO {
     }
 
     @Override
-    public boolean borrarCliente(Cliente cliente) throws IllegalArgumentException, ClientNotFoundException, IOException {
+    public boolean borrarCliente(Cliente cliente) throws ValidacionException, ClientNotFoundException, IOException {
 
         if (cliente == null){
-            throw new IllegalArgumentException("El cliente no puede ser nulo");
+            throw new ValidacionException("El cliente no puede ser nulo");
         }
 
         try {
@@ -497,15 +497,15 @@ public class CasinoDAOFileXML implements CasinoDAO {
     }
 
     @Override
-    public double gananciasAlimentos(String dni) throws IllegalArgumentException, IOException {
+    public double gananciasAlimentos(String dni) throws ValidacionException, IOException {
         boolean encontrado = false;
 
         if (dni == null || dni.isBlank()) {
-            throw new IllegalArgumentException("DNI no puede ser nulo o vacío");
+            throw new ValidacionException("DNI no puede ser nulo o vacío");
         }
 
         if (!Cliente.validarDni(dni)) {
-            throw new IllegalArgumentException("DNI no válido");
+            throw new ValidacionException("DNI no válido");
         }
 
         try {
@@ -522,7 +522,7 @@ public class CasinoDAOFileXML implements CasinoDAO {
             }
 
             if(!encontrado){
-                throw new IllegalArgumentException("DNI no encontrado");
+                throw new ValidacionException("DNI no encontrado");
             }
 
             return totalGanancias;
@@ -532,9 +532,9 @@ public class CasinoDAOFileXML implements CasinoDAO {
     }
 
     @Override
-    public double dineroInvertidoClienteEnDia(String dni, LocalDate fecha)throws IllegalArgumentException, LogNotFoundException, IOException {
+    public double dineroInvertidoClienteEnDia(String dni, LocalDate fecha)throws ValidacionException, LogNotFoundException, IOException {
         if (dni == null || dni.isBlank() || fecha == null){
-            throw new IllegalArgumentException("DNI/Fecha no pueden ser nulos");
+            throw new ValidacionException("DNI/Fecha no pueden ser nulos");
         }
 
         try {
@@ -565,9 +565,9 @@ public class CasinoDAOFileXML implements CasinoDAO {
     }
 
     @Override
-    public int vecesClienteJuegaMesa(String dni, String codigo) throws IllegalArgumentException, IOException {
+    public int vecesClienteJuegaMesa(String dni, String codigo) throws ValidacionException, IOException {
         if (dni == null || dni.isBlank() || codigo == null || codigo.isBlank()){
-            throw new IllegalArgumentException("El DNI y el Código no pueden ser nulos");
+            throw new ValidacionException("El DNI y el Código no pueden ser nulos");
         }
 
         try {
@@ -654,9 +654,9 @@ public class CasinoDAOFileXML implements CasinoDAO {
     }
 
     @Override
-    public List<Servicio> devolverServiciosTipo(TipoServicio tipoServicio) throws IllegalArgumentException, IOException{
+    public List<Servicio> devolverServiciosTipo(TipoServicio tipoServicio) throws ValidacionException, IOException{
         if (tipoServicio == null) {
-            throw new IllegalArgumentException("ERROR: El tipo de servicio no puede ser nulo");
+            throw new ValidacionException("ERROR: El tipo de servicio no puede ser nulo");
         }
 
         try {

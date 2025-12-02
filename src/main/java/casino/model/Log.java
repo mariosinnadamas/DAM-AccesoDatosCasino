@@ -12,6 +12,7 @@ import java.io.ObjectOutput;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 @XmlRootElement(name = "Log")
 @XmlType(propOrder = {"cliente", "servicio", "fechaStr", "horaStr", "concepto", "cantidadConcepto"})
@@ -150,6 +151,7 @@ public class Log implements Externalizable {
         this.cantidadConcepto = cantidadConcepto;
     }
 
+
     @Override
     public String toString() {
         return "Log{" +
@@ -182,5 +184,25 @@ public class Log implements Externalizable {
         this.concepto = (TipoConcepto) in.readObject();
         this.cantidadConcepto = in.readDouble();
 
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        Log log = (Log) obj;
+
+        return Double.compare(log.cantidadConcepto, cantidadConcepto) == 0 &&
+                Objects.equals(cliente, log.cliente) &&
+                Objects.equals(servicio, log.servicio) &&
+                Objects.equals(fecha, log.fecha) &&
+                Objects.equals(hora, log.hora) &&
+                concepto == log.concepto;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cliente, servicio, fecha, hora, concepto, cantidadConcepto);
     }
 }

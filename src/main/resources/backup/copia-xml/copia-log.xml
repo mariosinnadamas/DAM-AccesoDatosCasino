@@ -1530,4 +1530,89 @@
         <concepto>COMPRACOMIDA</concepto>
         <cantidadConcepto>35.0</cantidadConcepto>
     </log>
+    <log>
+        <cliente>
+            <dni>12345678Z</dni>
+            <nombre>Juan Carlos</nombre>
+            <apellidos>García Pérez</apellidos>
+        </cliente>
+        <servicio>
+            <codigo>F1DA9</codigo>
+            <tipo>MESAPOKER</tipo>
+            <nombreServicio>Nombre Actualizado</nombreServicio>
+            <capacidadMaxima>10</capacidadMaxima>
+        </servicio>
+        <fecha>2025-12-02</fecha>
+        <hora>10:51:46</hora>
+        <concepto>APOSTAR</concepto>
+        <cantidadConcepto>100.0</cantidadConcepto>
+    </log>
+    <log>
+        <cliente>
+            <dni>12345678Z</dni>
+            <nombre>Juan Carlos</nombre>
+            <apellidos>García Pérez</apellidos>
+        </cliente>
+        <servicio>
+            <codigo>F1DA9</codigo>
+            <tipo>MESAPOKER</tipo>
+            <nombreServicio>Nombre Actualizado</nombreServicio>
+            <capacidadMaxima>10</capacidadMaxima>
+        </servicio>
+        <fecha>2025-12-02</fecha>
+        <hora>10:51:46</hora>
+        <concepto>APUESTACLIENTEGANA</concepto>
+        <cantidadConcepto>200.0</cantidadConcepto>
+    </log>
+    <log>
+        <cliente>
+            <dni>12345678Z</dni>
+            <nombre>Juan Carlos</nombre>
+            <apellidos>García Pérez</apellidos>
+        </cliente>
+        <servicio>
+            <codigo>F1DA9</codigo>
+            <tipo>MESAPOKER</tipo>
+            <nombreServicio>Nombre Actualizado</nombreServicio>
+            <capacidadMaxima>10</capacidadMaxima>
+        </servicio>
+        <fecha>2025-12-02</fecha>
+        <hora>10:51:46</hora>
+        <concepto>APOSTAR</concepto>
+        <cantidadConcepto>50.0</cantidadConcepto>
+    </log>
+    <log>
+        <cliente>
+            <dni>12345678Z</dni>
+            <nombre>Juan Carlos</nombre>
+            <apellidos>García Pérez</apellidos>
+        </cliente>
+        <servicio>
+            <codigo>8F61A</codigo>
+            <tipo>BAR</tipo>
+            <nombreServicio>Bar Casino</nombreServicio>
+            <capacidadMaxima>20</capacidadMaxima>
+        </servicio>
+        <fecha>2025-12-02</fecha>
+        <hora>10:51:46</hora>
+        <concepto>COMPRABEBIDA</concepto>
+        <cantidadConcepto>15.0</cantidadConcepto>
+    </log>
+    <log>
+        <cliente>
+            <dni>12345678Z</dni>
+            <nombre>Juan Carlos</nombre>
+            <apellidos>García Pérez</apellidos>
+        </cliente>
+        <servicio>
+            <codigo>8F61A</codigo>
+            <tipo>BAR</tipo>
+            <nombreServicio>Bar Casino</nombreServicio>
+            <capacidadMaxima>20</capacidadMaxima>
+        </servicio>
+        <fecha>2025-12-02</fecha>
+        <hora>10:51:46</hora>
+        <concepto>COMPRACOMIDA</concepto>
+        <cantidadConcepto>35.0</cantidadConcepto>
+    </log>
 </logs>

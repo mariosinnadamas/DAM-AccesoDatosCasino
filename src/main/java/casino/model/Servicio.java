@@ -1,6 +1,7 @@
 package casino.model;
 
 import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementWrapper;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlType;
 
@@ -23,14 +24,14 @@ public class Servicio implements Externalizable {
     private int capacidadMaxima;
 
     //Constructor vacío obligatorio para JAXB
-    public Servicio() {}
+    public Servicio() {this.listaClientes = new ArrayList<>();}
 
     //Constructor para crear Servicio
     public Servicio(TipoServicio tipo, String nombreServicio) {
         this.codigo=generarCodigo();
         setTipo(tipo);
         setNombreServicio(nombreServicio);
-        this.listaClientes = new ArrayList<>();
+        setListaClientes(new ArrayList<>());
         this.capacidadMaxima = tipo.getCapacidadMaxima();
     }
 
@@ -38,7 +39,7 @@ public class Servicio implements Externalizable {
         setCodigo(codigo);
         setTipo(tipo);
         setNombreServicio(nombreServicio);
-        this.listaClientes = listaClientes;
+        setListaClientes(listaClientes);
         this.capacidadMaxima = capacidadMaxima;
     }
 
@@ -78,13 +79,19 @@ public class Servicio implements Externalizable {
 
         this.nombreServicio = nombreServicio.trim();
     }
-    @XmlElement
+
+    @XmlElementWrapper(name="listaClientes")
+    @XmlElement(name="cliente")
     public List<Cliente> getListaClientes() {
         return listaClientes;
     }
 
     public void setListaClientes(List<Cliente> listaClientes) {
-        this.listaClientes = listaClientes;
+        if (listaClientes == null) {
+            this.listaClientes = new ArrayList<>();
+        } else {
+            this.listaClientes = listaClientes;
+        }
     }
     @XmlElement
     public int getCapacidadMaxima() {
