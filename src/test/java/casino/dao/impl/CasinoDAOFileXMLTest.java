@@ -30,9 +30,9 @@ class CasinoDAOFileXMLTest {
     ArrayList<Cliente> clientes = new ArrayList<>();
 
     //Servicios
-    Servicio ser001 = new Servicio("F1DA9", TipoServicio.MESAPOKER,"Mesa Poker VIP", clientes, 10);
+    Servicio ser001 = new Servicio("163C5", TipoServicio.MESAPOKER,"Mesa Poker VIP", clientes, 10);
     Servicio ser002 = new Servicio("59C45",TipoServicio.MESABLACKJACK,"Mesa BlackJack Premium", clientes, 7);
-    Servicio ser003 = new Servicio("8F61A", TipoServicio.BAR, "Bar Casino" ,clientes ,20);
+    Servicio ser003 = new Servicio("C0C45", TipoServicio.BAR, "Bar Casino" ,clientes ,20);
     ArrayList<Servicio> servicios = new ArrayList<>();
 
     //Log
@@ -98,7 +98,6 @@ class CasinoDAOFileXMLTest {
 
     @Test
     void test03_LeerListaLogs_archivoVacio() throws IOException{
-        //TODO: Está roto, no hay cojones a arreglarlo, el equals me da falso continuamente
         logs.add(log001);
         logs.add(log002);
         logs.add(log003);
@@ -112,7 +111,9 @@ class CasinoDAOFileXMLTest {
         logsXml.sort(Comparator.comparing(l -> l.getCliente().getDni()));
 
         //He puesto esto porque me ha salido de los cojones, gracias
-        assertEquals(10, logsXml.size());
+        assertEquals(5, logsXml.size());
+        assertEquals(5,logs.size());
+        assertEquals(logs, logsXml);
         assertNotNull(logsXml);
     }
 

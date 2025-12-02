@@ -7,7 +7,7 @@
             <apellidos>García Pérez</apellidos>
         </cliente>
         <servicio>
-            <codigo>F1DA9</codigo>
+            <codigo>163C5</codigo>
             <tipo>MESAPOKER</tipo>
             <nombreServicio>Mesa Poker VIP</nombreServicio>
             <capacidadMaxima>10</capacidadMaxima>
@@ -24,7 +24,7 @@
             <apellidos>García Pérez</apellidos>
         </cliente>
         <servicio>
-            <codigo>F1DA9</codigo>
+            <codigo>163C5</codigo>
             <tipo>MESAPOKER</tipo>
             <nombreServicio>Mesa Poker VIP</nombreServicio>
             <capacidadMaxima>10</capacidadMaxima>
@@ -41,7 +41,7 @@
             <apellidos>García Pérez</apellidos>
         </cliente>
         <servicio>
-            <codigo>F1DA9</codigo>
+            <codigo>163C5</codigo>
             <tipo>MESAPOKER</tipo>
             <nombreServicio>Mesa Poker VIP</nombreServicio>
             <capacidadMaxima>10</capacidadMaxima>
@@ -58,7 +58,7 @@
             <apellidos>García Pérez</apellidos>
         </cliente>
         <servicio>
-            <codigo>8F61A</codigo>
+            <codigo>C0C45</codigo>
             <tipo>BAR</tipo>
             <nombreServicio>Bar Casino</nombreServicio>
             <capacidadMaxima>20</capacidadMaxima>
@@ -75,98 +75,13 @@
             <apellidos>García Pérez</apellidos>
         </cliente>
         <servicio>
-            <codigo>8F61A</codigo>
+            <codigo>C0C45</codigo>
             <tipo>BAR</tipo>
             <nombreServicio>Bar Casino</nombreServicio>
             <capacidadMaxima>20</capacidadMaxima>
         </servicio>
         <fecha>2025-11-29</fecha>
         <hora>13:14:44</hora>
-        <concepto>COMPRACOMIDA</concepto>
-        <cantidadConcepto>35.0</cantidadConcepto>
-    </log>
-    <log>
-        <cliente>
-            <dni>12345678Z</dni>
-            <nombre>Juan Paco</nombre>
-            <apellidos>García Pérez</apellidos>
-        </cliente>
-        <servicio>
-            <codigo>F1DA9</codigo>
-            <tipo>MESAPOKER</tipo>
-            <nombreServicio>Mesa Poker VIP</nombreServicio>
-            <capacidadMaxima>10</capacidadMaxima>
-        </servicio>
-        <fecha>2025-11-29</fecha>
-        <hora>15:01:42</hora>
-        <concepto>APOSTAR</concepto>
-        <cantidadConcepto>100.0</cantidadConcepto>
-    </log>
-    <log>
-        <cliente>
-            <dni>12345678Z</dni>
-            <nombre>Juan Paco</nombre>
-            <apellidos>García Pérez</apellidos>
-        </cliente>
-        <servicio>
-            <codigo>F1DA9</codigo>
-            <tipo>MESAPOKER</tipo>
-            <nombreServicio>Mesa Poker VIP</nombreServicio>
-            <capacidadMaxima>10</capacidadMaxima>
-        </servicio>
-        <fecha>2025-11-29</fecha>
-        <hora>15:01:42</hora>
-        <concepto>APUESTACLIENTEGANA</concepto>
-        <cantidadConcepto>200.0</cantidadConcepto>
-    </log>
-    <log>
-        <cliente>
-            <dni>12345678Z</dni>
-            <nombre>Juan Paco</nombre>
-            <apellidos>García Pérez</apellidos>
-        </cliente>
-        <servicio>
-            <codigo>F1DA9</codigo>
-            <tipo>MESAPOKER</tipo>
-            <nombreServicio>Mesa Poker VIP</nombreServicio>
-            <capacidadMaxima>10</capacidadMaxima>
-        </servicio>
-        <fecha>2025-11-29</fecha>
-        <hora>15:01:42</hora>
-        <concepto>APOSTAR</concepto>
-        <cantidadConcepto>50.0</cantidadConcepto>
-    </log>
-    <log>
-        <cliente>
-            <dni>12345678Z</dni>
-            <nombre>Juan Paco</nombre>
-            <apellidos>García Pérez</apellidos>
-        </cliente>
-        <servicio>
-            <codigo>8F61A</codigo>
-            <tipo>BAR</tipo>
-            <nombreServicio>Bar Casino</nombreServicio>
-            <capacidadMaxima>20</capacidadMaxima>
-        </servicio>
-        <fecha>2025-11-29</fecha>
-        <hora>15:01:42</hora>
-        <concepto>COMPRABEBIDA</concepto>
-        <cantidadConcepto>15.0</cantidadConcepto>
-    </log>
-    <log>
-        <cliente>
-            <dni>12345678Z</dni>
-            <nombre>Juan Paco</nombre>
-            <apellidos>García Pérez</apellidos>
-        </cliente>
-        <servicio>
-            <codigo>8F61A</codigo>
-            <tipo>BAR</tipo>
-            <nombreServicio>Bar Casino</nombreServicio>
-            <capacidadMaxima>20</capacidadMaxima>
-        </servicio>
-        <fecha>2025-11-29</fecha>
-        <hora>15:01:42</hora>
         <concepto>COMPRACOMIDA</concepto>
         <cantidadConcepto>35.0</cantidadConcepto>
     </log>
