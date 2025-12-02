@@ -1,0 +1,12 @@
+[
+    {
+        "dni": "12345678Z",
+        "nombre": "Juan Paco",
+        "apellido": "García Pérez"
+    },
+    {
+        "dni": "87654321X",
+        "nombre": "María",
+        "apellido": "López Sánchez"
+    }
+]

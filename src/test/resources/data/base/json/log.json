@@ -1,0 +1,97 @@
+[
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Paco",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "10908",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Mesa Poker VIP",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-29",
+        "hora": "13:14:44",
+        "tipoConcepto": "APOSTAR",
+        "cantidadConcepto": 100.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Paco",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "10908",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Mesa Poker VIP",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-29",
+        "hora": "13:14:44",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 200.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Paco",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "10908",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Mesa Poker VIP",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-29",
+        "hora": "13:14:44",
+        "tipoConcepto": "APOSTAR",
+        "cantidadConcepto": 50.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Paco",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "64B52",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Bar Casino",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-29",
+        "hora": "13:14:44",
+        "tipoConcepto": "COMPRABEBIDA",
+        "cantidadConcepto": 15.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Paco",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "64B52",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Bar Casino",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-29",
+        "hora": "13:14:44",
+        "tipoConcepto": "COMPRACOMIDA",
+        "cantidadConcepto": 35.0
+    }
+]
