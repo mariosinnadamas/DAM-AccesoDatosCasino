@@ -6,15 +6,15 @@
             "apellido": "García Pérez"
         },
         "servicio": {
-            "codigo": "12195",
+            "codigo": "E4BFE",
             "tipoServicio": "MESAPOKER",
             "nombreServicio": "Mesa Poker VIP",
             "listaClientes": [
             ],
             "capacidadMaxima": 10
         },
-        "fecha": "2025-11-11",
-        "hora": "22:20:49",
+        "fecha": "2025-11-28",
+        "hora": "10:43:10",
         "tipoConcepto": "APOSTAR",
         "cantidadConcepto": 100.0
     },
@@ -25,15 +25,15 @@
             "apellido": "García Pérez"
         },
         "servicio": {
-            "codigo": "12195",
+            "codigo": "E4BFE",
             "tipoServicio": "MESAPOKER",
             "nombreServicio": "Mesa Poker VIP",
             "listaClientes": [
             ],
             "capacidadMaxima": 10
         },
-        "fecha": "2025-11-11",
-        "hora": "22:20:49",
+        "fecha": "2025-11-28",
+        "hora": "10:43:10",
         "tipoConcepto": "APUESTACLIENTEGANA",
         "cantidadConcepto": 200.0
     },
@@ -44,15 +44,15 @@
             "apellido": "García Pérez"
         },
         "servicio": {
-            "codigo": "12195",
+            "codigo": "E4BFE",
             "tipoServicio": "MESAPOKER",
             "nombreServicio": "Mesa Poker VIP",
             "listaClientes": [
             ],
             "capacidadMaxima": 10
         },
-        "fecha": "2025-11-11",
-        "hora": "22:20:49",
+        "fecha": "2025-11-28",
+        "hora": "10:43:10",
         "tipoConcepto": "APOSTAR",
         "cantidadConcepto": 50.0
     },
@@ -63,15 +63,15 @@
             "apellido": "García Pérez"
         },
         "servicio": {
-            "codigo": "A2949",
+            "codigo": "B9EAE",
             "tipoServicio": "BAR",
             "nombreServicio": "Bar Casino",
             "listaClientes": [
             ],
             "capacidadMaxima": 20
         },
-        "fecha": "2025-11-11",
-        "hora": "22:20:49",
+        "fecha": "2025-11-28",
+        "hora": "10:43:10",
         "tipoConcepto": "COMPRABEBIDA",
         "cantidadConcepto": 15.0
     },
@@ -82,15 +82,15 @@
             "apellido": "García Pérez"
         },
         "servicio": {
-            "codigo": "A2949",
+            "codigo": "B9EAE",
             "tipoServicio": "BAR",
             "nombreServicio": "Bar Casino",
             "listaClientes": [
             ],
             "capacidadMaxima": 20
         },
-        "fecha": "2025-11-11",
-        "hora": "22:20:49",
+        "fecha": "2025-11-28",
+        "hora": "10:43:10",
         "tipoConcepto": "COMPRACOMIDA",
         "cantidadConcepto": 35.0
     },
@@ -101,7 +101,7 @@
             "apellido": "García Pérez"
         },
         "servicio": {
-            "codigo": "12195",
+            "codigo": "E4BFE",
             "tipoServicio": "MESAPOKER",
             "nombreServicio": "Nombre Actualizado",
             "listaClientes": [
@@ -109,7 +109,7 @@
             "capacidadMaxima": 10
         },
         "fecha": "2025-11-28",
-        "hora": "09:54:30",
+        "hora": "10:43:15",
         "tipoConcepto": "APOSTAR",
         "cantidadConcepto": 100.0
     },
@@ -120,7 +120,7 @@
             "apellido": "García Pérez"
         },
         "servicio": {
-            "codigo": "12195",
+            "codigo": "E4BFE",
             "tipoServicio": "MESAPOKER",
             "nombreServicio": "Nombre Actualizado",
             "listaClientes": [
@@ -128,7 +128,7 @@
             "capacidadMaxima": 10
         },
         "fecha": "2025-11-28",
-        "hora": "09:54:30",
+        "hora": "10:43:15",
         "tipoConcepto": "APUESTACLIENTEGANA",
         "cantidadConcepto": 200.0
     },
@@ -139,7 +139,7 @@
             "apellido": "García Pérez"
         },
         "servicio": {
-            "codigo": "12195",
+            "codigo": "E4BFE",
             "tipoServicio": "MESAPOKER",
             "nombreServicio": "Nombre Actualizado",
             "listaClientes": [
@@ -147,7 +147,7 @@
             "capacidadMaxima": 10
         },
         "fecha": "2025-11-28",
-        "hora": "09:54:30",
+        "hora": "10:43:15",
         "tipoConcepto": "APOSTAR",
         "cantidadConcepto": 50.0
     },
@@ -158,7 +158,7 @@
             "apellido": "García Pérez"
         },
         "servicio": {
-            "codigo": "A2949",
+            "codigo": "B9EAE",
             "tipoServicio": "BAR",
             "nombreServicio": "Bar Casino",
             "listaClientes": [
@@ -166,7 +166,7 @@
             "capacidadMaxima": 20
         },
         "fecha": "2025-11-28",
-        "hora": "09:54:30",
+        "hora": "10:43:15",
         "tipoConcepto": "COMPRABEBIDA",
         "cantidadConcepto": 15.0
     },
@@ -177,7 +177,7 @@
             "apellido": "García Pérez"
         },
         "servicio": {
-            "codigo": "A2949",
+            "codigo": "B9EAE",
             "tipoServicio": "BAR",
             "nombreServicio": "Bar Casino",
             "listaClientes": [
@@ -185,7 +185,7 @@
             "capacidadMaxima": 20
         },
         "fecha": "2025-11-28",
-        "hora": "09:54:30",
+        "hora": "10:43:15",
         "tipoConcepto": "COMPRACOMIDA",
         "cantidadConcepto": 35.0
     },
@@ -196,7 +196,7 @@
             "apellido": "García Pérez"
         },
         "servicio": {
-            "codigo": "12195",
+            "codigo": "E4BFE",
             "tipoServicio": "MESAPOKER",
             "nombreServicio": "Nombre Actualizado",
             "listaClientes": [
@@ -204,7 +204,7 @@
             "capacidadMaxima": 10
         },
         "fecha": "2025-11-28",
-        "hora": "09:56:17",
+        "hora": "10:45:05",
         "tipoConcepto": "APOSTAR",
         "cantidadConcepto": 100.0
     },
@@ -215,7 +215,7 @@
             "apellido": "García Pérez"
         },
         "servicio": {
-            "codigo": "12195",
+            "codigo": "E4BFE",
             "tipoServicio": "MESAPOKER",
             "nombreServicio": "Nombre Actualizado",
             "listaClientes": [
@@ -223,7 +223,7 @@
             "capacidadMaxima": 10
         },
         "fecha": "2025-11-28",
-        "hora": "09:56:17",
+        "hora": "10:45:05",
         "tipoConcepto": "APUESTACLIENTEGANA",
         "cantidadConcepto": 200.0
     },
@@ -234,7 +234,7 @@
             "apellido": "García Pérez"
         },
         "servicio": {
-            "codigo": "12195",
+            "codigo": "E4BFE",
             "tipoServicio": "MESAPOKER",
             "nombreServicio": "Nombre Actualizado",
             "listaClientes": [
@@ -242,7 +242,7 @@
             "capacidadMaxima": 10
         },
         "fecha": "2025-11-28",
-        "hora": "09:56:17",
+        "hora": "10:45:05",
         "tipoConcepto": "APOSTAR",
         "cantidadConcepto": 50.0
     },
@@ -253,7 +253,7 @@
             "apellido": "García Pérez"
         },
         "servicio": {
-            "codigo": "A2949",
+            "codigo": "B9EAE",
             "tipoServicio": "BAR",
             "nombreServicio": "Bar Casino",
             "listaClientes": [
@@ -261,7 +261,7 @@
             "capacidadMaxima": 20
         },
         "fecha": "2025-11-28",
-        "hora": "09:56:17",
+        "hora": "10:45:05",
         "tipoConcepto": "COMPRABEBIDA",
         "cantidadConcepto": 15.0
     },
@@ -272,7 +272,7 @@
             "apellido": "García Pérez"
         },
         "servicio": {
-            "codigo": "A2949",
+            "codigo": "B9EAE",
             "tipoServicio": "BAR",
             "nombreServicio": "Bar Casino",
             "listaClientes": [
@@ -280,7 +280,1432 @@
             "capacidadMaxima": 20
         },
         "fecha": "2025-11-28",
-        "hora": "09:56:17",
+        "hora": "10:45:05",
+        "tipoConcepto": "COMPRACOMIDA",
+        "cantidadConcepto": 35.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:45:19",
+        "tipoConcepto": "APOSTAR",
+        "cantidadConcepto": 100.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:45:19",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 200.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:45:19",
+        "tipoConcepto": "APOSTAR",
+        "cantidadConcepto": 50.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "B9EAE",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Bar Casino",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:45:19",
+        "tipoConcepto": "COMPRABEBIDA",
+        "cantidadConcepto": 15.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "B9EAE",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Bar Casino",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:45:19",
+        "tipoConcepto": "COMPRACOMIDA",
+        "cantidadConcepto": 35.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:45:54",
+        "tipoConcepto": "APOSTAR",
+        "cantidadConcepto": 100.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:45:54",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 200.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:45:54",
+        "tipoConcepto": "APOSTAR",
+        "cantidadConcepto": 50.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "B9EAE",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Bar Casino",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:45:54",
+        "tipoConcepto": "COMPRABEBIDA",
+        "cantidadConcepto": 15.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "B9EAE",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Bar Casino",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:45:54",
+        "tipoConcepto": "COMPRACOMIDA",
+        "cantidadConcepto": 35.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:47:14",
+        "tipoConcepto": "APOSTAR",
+        "cantidadConcepto": 100.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:47:14",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 200.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:47:14",
+        "tipoConcepto": "APOSTAR",
+        "cantidadConcepto": 50.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "B9EAE",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Bar Casino",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:47:14",
+        "tipoConcepto": "COMPRABEBIDA",
+        "cantidadConcepto": 15.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "B9EAE",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Bar Casino",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:47:14",
+        "tipoConcepto": "COMPRACOMIDA",
+        "cantidadConcepto": 35.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:47:31",
+        "tipoConcepto": "APOSTAR",
+        "cantidadConcepto": 100.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:47:31",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 200.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:47:31",
+        "tipoConcepto": "APOSTAR",
+        "cantidadConcepto": 50.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "B9EAE",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Bar Casino",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:47:31",
+        "tipoConcepto": "COMPRABEBIDA",
+        "cantidadConcepto": 15.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "B9EAE",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Bar Casino",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:47:31",
+        "tipoConcepto": "COMPRACOMIDA",
+        "cantidadConcepto": 35.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:47:56",
+        "tipoConcepto": "APOSTAR",
+        "cantidadConcepto": 100.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:47:56",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 200.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:47:56",
+        "tipoConcepto": "APOSTAR",
+        "cantidadConcepto": 50.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "B9EAE",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Bar Casino",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:47:56",
+        "tipoConcepto": "COMPRABEBIDA",
+        "cantidadConcepto": 15.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "B9EAE",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Bar Casino",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:47:56",
+        "tipoConcepto": "COMPRACOMIDA",
+        "cantidadConcepto": 35.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:48:26",
+        "tipoConcepto": "APOSTAR",
+        "cantidadConcepto": 100.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:48:26",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 200.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:48:26",
+        "tipoConcepto": "APOSTAR",
+        "cantidadConcepto": 50.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "B9EAE",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Bar Casino",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:48:26",
+        "tipoConcepto": "COMPRABEBIDA",
+        "cantidadConcepto": 15.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "B9EAE",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Bar Casino",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:48:26",
+        "tipoConcepto": "COMPRACOMIDA",
+        "cantidadConcepto": 35.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:49:11",
+        "tipoConcepto": "APOSTAR",
+        "cantidadConcepto": 100.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:49:11",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 200.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:49:11",
+        "tipoConcepto": "APOSTAR",
+        "cantidadConcepto": 50.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "B9EAE",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Bar Casino",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:49:11",
+        "tipoConcepto": "COMPRABEBIDA",
+        "cantidadConcepto": 15.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "B9EAE",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Bar Casino",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:49:11",
+        "tipoConcepto": "COMPRACOMIDA",
+        "cantidadConcepto": 35.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:49:23",
+        "tipoConcepto": "APOSTAR",
+        "cantidadConcepto": 100.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:49:23",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 200.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:49:23",
+        "tipoConcepto": "APOSTAR",
+        "cantidadConcepto": 50.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "B9EAE",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Bar Casino",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:49:23",
+        "tipoConcepto": "COMPRABEBIDA",
+        "cantidadConcepto": 15.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "B9EAE",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Bar Casino",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:49:23",
+        "tipoConcepto": "COMPRACOMIDA",
+        "cantidadConcepto": 35.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:50:47",
+        "tipoConcepto": "APOSTAR",
+        "cantidadConcepto": 100.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:50:47",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 200.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:50:47",
+        "tipoConcepto": "APOSTAR",
+        "cantidadConcepto": 50.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "B9EAE",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Bar Casino",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:50:47",
+        "tipoConcepto": "COMPRABEBIDA",
+        "cantidadConcepto": 15.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "B9EAE",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Bar Casino",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:50:47",
+        "tipoConcepto": "COMPRACOMIDA",
+        "cantidadConcepto": 35.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:51:06",
+        "tipoConcepto": "APOSTAR",
+        "cantidadConcepto": 100.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:51:06",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 200.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:51:06",
+        "tipoConcepto": "APOSTAR",
+        "cantidadConcepto": 50.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "B9EAE",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Bar Casino",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:51:06",
+        "tipoConcepto": "COMPRABEBIDA",
+        "cantidadConcepto": 15.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "B9EAE",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Bar Casino",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:51:06",
+        "tipoConcepto": "COMPRACOMIDA",
+        "cantidadConcepto": 35.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:53:57",
+        "tipoConcepto": "APOSTAR",
+        "cantidadConcepto": 100.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:53:57",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 200.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:53:57",
+        "tipoConcepto": "APOSTAR",
+        "cantidadConcepto": 50.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "B9EAE",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Bar Casino",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:53:57",
+        "tipoConcepto": "COMPRABEBIDA",
+        "cantidadConcepto": 15.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "B9EAE",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Bar Casino",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:53:57",
+        "tipoConcepto": "COMPRACOMIDA",
+        "cantidadConcepto": 35.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:58:17",
+        "tipoConcepto": "APOSTAR",
+        "cantidadConcepto": 100.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:58:17",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 200.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:58:17",
+        "tipoConcepto": "APOSTAR",
+        "cantidadConcepto": 50.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "B9EAE",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Bar Casino",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:58:17",
+        "tipoConcepto": "COMPRABEBIDA",
+        "cantidadConcepto": 15.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "B9EAE",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Bar Casino",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-28",
+        "hora": "10:58:17",
+        "tipoConcepto": "COMPRACOMIDA",
+        "cantidadConcepto": 35.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "11:01:26",
+        "tipoConcepto": "APOSTAR",
+        "cantidadConcepto": 100.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "11:01:26",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 200.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "11:01:26",
+        "tipoConcepto": "APOSTAR",
+        "cantidadConcepto": 50.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "B9EAE",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Bar Casino",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-28",
+        "hora": "11:01:26",
+        "tipoConcepto": "COMPRABEBIDA",
+        "cantidadConcepto": 15.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "B9EAE",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Bar Casino",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-28",
+        "hora": "11:01:26",
+        "tipoConcepto": "COMPRACOMIDA",
+        "cantidadConcepto": 35.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "11:01:46",
+        "tipoConcepto": "APOSTAR",
+        "cantidadConcepto": 100.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "11:01:46",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 200.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "11:01:46",
+        "tipoConcepto": "APOSTAR",
+        "cantidadConcepto": 50.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "B9EAE",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Bar Casino",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-28",
+        "hora": "11:01:46",
+        "tipoConcepto": "COMPRABEBIDA",
+        "cantidadConcepto": 15.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "B9EAE",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Bar Casino",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-28",
+        "hora": "11:01:46",
+        "tipoConcepto": "COMPRACOMIDA",
+        "cantidadConcepto": 35.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "11:02:48",
+        "tipoConcepto": "APOSTAR",
+        "cantidadConcepto": 100.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "11:02:48",
+        "tipoConcepto": "APUESTACLIENTEGANA",
+        "cantidadConcepto": 200.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "E4BFE",
+            "tipoServicio": "MESAPOKER",
+            "nombreServicio": "Nombre Actualizado",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 10
+        },
+        "fecha": "2025-11-28",
+        "hora": "11:02:48",
+        "tipoConcepto": "APOSTAR",
+        "cantidadConcepto": 50.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "B9EAE",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Bar Casino",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-28",
+        "hora": "11:02:48",
+        "tipoConcepto": "COMPRABEBIDA",
+        "cantidadConcepto": 15.0
+    },
+    {
+        "cliente": {
+            "dni": "12345678Z",
+            "nombre": "Juan Carlos",
+            "apellido": "García Pérez"
+        },
+        "servicio": {
+            "codigo": "B9EAE",
+            "tipoServicio": "BAR",
+            "nombreServicio": "Bar Casino",
+            "listaClientes": [
+            ],
+            "capacidadMaxima": 20
+        },
+        "fecha": "2025-11-28",
+        "hora": "11:02:48",
         "tipoConcepto": "COMPRACOMIDA",
         "cantidadConcepto": 35.0
     }

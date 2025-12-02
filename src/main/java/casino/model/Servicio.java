@@ -106,6 +106,17 @@ public class Servicio implements Externalizable {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object obj){
+
+        if (this == obj) return true;
+
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        Servicio servicio = (Servicio) obj;
+        return Objects.equals(codigo, servicio.codigo);
+    }
+
 
     @Override
     public void writeExternal(ObjectOutput out) throws IOException {
