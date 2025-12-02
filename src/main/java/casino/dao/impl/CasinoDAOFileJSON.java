@@ -46,7 +46,7 @@ public class CasinoDAOFileJSON implements CasinoDAO {
     }
 
     /**
-     * Devuelve una lista de clientes del archivo clientes.json
+     * Devuelve una lista de clientes del archivo cliente.json
      * @return List de Cliente del archivo cliente.json
      * @throws IOException
      */
@@ -254,7 +254,11 @@ public class CasinoDAOFileJSON implements CasinoDAO {
      * @throws ServiceAlreadyExistsException Lanza la excepción si el servicio está presente en el archivo
      */
     @Override
-    public void addServicio(Servicio servicio) throws IOException, ServiceAlreadyExistsException{
+    public void addServicio(Servicio servicio) throws IOException, ServiceAlreadyExistsException, IllegalArgumentException{
+        if (servicio==null){
+            throw new IllegalArgumentException("Servicio no puede ser nulo");
+        }
+
         //Obtener ArrayList<Servicio> del archivo
         ArrayList<Servicio> listaServicio = (ArrayList<Servicio>) this.leerListaServicios();
         boolean existe = listaServicio.stream()
