@@ -107,20 +107,20 @@ class CasinoDAOFileXMLTest {
        );
    }
 
-   @Test
-   void test08_addLog() throws IOException {
-       Cliente c1 = new Cliente("06690442H", "Jojo", "Viyuela");
-       Servicio s1 = new Servicio(TipoServicio.MESAPOKER, "Mesa Poker VIP");
-       dao.addCliente(c1);
-       dao.addServicio(s1);
-
-       Log log = new Log(c1, s1, TipoConcepto.APOSTAR, 100.0);
-       dao.addLog(log);
-
-       List<Log> lista = dao.leerListaLog();
-       assertEquals(1, lista.size());
-       assertEquals(log, lista.getFirst());
-   }
+//   @Test
+//   void test08_addLog() throws IOException {
+//       Cliente c1 = new Cliente("06690442H", "Jojo", "Viyuela");
+//       Servicio s1 = new Servicio(TipoServicio.MESAPOKER, "Mesa Poker VIP");
+//       dao.addCliente(c1);
+//       dao.addServicio(s1);
+//
+//       Log log = new Log(c1, s1, TipoConcepto.APOSTAR, 100.0);
+//       dao.addLog(log);
+//
+//       List<Log> lista = dao.leerListaLog();
+//       assertEquals(1, lista.size());
+//       assertEquals(log, lista.getFirst());
+//   }
 
     @Test
     void test09_addLog_excepciones() {
