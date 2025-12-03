@@ -1,6 +1,6 @@
 [
     {
-        "codigo": "E4BFE",
+        "codigo": "10908",
         "tipoServicio": "MESAPOKER",
         "nombreServicio": "Nombre Actualizado",
         "listaClientes": [
@@ -8,7 +8,7 @@
         "capacidadMaxima": 10
     },
     {
-        "codigo": "C1258",
+        "codigo": "F4AC5",
         "tipoServicio": "MESABLACKJACK",
         "nombreServicio": "Mesa BlackJack Premium",
         "listaClientes": [
@@ -16,7 +16,7 @@
         "capacidadMaxima": 7
     },
     {
-        "codigo": "B9EAE",
+        "codigo": "64B52",
         "tipoServicio": "BAR",
         "nombreServicio": "Bar Casino",
         "listaClientes": [
@@ -24,7 +24,7 @@
         "capacidadMaxima": 20
     },
     {
-        "codigo": "1AF51",
+        "codigo": "0154D",
         "tipoServicio": "MESAPOKER",
         "nombreServicio": "Mesa Poker VIP",
         "listaClientes": [
@@ -32,7 +32,7 @@
         "capacidadMaxima": 10
     },
     {
-        "codigo": "F43D8",
+        "codigo": "23C41",
         "tipoServicio": "MESABLACKJACK",
         "nombreServicio": "Mesa BlackJack Premium",
         "listaClientes": [
@@ -40,391 +40,7 @@
         "capacidadMaxima": 7
     },
     {
-        "codigo": "23AAD",
-        "tipoServicio": "BAR",
-        "nombreServicio": "Bar Casino",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 20
-    },
-    {
-        "codigo": "90E11",
-        "tipoServicio": "MESAPOKER",
-        "nombreServicio": "Mesa Poker VIP",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 10
-    },
-    {
-        "codigo": "183BB",
-        "tipoServicio": "MESABLACKJACK",
-        "nombreServicio": "Mesa BlackJack Premium",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 7
-    },
-    {
-        "codigo": "2FDA7",
-        "tipoServicio": "BAR",
-        "nombreServicio": "Bar Casino",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 20
-    },
-    {
-        "codigo": "4A941",
-        "tipoServicio": "MESAPOKER",
-        "nombreServicio": "Mesa Poker VIP",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 10
-    },
-    {
-        "codigo": "71B41",
-        "tipoServicio": "MESABLACKJACK",
-        "nombreServicio": "Mesa BlackJack Premium",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 7
-    },
-    {
-        "codigo": "59C5B",
-        "tipoServicio": "BAR",
-        "nombreServicio": "Bar Casino",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 20
-    },
-    {
-        "codigo": "89A17",
-        "tipoServicio": "MESAPOKER",
-        "nombreServicio": "Mesa Poker VIP",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 10
-    },
-    {
-        "codigo": "F101C",
-        "tipoServicio": "MESABLACKJACK",
-        "nombreServicio": "Mesa BlackJack Premium",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 7
-    },
-    {
-        "codigo": "D7335",
-        "tipoServicio": "BAR",
-        "nombreServicio": "Bar Casino",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 20
-    },
-    {
-        "codigo": "01876",
-        "tipoServicio": "MESAPOKER",
-        "nombreServicio": "Mesa Poker VIP",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 10
-    },
-    {
-        "codigo": "51151",
-        "tipoServicio": "MESABLACKJACK",
-        "nombreServicio": "Mesa BlackJack Premium",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 7
-    },
-    {
-        "codigo": "F1BBA",
-        "tipoServicio": "BAR",
-        "nombreServicio": "Bar Casino",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 20
-    },
-    {
-        "codigo": "B8141",
-        "tipoServicio": "MESAPOKER",
-        "nombreServicio": "Mesa Poker VIP",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 10
-    },
-    {
-        "codigo": "A17D1",
-        "tipoServicio": "MESABLACKJACK",
-        "nombreServicio": "Mesa BlackJack Premium",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 7
-    },
-    {
-        "codigo": "31993",
-        "tipoServicio": "BAR",
-        "nombreServicio": "Bar Casino",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 20
-    },
-    {
-        "codigo": "C7E93",
-        "tipoServicio": "MESAPOKER",
-        "nombreServicio": "Mesa Poker VIP",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 10
-    },
-    {
-        "codigo": "85F37",
-        "tipoServicio": "MESABLACKJACK",
-        "nombreServicio": "Mesa BlackJack Premium",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 7
-    },
-    {
-        "codigo": "49D42",
-        "tipoServicio": "BAR",
-        "nombreServicio": "Bar Casino",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 20
-    },
-    {
-        "codigo": "F535B",
-        "tipoServicio": "MESAPOKER",
-        "nombreServicio": "Mesa Poker VIP",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 10
-    },
-    {
-        "codigo": "ECDCC",
-        "tipoServicio": "MESABLACKJACK",
-        "nombreServicio": "Mesa BlackJack Premium",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 7
-    },
-    {
-        "codigo": "411B7",
-        "tipoServicio": "BAR",
-        "nombreServicio": "Bar Casino",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 20
-    },
-    {
-        "codigo": "718A5",
-        "tipoServicio": "MESAPOKER",
-        "nombreServicio": "Mesa Poker VIP",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 10
-    },
-    {
-        "codigo": "46AFA",
-        "tipoServicio": "MESABLACKJACK",
-        "nombreServicio": "Mesa BlackJack Premium",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 7
-    },
-    {
-        "codigo": "D075E",
-        "tipoServicio": "BAR",
-        "nombreServicio": "Bar Casino",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 20
-    },
-    {
-        "codigo": "54761",
-        "tipoServicio": "MESAPOKER",
-        "nombreServicio": "Mesa Poker VIP",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 10
-    },
-    {
-        "codigo": "41209",
-        "tipoServicio": "MESABLACKJACK",
-        "nombreServicio": "Mesa BlackJack Premium",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 7
-    },
-    {
-        "codigo": "C6164",
-        "tipoServicio": "BAR",
-        "nombreServicio": "Bar Casino",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 20
-    },
-    {
-        "codigo": "234D9",
-        "tipoServicio": "MESAPOKER",
-        "nombreServicio": "Mesa Poker VIP",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 10
-    },
-    {
-        "codigo": "21EBC",
-        "tipoServicio": "MESABLACKJACK",
-        "nombreServicio": "Mesa BlackJack Premium",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 7
-    },
-    {
-        "codigo": "5F983",
-        "tipoServicio": "BAR",
-        "nombreServicio": "Bar Casino",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 20
-    },
-    {
-        "codigo": "5D2FE",
-        "tipoServicio": "MESAPOKER",
-        "nombreServicio": "Mesa Poker VIP",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 10
-    },
-    {
-        "codigo": "4D345",
-        "tipoServicio": "MESABLACKJACK",
-        "nombreServicio": "Mesa BlackJack Premium",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 7
-    },
-    {
-        "codigo": "C5852",
-        "tipoServicio": "BAR",
-        "nombreServicio": "Bar Casino",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 20
-    },
-    {
-        "codigo": "FEC4A",
-        "tipoServicio": "MESAPOKER",
-        "nombreServicio": "Mesa Poker VIP",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 10
-    },
-    {
-        "codigo": "9A875",
-        "tipoServicio": "MESABLACKJACK",
-        "nombreServicio": "Mesa BlackJack Premium",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 7
-    },
-    {
-        "codigo": "D46FC",
-        "tipoServicio": "BAR",
-        "nombreServicio": "Bar Casino",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 20
-    },
-    {
-        "codigo": "63E91",
-        "tipoServicio": "MESAPOKER",
-        "nombreServicio": "Mesa Poker VIP",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 10
-    },
-    {
-        "codigo": "9918E",
-        "tipoServicio": "MESABLACKJACK",
-        "nombreServicio": "Mesa BlackJack Premium",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 7
-    },
-    {
-        "codigo": "57287",
-        "tipoServicio": "BAR",
-        "nombreServicio": "Bar Casino",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 20
-    },
-    {
-        "codigo": "0E4BA",
-        "tipoServicio": "MESAPOKER",
-        "nombreServicio": "Mesa Poker VIP",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 10
-    },
-    {
-        "codigo": "78214",
-        "tipoServicio": "MESABLACKJACK",
-        "nombreServicio": "Mesa BlackJack Premium",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 7
-    },
-    {
-        "codigo": "0E10E",
-        "tipoServicio": "BAR",
-        "nombreServicio": "Bar Casino",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 20
-    },
-    {
-        "codigo": "30740",
-        "tipoServicio": "MESAPOKER",
-        "nombreServicio": "Mesa Poker VIP",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 10
-    },
-    {
-        "codigo": "2FD99",
-        "tipoServicio": "MESABLACKJACK",
-        "nombreServicio": "Mesa BlackJack Premium",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 7
-    },
-    {
-        "codigo": "3C8E5",
-        "tipoServicio": "BAR",
-        "nombreServicio": "Bar Casino",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 20
-    },
-    {
-        "codigo": "2755C",
-        "tipoServicio": "MESAPOKER",
-        "nombreServicio": "Mesa Poker VIP",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 10
-    },
-    {
-        "codigo": "19EB0",
-        "tipoServicio": "MESABLACKJACK",
-        "nombreServicio": "Mesa BlackJack Premium",
-        "listaClientes": [
-        ],
-        "capacidadMaxima": 7
-    },
-    {
-        "codigo": "374A6",
+        "codigo": "6B8E9",
         "tipoServicio": "BAR",
         "nombreServicio": "Bar Casino",
         "listaClientes": [

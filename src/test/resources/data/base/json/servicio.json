@@ -1,0 +1,26 @@
+[
+    {
+        "codigo": "10908",
+        "tipoServicio": "MESAPOKER",
+        "nombreServicio": "Mesa Poker VIP",
+        "listaClientes": [
+        ],
+        "capacidadMaxima": 10
+    },
+    {
+        "codigo": "F4AC5",
+        "tipoServicio": "MESABLACKJACK",
+        "nombreServicio": "Mesa BlackJack Premium",
+        "listaClientes": [
+        ],
+        "capacidadMaxima": 7
+    },
+    {
+        "codigo": "64B52",
+        "tipoServicio": "BAR",
+        "nombreServicio": "Bar Casino",
+        "listaClientes": [
+        ],
+        "capacidadMaxima": 20
+    }
+]
