@@ -14,9 +14,7 @@ class ClienteTest {
     @Order(1)
     @Test
     void validarDni() {
-
         Assertions.assertTrue(Cliente.validarDni("12345678Z"));
-        Assertions.assertTrue(Cliente.validarDni("12345678"));
         Assertions.assertFalse(Cliente.validarDni("12345678"));
     }
 }
