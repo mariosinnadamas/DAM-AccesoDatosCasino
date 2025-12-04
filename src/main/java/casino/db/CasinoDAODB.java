@@ -8,8 +8,7 @@ import casino.model.TipoServicio;
 import exceptions.*;
 
 import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,20 +48,61 @@ public class CasinoDAODB implements CasinoDAO {
         }
     }
 
-
+    //TODO: Test
     @Override
     public void addServicio(Servicio servicio) throws ValidacionException, ServiceAlreadyExistsException, IOException {
+        String consulta = "INSERT INTO servicios (codigo, nombre, tipo, capacidad) VALUES (?,?,?,?)";
 
+        try{
+            PreparedStatement stm = conn.conectarBaseDatos().prepareStatement(consulta);
+            stm.setString(1,servicio.getCodigo());
+            stm.setString(2,servicio.getNombreServicio());
+            stm.setString(3,servicio.getTipo().toString());
+            stm.setInt(4,servicio.getCapacidadMaxima());
+
+            stm.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void addLog(Log log) throws ValidacionException, IOException {
+        String consulta = "INSERT INTO logs (dni,codigo,fecha,hora,concepto,cantidad_concepto) VALUES (?,?,?,?,?,?)";
 
+        try {
+            PreparedStatement stm = conn.conectarBaseDatos().prepareStatement(consulta);
+
+            stm.setString(1,log.getCliente().getDni());
+            stm.setString(2,log.getServicio().getCodigo());
+            stm.setDate(3, Date.valueOf(log.getFecha()));
+            stm.setTime(4, Time.valueOf(log.getHora()));
+            stm.setString(5,log.getConcepto().toString());
+            stm.setDouble(6,log.getCantidadConcepto());
+
+            stm.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
-
+    //TODO: Revisar y test
     @Override
     public String consultaServicio(String codigo) throws ValidacionException, IOException {
-        return "";
+        String query = "SELECT codigo, nombre, tipo, capacidad FROM servicios WHERE codigo = ?";
+        Servicio s = new Servicio();
+        try {
+            PreparedStatement stm = conn.conectarBaseDatos().prepareStatement(query);
+            stm.setString(1,codigo);
+            ResultSet rs = stm.executeQuery();
+            s.setCodigo(rs.getString("codigo"));
+            s.setNombreServicio(rs.getString("nombre"));
+            s.setTipo(TipoServicio.valueOf(rs.getString("tipo")));
+            s.setCapacidadMaxima(rs.getInt("capacidad"));
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return s.toString();
     }
 
     @Override
