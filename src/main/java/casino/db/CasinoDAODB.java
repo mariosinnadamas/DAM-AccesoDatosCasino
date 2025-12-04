@@ -26,7 +26,11 @@ public class CasinoDAODB implements CasinoDAO {
     }
 
     @Override
-    public void addCliente(Cliente cliente) throws ValidacionException, ClientAlreadyExistsException, IOException {
+    public void addCliente(Cliente cliente) throws ValidacionException, ClientAlreadyExistsException, IOException, AccesoDenegadoException{
+        if (cliente == null){
+            throw new ValidacionException("El cliente no puede ser nulo");
+        }
+
         String consulta = "INSERT INTO clientes(dni, nombre, apellido) VALUES(?, ?, ?)";
 
         try {
@@ -35,14 +39,23 @@ public class CasinoDAODB implements CasinoDAO {
             stm.setString(2, cliente.getNombre());
             stm.setString(3, cliente.getApellidos());
 
-            stm.execute();
+            try {
+                stm.execute();
+            } catch (SQLException e) {
+                throw new ClientAlreadyExistsException(e.getMessage());
+            }
+
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new AccesoDenegadoException(e.getMessage());
         }
+
+
+
+
     }
 
     //TODO: Revisar este método por las excepciones
-    public void addClientes(ArrayList<Cliente> listaClientes) throws IOException {
+    public void addClientes(ArrayList<Cliente> listaClientes) throws IOException, ClientAlreadyExistsException, ValidacionException {
         for  (Cliente cliente : listaClientes) {
             addCliente(cliente);
         }
@@ -178,5 +191,9 @@ public class CasinoDAODB implements CasinoDAO {
     @Override
     public List<Servicio> devolverServiciosTipo(TipoServicio tipoServicio) throws ValidacionException, IOException {
         return List.of();
+    }
+
+    public double dineroGanadoClienteEnDia(String s, LocalDate dateFecha) {
+        return 0;
     }
 }
