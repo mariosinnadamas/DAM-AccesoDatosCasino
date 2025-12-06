@@ -113,10 +113,10 @@ public class CasinoDAOFileJSON implements CasinoDAO {
      * @throws ClientAlreadyExistsException Lanza excepción si el cliente ya estaba en el archivo
      */
     @Override
-    public void addCliente(Cliente cliente) throws IOException, ClientAlreadyExistsException, IllegalArgumentException {
+    public void addCliente(Cliente cliente) throws IOException, ClientAlreadyExistsException, ValidacionException {
         //Validación de parámetros
         if (cliente == null) {
-            throw new IllegalArgumentException("ERROR: El cliente no puede ser nulo");
+            throw new ValidacionException("ERROR: El cliente no puede ser nulo");
         }
         //Obtener ArrayList<Cliente> del archivo
         ArrayList<Cliente> listaClientes = (ArrayList<Cliente>) this.leerListaClientes();
@@ -137,10 +137,13 @@ public class CasinoDAOFileJSON implements CasinoDAO {
      * @throws IOException
      * @throws ClientAlreadyExistsException Lanza la excepción si un cliente ya estaba en el archivo
      */
-    public void addListaClientes(List<Cliente> clientes) throws IOException, ClientAlreadyExistsException {
+    public void addListaClientes(List<Cliente> clientes) throws IOException, ClientAlreadyExistsException, ValidacionException {
         ArrayList<Cliente> listaClient = (ArrayList<Cliente>) this.leerListaClientes();
 
         for (Cliente cliente : clientes) {
+            if (cliente == null) {
+                throw new ValidacionException("El cliente no puede ser nulo");
+            }
             if (listaClient.contains(cliente)) {
                 throw new  ClientAlreadyExistsException("El cliente ya está en el archivo");
             }
@@ -254,9 +257,9 @@ public class CasinoDAOFileJSON implements CasinoDAO {
      * @throws ServiceAlreadyExistsException Lanza la excepción si el servicio está presente en el archivo
      */
     @Override
-    public void addServicio(Servicio servicio) throws IOException, ServiceAlreadyExistsException, IllegalArgumentException{
+    public void addServicio(Servicio servicio) throws IOException, ServiceAlreadyExistsException, ValidacionException {
         if (servicio==null){
-            throw new IllegalArgumentException("Servicio no puede ser nulo");
+            throw new ValidacionException("Servicio no puede ser nulo");
         }
 
         //Obtener ArrayList<Servicio> del archivo
@@ -278,12 +281,15 @@ public class CasinoDAOFileJSON implements CasinoDAO {
      * @throws IOException
      * @throws ServiceAlreadyExistsException Lanza excepción si ya está presente en el json
      */
-    public void addListaServicios(List<Servicio> servicios) throws IOException, ServiceAlreadyExistsException {
+    public void addListaServicios(List<Servicio> servicios) throws IOException, ServiceAlreadyExistsException, ValidacionException {
 
         //Obtener ArrayList<Servicio> del archivo
         ArrayList<Servicio> listaServicio = (ArrayList<Servicio>) this.leerListaServicios();
         //Agregar los objetos Servicio
         for (Servicio ser : servicios) {
+            if (ser == null){
+                throw new ValidacionException("Servicio no puede ser nulo");
+            }
             if (listaServicio.contains(ser)){
                 throw new ServiceAlreadyExistsException("Servicio ya existente");
             }
@@ -435,7 +441,11 @@ public class CasinoDAOFileJSON implements CasinoDAO {
      * @throws IOException
      */
     @Override
-    public void addLog(Log log) throws IOException{
+    public void addLog(Log log) throws IOException, ValidacionException{
+        if (log == null) {
+            throw new  ValidacionException("Log no puede ser null");
+        }
+
         //Obtener ArrayList<SLog> del archivo
         ArrayList<Log> listaLog = (ArrayList<Log>) this.leerListaLog();
 
@@ -451,12 +461,15 @@ public class CasinoDAOFileJSON implements CasinoDAO {
      * @param logs Lista de log a agregar al archivo
      * @throws IOException
      */
-    public void addListaLogs(List<Log> logs) throws IOException{
+    public void addListaLogs(List<Log> logs) throws IOException, ValidacionException {
         //Obtener ArrayList<SLog> del archivo
         ArrayList<Log> listaLog = (ArrayList<Log>) this.leerListaLog();
 
         //Agregar los Objetos Log
-        for  (Log logFor : logs) {
+        for (Log logFor : logs) {
+            if  (logFor == null) {
+                throw new  ValidacionException("Log no puede ser null");
+            }
             listaLog.add(logFor);
         }
 

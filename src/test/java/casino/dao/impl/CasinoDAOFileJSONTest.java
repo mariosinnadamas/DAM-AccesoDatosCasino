@@ -98,7 +98,14 @@ class CasinoDAOFileJSONTest {
     @Test
     void addClienteClientIsNull() throws IOException {
         Cliente cli001 = null;
-        assertThrows(IllegalArgumentException.class, () -> json.addCliente(cli001));
+        assertThrows(ValidacionException.class, () -> json.addCliente(cli001));
+    }
+
+    @Test
+    void addListaClientesNull(){
+        Cliente cli004 = null;
+        clientes.add(cli004);
+        assertThrows(ValidacionException.class, () -> json.addListaClientes(clientes));
     }
 
     @Test
@@ -127,11 +134,15 @@ class CasinoDAOFileJSONTest {
     @Test
     void addServicioNull() {
         Servicio ser001 = null;
-
-        assertThrows(IllegalArgumentException.class, () -> json.addServicio(ser001));
+        assertThrows(ValidacionException.class, () -> json.addServicio(ser001));
     }
 
-
+    @Test
+    void addListaServiciosNull() {
+        Servicio ser004 = null;
+        servicios.add(ser004);
+        assertThrows(ValidacionException.class, () -> json.addListaServicios(servicios));
+    }
 
     @Test
     void addListaServiciosThrowsAlreadyExists() {
@@ -143,29 +154,36 @@ class CasinoDAOFileJSONTest {
     }
 
     @Test
-    void leerListaLog() {
+    void addLogNull(){
+        Log log001 = null;
+        assertThrows(ValidacionException.class, () -> json.addLog(log001));
+    }
+
+    @Test
+    void addListaLogsNull(){
+        Log log006 = null;
+        logs.add(log006);
+        assertThrows(ValidacionException.class, () -> json.addListaLogs(logs));
+    }
+
+    @Test
+    void leerListaLog() throws IOException {
         logs.add(log001);
         logs.add(log002);
         logs.add(log003);
         logs.add(log004);
         logs.add(log005);
 
-        try {
-            ArrayList<Log> listaLogs = (ArrayList<Log>) json.leerListaLog();
-            assertEquals(logs, listaLogs);
-        } catch (IOException e) {
-            System.out.println("error");
-        }
+        ArrayList<Log> listaLogs = (ArrayList<Log>) json.leerListaLog();
+        assertEquals(logs, listaLogs);
+
     }
 
     @Test
-    void consultaCliente() {
+    void consultaCliente() throws IOException {
         String clienteString = cli001.toString();
-        try {
-            assertEquals(clienteString, json.consultaCliente("12345678Z"));
-        } catch (IOException e) {
-            System.out.println("error en consultaCliente");
-        }
+        assertEquals(clienteString, json.consultaCliente("12345678Z"));
+
     }
 
     @Test
@@ -174,13 +192,9 @@ class CasinoDAOFileJSONTest {
     }
 
     @Test
-    void consultaServicio() {
+    void consultaServicio() throws IOException {
         String serviceString = ser001.toString();
-        try {
-            assertEquals(serviceString, json.consultaServicio("10908"));
-        } catch (IOException e) {
-            System.out.println("error en consultaServicio");
-        }
+        assertEquals(serviceString, json.consultaServicio("10908"));
     }
 
     @Test
@@ -189,13 +203,10 @@ class CasinoDAOFileJSONTest {
     }
 
     @Test
-    void consultaLog() {
+    void consultaLog() throws IOException {
         String logString = log001.toString();
-        try{
-            assertEquals(logString, json.consultaLog("10908", "12345678Z", dateFecha));
-        } catch (IOException e) {
-            System.out.println("Error en consultaLog");
-        }
+        assertEquals(logString, json.consultaLog("10908", "12345678Z", dateFecha));
+
     }
 
     @Test
@@ -204,15 +215,10 @@ class CasinoDAOFileJSONTest {
     }
 
     @Test
-    void actualizarCliente() {
+    void actualizarCliente() throws IOException {
         cli001.setNombre("Alberto");
         String nombre = "Alberto";
-
-        try {
-            json.actualizarCliente("12345678Z",cli001);
-        } catch (IOException e) {
-            System.out.println("error en actualizarCliente");
-        }
+        json.actualizarCliente("12345678Z",cli001);
         assertEquals(nombre, cli001.getNombre());
     }
 
@@ -222,15 +228,11 @@ class CasinoDAOFileJSONTest {
     }
 
     @Test
-    void actualizarServicio() {
+    void actualizarServicio() throws IOException {
         String nuevoNombre = "Mesa Actualizada";
         ser001.setNombreServicio(nuevoNombre);
-        try {
-            json.actualizarServicio("10908", ser001);
-            assertEquals(nuevoNombre, ser001.getNombreServicio());
-        } catch (Exception e) {
-            System.out.println("error en actualizarServicio");
-        }
+        json.actualizarServicio("10908", ser001);
+        assertEquals(nuevoNombre, ser001.getNombreServicio());
     }
 
     @Test
@@ -239,13 +241,9 @@ class CasinoDAOFileJSONTest {
     }
 
     @Test
-    void borrarServicio() {
-        try {
-            json.borrarServicio(ser001);
-            assertThrows(ServiceNotFoundException.class, () -> json.consultaServicio("10908"));
-        } catch (IOException e) {
-            System.out.println("error en borrarServicio");
-        }
+    void borrarServicio() throws IOException {
+        json.borrarServicio(ser001);
+        assertThrows(ServiceNotFoundException.class, () -> json.consultaServicio("10908"));
     }
 
     @Test
@@ -255,13 +253,10 @@ class CasinoDAOFileJSONTest {
     }
 
     @Test
-    void borrarCliente() {
-        try {
-            json.borrarCliente(cli001);
-            assertThrows(ClientNotFoundException.class, () -> json.consultaCliente("12345678Z"));
-        } catch (IOException e) {
-            System.out.println("error en borrarCliente");
-        }
+    void borrarCliente() throws IOException {
+        json.borrarCliente(cli001);
+        assertThrows(ClientNotFoundException.class, () -> json.consultaCliente("12345678Z"));
+
     }
 
     @Test
@@ -271,13 +266,10 @@ class CasinoDAOFileJSONTest {
     }
 
     @Test
-    void dineroInvertidoClienteEnDia() {
+    void dineroInvertidoClienteEnDia() throws IOException {
         double totalInvertido = 35.0 + 15.0 + 50.0 - 200.0 + 100.0;
-        try {
-            assertEquals(totalInvertido, json.dineroInvertidoClienteEnDia("12345678Z", dateFecha));
-        } catch (IOException e) {
-            System.out.println("Error en dineroInvertidoClienteEnDia");
-        }
+        assertEquals(totalInvertido, json.dineroInvertidoClienteEnDia("12345678Z", dateFecha));
+
     }
 
     @Test
@@ -286,13 +278,9 @@ class CasinoDAOFileJSONTest {
     }
 
     @Test
-    void gananciasAlimentos() {
+    void gananciasAlimentos() throws IOException {
         double totalInvertido = 35.0 + 15.0;
-        try {
-            assertEquals(totalInvertido, json.gananciasAlimentos("12345678Z"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        assertEquals(totalInvertido, json.gananciasAlimentos("12345678Z"));
     }
 
     @Test
@@ -301,13 +289,9 @@ class CasinoDAOFileJSONTest {
     }
 
     @Test
-    void dineroGanadoClienteEnDia() {
+    void dineroGanadoClienteEnDia() throws IOException {
         double totalInvertido = -100.0 - 50.0 + 200.0;
-        try {
-            assertEquals(totalInvertido, json.dineroGanadoClienteEnDia("12345678Z", dateFecha));
-        } catch (IOException e) {
-            System.out.println("Error en DineroGanadoClienteEnDia");
-        }
+        assertEquals(totalInvertido, json.dineroGanadoClienteEnDia("12345678Z", dateFecha));
     }
 
     @Test
@@ -316,13 +300,9 @@ class CasinoDAOFileJSONTest {
     }
 
     @Test
-    void vecesClienteJuegaMesa() {
+    void vecesClienteJuegaMesa() throws IOException {
         double contador = 3.0;
-        try {
-            assertEquals(contador, json.vecesClienteJuegaMesa(cli001.getDni(), ser001.getCodigo()));
-        } catch (IOException e) {
-            System.out.println("Error en vecesClienteJuegaMesa");
-        }
+        assertEquals(contador, json.vecesClienteJuegaMesa(cli001.getDni(), ser001.getCodigo()));
     }
 
     @Test
@@ -336,34 +316,21 @@ class CasinoDAOFileJSONTest {
     }
 
     @Test
-    void ganadoMesas() {
+    void ganadoMesas() throws IOException {
         double totalInvertido = 100.0 - 200.0 + 50.0;
-        try {
-            assertEquals(totalInvertido, json.ganadoMesas());
-        } catch (IOException e) {
-            System.out.println("Error en ganadoMesas");
-        }
+        assertEquals(totalInvertido, json.ganadoMesas());
     }
 
     @Test
-    void ganadoEstablecimientos() {
+    void ganadoEstablecimientos() throws IOException {
         double totalInvertido = 35.0 + 15.0;
-        try {
-            assertEquals(totalInvertido, json.ganadoEstablecimientos());
-        } catch (IOException e) {
-            System.out.println("Error en ganadoEstablecimientos");
-        }
+        assertEquals(totalInvertido, json.ganadoEstablecimientos());
     }
 
     @Test
-    void devolverServiciosTipo() {
+    void devolverServiciosTipo() throws IOException {
         ArrayList<Servicio> mesaPokerLista = new ArrayList<>();
         mesaPokerLista.add(ser001);
-
-        try {
-            assertEquals(mesaPokerLista, json.devolverServiciosTipo(TipoServicio.MESAPOKER));
-        } catch (IOException e) {
-            System.out.println("Error en devolverServiciosTipo");
-        }
+        assertEquals(mesaPokerLista, json.devolverServiciosTipo(TipoServicio.MESAPOKER));
     }
 }
