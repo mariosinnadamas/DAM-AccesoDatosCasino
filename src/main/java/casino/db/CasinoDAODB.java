@@ -48,10 +48,6 @@ public class CasinoDAODB implements CasinoDAO {
         } catch (SQLException e) {
             throw new AccesoDenegadoException(e.getMessage());
         }
-
-
-
-
     }
 
     //TODO: Revisar este método por las excepciones
@@ -61,7 +57,7 @@ public class CasinoDAODB implements CasinoDAO {
         }
     }
 
-    //TODO: Test
+    //TODO: Revisar y Test
     @Override
     public void addServicio(Servicio servicio) throws ValidacionException, ServiceAlreadyExistsException, IOException {
         String consulta = "INSERT INTO servicios (codigo, nombre, tipo, capacidad) VALUES (?,?,?,?)";
@@ -73,14 +69,23 @@ public class CasinoDAODB implements CasinoDAO {
             stm.setString(3,servicio.getTipo().toString());
             stm.setInt(4,servicio.getCapacidadMaxima());
 
-            stm.execute();
+            try {
+                stm.execute();
+            } catch (SQLException e) {
+                throw new ServiceAlreadyExistsException("ERROR: Servicio duplicado " + e.getMessage());
+            }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new AccesoDenegadoException("Ha habido un problema al conectar con la BdD " + e.getMessage());
         }
     }
 
+    //TODO: Revisar y Test
     @Override
     public void addLog(Log log) throws ValidacionException, IOException {
+        if (log == null){
+            throw new ValidacionException("ERROR: Log inválido o nulo");
+        }
+
         String consulta = "INSERT INTO logs (dni,codigo,fecha,hora,concepto,cantidad_concepto) VALUES (?,?,?,?,?,?)";
 
         try {
@@ -95,25 +100,37 @@ public class CasinoDAODB implements CasinoDAO {
 
             stm.execute();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new AccesoDenegadoException("Ha habido un problema al conectar a la BdD "+ e.getMessage());
         }
     }
+
     //TODO: Revisar y test
     @Override
     public String consultaServicio(String codigo) throws ValidacionException, IOException {
+        if (codigo.isEmpty()){
+            throw new ValidacionException("El codigo no es válido o está vacío");
+        }
+
         String query = "SELECT codigo, nombre, tipo, capacidad FROM servicios WHERE codigo = ?";
         Servicio s = new Servicio();
         try {
             PreparedStatement stm = conn.conectarBaseDatos().prepareStatement(query);
             stm.setString(1,codigo);
-            ResultSet rs = stm.executeQuery();
-            s.setCodigo(rs.getString("codigo"));
-            s.setNombreServicio(rs.getString("nombre"));
-            s.setTipo(TipoServicio.valueOf(rs.getString("tipo")));
-            s.setCapacidadMaxima(rs.getInt("capacidad"));
+            try {
+                ResultSet rs = stm.executeQuery();
+                s.setCodigo(rs.getString("codigo"));
+                s.setNombreServicio(rs.getString("nombre"));
+                s.setTipo(TipoServicio.valueOf(rs.getString("tipo")));
+                s.setCapacidadMaxima(rs.getInt("capacidad"));
+            } catch (SQLException e) {
+                throw new ServiceNotFoundException("No se ha encontrado ningún servicio con ese código " + e.getMessage());
+            } catch (IllegalArgumentException e) {
+                //TODO: Ni idea de como tratar esta excepción, ayuda. Me lo ha generado al rodear todo con try-catch
+                throw new RuntimeException(e);
+            }
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new AccesoDenegadoException("Ha habido un error al conectar con la BdD: " + e.getMessage());
         }
         return s.toString();
     }
@@ -123,9 +140,34 @@ public class CasinoDAODB implements CasinoDAO {
         return List.of();
     }
 
+    //TODO: Revisar excepciones y Test
     @Override
     public String consultaCliente(String dni) throws ValidacionException, ClientNotFoundException, IOException {
-        return "";
+        if (dni.isEmpty()){
+            throw new ValidacionException("El dni no es válido o está vacío");
+        }
+
+        String sql = "SELECT dni,nombre,apellidos FROM clientes WHERE dni = ?";
+        Cliente c = new Cliente();
+        try {
+            PreparedStatement stm = conn.conectarBaseDatos().prepareStatement(sql);
+            stm.setString(1,dni);
+
+            try {
+                ResultSet rs = stm.executeQuery();
+                String dniQuery = rs.getString("dni");
+                String nombreQuery = rs.getString("nombre");
+                String apellidosQuery = rs.getString("apellidos");
+                c.setDni(dniQuery);
+                c.setNombre(nombreQuery);
+                c.setApellidos(apellidosQuery);
+            } catch (SQLException e) {
+                throw new ClientNotFoundException("No se ha encontrado ningún cliente con ese DNI " + e.getMessage());
+            }
+        } catch (SQLException e) {
+            throw new AccesoDenegadoException("Ha ocurrido un error al acceder a la BdD " + e.getMessage());
+        }
+        return c.toString();
     }
 
     @Override

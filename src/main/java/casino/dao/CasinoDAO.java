@@ -45,7 +45,7 @@ public interface CasinoDAO {
      * @throws ValidacionException si el código que se pasa por parámetro es nulo o está mal
      * @throws IOException Si ha habido algún problema de E/S en la consulta del Servicio
      */
-    public String consultaServicio(String codigo) throws ValidacionException ,IOException;
+    public String consultaServicio(String codigo) throws ValidacionException,ServiceNotFoundException,IOException;
 
     /**
      * Consulta todos los servicios almacenados
