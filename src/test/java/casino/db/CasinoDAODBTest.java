@@ -197,8 +197,8 @@ class CasinoDAODBTest {
     @Test
     void consultaLog() throws IOException {
         logs.add(log001);
+        logs.add(log002);
         logs.add(log003);
-        //List<Log> listaLogs = (ArrayList<Log>) daodb.leerListaLog();
         assertEquals(logs, daodb.consultaLog("10908", "12345678Z", dateFecha));
     }
 
@@ -216,8 +216,13 @@ class CasinoDAODBTest {
     }
 
     @Test
-    void actualizarClienteThrowsClientNotFound() {
-        assertThrows(ClientNotFoundException.class, () -> daodb.actualizarCliente("NOTVALIDDNI", cli001));
+    void actualizarClienteExcepciones() {
+        Cliente c = new Cliente("41165112B", "Juan Paco", "García Pérez");
+
+        assertThrows(ValidacionException.class, () -> daodb.actualizarCliente("", cli001));
+        assertThrows(ValidacionException.class, () -> daodb.actualizarCliente("12345678Z", null));
+        assertThrows(ValidacionException.class, () -> daodb.actualizarCliente("NOTVALIDDNI", cli001));
+        assertThrows(ClientNotFoundException.class, () -> daodb.actualizarCliente("41165112B", c));
     }
 
     @Test

@@ -226,6 +226,7 @@ public class CasinoDAODB implements CasinoDAO {
         return listaClientes;
     }
 
+    //TODO: Revisar el toString, quizás podriamos dejarlo un poquito más guapo para que sea más fácil de leer
     @Override
     public List<Log> consultaLog(String codigoServicio, String dni, LocalDate fecha) throws ValidacionException, LogNotFoundException, IOException {
         List<Log>listaLogs = new ArrayList<>();
@@ -266,6 +267,9 @@ public class CasinoDAODB implements CasinoDAO {
         } catch (SQLException e) {
             throw new AccesoDenegadoException("Error al conectar con la BdD " + e.getMessage());
         }
+        if (listaLogs.isEmpty()){
+            throw new LogNotFoundException("No se ha encontrado ningún LOG con esas condiciones");
+        }
         return listaLogs;
     }
 
@@ -295,7 +299,6 @@ public class CasinoDAODB implements CasinoDAO {
                 stm.setString(5, listaClientesToJSON((ArrayList<Cliente>) servicioActualizado.getListaClientes()));
                 stm.setString(6, codigo);
 
-
                 try {
                     stm.executeUpdate();
                     return true;
@@ -309,13 +312,57 @@ public class CasinoDAODB implements CasinoDAO {
 
     }
 
+    //TODO: Revisar este metodo, nunca devuelve false porque salta la excepcion creo?
     @Override
     public boolean actualizarCliente(String dni, Cliente clienteActualizado) throws ValidacionException, ClientNotFoundException, IOException {
-        return false;
+        if (dni.isEmpty()){
+            throw new ValidacionException("ERROR: DNI vacío o inválido");
+        }
+
+        if (clienteActualizado == null){
+            throw new ValidacionException("ERROR: Cliente nulo");
+        }
+
+        if (!dni.equals(clienteActualizado.getDni())){
+            throw new ValidacionException("ERROR: El dni recibido no coincide con el DNI del cliente");
+        }
+
+        if (consultaCliente(dni).isEmpty()){
+            throw new ClientNotFoundException("ERROR: No existe ningún cliente con ese dni");
+        }
+
+        String query = "UPDATE clientes SET nombre = ?, apellido = ? where dni = ?";
+        try (Connection connection = conn.conectarBaseDatos();
+        PreparedStatement stm = connection.prepareStatement(query)){
+
+            stm.setString(1, clienteActualizado.getNombre());
+            stm.setString(2, clienteActualizado.getApellidos());
+            stm.setString(3, dni);
+            stm.executeUpdate();
+            return true;
+
+        } catch (SQLException e) {
+            throw new AccessDeniedException("ERROR al acceder a la BdD");
+        }
     }
 
+    //TODO: Revisar este método
     @Override
     public boolean borrarServicio(Servicio servicio) throws ValidacionException, ServiceNotFoundException, IOException {
+        if (servicio == null){
+            throw new ValidacionException("ERROR: El servicio no puede ser nulo");
+        }
+
+        String query = "DELETE FROM servicios WHERE codigo = ?";
+        try (Connection connection = conn.conectarBaseDatos();
+        PreparedStatement stm = connection.prepareStatement(query)){
+            stm.setString(1, servicio.getCodigo());
+            stm.execute();
+
+        } catch (SQLException e) {
+            throw new AccessDeniedException("ERROR: Ha habido un error al conectar a la BdD");
+        }
+
         return false;
     }
 
@@ -351,6 +398,16 @@ public class CasinoDAODB implements CasinoDAO {
 
     @Override
     public List<Servicio> devolverServiciosTipo(TipoServicio tipoServicio) throws ValidacionException, IOException {
+        ArrayList<Servicio> listaServicio = new ArrayList<>();
+
+        String consulta = "SELECT codigo, "
+
+        try (Connection con = conn.conectarBaseDatos()) {
+
+        } catch (SQLException e) {
+            throw new AccesoDenegadoException("Error al conectar con la base de datos");
+        }
+
         return List.of();
     }
 
