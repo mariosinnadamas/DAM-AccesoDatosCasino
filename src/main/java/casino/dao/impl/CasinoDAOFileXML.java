@@ -357,7 +357,6 @@ public class CasinoDAOFileXML implements CasinoDAO {
         }
     }
 
-    @Override
     public List<Log> leerListaLog() throws IOException{
         List<Log> logsTemporal = new ArrayList<>();
         try{

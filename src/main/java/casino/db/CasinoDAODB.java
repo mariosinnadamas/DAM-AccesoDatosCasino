@@ -50,7 +50,6 @@ public class CasinoDAODB implements CasinoDAO {
         }
     }
 
-    //TODO: Revisar este método por las excepciones
     public void addClientes(ArrayList<Cliente> listaClientes) throws IOException, ClientAlreadyExistsException, ValidacionException {
         if (listaClientes == null || listaClientes.isEmpty() || listaClientes.contains(null)) {
             throw new ValidacionException("El cliente no puede ser nulo");
@@ -61,7 +60,6 @@ public class CasinoDAODB implements CasinoDAO {
         }
     }
 
-    //TODO: Revisar y Test
     @Override
     public void addServicio(Servicio servicio) throws ValidacionException, ServiceAlreadyExistsException, IOException {
         if (servicio == null){
@@ -89,7 +87,6 @@ public class CasinoDAODB implements CasinoDAO {
         }
     }
 
-    //TODO: Revisar y Test
     @Override
     public void addLog(Log log) throws ValidacionException, IOException {
         if (log == null){
@@ -115,7 +112,6 @@ public class CasinoDAODB implements CasinoDAO {
         }
     }
 
-    //TODO: Revisar y test
     @Override
     public String consultaServicio(String codigo) throws ValidacionException, IOException {
         if (codigo.isEmpty()){
@@ -140,11 +136,7 @@ public class CasinoDAODB implements CasinoDAO {
                 s.setListaClientes(listaClientes);
             } catch (SQLException e) {
                 throw new ServiceNotFoundException("No se ha encontrado ningún servicio con ese código " + e.getMessage());
-            } catch (IllegalArgumentException e) {
-                //TODO: Ni idea de como tratar esta excepción, ayuda. Me lo ha generado al rodear todo con try-catch
-                throw new RuntimeException(e);
             }
-
         } catch (SQLException e) {
             throw new AccesoDenegadoException("Ha habido un error al conectar con la BdD: " + e.getMessage());
         }
@@ -174,7 +166,6 @@ public class CasinoDAODB implements CasinoDAO {
         return listaServicios;
     }
 
-    //TODO: Revisar excepciones y Test
     @Override
     public String consultaCliente(String dni) throws ValidacionException, ClientNotFoundException, IOException {
         if (dni.isEmpty()){
@@ -221,7 +212,6 @@ public class CasinoDAODB implements CasinoDAO {
         return listaClientes;
     }
 
-    //TODO: Revisar el toString, quizás podriamos dejarlo un poquito más guapo para que sea más fácil de leer
     @Override
     public List<Log> consultaLog(String codigoServicio, String dni, LocalDate fecha) throws ValidacionException, LogNotFoundException, IOException {
         List<Log>listaLogs = new ArrayList<>();
@@ -268,12 +258,6 @@ public class CasinoDAODB implements CasinoDAO {
         return listaLogs;
     }
 
-    //Todo: Illo esto que
-    @Override
-    public List<Log> leerListaLog() throws IOException {
-        return List.of();
-    }
-
     @Override
     public boolean actualizarServicio(String codigo, Servicio servicioActualizado) throws ValidacionException, ServiceNotFoundException, IOException {
         String consulta = "UPDATE servicios SET codigo = ?, nombre = ?, tipo = ?, capacidad = ?, lista_clientes = ?::json WHERE codigo = ?";
@@ -300,8 +284,7 @@ public class CasinoDAODB implements CasinoDAO {
             }
         }
     }
-
-    //TODO: Revisar este metodo, nunca devuelve false porque salta la excepcion creo?
+    
     @Override
     public boolean actualizarCliente(String dni, Cliente clienteActualizado) throws ValidacionException, ClientNotFoundException, IOException {
         if (dni.isEmpty()){
@@ -335,7 +318,6 @@ public class CasinoDAODB implements CasinoDAO {
         }
     }
 
-    //TODO: Revisar este método
     @Override
     public boolean borrarServicio(Servicio servicio) throws ValidacionException, ServiceNotFoundException, IOException {
         if (servicio == null){
@@ -351,12 +333,11 @@ public class CasinoDAODB implements CasinoDAO {
         PreparedStatement stm = connection.prepareStatement(query)){
             stm.setString(1, servicio.getCodigo());
             stm.execute();
+            return true;
 
         } catch (SQLException e) {
             throw new AccessDeniedException("ERROR: Ha habido un error al conectar a la BdD");
         }
-
-        return false;
     }
 
     @Override
@@ -678,11 +659,7 @@ public class CasinoDAODB implements CasinoDAO {
                 s.setListaClientes(listaClientes);
             } catch (SQLException e) {
                 throw new ServiceNotFoundException("No se ha encontrado ningún servicio con ese código " + e.getMessage());
-            } catch (IllegalArgumentException e) {
-                //TODO: Ni idea de como tratar esta excepción, ayuda. Me lo ha generado al rodear todo con try-catch
-                throw new RuntimeException(e);
             }
-
         } catch (SQLException e) {
             throw new AccesoDenegadoException("Ha habido un error al conectar con la BdD: " + e.getMessage());
         }

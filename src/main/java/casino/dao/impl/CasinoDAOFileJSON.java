@@ -304,7 +304,7 @@ public class CasinoDAOFileJSON implements CasinoDAO {
      * @return List de log del archivo log.json
      * @throws IOException
      */
-    @Override
+
     public List<Log> leerListaLog() throws IOException{
         List<Log> listaLog = new ArrayList<>();
 

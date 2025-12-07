@@ -213,24 +213,12 @@ class CasinoDAOFileXMLTest {
                 () -> assertThrows(ValidacionException.class, () -> xml.consultaServicio(null))
         );
     }
-    //TODO: Arreglar
-    /*
+
     @Test
     void test14_consultarLog() throws IOException {
-
-        String resultado = xml.consultaLog(log001.getServicio().getCodigo(), log001.getCliente().getDni(), log001.getFecha());
-
-        assertNotNull(resultado, "La consulta no deberia devolver null");
-        assertTrue(resultado.contains(cli001.toString()));
-        assertTrue(resultado.contains(ser001.getCodigo()));
-        assertTrue(resultado.contains(ser001.getNombreServicio()));
-        assertTrue(resultado.contains(ser001.getTipo().toString()));
-        assertTrue(resultado.contains(TipoConcepto.APOSTAR.toString()));
-        assertTrue(resultado.contains("100.0"));
-
+        logs.add(log001);
+        assertEquals(logs, xml.consultaLog("163C5", "12345678Z", dateFecha));
     }
-
-     */
 
     @Test
     void test15_consultaLog_excepciones() {
@@ -246,7 +234,6 @@ class CasinoDAOFileXMLTest {
 
     @Test
     void test16_actualizarCliente() throws IOException {
-        //Todo: Revisar, no estoy seguro de que tenga que tener los equals de nombre y apellido para ver si funciona actualizar
         assertTrue(xml.actualizarCliente("87654321X", cli002));
 
         List<Cliente> lista = xml.leerListaClientes();

@@ -83,12 +83,6 @@ public interface CasinoDAO {
      */
     public List<Log> consultaLog(String codigoServicio, String dni, LocalDate fecha) throws ValidacionException, LogNotFoundException, IOException;
 
-    /**
-     * Consulta todos los Log almacenados
-     * @return List con todos los Log
-     * @throws IOException Si ha habido algún error con la E/S al leer el documento Log
-     */
-    public List<Log> leerListaLog() throws IOException;
 
     /**
      * Actualiza la información de un Servicio

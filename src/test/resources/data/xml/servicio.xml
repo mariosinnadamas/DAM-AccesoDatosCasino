@@ -4,18 +4,14 @@
         <codigo>163C5</codigo>
         <tipo>MESAPOKER</tipo>
         <nombreServicio>Mesa Poker VIP</nombreServicio>
+        <listaClientes/>
         <capacidadMaxima>10</capacidadMaxima>
     </servicio>
     <servicio>
         <codigo>59C45</codigo>
         <tipo>MESABLACKJACK</tipo>
         <nombreServicio>Mesa BlackJack Premium</nombreServicio>
+        <listaClientes/>
         <capacidadMaxima>7</capacidadMaxima>
-    </servicio>
-    <servicio>
-        <codigo>C0C45</codigo>
-        <tipo>BAR</tipo>
-        <nombreServicio>Bar Casino</nombreServicio>
-        <capacidadMaxima>20</capacidadMaxima>
     </servicio>
 </servicios>
