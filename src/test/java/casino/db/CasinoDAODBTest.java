@@ -10,6 +10,7 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,6 +20,7 @@ class CasinoDAODBTest {
     //Clientes
     Cliente cli001 = new Cliente("12345678Z", "Juan Paco", "García Pérez");
     Cliente cli002 = new Cliente("87654321X", "María","López Sánchez");
+    Cliente cli003 = new Cliente("75972453A", "Prueba", "Pruebez");
     ArrayList<Cliente> clientes = new ArrayList<>();
 
     //Servicios
@@ -32,7 +34,7 @@ class CasinoDAODBTest {
     LocalTime dateHora = Time.valueOf("13:14:44").toLocalTime();
     Log log001 = new Log(cli001, ser001, dateFecha, dateHora, TipoConcepto.APOSTAR, 100.0);
     Log log002 = new Log(cli001, ser001, dateFecha, dateHora, TipoConcepto.APUESTACLIENTEGANA, 200.0);
-    Log log003 = new Log(cli001, ser001, dateFecha, dateHora, TipoConcepto.APOSTAR, 50.0);
+    Log log003 = new Log(cli001, ser001, dateFecha, dateHora, TipoConcepto.APOSTAR, 15.0);
     Log log004 = new Log(cli001, ser003, dateFecha, dateHora, TipoConcepto.COMPRABEBIDA, 15.0);
     Log log005 = new Log(cli001, ser003, dateFecha, dateHora, TipoConcepto.COMPRACOMIDA, 35.0);
     ArrayList<Log> logs = new ArrayList<>();
@@ -97,7 +99,9 @@ class CasinoDAODBTest {
 
     //TODO: Agregar TEST addCliente()
     @Test
-    void addCliente() {
+    void addCliente() throws IOException {
+        daodb.addCliente(cli003);
+        assertEquals(cli003.toString(),daodb.consultaCliente(cli003.getDni()));
     }
 
     @Test
@@ -192,8 +196,10 @@ class CasinoDAODBTest {
 
     @Test
     void consultaLog() throws IOException {
-        String logString = log001.toString();
-        assertEquals(logString, daodb.consultaLog("10908", "12345678Z", dateFecha));
+        logs.add(log001);
+        logs.add(log003);
+        //List<Log> listaLogs = (ArrayList<Log>) daodb.leerListaLog();
+        assertEquals(logs, daodb.consultaLog("10908", "12345678Z", dateFecha));
     }
 
     @Test

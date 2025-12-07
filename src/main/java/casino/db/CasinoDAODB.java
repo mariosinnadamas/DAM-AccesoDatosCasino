@@ -5,6 +5,7 @@ import casino.model.*;
 import exceptions.*;
 
 import java.io.IOException;
+import java.nio.file.AccessDeniedException;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -31,8 +32,9 @@ public class CasinoDAODB implements CasinoDAO {
 
         String consulta = "INSERT INTO clientes(dni, nombre, apellido) VALUES(?, ?, ?)";
 
-        try {
-            PreparedStatement stm = conn.conectarBaseDatos().prepareStatement(consulta);
+        try (Connection connection = conn.conectarBaseDatos();
+                PreparedStatement stm = connection.prepareStatement(consulta)) {
+
             stm.setString(1, cliente.getDni());
             stm.setString(2, cliente.getNombre());
             stm.setString(3, cliente.getApellidos());
@@ -62,10 +64,15 @@ public class CasinoDAODB implements CasinoDAO {
     //TODO: Revisar y Test
     @Override
     public void addServicio(Servicio servicio) throws ValidacionException, ServiceAlreadyExistsException, IOException {
+        if (servicio == null){
+            throw new ValidacionException("ERROR: El servicio no puede ser nulo");
+        }
+
         String consulta = "INSERT INTO servicios (codigo, nombre, tipo, capacidad, lista_clientes) VALUES (?,?,?,?,?::json)";
 
-        try{
-            PreparedStatement stm = conn.conectarBaseDatos().prepareStatement(consulta);
+        try (Connection connection = conn.conectarBaseDatos();
+             PreparedStatement stm = connection.prepareStatement(consulta);){
+
             stm.setString(1,servicio.getCodigo());
             stm.setString(2,servicio.getNombreServicio());
             stm.setString(3,servicio.getTipo().toString());
@@ -91,8 +98,8 @@ public class CasinoDAODB implements CasinoDAO {
 
         String consulta = "INSERT INTO logs(dni,codigo,fecha,hora,concepto,cantidad_concepto, lista_clientes) VALUES (?,?,?,?,?,?,?::json)";
 
-        try {
-            PreparedStatement stm = conn.conectarBaseDatos().prepareStatement(consulta);
+        try (Connection connection = conn.conectarBaseDatos();
+             PreparedStatement stm = connection.prepareStatement(consulta);){
 
             stm.setString(1,log.getCliente().getDni());
             stm.setString(2,log.getServicio().getCodigo());
@@ -117,8 +124,9 @@ public class CasinoDAODB implements CasinoDAO {
 
         String query = "SELECT codigo, nombre, tipo, capacidad, lista_clientes FROM servicios WHERE codigo = ?";
         Servicio s = new Servicio();
-        try {
-            PreparedStatement stm = conn.conectarBaseDatos().prepareStatement(query);
+        try (Connection connection = conn.conectarBaseDatos();
+             PreparedStatement stm = connection.prepareStatement(query);){
+
             stm.setString(1,codigo);
             try {
                 ResultSet rs = stm.executeQuery();
@@ -148,10 +156,27 @@ public class CasinoDAODB implements CasinoDAO {
         return s.toString();
     }
 
-    //TODO: illo esto que
     @Override
     public List<Servicio> leerListaServicios() throws IOException {
-        return List.of();
+        String query = "SELECT codigo,nombre,tipo,capacidad,lista_clientes FROM servicios";
+        List <Servicio> listaServicios = new ArrayList<>();
+        try (Connection connection = conn.conectarBaseDatos();
+        Statement stm = connection.createStatement();
+        ResultSet rs = stm.executeQuery(query)){
+            while (rs.next()){
+                Servicio s = new Servicio(
+                        rs.getString("codigo"),
+                        TipoServicio.valueOf(rs.getString("tipo")),
+                        rs.getString("nombre"),
+                        jsonToClientes(rs.getString("lista_clientes")),
+                        rs.getInt("capacidad"));
+
+                listaServicios.add(s);
+            }
+        } catch (SQLException e) {
+            throw new AccessDeniedException("Error al conectar a la BdD: " + e.getMessage());
+        }
+        return listaServicios;
     }
 
     //TODO: Revisar excepciones y Test
@@ -185,15 +210,26 @@ public class CasinoDAODB implements CasinoDAO {
         return c.toString();
     }
 
-    //TODO: Illo esto que
     @Override
     public List<Cliente> leerListaClientes() throws IOException {
-        return List.of();
+        String query = "SELECT dni, nombre, apellido FROM clientes";
+        List <Cliente> listaClientes = new ArrayList<>();
+        try (Statement stm = conn.conectarBaseDatos().createStatement();
+             ResultSet rs = stm.executeQuery(query)) {
+            while (rs.next()){
+                Cliente c = new Cliente(rs.getString("dni"), rs.getString("nombre"), rs.getString("apellido"));
+                listaClientes.add(c);
+            }
+        } catch (SQLException e) {
+            throw new AccesoDenegadoException("Ha habido un error al conectar a la BdD: " + e.getMessage());
+        }
+        return listaClientes;
     }
 
     @Override
-    public String consultaLog(String codigoServicio, String dni, LocalDate fecha) throws ValidacionException, LogNotFoundException, IOException {
-        String output = "";
+    public List<Log> consultaLog(String codigoServicio, String dni, LocalDate fecha) throws ValidacionException, LogNotFoundException, IOException {
+        List<Log>listaLogs = new ArrayList<>();
+
         String consulta = "SELECT dni, codigo, fecha, hora, concepto, cantidad_concepto, lista_clientes " +
                 "FROM logs " +
                 "WHERE dni = ? AND codigo = ? AND fecha = ?" ;
@@ -221,7 +257,7 @@ public class CasinoDAODB implements CasinoDAO {
                     log.setConcepto(conceptoLog);
                     log.setCantidadConcepto(cantidadLog);
 
-                    output = log.toString();
+                    listaLogs.add(log);
                 }
 
             } catch (SQLException e) {
@@ -230,7 +266,7 @@ public class CasinoDAODB implements CasinoDAO {
         } catch (SQLException e) {
             throw new AccesoDenegadoException("Error al conectar con la BdD " + e.getMessage());
         }
-        return output;
+        return listaLogs;
     }
 
     //Todo: Illo esto que

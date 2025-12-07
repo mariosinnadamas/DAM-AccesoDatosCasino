@@ -72,7 +72,7 @@ public interface CasinoDAO {
     public List<Cliente> leerListaClientes() throws IOException;
 
     /**
-     * Consulta un Log específico
+     * Consulta unos Logs a través de los parámetros recibidos
      * @param codigoServicio del servicio a buscar
      * @param dni del cliente a buscar en el log
      * @param fecha del log
@@ -81,7 +81,7 @@ public interface CasinoDAO {
      * @throws LogNotFoundException Si no se ha encontrado el Log querido
      * @throws IOException Si ha habido algún error de E/S en el fichero
      */
-    public String consultaLog(String codigoServicio, String dni, LocalDate fecha) throws ValidacionException, LogNotFoundException, IOException;
+    public List<Log> consultaLog(String codigoServicio, String dni, LocalDate fecha) throws ValidacionException, LogNotFoundException, IOException;
 
     /**
      * Consulta todos los Log almacenados
