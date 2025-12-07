@@ -1,15 +1,13 @@
 package casino.db;
 
 import casino.dao.CasinoDAO;
-import casino.model.Cliente;
-import casino.model.Log;
-import casino.model.Servicio;
-import casino.model.TipoServicio;
+import casino.model.*;
 import exceptions.*;
 
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,6 +50,10 @@ public class CasinoDAODB implements CasinoDAO {
 
     //TODO: Revisar este método por las excepciones
     public void addClientes(ArrayList<Cliente> listaClientes) throws IOException, ClientAlreadyExistsException, ValidacionException {
+        if (listaClientes == null || listaClientes.isEmpty() || listaClientes.contains(null)) {
+            throw new ValidacionException("El cliente no puede ser nulo");
+        }
+
         for  (Cliente cliente : listaClientes) {
             addCliente(cliente);
         }
@@ -60,7 +62,7 @@ public class CasinoDAODB implements CasinoDAO {
     //TODO: Revisar y Test
     @Override
     public void addServicio(Servicio servicio) throws ValidacionException, ServiceAlreadyExistsException, IOException {
-        String consulta = "INSERT INTO servicios (codigo, nombre, tipo, capacidad) VALUES (?,?,?,?)";
+        String consulta = "INSERT INTO servicios (codigo, nombre, tipo, capacidad, lista_clientes) VALUES (?,?,?,?,?::json)";
 
         try{
             PreparedStatement stm = conn.conectarBaseDatos().prepareStatement(consulta);
@@ -68,6 +70,7 @@ public class CasinoDAODB implements CasinoDAO {
             stm.setString(2,servicio.getNombreServicio());
             stm.setString(3,servicio.getTipo().toString());
             stm.setInt(4,servicio.getCapacidadMaxima());
+            stm.setString(5, listaClientesToJSON((ArrayList<Cliente>) servicio.getListaClientes()));
 
             try {
                 stm.execute();
@@ -86,7 +89,7 @@ public class CasinoDAODB implements CasinoDAO {
             throw new ValidacionException("ERROR: Log inválido o nulo");
         }
 
-        String consulta = "INSERT INTO logs (dni,codigo,fecha,hora,concepto,cantidad_concepto) VALUES (?,?,?,?,?,?)";
+        String consulta = "INSERT INTO logs(dni,codigo,fecha,hora,concepto,cantidad_concepto, lista_clientes) VALUES (?,?,?,?,?,?,?::json)";
 
         try {
             PreparedStatement stm = conn.conectarBaseDatos().prepareStatement(consulta);
@@ -97,6 +100,7 @@ public class CasinoDAODB implements CasinoDAO {
             stm.setTime(4, Time.valueOf(log.getHora()));
             stm.setString(5,log.getConcepto().toString());
             stm.setDouble(6,log.getCantidadConcepto());
+            stm.setString(7, listaClientesToJSON((ArrayList<Cliente>) log.getServicio().getListaClientes()));
 
             stm.execute();
         } catch (SQLException e) {
@@ -111,17 +115,26 @@ public class CasinoDAODB implements CasinoDAO {
             throw new ValidacionException("El codigo no es válido o está vacío");
         }
 
-        String query = "SELECT codigo, nombre, tipo, capacidad FROM servicios WHERE codigo = ?";
+        String query = "SELECT codigo, nombre, tipo, capacidad, lista_clientes FROM servicios WHERE codigo = ?";
         Servicio s = new Servicio();
         try {
             PreparedStatement stm = conn.conectarBaseDatos().prepareStatement(query);
             stm.setString(1,codigo);
             try {
                 ResultSet rs = stm.executeQuery();
+                rs.next();
                 s.setCodigo(rs.getString("codigo"));
                 s.setNombreServicio(rs.getString("nombre"));
                 s.setTipo(TipoServicio.valueOf(rs.getString("tipo")));
                 s.setCapacidadMaxima(rs.getInt("capacidad"));
+                String clientes = rs.getString("lista_clientes");
+                System.out.println(clientes);
+                ArrayList<Cliente> listaClientes = jsonToClientes(clientes);
+                for (Cliente cliente : listaClientes){
+                    System.out.println(cliente);
+                }
+                s.setListaClientes(listaClientes);
+                System.out.println(s);
             } catch (SQLException e) {
                 throw new ServiceNotFoundException("No se ha encontrado ningún servicio con ese código " + e.getMessage());
             } catch (IllegalArgumentException e) {
@@ -135,6 +148,7 @@ public class CasinoDAODB implements CasinoDAO {
         return s.toString();
     }
 
+    //TODO: illo esto que
     @Override
     public List<Servicio> leerListaServicios() throws IOException {
         return List.of();
@@ -147,7 +161,7 @@ public class CasinoDAODB implements CasinoDAO {
             throw new ValidacionException("El dni no es válido o está vacío");
         }
 
-        String sql = "SELECT dni,nombre,apellidos FROM clientes WHERE dni = ?";
+        String sql = "SELECT dni,nombre, apellido FROM clientes WHERE dni = ?";
         Cliente c = new Cliente();
         try {
             PreparedStatement stm = conn.conectarBaseDatos().prepareStatement(sql);
@@ -155,9 +169,10 @@ public class CasinoDAODB implements CasinoDAO {
 
             try {
                 ResultSet rs = stm.executeQuery();
+                rs.next();
                 String dniQuery = rs.getString("dni");
                 String nombreQuery = rs.getString("nombre");
-                String apellidosQuery = rs.getString("apellidos");
+                String apellidosQuery = rs.getString("apellido");
                 c.setDni(dniQuery);
                 c.setNombre(nombreQuery);
                 c.setApellidos(apellidosQuery);
@@ -170,6 +185,7 @@ public class CasinoDAODB implements CasinoDAO {
         return c.toString();
     }
 
+    //TODO: Illo esto que
     @Override
     public List<Cliente> leerListaClientes() throws IOException {
         return List.of();
@@ -177,9 +193,47 @@ public class CasinoDAODB implements CasinoDAO {
 
     @Override
     public String consultaLog(String codigoServicio, String dni, LocalDate fecha) throws ValidacionException, LogNotFoundException, IOException {
-        return "";
+        String output = "";
+        String consulta = "SELECT dni, codigo, fecha, hora, concepto, cantidad_concepto, lista_clientes " +
+                "FROM logs " +
+                "WHERE dni = ? AND codigo = ? AND fecha = ?" ;
+
+        try {
+            PreparedStatement stm = conn.conectarBaseDatos().prepareStatement(consulta);
+            stm.setString(1, dni);
+            stm.setString(2, codigoServicio);
+            stm.setDate(3, Date.valueOf(fecha));
+            try (ResultSet rs = stm.executeQuery()) {
+                while (rs.next()) {
+                    Cliente clienteLog = obtenerCliente(rs.getString("dni"));
+                    Servicio servicioLog = obtenerServicio(rs.getString("codigo"));
+                    LocalDate fechaLog = rs.getDate("fecha").toLocalDate();
+                    LocalTime horaLog = rs.getTime("hora").toLocalTime();
+                    TipoConcepto conceptoLog = TipoConcepto.valueOf(rs.getString("concepto"));
+                    Double cantidadLog =  rs.getDouble("cantidad_concepto");
+
+                    servicioLog.setListaClientes(jsonToClientes(rs.getString("lista_clientes")));
+                    Log log = new Log();
+                    log.setCliente(clienteLog);
+                    log.setServicio(servicioLog);
+                    log.setFecha(fechaLog);
+                    log.setHora(horaLog);
+                    log.setConcepto(conceptoLog);
+                    log.setCantidadConcepto(cantidadLog);
+
+                    output = log.toString();
+                }
+
+            } catch (SQLException e) {
+                throw new AccesoDenegadoException("Ocurrio un problema en la conexion");
+            }
+        } catch (SQLException e) {
+            throw new AccesoDenegadoException("Error al conectar con la BdD " + e.getMessage());
+        }
+        return output;
     }
 
+    //Todo: Illo esto que
     @Override
     public List<Log> leerListaLog() throws IOException {
         return List.of();
@@ -187,7 +241,36 @@ public class CasinoDAODB implements CasinoDAO {
 
     @Override
     public boolean actualizarServicio(String codigo, Servicio servicioActualizado) throws ValidacionException, ServiceNotFoundException, IOException {
-        return false;
+        String consulta = "UPDATE servicios SET codigo = ?, nombre = ?, tipo = ?, capacidad = ?, lista_clientes = ?::json WHERE codigo = ?";
+
+        if (codigo == null || codigo.isEmpty() || servicioActualizado == null) {
+            throw new ValidacionException("Codigo no válido");
+        }
+
+        if (consultaServicio(codigo).isEmpty()) {
+            throw new ServiceNotFoundException("Servicio no encontrado");
+        } else {
+            try {
+                PreparedStatement stm = conn.conectarBaseDatos().prepareStatement(consulta);
+                stm.setString(1, servicioActualizado.getCodigo());
+                stm.setString(2, servicioActualizado.getNombreServicio());
+                stm.setString(3, servicioActualizado.getTipo().toString());
+                stm.setInt(4, servicioActualizado.getCapacidadMaxima());
+                stm.setString(5, listaClientesToJSON((ArrayList<Cliente>) servicioActualizado.getListaClientes()));
+                stm.setString(6, codigo);
+
+
+                try {
+                    stm.executeUpdate();
+                    return true;
+                } catch (Exception e) {
+                    throw new ServiceNotFoundException("Servicio no encontrado");
+                }
+            } catch (SQLException e) {
+                throw new AccesoDenegadoException("Error al conectar con la BdD " + e.getMessage());
+            }
+        }
+
     }
 
     @Override
@@ -237,5 +320,127 @@ public class CasinoDAODB implements CasinoDAO {
 
     public double dineroGanadoClienteEnDia(String s, LocalDate dateFecha) {
         return 0;
+    }
+
+    public String listaClientesToJSON(ArrayList<Cliente> clientes) {
+        ArrayList<String> dniList = new ArrayList<>();
+        String json = "";
+        if (clientes == null || clientes.contains(null)) {
+            throw new ValidacionException("No se permiten valores NULL");
+        }
+
+        if (clientes.isEmpty()) {
+            return "[]";
+        } else {
+            for (Cliente c : clientes) {
+                dniList.add("\""+c.getDni()+"\"");
+            }
+            String dniSting = String.join(", ", dniList);
+
+            json = "[" +  dniSting + "]";
+        }
+
+        return json;
+    }
+
+    public ArrayList<Cliente> jsonToClientes(String json) throws IOException, SQLException {
+        ArrayList<Cliente> clientes = new ArrayList<>();
+
+        if (json.equals("[]")) {
+            return clientes;
+        } else {
+            json = json.replace("[", "")
+                    .replace("]", "")
+                    .replace(" ", "")
+                    .replace("\"", "")
+                    .replace("'", "")
+                    .trim();
+
+            String[] dniArray = json.split(",");
+            String placeholders = "";
+            for (int  i = 0; i < dniArray.length; i++) {
+                placeholders += "?";
+                if (i < dniArray.length - 1) {
+                    placeholders += ",";
+                }
+            }
+
+            String consulta = "SELECT dni, nombre, apellido FROM clientes WHERE dni IN (" + placeholders + ")";
+
+            PreparedStatement stm = conn.conectarBaseDatos().prepareStatement(consulta);
+
+            for (int i = 0; i < dniArray.length; i++) {
+                stm.setString(i + 1, dniArray[i]);
+            }
+
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                clientes.add(new Cliente(
+                        rs.getString("dni"),
+                        rs.getString("nombre"),
+                        rs.getString("apellido")
+                ));
+            }
+
+        }
+        return clientes;
+    }
+
+    private Cliente obtenerCliente(String dni){
+        String sql = "SELECT dni,nombre, apellido FROM clientes WHERE dni = ?";
+        Cliente c = new Cliente();
+        try {
+            PreparedStatement stm = conn.conectarBaseDatos().prepareStatement(sql);
+            stm.setString(1,dni);
+
+            try {
+                ResultSet rs = stm.executeQuery();
+                rs.next();
+                String dniQuery = rs.getString("dni");
+                String nombreQuery = rs.getString("nombre");
+                String apellidosQuery = rs.getString("apellido");
+                c.setDni(dniQuery);
+                c.setNombre(nombreQuery);
+                c.setApellidos(apellidosQuery);
+            } catch (SQLException e) {
+                throw new ClientNotFoundException("No se ha encontrado ningún cliente con ese DNI " + e.getMessage());
+            }
+        } catch (SQLException e) {
+            throw new AccesoDenegadoException("Ha ocurrido un error al acceder a la BdD " + e.getMessage());
+        }
+        return c;
+    }
+
+    private Servicio obtenerServicio(String codigo) throws IOException {
+        if (codigo.isEmpty()){
+            throw new ValidacionException("El codigo no es válido o está vacío");
+        }
+
+        String query = "SELECT codigo, nombre, tipo, capacidad, lista_clientes FROM servicios WHERE codigo = ?";
+        Servicio s = new Servicio();
+        try {
+            PreparedStatement stm = conn.conectarBaseDatos().prepareStatement(query);
+            stm.setString(1,codigo);
+            try {
+                ResultSet rs = stm.executeQuery();
+                rs.next();
+                s.setCodigo(rs.getString("codigo"));
+                s.setNombreServicio(rs.getString("nombre"));
+                s.setTipo(TipoServicio.valueOf(rs.getString("tipo")));
+                s.setCapacidadMaxima(rs.getInt("capacidad"));
+                String clientes = rs.getString("lista_clientes");
+                ArrayList<Cliente> listaClientes = jsonToClientes(clientes);
+                s.setListaClientes(listaClientes);
+            } catch (SQLException e) {
+                throw new ServiceNotFoundException("No se ha encontrado ningún servicio con ese código " + e.getMessage());
+            } catch (IllegalArgumentException e) {
+                //TODO: Ni idea de como tratar esta excepción, ayuda. Me lo ha generado al rodear todo con try-catch
+                throw new RuntimeException(e);
+            }
+
+        } catch (SQLException e) {
+            throw new AccesoDenegadoException("Ha habido un error al conectar con la BdD: " + e.getMessage());
+        }
+        return s;
     }
 }
