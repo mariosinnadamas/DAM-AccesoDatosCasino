@@ -136,13 +136,8 @@ public class CasinoDAODB implements CasinoDAO {
                 s.setTipo(TipoServicio.valueOf(rs.getString("tipo")));
                 s.setCapacidadMaxima(rs.getInt("capacidad"));
                 String clientes = rs.getString("lista_clientes");
-                System.out.println(clientes);
                 ArrayList<Cliente> listaClientes = jsonToClientes(clientes);
-                for (Cliente cliente : listaClientes){
-                    System.out.println(cliente);
-                }
                 s.setListaClientes(listaClientes);
-                System.out.println(s);
             } catch (SQLException e) {
                 throw new ServiceNotFoundException("No se ha encontrado ningún servicio con ese código " + e.getMessage());
             } catch (IllegalArgumentException e) {
@@ -288,7 +283,7 @@ public class CasinoDAODB implements CasinoDAO {
         }
 
         if (consultaServicio(codigo).isEmpty()) {
-            throw new ServiceNotFoundException("Servicio no encontrado");
+            throw new ServiceNotFoundException("ERROR: Servicio no encontrado");
         } else {
             try {
                 PreparedStatement stm = conn.conectarBaseDatos().prepareStatement(consulta);
@@ -298,18 +293,12 @@ public class CasinoDAODB implements CasinoDAO {
                 stm.setInt(4, servicioActualizado.getCapacidadMaxima());
                 stm.setString(5, listaClientesToJSON((ArrayList<Cliente>) servicioActualizado.getListaClientes()));
                 stm.setString(6, codigo);
-
-                try {
-                    stm.executeUpdate();
-                    return true;
-                } catch (Exception e) {
-                    throw new ServiceNotFoundException("Servicio no encontrado");
-                }
+                stm.executeUpdate();
+                return true;
             } catch (SQLException e) {
                 throw new AccesoDenegadoException("Error al conectar con la BdD " + e.getMessage());
             }
         }
-
     }
 
     //TODO: Revisar este metodo, nunca devuelve false porque salta la excepcion creo?
@@ -353,6 +342,10 @@ public class CasinoDAODB implements CasinoDAO {
             throw new ValidacionException("ERROR: El servicio no puede ser nulo");
         }
 
+        if (consultaServicio(servicio.getCodigo()).isEmpty()){
+            throw new ServiceNotFoundException("ERROR: No se ha encontrado ningún servicio con el mismo código");
+        }
+
         String query = "DELETE FROM servicios WHERE codigo = ?";
         try (Connection connection = conn.conectarBaseDatos();
         PreparedStatement stm = connection.prepareStatement(query)){
@@ -368,51 +361,210 @@ public class CasinoDAODB implements CasinoDAO {
 
     @Override
     public boolean borrarCliente(Cliente cliente) throws ValidacionException, ClientNotFoundException, IOException {
+        if (cliente == null){
+            throw new ValidacionException("ERROR: El cliente no puede ser nulo");
+        }
+
+        if (consultaCliente(cliente.getDni()).isEmpty()){
+            throw new ServiceNotFoundException("ERROR: No se ha encontrado ningún cliente con el mismo DNI");
+        }
+
+        String query = "DELETE FROM clientes WHERE dni = ?";
+        try (Connection connection = conn.conectarBaseDatos();
+             PreparedStatement stm = connection.prepareStatement(query)){
+            stm.setString(1, cliente.getDni());
+            stm.execute();
+
+        } catch (SQLException e) {
+            throw new AccessDeniedException("ERROR: Ha habido un error al conectar a la BdD");
+        }
+
         return false;
     }
 
     @Override
     public double gananciasAlimentos(String dni) throws ValidacionException, IOException {
-        return 0;
+        String consulta = "SELECT concepto,cantidad_concepto FROM logs WHERE dni = ?";
+        double cantidadGanada = 0;
+        boolean encontrado = false;
+        try (Connection con = conn.conectarBaseDatos()){
+            PreparedStatement stm = con.prepareStatement(consulta);
+            stm.setString(1, dni);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()){
+                encontrado = true;
+                TipoConcepto tipoConcepto = TipoConcepto.valueOf(rs.getString("concepto"));
+                if (tipoConcepto == TipoConcepto.COMPRABEBIDA || tipoConcepto == TipoConcepto.COMPRACOMIDA){
+                    cantidadGanada += rs.getDouble("cantidad_concepto");
+                }
+            }
+            if (!encontrado){
+                throw new ClientNotFoundException("Cliente no encontrado");
+            }
+
+        } catch (SQLException e) {
+            throw new AccesoDenegadoException("Error al conectar con la base de datos" + e.getMessage());
+        }
+
+        return cantidadGanada;
     }
 
     @Override
     public double dineroInvertidoClienteEnDia(String dni, LocalDate fecha) throws ValidacionException, LogNotFoundException, IOException {
-        return 0;
+        String consulta = "SELECT concepto,cantidad_concepto FROM logs WHERE dni = ? AND fecha = ?";
+        double cantidadInvertida = 0;
+        boolean encontrado = false;
+        try (Connection con = conn.conectarBaseDatos()){
+            PreparedStatement stm = con.prepareStatement(consulta);
+            stm.setString(1, dni);
+            stm.setDate(2, Date.valueOf(fecha));
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()){
+                encontrado = true;
+                TipoConcepto tipoConcepto = TipoConcepto.valueOf(rs.getString("concepto"));
+                if (tipoConcepto == TipoConcepto.COMPRABEBIDA || tipoConcepto == TipoConcepto.COMPRACOMIDA || tipoConcepto == TipoConcepto.APOSTAR){
+                    cantidadInvertida += rs.getDouble("cantidad_concepto");
+                } else if (tipoConcepto == TipoConcepto.APUESTACLIENTEGANA){
+                    cantidadInvertida -= rs.getDouble("cantidad_concepto");
+                }
+            }
+            if (!encontrado){
+                throw new LogNotFoundException("Logs no encontrados");
+            }
+
+        } catch (SQLException e) {
+            throw new AccesoDenegadoException("Error al conectar con la base de datos" + e.getMessage());
+        }
+
+        return cantidadInvertida;
     }
 
     @Override
     public int vecesClienteJuegaMesa(String dni, String codigo) throws ValidacionException, IOException {
-        return 0;
+        String consulta = "SELECT dni FROM logs WHERE dni = ? AND codigo = ?";
+        int cantidad = 0;
+        try (Connection con = conn.conectarBaseDatos()){
+            PreparedStatement stm = con.prepareStatement(consulta);
+            stm.setString(1, dni);
+            stm.setString(2, codigo);
+
+        ResultSet rs = stm.executeQuery();
+        while (rs.next()){
+            cantidad+=1;
+        }
+
+        } catch (SQLException e) {
+            throw new AccesoDenegadoException("Error al conectar con la base de datos" + e.getMessage());
+        }
+        return cantidad;
     }
 
     @Override
     public double ganadoMesas() throws IOException {
-        return 0;
+        String consulta = "SELECT concepto,cantidad_concepto FROM logs";
+        double cantidadGanada = 0;
+        try (Connection con = conn.conectarBaseDatos()){
+            PreparedStatement stm = con.prepareStatement(consulta);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()){
+                TipoConcepto tipoConcepto = TipoConcepto.valueOf(rs.getString("concepto"));
+                if (tipoConcepto == TipoConcepto.APOSTAR){
+                    cantidadGanada += rs.getDouble("cantidad_concepto");
+                } else if (tipoConcepto == tipoConcepto.APUESTACLIENTEGANA){
+                    cantidadGanada -= rs.getDouble("cantidad_concepto");
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new AccesoDenegadoException("Error al conectar con la base de datos" + e.getMessage());
+        }
+
+        return cantidadGanada;
     }
 
     @Override
     public double ganadoEstablecimientos() throws IOException {
-        return 0;
+        String consulta = "SELECT concepto,cantidad_concepto FROM logs";
+        double cantidadGanada = 0;
+        try (Connection con = conn.conectarBaseDatos()){
+            PreparedStatement stm = con.prepareStatement(consulta);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()){
+                TipoConcepto tipoConcepto = TipoConcepto.valueOf(rs.getString("concepto"));
+                if (tipoConcepto == TipoConcepto.COMPRABEBIDA || tipoConcepto == TipoConcepto.COMPRACOMIDA){
+                    cantidadGanada += rs.getDouble("cantidad_concepto");
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new AccesoDenegadoException("Error al conectar con la base de datos" + e.getMessage());
+        }
+
+        return cantidadGanada;
     }
 
     @Override
     public List<Servicio> devolverServiciosTipo(TipoServicio tipoServicio) throws ValidacionException, IOException {
         ArrayList<Servicio> listaServicio = new ArrayList<>();
 
-        String consulta = "SELECT codigo, "
-
-        try (Connection con = conn.conectarBaseDatos()) {
-
-        } catch (SQLException e) {
-            throw new AccesoDenegadoException("Error al conectar con la base de datos");
+        if (tipoServicio == null){
+            throw new ValidacionException("El tipoServicio no puede ser nulo");
         }
 
-        return List.of();
+        String consulta = "SELECT codigo, nombre, tipo, capacidad, lista_clientes FROM servicios WHERE tipo = ?";
+
+        try (Connection con = conn.conectarBaseDatos()) {
+            PreparedStatement stm = con.prepareStatement(consulta);
+            stm.setString(1, tipoServicio.toString());
+
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()){
+                Servicio ser = new Servicio(
+                        rs.getString("codigo"),
+                        TipoServicio.valueOf(rs.getString("tipo")),
+                        rs.getString("nombre"),
+                        jsonToClientes(rs.getString("lista_clientes")),
+                        rs.getInt("capacidad")
+                );
+                listaServicio.add(ser);
+            }
+        } catch (SQLException e) {
+            throw new AccesoDenegadoException("Error al conectar con la base de datos " + e.getMessage());
+        }
+
+        return listaServicio;
     }
 
-    public double dineroGanadoClienteEnDia(String s, LocalDate dateFecha) {
-        return 0;
+    public double dineroGanadoClienteEnDia(String dni, LocalDate dateFecha) {
+        String consulta = "SELECT concepto,cantidad_concepto FROM logs WHERE dni = ? AND fecha = ?";
+        double cantidadGanada = 0;
+        boolean encontrado = false;
+
+        try (Connection con = conn.conectarBaseDatos()){
+            PreparedStatement stm = con.prepareStatement(consulta);
+            stm.setString(1, dni);
+            stm.setDate(2, Date.valueOf(dateFecha));
+
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()){
+                encontrado = true;
+                TipoConcepto tipoConcepto = TipoConcepto.valueOf(rs.getString("concepto"));
+                if (tipoConcepto == TipoConcepto.APUESTACLIENTEGANA){
+                    cantidadGanada += rs.getDouble("cantidad_concepto");
+                } else if (tipoConcepto == TipoConcepto.APOSTAR){
+                    cantidadGanada -= rs.getDouble("cantidad_concepto");
+                }
+            }
+            if (!encontrado){
+                throw new ClientNotFoundException("Cliente no encontrado");
+            }
+
+        } catch (SQLException e) {
+            throw new AccesoDenegadoException("Error al conectar con la base de datos" + e.getMessage());
+        }
+
+        return cantidadGanada;
     }
 
     public String listaClientesToJSON(ArrayList<Cliente> clientes) {

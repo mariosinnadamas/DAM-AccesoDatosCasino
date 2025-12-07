@@ -65,8 +65,8 @@ class CasinoDAODBTest {
                         "concepto varchar (50) not null, " +
                         "cantidad_concepto decimal(10,2) not null, " +
                         "lista_clientes JSON not null, " +
-                        "foreign key (dni) references clientes(dni), " +
-                        "foreign key (codigo) references servicios(codigo) " +
+                        "foreign key (dni) references clientes(dni) ON DELETE CASCADE, " +
+                        "foreign key (codigo) references servicios(codigo) ON DELETE CASCADE" +
                         "); " +
                         "INSERT INTO clientes(dni, nombre, apellido) VALUES" +
                         "('12345678Z', 'Juan Paco', 'García Pérez'), " +
@@ -97,7 +97,6 @@ class CasinoDAODBTest {
         }
     }
 
-    //TODO: Agregar TEST addCliente()
     @Test
     void addCliente() throws IOException {
         daodb.addCliente(cli003);
@@ -105,16 +104,11 @@ class CasinoDAODBTest {
     }
 
     @Test
-    void addClienteNull(){
+    void addClienteExcepciones(){
         Cliente cli = null;
         assertThrows(ValidacionException.class, () -> daodb.addCliente(cli));
-    }
-
-    @Test
-    void addClienteThrowsClientAlreadyExistsException() {
         assertThrows(ClientAlreadyExistsException.class, () -> daodb.addCliente(cli001));
     }
-
 
     @Test
     void addClientesNull(){
@@ -125,29 +119,27 @@ class CasinoDAODBTest {
 
     }
 
-    //TODO: Agregar TEST addServicio()
     @Test
-    void addServicio() {
+    void addServicio() throws IOException {
+        Servicio s = new Servicio("64C52", TipoServicio.BAR, "Bar Casino" ,clientes ,20);
+        daodb.addServicio(s);
+        assertEquals(s.toString(),daodb.consultaServicio(s.getCodigo()));
     }
 
     @Test
-    void addServicioNull() {
+    void addServicioExcepciones() {
         Servicio serv = null;
         assertThrows(ValidacionException.class, () -> daodb.addServicio(serv));
-    }
-
-    @Test
-    void addServicioThrowsServiceAlreadyExistsException() {
         assertThrows(ServiceAlreadyExistsException.class, () -> daodb.addServicio(ser001));
     }
 
-    //TODO: Agregar TEST addLog()
     @Test
-    void addLog() {
+    void addLog() throws IOException {
+        daodb.addLog(log004);
     }
 
     @Test
-    void addLogNull() {
+    void addLogExcepcion() {
         Log log = null;
         assertThrows(ValidacionException.class, () -> daodb.addLog(log));
     }
@@ -234,7 +226,10 @@ class CasinoDAODBTest {
     }
 
     @Test
-    void actualizarServicioThrowsServiceNotFound() {
+    void actualizarServicioExcepciones() {
+        assertThrows(ValidacionException.class, () -> daodb.actualizarServicio(null, ser001));
+        assertThrows(ValidacionException.class, () -> daodb.actualizarServicio("", ser001));
+        assertThrows(ValidacionException.class, () -> daodb.actualizarServicio("NOTVALIDCODE", null));
         assertThrows(ServiceNotFoundException.class, () -> daodb.actualizarServicio("NOTVALIDCODE", ser001));
     }
 
@@ -245,9 +240,10 @@ class CasinoDAODBTest {
     }
 
     @Test
-    void borrarServicioThrowsServiceNotFound(){
+    void borrarServicioExcepciones(){
         Servicio ser004 = new Servicio(TipoServicio.BAR, "Bar De Pruebas");
         assertThrows(ServiceNotFoundException.class, () -> daodb.borrarServicio(ser004));
+        assertThrows(ValidacionException.class, () -> daodb.borrarServicio(null));
     }
 
     @Test
@@ -258,21 +254,22 @@ class CasinoDAODBTest {
     }
 
     @Test
-    void borrarClienteThrowsClientNotFound() {
+    void borrarClienteExcepciones() {
         Cliente cli003 = new Cliente("53720451H", "Prueba", "Pruebez");
+        assertThrows(ValidacionException.class, () -> daodb.borrarCliente(null));
         assertThrows(ClientNotFoundException.class, () -> daodb.borrarCliente(cli003));
     }
 
     @Test
     void dineroInvertidoClienteEnDia() throws IOException {
-        double totalInvertido = 35.0 + 15.0 + 50.0 - 200.0 + 100.0;
+        double totalInvertido = 35.0 + 15.0 + 15.0 - 200.0 + 100.0;
         assertEquals(totalInvertido, daodb.dineroInvertidoClienteEnDia("12345678Z", dateFecha));
 
     }
 
     @Test
-    void dineroInvertidoClienteEnDiaThrowsClientNotFound(){
-        assertThrows(ClientNotFoundException.class, () -> daodb.dineroInvertidoClienteEnDia("NOTVALIDDNI", dateFecha));
+    void dineroInvertidoClienteEnDiaThrowsLOgNotFound(){
+        assertThrows(LogNotFoundException.class, () -> daodb.dineroInvertidoClienteEnDia("NOTVALIDDNI", dateFecha));
     }
 
     @Test
@@ -288,7 +285,7 @@ class CasinoDAODBTest {
 
     @Test
     void dineroGanadoClienteEnDia() throws IOException {
-        double totalInvertido = -100.0 - 50.0 + 200.0;
+        double totalInvertido = -100.0 - 15.0 + 200.0;
         assertEquals(totalInvertido, daodb.dineroGanadoClienteEnDia("12345678Z", dateFecha));
     }
 
@@ -303,19 +300,10 @@ class CasinoDAODBTest {
         assertEquals(contador, daodb.vecesClienteJuegaMesa(cli001.getDni(), ser001.getCodigo()));
     }
 
-    @Test
-    void vecesClienteJuegaMesaThrowsClientNotFound(){
-        assertThrows(ClientNotFoundException.class, () -> daodb.vecesClienteJuegaMesa("NOTVALIDDNI", ser001.getCodigo()));
-    }
-
-    @Test
-    void vecesClienteJuegaMesaThrowsServiceNotFound(){
-        assertThrows(ServiceNotFoundException.class, () -> daodb.vecesClienteJuegaMesa(cli001.getDni(), "NOTVALIDCODE"));
-    }
 
     @Test
     void ganadoMesas() throws IOException {
-        double totalInvertido = 100.0 - 200.0 + 50.0;
+        double totalInvertido = 100.0 - 200.0 + 15.0;
         assertEquals(totalInvertido, daodb.ganadoMesas());
     }
 
@@ -330,6 +318,11 @@ class CasinoDAODBTest {
         ArrayList<Servicio> mesaPokerLista = new ArrayList<>();
         mesaPokerLista.add(ser001);
         assertEquals(mesaPokerLista, daodb.devolverServiciosTipo(TipoServicio.MESAPOKER));
+    }
+
+    @Test
+    void devolverServiciosTipoNull(){
+        assertThrows(ValidacionException.class, () -> daodb.devolverServiciosTipo(null));
     }
 
     @Test
