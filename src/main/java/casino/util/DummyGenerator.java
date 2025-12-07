@@ -1,6 +1,7 @@
 package casino.util;
 
 import casino.model.*;
+import exceptions.ClientAlreadyExistsException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,14 +16,18 @@ public class DummyGenerator {
     }
 
     public String randomName(){
-        String[] namePool = {"Alberto", "Bea", "Carlos", "David", "Ernesto", "Federico", "Guillermo"};
+        String[] namePool = {"Alberto", "Bea", "Carlos", "David", "Elena", "Federico", "Guillermo",
+                "Hugo", "Jaime", "Kylian", "Miguel", "Nicolas", "Olivia", "Paula", "Rodrigo",
+                "Sofia", "Teresa", "Ursula", "Vicente", "Yolanda"};
         int randomInt = (int) (Math.random() * (namePool.length));
         return namePool[randomInt];
     }
 
 
     public String randomSurname(){
-        String[] surnamePool = {"Albertez", "Beaz", "Carlez", "Davidez", "Ernestez", "Federiquez", "Guillermez"};
+        String[] surnamePool = {"Alvarez", "Blanco", "Cruz", "Diaz", "Espinoza", "Fernandez", "Garcia",
+                "Herrera", "Ibaéz", "Jimenez", "Lopez", "Navarro", "Ortiz", "Perez", "Rodriguez", "Sanchez",
+                "Torres", "Uribe", "Vargas", "Ximenez", "Zapata"};
         int randomInt = (int) (Math.random() * (surnamePool.length));
         return surnamePool[randomInt];
     }
@@ -66,9 +71,21 @@ public class DummyGenerator {
     public List<Cliente> crearListaCliente(int longitudLista){
         List<Cliente> listaClientes = new ArrayList<>();
         for (int i = 0; i < longitudLista; i++) {
-            listaClientes.add(new Cliente(randomDNI(), randomName(), randomSurname() ) );
+            while (true) {
+                try {
+                    Cliente cli = new Cliente(randomDNI(), randomName(), randomSurname());
+                    if (listaClientes.contains(cli)) {
+                        System.out.println();
+                        throw new ClientAlreadyExistsException("Cliente Existente");
+                    } else {
+                        listaClientes.add(cli);
+                        break;
+                    }
+                } catch (ClientAlreadyExistsException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
         }
-
         return listaClientes;
     }
 
@@ -77,6 +94,36 @@ public class DummyGenerator {
         List<Servicio> listaServicio = new ArrayList<>();
         for (int i = 0; i < longitudLista; i++) {
             listaServicio.add(new Servicio(randomTipoServicio(), "Servicio"+(i+1)));
+        }
+        return listaServicio;
+    }
+
+    public List<Cliente> diluirListaCliente(int dilu, ArrayList<Cliente> listaClientes) {
+        List<Cliente> listaDiluida = new ArrayList<>();
+        while (listaDiluida.size() < dilu) {
+            try {
+                int randomInt = (int) (Math.random() * (listaClientes.size()));
+                Cliente cli =  listaClientes.get(randomInt);
+                if (listaDiluida.contains(cli)) {
+                    throw new ClientAlreadyExistsException("Cliente Existente");
+                } else {
+                    listaDiluida.add(cli);
+                }
+            } catch (ClientAlreadyExistsException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return listaDiluida;
+    }
+
+    public List<Servicio> crearListaServicioClientes(int longitudLista, ArrayList<Cliente> listaClientes) {
+        List<Servicio> listaServicio = new ArrayList<>();
+        for (int i = 0; i < longitudLista; i++) {
+            Servicio ser = new Servicio(randomTipoServicio(), "Servicio"+(i+1));
+            int randomNum = (int) (Math.random() * (5));
+            ArrayList<Cliente> listaDiluida = (ArrayList<Cliente>) diluirListaCliente(randomNum, listaClientes);
+            ser.setListaClientes(listaDiluida);
+            listaServicio.add(ser);
         }
         return listaServicio;
     }
