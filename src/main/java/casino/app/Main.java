@@ -14,13 +14,9 @@ import java. util.List;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("=== DEMO Casino DAO ===\n");
 
         // Puedes cambiar entre JSON y XML aquí
-        CasinoDAO dao = new CasinoDAOFileXML(); // O usar:  new CasinoDAOFileXML()
-
-        String tipoDAO = dao instanceof CasinoDAOFileJSON ? "JSON" : "XML";
-        System.out.println("Usando implementación:  " + tipoDAO + "\n");
+        CasinoDAO dao = new CasinoDAOFileJSON(); // O usar:  new CasinoDAOFileXML()
 
         try {
             // 1. CREAR CLIENTES
@@ -108,7 +104,6 @@ public class Main {
             todosClientes.forEach(c -> System.out.println("  - " + c.getNombre() + " " + c.getApellidos()));
             System.out.println();
 
-            System.out.println("=== DEMO FINALIZADA CORRECTAMENTE ===");
 
         } catch (ClientAlreadyExistsException e) {
             System.err.println("Error: El cliente ya existe - " + e.getMessage());
