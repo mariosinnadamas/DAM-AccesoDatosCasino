@@ -33,7 +33,7 @@ public class Main {
             String infoCliente = dao.consultaCliente("12345678Z");
             System. out.println(infoCliente + "\n");
 
-            // 3. CREAR SERVICIOS
+            // 3. CREAR SERVICIOSa
             System.out.println("--- 3. Añadiendo servicios ---");
             List<Cliente> clientesMesa = new ArrayList<>();
             clientesMesa.add(cliente1);
