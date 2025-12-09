@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CasinoMain {
+public class  CasinoMain {
     public static ArrayList<ArrayList> initListas(){
         DummyGenerator dg = new DummyGenerator();
         ArrayList<Cliente> testListaClientes = (ArrayList<Cliente>) dg.crearListaCliente(10);
