@@ -325,7 +325,7 @@ public class CasinoDAOFileXML implements CasinoDAO {
     }
 
     @Override
-    public String consultaLog(String codigoServicio, String dni, LocalDate fecha) throws ValidacionException, LogNotFoundException, IOException {
+    public List<Log> consultaLog(String codigoServicio, String dni, LocalDate fecha) throws ValidacionException, LogNotFoundException, IOException {
 
         if (codigoServicio == null || codigoServicio.isBlank() || dni == null || dni.isBlank() || fecha == null) {
             throw new ValidacionException("Error: parámetros inválidos. Asegúrate de introducir un código, un DNI y una fecha válidos.");
@@ -333,17 +333,21 @@ public class CasinoDAOFileXML implements CasinoDAO {
 
         try {
             List<Log> listaLogs = leerListaLog();
+            List<Log> logsCoincidencias = new ArrayList<>();
+
             for(Log l: listaLogs){
                 // Validar que ningún objeto sea null antes de acceder a sus métodos
                 if (l != null &&
                         l.getServicio() != null && l.getServicio().getCodigo() != null &&
                         l.getCliente() != null && l.getCliente().getDni() != null &&
                         l.getFecha() != null) {
-
-                    if (l.getServicio().getCodigo().equals(codigoServicio) &&
-                            l.getCliente().getDni().equals(dni) &&
-                            l.getFecha().equals(fecha)) {
-                        return l.toString();
+                    for (Log temp : listaLogs){
+                        if (l.getServicio().getCodigo().equals(codigoServicio) &&
+                                l.getCliente().getDni().equals(dni) &&
+                                l.getFecha().equals(fecha)) {
+                            logsCoincidencias.add(l);
+                            return logsCoincidencias;
+                        }
                     }
                 }
             }
@@ -353,7 +357,6 @@ public class CasinoDAOFileXML implements CasinoDAO {
         }
     }
 
-    @Override
     public List<Log> leerListaLog() throws IOException{
         List<Log> logsTemporal = new ArrayList<>();
         try{

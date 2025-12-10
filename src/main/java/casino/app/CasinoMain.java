@@ -81,8 +81,8 @@ public class CasinoMain {
         testAddLog(daoJson);
 
         // Test 10: Consultar log
-        testConsultaLog(dao);
-        testConsultaLog(daoJson);
+        //testConsultaLog(dao);
+        //testConsultaLog(daoJson);
 
         // Test 11: Actualizar cliente
         testActualizarCliente(dao);
@@ -296,7 +296,7 @@ public class CasinoMain {
             e.printStackTrace();
         }
     }
-
+/*
     private static void testConsultaLog(CasinoDAOFileXML dao) {
         System.out.println("--- Test 10: Consultar log ---");
         try {
@@ -314,6 +314,8 @@ public class CasinoMain {
             System.err.println("Error: " + e.getMessage() + "\n");
         }
     }
+
+ */
 
     private static void testActualizarCliente(CasinoDAOFileXML dao) {
         System.out.println("--- Test 11: Actualizar cliente ---");
@@ -637,11 +639,12 @@ public class CasinoMain {
             e.printStackTrace();
         }
     }
-
+    /*
     private static void testConsultaLog(CasinoDAOFileJSON dao) {
         System.out.println("--- Test 10: Consultar log ---");
         try {
             List<Log> logs = dao.leerListaLog();
+            List<Log> logsCoincidencias = new ArrayList<>();
             if (!logs.isEmpty()) {
                 Log log = logs.get(0);
                 String resultado = dao.consultaLog(
@@ -655,6 +658,8 @@ public class CasinoMain {
             System.err.println("Error: " + e.getMessage() + "\n");
         }
     }
+
+     */
 
     private static void testActualizarCliente(CasinoDAOFileJSON dao) {
         System.out.println("--- Test 11: Actualizar cliente ---");

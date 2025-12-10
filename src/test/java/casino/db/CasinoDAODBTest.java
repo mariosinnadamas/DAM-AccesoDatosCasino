@@ -10,6 +10,7 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,6 +20,7 @@ class CasinoDAODBTest {
     //Clientes
     Cliente cli001 = new Cliente("12345678Z", "Juan Paco", "García Pérez");
     Cliente cli002 = new Cliente("87654321X", "María","López Sánchez");
+    Cliente cli003 = new Cliente("75972453A", "Prueba", "Pruebez");
     ArrayList<Cliente> clientes = new ArrayList<>();
 
     //Servicios
@@ -32,7 +34,7 @@ class CasinoDAODBTest {
     LocalTime dateHora = Time.valueOf("13:14:44").toLocalTime();
     Log log001 = new Log(cli001, ser001, dateFecha, dateHora, TipoConcepto.APOSTAR, 100.0);
     Log log002 = new Log(cli001, ser001, dateFecha, dateHora, TipoConcepto.APUESTACLIENTEGANA, 200.0);
-    Log log003 = new Log(cli001, ser001, dateFecha, dateHora, TipoConcepto.APOSTAR, 50.0);
+    Log log003 = new Log(cli001, ser001, dateFecha, dateHora, TipoConcepto.APOSTAR, 15.0);
     Log log004 = new Log(cli001, ser003, dateFecha, dateHora, TipoConcepto.COMPRABEBIDA, 15.0);
     Log log005 = new Log(cli001, ser003, dateFecha, dateHora, TipoConcepto.COMPRACOMIDA, 35.0);
     ArrayList<Log> logs = new ArrayList<>();
@@ -46,13 +48,14 @@ class CasinoDAODBTest {
                         "CREATE TABLE if not exists clientes (" +
                         "dni varchar(9) primary key," +
                         "nombre varchar(50) not null," +
-                        "apellido varchar (50) not null" +
+                        "apellido varchar(50) not null" +
                         ");" +
                         "create table if not exists servicios (" +
                         "codigo varchar(5) primary key," +
-                        "nombre varchar (50) not null," +
-                        "tipo varchar (50) not null," +
-                        "capacidad int not null" +
+                        "nombre varchar(50) not null," +
+                        "tipo varchar(50) not null," +
+                        "capacidad int not null," +
+                        "lista_clientes JSON not null" +
                         "); " +
                         "create table if not exists logs (" +
                         "dni varchar(9)," +
@@ -61,29 +64,23 @@ class CasinoDAODBTest {
                         "hora time not null," +
                         "concepto varchar (50) not null, " +
                         "cantidad_concepto decimal(10,2) not null, " +
-                        "foreign key (dni) references clientes(dni), " +
-                        "foreign key (codigo) references servicios(codigo) " +
-                        "); " +
-                        "create table if not exists lista_clientes(" +
-                        "id_lista serial primary key, " +
-                        "dni varchar (9) not null, " +
-                        "codigo varchar(5) not null, " +
-                        "foreign key (dni) references clientes(dni), " +
-                        "foreign key (codigo) references servicios(codigo) " +
+                        "lista_clientes JSON not null, " +
+                        "foreign key (dni) references clientes(dni) ON DELETE CASCADE, " +
+                        "foreign key (codigo) references servicios(codigo) ON DELETE CASCADE" +
                         "); " +
                         "INSERT INTO clientes(dni, nombre, apellido) VALUES" +
                         "('12345678Z', 'Juan Paco', 'García Pérez'), " +
                         "('87654321X', 'María', 'López Sánchez');" +
-                        "INSERT INTO servicios(codigo, nombre, tipo, capacidad) VALUES" +
-                        "('10908', 'Mesa Poker VIP', 'MESAPOKER', 10)," +
-                        "('F4AC5', 'Mesa BlackJack', 'MESABLACKJACK', 7)," +
-                        "('64B52', 'Bar Casino', 'BAR', 20);" +
-                        "INSERT INTO logs(dni, codigo, fecha, hora, concepto, cantidad_concepto) VALUES" +
-                        "('12345678Z', '10908', '2025-11-29', '13:14:44', 'APOSTAR', 100.0)," +
-                        "('12345678Z', '10908', '2025-11-29', '13:14:44', 'APUESTACLIENTEGANA', 200.0)," +
-                        "('12345678Z', '10908', '2025-11-29', '13:14:44', 'APOSTAR', 15.0)," +
-                        "('12345678Z', '64B52', '2025-11-29', '13:14:44', 'COMPRABEBIDA', 15.0)," +
-                        "('12345678Z', '64B52', '2025-11-29', '13:14:44', 'COMPRACOMIDA', 35.0);";
+                        "INSERT INTO servicios(codigo, nombre, tipo, capacidad, lista_clientes) VALUES" +
+                        "('10908', 'Mesa Poker VIP', 'MESAPOKER', 10, '[]')," +
+                        "('F4AC5', 'Mesa BlackJack', 'MESABLACKJACK', 7, '[]')," +
+                        "('64B52', 'Bar Casino', 'BAR', 20, '[]');" +
+                        "INSERT INTO logs(dni, codigo, fecha, hora, concepto, cantidad_concepto, lista_clientes) VALUES" +
+                        "('12345678Z', '10908', '2025-11-29', '13:14:44', 'APOSTAR', 100.0, '[]')," +
+                        "('12345678Z', '10908', '2025-11-29', '13:14:44', 'APUESTACLIENTEGANA', 200.0, '[]')," +
+                        "('12345678Z', '10908', '2025-11-29', '13:14:44', 'APOSTAR', 15.0, '[]')," +
+                        "('12345678Z', '64B52', '2025-11-29', '13:14:44', 'COMPRABEBIDA', 15.0, '[]')," +
+                        "('12345678Z', '64B52', '2025-11-29', '13:14:44', 'COMPRACOMIDA', 35.0, '[]');";
         Connection con = conexionDB.conectarBaseDatos();
 
         PreparedStatement stm = con.prepareStatement(consulta);
@@ -100,45 +97,49 @@ class CasinoDAODBTest {
         }
     }
 
-    //TODO: Agregar TEST addCliente()
     @Test
-    void addCliente() {
+    void addCliente() throws IOException {
+        daodb.addCliente(cli003);
+        assertEquals(cli003.toString(),daodb.consultaCliente(cli003.getDni()));
     }
 
     @Test
-    void addClienteNull(){
+    void addClienteExcepciones(){
         Cliente cli = null;
         assertThrows(ValidacionException.class, () -> daodb.addCliente(cli));
-    }
-
-    @Test
-    void addClienteThrowsClientAlreadyExistsException() {
         assertThrows(ClientAlreadyExistsException.class, () -> daodb.addCliente(cli001));
     }
 
-    //TODO: Agregar TEST addServicio()
     @Test
-    void addServicio() {
+    void addClientesNull(){
+        ArrayList<Cliente> clientes = new ArrayList<>();
+        clientes.add(null);
+        assertThrows(ValidacionException.class, () -> daodb.addClientes(null));
+        assertThrows(ValidacionException.class, () -> daodb.addClientes(clientes));
+
     }
 
     @Test
-    void addServicioNull() {
+    void addServicio() throws IOException {
+        Servicio s = new Servicio("64C52", TipoServicio.BAR, "Bar Casino" ,clientes ,20);
+        daodb.addServicio(s);
+        assertEquals(s.toString(),daodb.consultaServicio(s.getCodigo()));
+    }
+
+    @Test
+    void addServicioExcepciones() {
         Servicio serv = null;
         assertThrows(ValidacionException.class, () -> daodb.addServicio(serv));
-    }
-
-    @Test
-    void addServicioThrowsServiceAlreadyExistsException() {
         assertThrows(ServiceAlreadyExistsException.class, () -> daodb.addServicio(ser001));
     }
 
-    //TODO: Agregar TEST addLog()
     @Test
-    void addLog() {
+    void addLog() throws IOException {
+        daodb.addLog(log004);
     }
 
     @Test
-    void addLogNull() {
+    void addLogExcepcion() {
         Log log = null;
         assertThrows(ValidacionException.class, () -> daodb.addLog(log));
     }
@@ -187,8 +188,10 @@ class CasinoDAODBTest {
 
     @Test
     void consultaLog() throws IOException {
-        String logString = log001.toString();
-        assertEquals(logString, daodb.consultaLog("10908", "12345678Z", dateFecha));
+        logs.add(log001);
+        logs.add(log002);
+        logs.add(log003);
+        assertEquals(logs, daodb.consultaLog("10908", "12345678Z", dateFecha));
     }
 
     @Test
@@ -205,8 +208,13 @@ class CasinoDAODBTest {
     }
 
     @Test
-    void actualizarClienteThrowsClientNotFound() {
-        assertThrows(ClientNotFoundException.class, () -> daodb.actualizarCliente("NOTVALIDDNI", cli001));
+    void actualizarClienteExcepciones() {
+        Cliente c = new Cliente("41165112B", "Juan Paco", "García Pérez");
+
+        assertThrows(ValidacionException.class, () -> daodb.actualizarCliente("", cli001));
+        assertThrows(ValidacionException.class, () -> daodb.actualizarCliente("12345678Z", null));
+        assertThrows(ValidacionException.class, () -> daodb.actualizarCliente("NOTVALIDDNI", cli001));
+        assertThrows(ClientNotFoundException.class, () -> daodb.actualizarCliente("41165112B", c));
     }
 
     @Test
@@ -218,7 +226,10 @@ class CasinoDAODBTest {
     }
 
     @Test
-    void actualizarServicioThrowsServiceNotFound() {
+    void actualizarServicioExcepciones() {
+        assertThrows(ValidacionException.class, () -> daodb.actualizarServicio(null, ser001));
+        assertThrows(ValidacionException.class, () -> daodb.actualizarServicio("", ser001));
+        assertThrows(ValidacionException.class, () -> daodb.actualizarServicio("NOTVALIDCODE", null));
         assertThrows(ServiceNotFoundException.class, () -> daodb.actualizarServicio("NOTVALIDCODE", ser001));
     }
 
@@ -229,9 +240,10 @@ class CasinoDAODBTest {
     }
 
     @Test
-    void borrarServicioThrowsServiceNotFound(){
+    void borrarServicioExcepciones(){
         Servicio ser004 = new Servicio(TipoServicio.BAR, "Bar De Pruebas");
         assertThrows(ServiceNotFoundException.class, () -> daodb.borrarServicio(ser004));
+        assertThrows(ValidacionException.class, () -> daodb.borrarServicio(null));
     }
 
     @Test
@@ -242,21 +254,22 @@ class CasinoDAODBTest {
     }
 
     @Test
-    void borrarClienteThrowsClientNotFound() {
+    void borrarClienteExcepciones() {
         Cliente cli003 = new Cliente("53720451H", "Prueba", "Pruebez");
+        assertThrows(ValidacionException.class, () -> daodb.borrarCliente(null));
         assertThrows(ClientNotFoundException.class, () -> daodb.borrarCliente(cli003));
     }
 
     @Test
     void dineroInvertidoClienteEnDia() throws IOException {
-        double totalInvertido = 35.0 + 15.0 + 50.0 - 200.0 + 100.0;
+        double totalInvertido = 35.0 + 15.0 + 15.0 - 200.0 + 100.0;
         assertEquals(totalInvertido, daodb.dineroInvertidoClienteEnDia("12345678Z", dateFecha));
 
     }
 
     @Test
-    void dineroInvertidoClienteEnDiaThrowsClientNotFound(){
-        assertThrows(ClientNotFoundException.class, () -> daodb.dineroInvertidoClienteEnDia("NOTVALIDDNI", dateFecha));
+    void dineroInvertidoClienteEnDiaThrowsLOgNotFound(){
+        assertThrows(LogNotFoundException.class, () -> daodb.dineroInvertidoClienteEnDia("NOTVALIDDNI", dateFecha));
     }
 
     @Test
@@ -272,7 +285,7 @@ class CasinoDAODBTest {
 
     @Test
     void dineroGanadoClienteEnDia() throws IOException {
-        double totalInvertido = -100.0 - 50.0 + 200.0;
+        double totalInvertido = -100.0 - 15.0 + 200.0;
         assertEquals(totalInvertido, daodb.dineroGanadoClienteEnDia("12345678Z", dateFecha));
     }
 
@@ -287,19 +300,10 @@ class CasinoDAODBTest {
         assertEquals(contador, daodb.vecesClienteJuegaMesa(cli001.getDni(), ser001.getCodigo()));
     }
 
-    @Test
-    void vecesClienteJuegaMesaThrowsClientNotFound(){
-        assertThrows(ClientNotFoundException.class, () -> daodb.vecesClienteJuegaMesa("NOTVALIDDNI", ser001.getCodigo()));
-    }
-
-    @Test
-    void vecesClienteJuegaMesaThrowsServiceNotFound(){
-        assertThrows(ServiceNotFoundException.class, () -> daodb.vecesClienteJuegaMesa(cli001.getDni(), "NOTVALIDCODE"));
-    }
 
     @Test
     void ganadoMesas() throws IOException {
-        double totalInvertido = 100.0 - 200.0 + 50.0;
+        double totalInvertido = 100.0 - 200.0 + 15.0;
         assertEquals(totalInvertido, daodb.ganadoMesas());
     }
 
@@ -314,5 +318,31 @@ class CasinoDAODBTest {
         ArrayList<Servicio> mesaPokerLista = new ArrayList<>();
         mesaPokerLista.add(ser001);
         assertEquals(mesaPokerLista, daodb.devolverServiciosTipo(TipoServicio.MESAPOKER));
+    }
+
+    @Test
+    void devolverServiciosTipoNull(){
+        assertThrows(ValidacionException.class, () -> daodb.devolverServiciosTipo(null));
+    }
+
+    @Test
+    void listaClientesToJSON() {
+        String validJsonFormat = "[\"12345678Z\", \"87654321X\"]";
+        clientes.add(cli001);
+        clientes.add(cli002);
+        assertEquals(validJsonFormat, daodb.listaClientesToJSON(clientes));
+    }
+
+    @Test
+    void listaClientesToJSONNull(){
+        assertThrows(ValidacionException.class, () -> daodb.listaClientesToJSON(null));
+    }
+
+    @Test
+    void jsonToClientes() throws SQLException, IOException {
+        String validJsonFormat = "[\"12345678Z\",\"87654321X\"]";
+        clientes.add(cli001);
+        clientes.add(cli002);
+        assertEquals(clientes, daodb.jsonToClientes(validJsonFormat));
     }
 }

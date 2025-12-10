@@ -204,9 +204,8 @@ class CasinoDAOFileJSONTest {
 
     @Test
     void consultaLog() throws IOException {
-        String logString = log001.toString();
-        assertEquals(logString, json.consultaLog("10908", "12345678Z", dateFecha));
-
+        logs.add(log001);
+        assertEquals(logs, json.consultaLog("10908", "12345678Z", dateFecha));
     }
 
     @Test

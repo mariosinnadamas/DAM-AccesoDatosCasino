@@ -107,8 +107,8 @@ public class Servicio implements Externalizable {
         return "Servicio{" +
                 "codigo='" + codigo + '\'' +
                 ", tipo=" + tipo +
-                ", nombreServicio='" + nombreServicio + '\'' +
-                ", leerListaClientes=" + listaClientes +
+                ", nombre del Servicio='" + nombreServicio + '\'' +
+                ", Lista clientes=" + listaClientes +
                 ", capacidadMaxima=" + capacidadMaxima +
                 '}';
     }

@@ -304,7 +304,7 @@ public class CasinoDAOFileJSON implements CasinoDAO {
      * @return List de log del archivo log.json
      * @throws IOException
      */
-    @Override
+
     public List<Log> leerListaLog() throws IOException{
         List<Log> listaLog = new ArrayList<>();
 
@@ -525,12 +525,14 @@ public class CasinoDAOFileJSON implements CasinoDAO {
      * @throws LogNotFoundException Si no se encuentra el log especificado
      */
     @Override
-    public String consultaLog(String codigo, String dni, LocalDate fecha) throws IOException, LogNotFoundException{
+    public List<Log> consultaLog(String codigo, String dni, LocalDate fecha) throws IOException, LogNotFoundException{
         ArrayList<Log> listaLog = (ArrayList<Log>) this.leerListaLog();
         String fechaStr = fecha.toString();
+        List<Log> listaCoincidencias = new ArrayList<>();
         for (Log log : listaLog) {
             if (log.getCliente().getDni().equals(dni) && log.getServicio().getCodigo().equals(codigo) && log.getFechaStr().equals(fechaStr)) {
-                return log.toString();
+                listaCoincidencias.add(log);
+                return listaCoincidencias;
             }
         }
         throw new LogNotFoundException("No se ha encontrado el log especificado");
