@@ -24,7 +24,7 @@ public class CasinoDAODB implements CasinoDAO {
     }
 
     @Override
-    public void addCliente(Cliente cliente) throws ValidacionException, ClientAlreadyExistsException, IOException, AccesoDenegadoException{
+    public void addCliente(Cliente cliente) throws ValidacionException, ClientAlreadyExistsException, IOException, DataBaseException {
         if (cliente == null){
             throw new ValidacionException("El cliente no puede ser nulo");
         }
@@ -44,18 +44,35 @@ public class CasinoDAODB implements CasinoDAO {
             if (e.getSQLState().startsWith("23")){
                 throw new ClientAlreadyExistsException("Cliente duplicado", e);
             }
-            throw new AccesoDenegadoException(e.getMessage());
+            throw new DataBaseException("Error accediendo a la base de datos" + e);
         }
     }
 
+    //Este metodo es una transacción para que añada todos los elementos de la lista y en caso de error ninguno
     public void addClientes(ArrayList<Cliente> listaClientes) throws IOException, ClientAlreadyExistsException, ValidacionException {
         if (listaClientes == null || listaClientes.isEmpty() || listaClientes.contains(null)) {
             throw new ValidacionException("El cliente no puede ser nulo");
         }
 
-        for  (Cliente cliente : listaClientes) {
-            addCliente(cliente);
+
+        try (Connection connection = conn.conectarBaseDatos()){
+            connection.setAutoCommit(false);
+            try {
+                for  (Cliente cliente : listaClientes) {
+                    addCliente(cliente);
+                }
+                connection.commit();
+
+            } catch (ClientAlreadyExistsException | ValidacionException e) {
+                connection.rollback();
+                throw e;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
+
+
     }
 
     @Override
@@ -82,7 +99,7 @@ public class CasinoDAODB implements CasinoDAO {
             if (e.getSQLState().startsWith("23")){
                 throw new ServiceAlreadyExistsException("Servicio duplicado", e);
             }
-            throw new AccesoDenegadoException("Ha habido un problema al conectar con la BdD ", e);
+            throw new DataBaseException("Ha habido un problema al conectar con la BdD ", e);
         }
     }
 
@@ -107,7 +124,7 @@ public class CasinoDAODB implements CasinoDAO {
 
             stm.execute();
         } catch (SQLException e) {
-            throw new AccesoDenegadoException("Ha habido un problema al conectar a la BdD ", e);
+            throw new DataBaseException("Ha habido un problema al conectar a la BdD ", e);
         }
     }
 
@@ -137,7 +154,7 @@ public class CasinoDAODB implements CasinoDAO {
                 throw new ServiceNotFoundException("No se ha encontrado ningún servicio con ese código ", e);
             }
         } catch (SQLException e) {
-            throw new AccesoDenegadoException("Ha habido un error al conectar con la BdD: ", e);
+            throw new DataBaseException("Ha habido un error al conectar con la BdD: ", e);
         }
         return s.toString();
     }
@@ -160,7 +177,7 @@ public class CasinoDAODB implements CasinoDAO {
                 listaServicios.add(s);
             }
         } catch (SQLException e) {
-            throw new AccesoDenegadoException("Error al conectar a la BdD: ", e);
+            throw new DataBaseException("Error al conectar a la BdD: ", e);
         }
         return listaServicios;
     }
@@ -190,7 +207,7 @@ public class CasinoDAODB implements CasinoDAO {
                 throw new ClientNotFoundException("No se ha encontrado ningún cliente con ese DNI ", e);
             }
         } catch (SQLException e) {
-            throw new AccesoDenegadoException("Ha ocurrido un error al acceder a la BdD ", e);
+            throw new DataBaseException("Ha ocurrido un error al acceder a la BdD ", e);
         }
         return c.toString();
     }
@@ -206,7 +223,7 @@ public class CasinoDAODB implements CasinoDAO {
                 listaClientes.add(c);
             }
         } catch (SQLException e) {
-            throw new AccesoDenegadoException("Ha habido un error al conectar a la BdD: ", e);
+            throw new DataBaseException("Ha habido un error al conectar a la BdD: ", e);
         }
         return listaClientes;
     }
@@ -246,10 +263,10 @@ public class CasinoDAODB implements CasinoDAO {
                 }
 
             } catch (SQLException e) {
-                throw new AccesoDenegadoException("Ocurrio un problema en la conexion");
+                throw new DataBaseException("Ocurrio un problema en la conexion");
             }
         } catch (SQLException e) {
-            throw new AccesoDenegadoException("Error al conectar con la BdD ", e);
+            throw new DataBaseException("Error al conectar con la BdD ", e);
         }
         if (listaLogs.isEmpty()){
             throw new LogNotFoundException("No se ha encontrado ningún LOG con esas condiciones");
@@ -279,7 +296,7 @@ public class CasinoDAODB implements CasinoDAO {
                 stm.executeUpdate();
                 return true;
             } catch (SQLException e) {
-                throw new AccesoDenegadoException("Error al conectar con la BdD ", e);
+                throw new DataBaseException("Error al conectar con la BdD ", e);
             }
         }
     }
@@ -313,7 +330,7 @@ public class CasinoDAODB implements CasinoDAO {
             return true;
 
         } catch (SQLException e) {
-            throw new AccesoDenegadoException("ERROR al acceder a la BdD");
+            throw new DataBaseException("ERROR al acceder a la BdD");
         }
     }
 
@@ -335,7 +352,7 @@ public class CasinoDAODB implements CasinoDAO {
             return true;
 
         } catch (SQLException e) {
-            throw new AccesoDenegadoException("ERROR: Ha habido un error al conectar a la BdD");
+            throw new DataBaseException("ERROR: Ha habido un error al conectar a la BdD");
         }
     }
 
@@ -356,7 +373,7 @@ public class CasinoDAODB implements CasinoDAO {
             stm.execute();
 
         } catch (SQLException e) {
-            throw new AccesoDenegadoException("ERROR: Ha habido un error al conectar a la BdD");
+            throw new DataBaseException("ERROR: Ha habido un error al conectar a la BdD");
         }
 
         return false;
@@ -383,7 +400,7 @@ public class CasinoDAODB implements CasinoDAO {
             }
 
         } catch (SQLException e) {
-            throw new AccesoDenegadoException("Error al conectar con la base de datos", e);
+            throw new DataBaseException("Error al conectar con la base de datos", e);
         }
 
         return cantidadGanada;
@@ -413,7 +430,7 @@ public class CasinoDAODB implements CasinoDAO {
             }
 
         } catch (SQLException e) {
-            throw new AccesoDenegadoException("Error al conectar con la base de datos", e);
+            throw new DataBaseException("Error al conectar con la base de datos", e);
         }
 
         return cantidadInvertida;
@@ -434,7 +451,7 @@ public class CasinoDAODB implements CasinoDAO {
         }
 
         } catch (SQLException e) {
-            throw new AccesoDenegadoException("Error al conectar con la base de datos", e);
+            throw new DataBaseException("Error al conectar con la base de datos", e);
         }
         return cantidad;
     }
@@ -456,7 +473,7 @@ public class CasinoDAODB implements CasinoDAO {
             }
 
         } catch (SQLException e) {
-            throw new AccesoDenegadoException("Error al conectar con la base de datos", e);
+            throw new DataBaseException("Error al conectar con la base de datos", e);
         }
 
         return cantidadGanada;
@@ -477,7 +494,7 @@ public class CasinoDAODB implements CasinoDAO {
             }
 
         } catch (SQLException e) {
-            throw new AccesoDenegadoException("Error al conectar con la base de datos", e);
+            throw new DataBaseException("Error al conectar con la base de datos", e);
         }
 
         return cantidadGanada;
@@ -510,7 +527,7 @@ public class CasinoDAODB implements CasinoDAO {
                 listaServicio.add(ser);
             }
         } catch (SQLException e) {
-            throw new AccesoDenegadoException("Error al conectar con la base de datos ", e);
+            throw new DataBaseException("Error al conectar con la base de datos ", e);
         }
 
         return listaServicio;
@@ -541,7 +558,7 @@ public class CasinoDAODB implements CasinoDAO {
             }
 
         } catch (SQLException e) {
-            throw new AccesoDenegadoException("Error al conectar con la base de datos", e);
+            throw new DataBaseException("Error al conectar con la base de datos", e);
         }
 
         return cantidadGanada;
@@ -631,7 +648,7 @@ public class CasinoDAODB implements CasinoDAO {
                 throw new ClientNotFoundException("No se ha encontrado ningún cliente con ese DNI ", e);
             }
         } catch (SQLException e) {
-            throw new AccesoDenegadoException("Ha ocurrido un error al acceder a la BdD ", e);
+            throw new DataBaseException("Ha ocurrido un error al acceder a la BdD ", e);
         }
         return c;
     }
@@ -660,7 +677,7 @@ public class CasinoDAODB implements CasinoDAO {
                 throw new ServiceNotFoundException("No se ha encontrado ningún servicio con ese código ", e);
             }
         } catch (SQLException e) {
-            throw new AccesoDenegadoException("Ha habido un error al conectar con la BdD: ", e);
+            throw new DataBaseException("Ha habido un error al conectar con la BdD: ", e);
         }
         return s;
     }

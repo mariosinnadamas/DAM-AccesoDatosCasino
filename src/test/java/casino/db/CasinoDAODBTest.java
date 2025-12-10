@@ -98,7 +98,7 @@ class CasinoDAODBTest {
     }
 
     @Test
-    void addCliente() throws IOException {
+    void addCliente() throws IOException, ValidacionException, ClientAlreadyExistsException {
         daodb.addCliente(cli003);
         assertEquals(cli003.toString(),daodb.consultaCliente(cli003.getDni()));
     }

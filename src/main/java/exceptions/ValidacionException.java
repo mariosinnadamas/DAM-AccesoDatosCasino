@@ -1,6 +1,6 @@
 package exceptions;
 
-public class ValidacionException extends RuntimeException {
+public class ValidacionException extends Exception {
     public ValidacionException(String message, Throwable cause) {
         super(message, cause);
     }
