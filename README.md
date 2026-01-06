@@ -1,21 +1,40 @@
-# Para los comentarios  -ToDo:
-- Prioridad
-  - !1 MUY IMPORTANTE
-  - !2 Menos prioridad
-  - !3 Sin prioridad 
+# Proyecto Casino
 
-- #Numero del ToDo
-- Explicar el motivo del ToDo
+## Paquete Casino
 
-## Ejemplos
-- //ToDo\[!1#1]: "Se me ha roto la Dao"
-- //ToDo\[!2#2]: "Implementar metodo darDeAlta"
-- //ToDo\[!1#3]: "Se me ha vuelto a romper la Dao"
-- //ToDo\[!3#4]: "Añadir JavaDoc"
-- //ToDo\[!2#5]: "Me he quedado calvo"
+### app
+Paquete principal donde se encuentran los main del json/xml y de la base de datos
+- CanelaTest* : Main de la DaoDB
+- Main: Main del json/xml
 
-# Cambios realizados en comparación a la primera versión
-- [x] Reestructura de carpetas
-- [x] Cambiar los Paths de las clases para que se adapten a la nueva estructura de carpetas
-- [ ] Test Unitarios en JUnit5
-- [ ] Añadir BdD en PostgreSQL
+### dao
+Paquete con el contenido de la DAO, excluyendo la DAO de la base de datos que va aparte
+- CasinoDAO : Interfaz DAO usada por el json/xml/bd
+
+#### helper
+- CasinoGestorArchivos: Incluye métodos para generar copias de seguridad tanto del json como del xml
+
+#### impl
+Implementaciones de la DAO con ficheros
+- CasinoDAOFileJSON: Implementación de la DAO para el formato JSON
+- CasinoDAOFileXML:
+
+### db
+Paquete con el contenido de la DAO respecto a bases de datos
+- CasinoDAODB: Implementación de la DAO para base de datos PostgreSQL
+- ConexionDB: Clase que permite la conexión a una BD 
+
+### model
+Clases de negocio
+- Cliente: Contiene información de los clientes
+- Log: Contiene información de los logs(registros)
+- Servicio: Contiene información de los servicios
+- TipoConcepto: Enum. Declara el motivo por el que se ha hecho un log en un servicio
+- TipoServicio: Enum. Declara el tipo de servicio
+
+### util
+Paquete que contiene clases que no son de negocio pero facilitan los tests y otras pruebas
+- DummyGenerator: Permite popular arrays con datos y por extensión bases de datos
+
+## exceptions
+Alberga todas las excepciones del proyecto

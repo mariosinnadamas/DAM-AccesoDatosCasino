@@ -1,6 +1,6 @@
 package exceptions;
 
-public class LogNotFoundException extends RuntimeException {
+public class LogNotFoundException extends Exception {
     public LogNotFoundException(String message, Throwable cause) {
         super(message, cause);
     }

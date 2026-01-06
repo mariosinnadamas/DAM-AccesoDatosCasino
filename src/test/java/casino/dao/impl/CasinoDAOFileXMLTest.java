@@ -119,7 +119,7 @@ class CasinoDAOFileXMLTest {
 
     // Escritura
     @Test
-    void test04_addCliente() throws IOException {
+    void test04_addCliente() throws IOException, ClientAlreadyExistsException {
         Cliente c = new Cliente("53791037V", "Prueba", "Pruebez");
         xml.addCliente(c);
 
@@ -137,7 +137,7 @@ class CasinoDAOFileXMLTest {
     }
 
     @Test
-    void test06_addServicio() throws IOException {
+    void test06_addServicio() throws IOException, ServiceAlreadyExistsException {
         Servicio s1 = new Servicio(TipoServicio.MESAPOKER, "Mesa Poker2 VIP");
         xml.addServicio(s1);
 
@@ -178,7 +178,7 @@ class CasinoDAOFileXMLTest {
 
     // Consulta
     @Test
-    void test10_consultaCliente() throws IOException {
+    void test10_consultaCliente() throws IOException, ClientNotFoundException {
 
         String resultado = xml.consultaCliente("12345678Z");
 
@@ -198,7 +198,7 @@ class CasinoDAOFileXMLTest {
     }
 
     @Test
-    void test12_consultaServicio() throws IOException {
+    void test12_consultaServicio() throws IOException, ServiceNotFoundException {
         String resultado = xml.consultaServicio(ser001.getCodigo());
 
         assertNotNull(resultado, "La consulta no deberia devolver null");
@@ -215,7 +215,7 @@ class CasinoDAOFileXMLTest {
     }
 
     @Test
-    void test14_consultarLog() throws IOException {
+    void test14_consultarLog() throws IOException, LogNotFoundException {
         logs.add(log001);
         assertEquals(logs, xml.consultaLog("163C5", "12345678Z", dateFecha));
     }
@@ -233,7 +233,7 @@ class CasinoDAOFileXMLTest {
     }
 
     @Test
-    void test16_actualizarCliente() throws IOException {
+    void test16_actualizarCliente() throws IOException, ClientNotFoundException {
         assertTrue(xml.actualizarCliente("87654321X", cli002));
 
         List<Cliente> lista = xml.leerListaClientes();
@@ -245,7 +245,7 @@ class CasinoDAOFileXMLTest {
     }
 
     @Test
-    void test17_actualizarCliente_excepciones() throws IOException {
+    void test17_actualizarCliente_excepciones() throws IOException, ClientAlreadyExistsException {
         Cliente c = new Cliente("06690442H", "Jose", "Cruz");
         xml.addCliente(c);
         assertAll("Validaciones de argumentos",
@@ -256,7 +256,7 @@ class CasinoDAOFileXMLTest {
     }
 
     @Test
-    void test18_actualizarServicio() throws IOException {
+    void test18_actualizarServicio() throws IOException, ServiceNotFoundException {
 
         assertTrue(xml.actualizarServicio(ser001.getCodigo(), ser002));
 
@@ -278,7 +278,7 @@ class CasinoDAOFileXMLTest {
     }
 
     @Test
-    void test20_borrarCliente() throws IOException {
+    void test20_borrarCliente() throws IOException, ClientNotFoundException {
         boolean borrado = xml.borrarCliente(cli001);
 
         assertTrue(borrado);
@@ -293,7 +293,7 @@ class CasinoDAOFileXMLTest {
     }
 
     @Test
-    void test22_borrarServicio() throws IOException {
+    void test22_borrarServicio() throws IOException, ServiceNotFoundException {
 
         boolean borrado = xml.borrarServicio(ser001);
 
@@ -301,7 +301,7 @@ class CasinoDAOFileXMLTest {
     }
 
     @Test
-    void test23_borrarServicio_excepciones() throws IOException {
+    void test23_borrarServicio_excepciones() throws IOException, ServiceAlreadyExistsException {
         Servicio s = new Servicio(TipoServicio.RESTAURANTE,"Resutaurante VIP");
         xml.addServicio(s);
 
@@ -329,7 +329,7 @@ class CasinoDAOFileXMLTest {
     }
 
     @Test
-    void test26_dineroInvertidoDia() throws IOException {
+    void test26_dineroInvertidoDia() throws IOException, LogNotFoundException {
         double ganancias = xml.dineroInvertidoClienteEnDia("12345678Z", dateFecha);
 
         assertEquals(0, ganancias);

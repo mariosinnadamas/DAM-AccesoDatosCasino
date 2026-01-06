@@ -2,6 +2,8 @@ package casino.dao.helper;
 
 import casino.dao.impl.CasinoDAOFileJSON;
 import casino.dao.impl.CasinoDAOFileXML;
+import exceptions.ClientAlreadyExistsException;
+import exceptions.ValidacionException;
 
 import java.io.*;
 import java.nio.file.Path;
@@ -92,7 +94,7 @@ public class CasinoGestorArchivos {
      * Para sincronizarlo se borra el contenido del XML y se sobreescribe por el del JSON
      * @throws IOException
      */
-    public void sincronizarXML() throws IOException{
+    public void sincronizarXML() throws IOException, ValidacionException {
         try(FileWriter fw = new FileWriter(xml.fileCliente)){
              xml.fileCliente.delete();
         } catch (Exception e){
@@ -106,7 +108,7 @@ public class CasinoGestorArchivos {
      * Para sincronizarlo se borra el contenido del JSON y se sobreescribe por el del XML
      * @throws IOException
      */
-    public void sincronizarJSON() throws IOException{
+    public void sincronizarJSON() throws IOException, ValidacionException, ClientAlreadyExistsException {
         try(FileWriter fw = new FileWriter(json.fileCliente)){
             fw.write("");
         } catch (Exception e){

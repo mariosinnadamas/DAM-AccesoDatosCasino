@@ -22,7 +22,7 @@ public class Cliente implements Externalizable {
     public Cliente() {
     }
 
-    public Cliente(String dni, String nombre, String apellidos){
+    public Cliente(String dni, String nombre, String apellidos) throws ValidacionException{
         setDni(dni);
         setNombre(nombre);
         setApellidos(apellidos);
@@ -32,7 +32,7 @@ public class Cliente implements Externalizable {
         return dni;
     }
 
-    public void setDni(String dni) {
+    public void setDni(String dni) throws ValidacionException {
         if (dni == null) {
             throw new ValidacionException("ERROR: El DNI no puede estar vacio");
         }
@@ -62,7 +62,7 @@ public class Cliente implements Externalizable {
         return apellidos;
     }
 
-    public void setApellidos(String apellidos) {
+    public void setApellidos(String apellidos) throws ValidacionException {
         if (apellidos == null || apellidos.isBlank()) {
             throw new ValidacionException("ERROR: Apellidos no puede estar vacío o ser nulo");
         }
