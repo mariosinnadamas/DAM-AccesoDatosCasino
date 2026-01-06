@@ -1,6 +1,6 @@
 package exceptions;
 
-public class ServiceAlreadyExistsException extends RuntimeException {
+public class ServiceAlreadyExistsException extends Exception {
     public ServiceAlreadyExistsException(String message, Throwable cause) {
         super(message, cause);
     }

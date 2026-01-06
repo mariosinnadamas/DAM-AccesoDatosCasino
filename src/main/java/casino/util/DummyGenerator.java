@@ -2,6 +2,7 @@ package casino.util;
 
 import casino.model.*;
 import exceptions.ClientAlreadyExistsException;
+import exceptions.ValidacionException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +69,7 @@ public class DummyGenerator {
     }
 
 
-    public List<Cliente> crearListaCliente(int longitudLista){
+    public List<Cliente> crearListaCliente(int longitudLista) throws ValidacionException {
         List<Cliente> listaClientes = new ArrayList<>();
         for (int i = 0; i < longitudLista; i++) {
             while (true) {

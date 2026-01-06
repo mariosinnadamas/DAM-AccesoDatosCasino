@@ -6,6 +6,7 @@ import casino.dao.impl.CasinoDAOFileXML;
 import casino.model.*;
 import exceptions.*;
 
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java. time.LocalTime;
@@ -120,6 +121,8 @@ public class Main {
             e.printStackTrace();
         } catch (IllegalArgumentException e) {
             System.err.println("Error: Argumento inválido - " + e.getMessage());
+        } catch (Exception e){
+            System.err.println("Error: Excepción - " + e.getMessage());
         }
     }
 }

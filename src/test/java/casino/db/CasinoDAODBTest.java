@@ -39,6 +39,9 @@ class CasinoDAODBTest {
     Log log005 = new Log(cli001, ser003, dateFecha, dateHora, TipoConcepto.COMPRACOMIDA, 35.0);
     ArrayList<Log> logs = new ArrayList<>();
 
+    CasinoDAODBTest() throws ValidacionException {
+    }
+
     public void init() throws SQLException {
         ConexionDB conexionDB =  new ConexionDB();
         String consulta =
@@ -98,7 +101,7 @@ class CasinoDAODBTest {
     }
 
     @Test
-    void addCliente() throws IOException {
+    void addCliente() throws IOException, Exception {
         daodb.addCliente(cli003);
         assertEquals(cli003.toString(),daodb.consultaCliente(cli003.getDni()));
     }
@@ -120,7 +123,7 @@ class CasinoDAODBTest {
     }
 
     @Test
-    void addServicio() throws IOException {
+    void addServicio() throws IOException, Exception {
         Servicio s = new Servicio("64C52", TipoServicio.BAR, "Bar Casino" ,clientes ,20);
         daodb.addServicio(s);
         assertEquals(s.toString(),daodb.consultaServicio(s.getCodigo()));
@@ -134,7 +137,7 @@ class CasinoDAODBTest {
     }
 
     @Test
-    void addLog() throws IOException {
+    void addLog() throws IOException, ValidacionException, AccesoDenegadoException {
         daodb.addLog(log004);
     }
 
@@ -145,7 +148,7 @@ class CasinoDAODBTest {
     }
 
     @Test
-    void consultaServicio() throws IOException {
+    void consultaServicio() throws IOException, Exception {
         String servicioString = ser001.toString();
         assertEquals(servicioString, daodb.consultaServicio(ser001.getCodigo()));
     }
@@ -156,7 +159,7 @@ class CasinoDAODBTest {
     }
 
     @Test
-    void leerListaServicios() throws IOException {
+    void leerListaServicios() throws IOException, Exception {
         servicios.add(ser001);
         servicios.add(ser002);
         servicios.add(ser003);
@@ -166,7 +169,7 @@ class CasinoDAODBTest {
     }
 
     @Test
-    void consultaCliente() throws IOException {
+    void consultaCliente() throws IOException, Exception {
         String clienteString = cli001.toString();
         assertEquals(clienteString, daodb.consultaCliente(cli001.getDni()));
     }
@@ -177,7 +180,7 @@ class CasinoDAODBTest {
     }
 
     @Test
-    void leerListaClientes() throws IOException {
+    void leerListaClientes() throws IOException, Exception {
         clientes.add(cli001);
         clientes.add(cli002);
 
@@ -187,7 +190,7 @@ class CasinoDAODBTest {
     }
 
     @Test
-    void consultaLog() throws IOException {
+    void consultaLog() throws IOException, Exception {
         logs.add(log001);
         logs.add(log002);
         logs.add(log003);
@@ -200,7 +203,7 @@ class CasinoDAODBTest {
     }
 
     @Test
-    void actualizarCliente() throws IOException {
+    void actualizarCliente() throws IOException, Exception {
         cli001.setNombre("Alberto");
         String nombre = "Alberto";
         daodb.actualizarCliente("12345678Z",cli001);
@@ -208,7 +211,7 @@ class CasinoDAODBTest {
     }
 
     @Test
-    void actualizarClienteExcepciones() {
+    void actualizarClienteExcepciones() throws ValidacionException{
         Cliente c = new Cliente("41165112B", "Juan Paco", "García Pérez");
 
         assertThrows(ValidacionException.class, () -> daodb.actualizarCliente("", cli001));
@@ -218,7 +221,7 @@ class CasinoDAODBTest {
     }
 
     @Test
-    void actualizarServicio() throws IOException {
+    void actualizarServicio() throws IOException, Exception {
         String nuevoNombre = "Mesa Actualizada";
         ser001.setNombreServicio(nuevoNombre);
         daodb.actualizarServicio("10908", ser001);
@@ -234,7 +237,7 @@ class CasinoDAODBTest {
     }
 
     @Test
-    void borrarServicio() throws IOException {
+    void borrarServicio() throws IOException, Exception {
         daodb.borrarServicio(ser001);
         assertThrows(ServiceNotFoundException.class, () -> daodb.consultaServicio("10908"));
     }
@@ -247,21 +250,21 @@ class CasinoDAODBTest {
     }
 
     @Test
-    void borrarCliente() throws IOException {
+    void borrarCliente() throws IOException, Exception {
         daodb.borrarCliente(cli001);
         assertThrows(ClientNotFoundException.class, () -> daodb.consultaCliente("12345678Z"));
 
     }
 
     @Test
-    void borrarClienteExcepciones() {
+    void borrarClienteExcepciones() throws ValidacionException {
         Cliente cli003 = new Cliente("53720451H", "Prueba", "Pruebez");
         assertThrows(ValidacionException.class, () -> daodb.borrarCliente(null));
         assertThrows(ClientNotFoundException.class, () -> daodb.borrarCliente(cli003));
     }
 
     @Test
-    void dineroInvertidoClienteEnDia() throws IOException {
+    void dineroInvertidoClienteEnDia() throws IOException, Exception {
         double totalInvertido = 35.0 + 15.0 + 15.0 - 200.0 + 100.0;
         assertEquals(totalInvertido, daodb.dineroInvertidoClienteEnDia("12345678Z", dateFecha));
 
@@ -273,7 +276,7 @@ class CasinoDAODBTest {
     }
 
     @Test
-    void gananciasAlimentos() throws IOException {
+    void gananciasAlimentos() throws IOException, Exception {
         double totalInvertido = 35.0 + 15.0;
         assertEquals(totalInvertido, daodb.gananciasAlimentos("12345678Z"));
     }
@@ -284,7 +287,7 @@ class CasinoDAODBTest {
     }
 
     @Test
-    void dineroGanadoClienteEnDia() throws IOException {
+    void dineroGanadoClienteEnDia() throws IOException, Exception {
         double totalInvertido = -100.0 - 15.0 + 200.0;
         assertEquals(totalInvertido, daodb.dineroGanadoClienteEnDia("12345678Z", dateFecha));
     }
@@ -295,26 +298,26 @@ class CasinoDAODBTest {
     }
 
     @Test
-    void vecesClienteJuegaMesa() throws IOException {
+    void vecesClienteJuegaMesa() throws IOException, Exception {
         double contador = 3.0;
         assertEquals(contador, daodb.vecesClienteJuegaMesa(cli001.getDni(), ser001.getCodigo()));
     }
 
 
     @Test
-    void ganadoMesas() throws IOException {
+    void ganadoMesas() throws IOException, Exception {
         double totalInvertido = 100.0 - 200.0 + 15.0;
         assertEquals(totalInvertido, daodb.ganadoMesas());
     }
 
     @Test
-    void ganadoEstablecimientos() throws IOException {
+    void ganadoEstablecimientos() throws IOException, Exception {
         double totalInvertido = 35.0 + 15.0;
         assertEquals(totalInvertido, daodb.ganadoEstablecimientos());
     }
 
     @Test
-    void devolverServiciosTipo() throws IOException {
+    void devolverServiciosTipo() throws IOException, ValidacionException, AccesoDenegadoException {
         ArrayList<Servicio> mesaPokerLista = new ArrayList<>();
         mesaPokerLista.add(ser001);
         assertEquals(mesaPokerLista, daodb.devolverServiciosTipo(TipoServicio.MESAPOKER));
@@ -326,7 +329,7 @@ class CasinoDAODBTest {
     }
 
     @Test
-    void listaClientesToJSON() {
+    void listaClientesToJSON() throws Exception {
         String validJsonFormat = "[\"12345678Z\", \"87654321X\"]";
         clientes.add(cli001);
         clientes.add(cli002);
@@ -339,7 +342,7 @@ class CasinoDAODBTest {
     }
 
     @Test
-    void jsonToClientes() throws SQLException, IOException {
+    void jsonToClientes() throws SQLException, IOException, ValidacionException {
         String validJsonFormat = "[\"12345678Z\",\"87654321X\"]";
         clientes.add(cli001);
         clientes.add(cli002);

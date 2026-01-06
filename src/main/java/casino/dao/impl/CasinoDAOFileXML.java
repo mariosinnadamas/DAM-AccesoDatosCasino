@@ -89,8 +89,6 @@ public class CasinoDAOFileXML implements CasinoDAO {
             //Si se ha añadido 1 cliente o más escribe en el fichero y lo actualiza
             if (clientesAniadidos > 0) {
                 guardarClientesEnXML(listaClientes);
-            } else {
-                System.out.println("No se añadió ningún cliente nuevo"); //Mensaje de pruebas
             }
 
         } catch (IOException e) {

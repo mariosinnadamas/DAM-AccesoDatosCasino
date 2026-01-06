@@ -2,13 +2,12 @@ package casino.app;
 
 import casino.db.CasinoDAODB;
 import casino.model.*;
+import exceptions.ValidacionException;
 
-import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class CanelaTest {
-    public static void main(String[] args) {
+public class DBPruebas {
+    public static void main(String[] args) throws ValidacionException {
         CasinoDAODB dao = new CasinoDAODB("casinotest");
         Cliente cli001 = new Cliente("91390590K", "Paquito", "Paquitez");
         Cliente cli002 = new Cliente("33683162F", "Alberto", "Albertez");
@@ -33,7 +32,7 @@ public class CanelaTest {
         Log log001 = new Log(cli001, ser004, TipoConcepto.APOSTAR, 20.0);
         try {
             dao.actualizarServicio("AAAAA", ser004);
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }

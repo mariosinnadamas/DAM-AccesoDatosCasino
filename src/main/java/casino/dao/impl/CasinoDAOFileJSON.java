@@ -51,7 +51,7 @@ public class CasinoDAOFileJSON implements CasinoDAO {
      * @throws IOException
      */
     @Override
-    public List<Cliente> leerListaClientes() throws IOException {
+    public List<Cliente> leerListaClientes() throws IOException{
         List<Cliente> listaClientes = new ArrayList<>();
 
         try (FileReader fileReader = new FileReader(fileCliente);
@@ -62,11 +62,16 @@ public class CasinoDAOFileJSON implements CasinoDAO {
             jsonArray.forEach(jsonValue -> {
                 JsonObject jsonObject = jsonValue.asJsonObject();
 
-                Cliente auxCliente = new Cliente(
-                        jsonObject.getString("dni"),
-                        jsonObject.getString("nombre"),
-                        jsonObject.getString("apellido")
-                );
+                Cliente auxCliente = null;
+                try {
+                    auxCliente = new Cliente(
+                            jsonObject.getString("dni"),
+                            jsonObject.getString("nombre"),
+                            jsonObject.getString("apellido")
+                    );
+                } catch (ValidacionException e) {
+                    System.out.println("Hola");
+                }
                 listaClientes.add(auxCliente);
             });
         }
@@ -183,7 +188,11 @@ public class CasinoDAOFileJSON implements CasinoDAO {
                     String dni = jobjCliente.getString("dni");
                     String nombre = jobjCliente.getString("nombre");
                     String apellido = jobjCliente.getString("apellido");
-                    clientesServicios.add(new  Cliente(dni, nombre, apellido));
+                    try {
+                        clientesServicios.add(new Cliente(dni, nombre, apellido));
+                    } catch (ValidacionException e) {
+                        System.out.println("Tobias es bobo");
+                    }
                 }
 
                 int capacidadMaxima = jsonObject.getInt("capacidadMaxima");
@@ -337,11 +346,20 @@ public class CasinoDAOFileJSON implements CasinoDAO {
                     String dniCli = jobjCliente.getString("dni");
                     String nombreCli = jobjCliente.getString("nombre");
                     String apellidoCli = jobjCliente.getString("apellido");
-                    clientesServicios.add(new Cliente(dniCli, nombreCli, apellidoCli));
+                    try {
+                        clientesServicios.add(new Cliente(dniCli, nombreCli, apellidoCli));
+                    } catch (ValidacionException e) {
+                        System.out.println("Hola");
+                    }
                 }
                 int capacidadMaxima = jsonServicio.getInt("capacidadMaxima");
 
-                Cliente clie = new Cliente(dni, nombre, apellido);
+                Cliente clie = null;
+                try {
+                    clie = new Cliente(dni, nombre, apellido);
+                } catch (ValidacionException e) {
+                    System.out.println("Hola");
+                }
                 Servicio serv = new Servicio(
                         codigo, tipoServicio, nombreServicio, clientesServicios, capacidadMaxima
                 );

@@ -1,6 +1,6 @@
 package exceptions;
 
-public class AccesoDenegadoException extends RuntimeException {
+public class AccesoDenegadoException extends Exception {
     public AccesoDenegadoException(String message, Throwable cause) {
         super(message, cause);
     }

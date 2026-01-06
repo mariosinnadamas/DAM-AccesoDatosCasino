@@ -48,7 +48,7 @@ public class CasinoDAODB implements CasinoDAO {
         }
     }
 
-    public void addClientes(ArrayList<Cliente> listaClientes) throws IOException, ClientAlreadyExistsException, ValidacionException {
+    public void addClientes(ArrayList<Cliente> listaClientes) throws IOException, ClientAlreadyExistsException, ValidacionException, AccesoDenegadoException {
         if (listaClientes == null || listaClientes.isEmpty() || listaClientes.contains(null)) {
             throw new ValidacionException("El cliente no puede ser nulo");
         }
@@ -59,7 +59,7 @@ public class CasinoDAODB implements CasinoDAO {
     }
 
     @Override
-    public void addServicio(Servicio servicio) throws ValidacionException, ServiceAlreadyExistsException, IOException {
+    public void addServicio(Servicio servicio) throws ValidacionException, ServiceAlreadyExistsException, IOException, AccesoDenegadoException {
         if (servicio == null){
             throw new ValidacionException("ERROR: El servicio no puede ser nulo");
         }
@@ -87,7 +87,7 @@ public class CasinoDAODB implements CasinoDAO {
     }
 
     @Override
-    public void addLog(Log log) throws ValidacionException, IOException {
+    public void addLog(Log log) throws ValidacionException, IOException, AccesoDenegadoException {
         if (log == null){
             throw new ValidacionException("ERROR: nulo");
         }
@@ -112,7 +112,7 @@ public class CasinoDAODB implements CasinoDAO {
     }
 
     @Override
-    public String consultaServicio(String codigo) throws ValidacionException, IOException {
+    public String consultaServicio(String codigo) throws ValidacionException, IOException, ServiceNotFoundException, AccesoDenegadoException {
         if (codigo == null|| codigo.isEmpty()){
             throw new ValidacionException("El codigo es nulo o está vacío");
         }
@@ -143,7 +143,7 @@ public class CasinoDAODB implements CasinoDAO {
     }
 
     @Override
-    public List<Servicio> leerListaServicios() throws IOException {
+    public List<Servicio> leerListaServicios() throws IOException, AccesoDenegadoException {
         String query = "SELECT codigo,nombre,tipo,capacidad,lista_clientes FROM servicios";
         List <Servicio> listaServicios = new ArrayList<>();
         try (Connection connection = conn.conectarBaseDatos();
@@ -166,7 +166,7 @@ public class CasinoDAODB implements CasinoDAO {
     }
 
     @Override
-    public String consultaCliente(String dni) throws ValidacionException, ClientNotFoundException, IOException {
+    public String consultaCliente(String dni) throws ValidacionException, ClientNotFoundException, IOException, AccesoDenegadoException {
         if (dni == null || dni.isEmpty()){
             throw new ValidacionException("El dni es nulo o está vacío");
         }
@@ -196,7 +196,7 @@ public class CasinoDAODB implements CasinoDAO {
     }
 
     @Override
-    public List<Cliente> leerListaClientes() throws IOException {
+    public List<Cliente> leerListaClientes() throws IOException, AccesoDenegadoException {
         String query = "SELECT dni, nombre, apellido FROM clientes";
         List <Cliente> listaClientes = new ArrayList<>();
         try (Statement stm = conn.conectarBaseDatos().createStatement();
@@ -207,12 +207,14 @@ public class CasinoDAODB implements CasinoDAO {
             }
         } catch (SQLException e) {
             throw new AccesoDenegadoException("Ha habido un error al conectar a la BdD: ", e);
+        } catch (Exception e) {
+            throw new IOException(e);
         }
         return listaClientes;
     }
 
     @Override
-    public List<Log> consultaLog(String codigoServicio, String dni, LocalDate fecha) throws ValidacionException, LogNotFoundException, IOException {
+    public List<Log> consultaLog(String codigoServicio, String dni, LocalDate fecha) throws ValidacionException, LogNotFoundException, IOException, AccesoDenegadoException, ClientNotFoundException, ServiceNotFoundException {
         List<Log>listaLogs = new ArrayList<>();
 
         String consulta = "SELECT dni, codigo, fecha, hora, concepto, cantidad_concepto, lista_clientes " +
@@ -258,7 +260,7 @@ public class CasinoDAODB implements CasinoDAO {
     }
 
     @Override
-    public boolean actualizarServicio(String codigo, Servicio servicioActualizado) throws ValidacionException, ServiceNotFoundException, IOException {
+    public boolean actualizarServicio(String codigo, Servicio servicioActualizado) throws ValidacionException, ServiceNotFoundException, IOException, AccesoDenegadoException {
         String consulta = "UPDATE servicios SET codigo = ?, nombre = ?, tipo = ?, capacidad = ?, lista_clientes = ?::json WHERE codigo = ?";
 
         if (codigo == null || codigo.isEmpty() || servicioActualizado == null) {
@@ -285,7 +287,7 @@ public class CasinoDAODB implements CasinoDAO {
     }
     
     @Override
-    public boolean actualizarCliente(String dni, Cliente clienteActualizado) throws ValidacionException, ClientNotFoundException, IOException {
+    public boolean actualizarCliente(String dni, Cliente clienteActualizado) throws ValidacionException, ClientNotFoundException, IOException, AccesoDenegadoException {
         if (dni == null || dni.isEmpty()){
             throw new ValidacionException("ERROR: DNI vacío o nulo");
         }
@@ -318,7 +320,7 @@ public class CasinoDAODB implements CasinoDAO {
     }
 
     @Override
-    public boolean borrarServicio(Servicio servicio) throws ValidacionException, ServiceNotFoundException, IOException {
+    public boolean borrarServicio(Servicio servicio) throws ValidacionException, ServiceNotFoundException, IOException, AccesoDenegadoException {
         if (servicio == null){
             throw new ValidacionException("ERROR: El servicio no puede ser nulo");
         }
@@ -340,7 +342,7 @@ public class CasinoDAODB implements CasinoDAO {
     }
 
     @Override
-    public boolean borrarCliente(Cliente cliente) throws ValidacionException, ClientNotFoundException, IOException {
+    public boolean borrarCliente(Cliente cliente) throws ValidacionException, ClientNotFoundException, IOException, AccesoDenegadoException, ServiceNotFoundException {
         if (cliente == null){
             throw new ValidacionException("ERROR: El cliente no puede ser nulo");
         }
@@ -363,7 +365,7 @@ public class CasinoDAODB implements CasinoDAO {
     }
 
     @Override
-    public double gananciasAlimentos(String dni) throws ValidacionException, IOException {
+    public double gananciasAlimentos(String dni) throws ValidacionException, IOException, AccesoDenegadoException, ClientNotFoundException {
         String consulta = "SELECT concepto,cantidad_concepto FROM logs WHERE dni = ?";
         double cantidadGanada = 0;
         boolean encontrado = false;
@@ -390,7 +392,7 @@ public class CasinoDAODB implements CasinoDAO {
     }
 
     @Override
-    public double dineroInvertidoClienteEnDia(String dni, LocalDate fecha) throws ValidacionException, LogNotFoundException, IOException {
+    public double dineroInvertidoClienteEnDia(String dni, LocalDate fecha) throws ValidacionException, LogNotFoundException, IOException, AccesoDenegadoException {
         String consulta = "SELECT concepto,cantidad_concepto FROM logs WHERE dni = ? AND fecha = ?";
         double cantidadInvertida = 0;
         boolean encontrado = false;
@@ -420,7 +422,7 @@ public class CasinoDAODB implements CasinoDAO {
     }
 
     @Override
-    public int vecesClienteJuegaMesa(String dni, String codigo) throws ValidacionException, IOException {
+    public int vecesClienteJuegaMesa(String dni, String codigo) throws ValidacionException, IOException, AccesoDenegadoException {
         String consulta = "SELECT dni FROM logs WHERE dni = ? AND codigo = ?";
         int cantidad = 0;
         try (Connection con = conn.conectarBaseDatos()){
@@ -440,7 +442,7 @@ public class CasinoDAODB implements CasinoDAO {
     }
 
     @Override
-    public double ganadoMesas() throws IOException {
+    public double ganadoMesas() throws IOException, AccesoDenegadoException {
         String consulta = "SELECT concepto,cantidad_concepto FROM logs";
         double cantidadGanada = 0;
         try (Connection con = conn.conectarBaseDatos()){
@@ -463,7 +465,7 @@ public class CasinoDAODB implements CasinoDAO {
     }
 
     @Override
-    public double ganadoEstablecimientos() throws IOException {
+    public double ganadoEstablecimientos() throws IOException, AccesoDenegadoException {
         String consulta = "SELECT concepto,cantidad_concepto FROM logs";
         double cantidadGanada = 0;
         try (Connection con = conn.conectarBaseDatos()){
@@ -484,7 +486,7 @@ public class CasinoDAODB implements CasinoDAO {
     }
 
     @Override
-    public List<Servicio> devolverServiciosTipo(TipoServicio tipoServicio) throws ValidacionException, IOException {
+    public List<Servicio> devolverServiciosTipo(TipoServicio tipoServicio) throws ValidacionException, IOException, AccesoDenegadoException {
         ArrayList<Servicio> listaServicio = new ArrayList<>();
 
         if (tipoServicio == null){
@@ -516,7 +518,7 @@ public class CasinoDAODB implements CasinoDAO {
         return listaServicio;
     }
 
-    public double dineroGanadoClienteEnDia(String dni, LocalDate dateFecha) {
+    public double dineroGanadoClienteEnDia(String dni, LocalDate dateFecha) throws ClientNotFoundException, AccesoDenegadoException {
         String consulta = "SELECT concepto,cantidad_concepto FROM logs WHERE dni = ? AND fecha = ?";
         double cantidadGanada = 0;
         boolean encontrado = false;
@@ -568,7 +570,7 @@ public class CasinoDAODB implements CasinoDAO {
         return json;
     }
 
-    public ArrayList<Cliente> jsonToClientes(String json) throws IOException, SQLException {
+    public ArrayList<Cliente> jsonToClientes(String json) throws IOException, SQLException, ValidacionException {
         ArrayList<Cliente> clientes = new ArrayList<>();
 
         if (json.equals("[]")) {
@@ -611,7 +613,7 @@ public class CasinoDAODB implements CasinoDAO {
         return clientes;
     }
 
-    private Cliente obtenerCliente(String dni){
+    private Cliente obtenerCliente(String dni) throws AccesoDenegadoException, ClientNotFoundException, ValidacionException {
         String sql = "SELECT dni,nombre, apellido FROM clientes WHERE dni = ?";
         Cliente c = new Cliente();
         try {
@@ -636,7 +638,7 @@ public class CasinoDAODB implements CasinoDAO {
         return c;
     }
 
-    private Servicio obtenerServicio(String codigo) throws IOException {
+    private Servicio obtenerServicio(String codigo) throws IOException, ServiceNotFoundException, AccesoDenegadoException, ValidacionException {
         if (codigo == null || codigo.isEmpty()){
             throw new ValidacionException("El codigo es nulo o está vacío");
         }

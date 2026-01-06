@@ -180,7 +180,7 @@ class CasinoDAOFileJSONTest {
     }
 
     @Test
-    void consultaCliente() throws IOException {
+    void consultaCliente() throws IOException, ClientNotFoundException {
         String clienteString = cli001.toString();
         assertEquals(clienteString, json.consultaCliente("12345678Z"));
 
@@ -192,7 +192,7 @@ class CasinoDAOFileJSONTest {
     }
 
     @Test
-    void consultaServicio() throws IOException {
+    void consultaServicio() throws IOException, ServiceNotFoundException {
         String serviceString = ser001.toString();
         assertEquals(serviceString, json.consultaServicio("10908"));
     }
@@ -203,7 +203,7 @@ class CasinoDAOFileJSONTest {
     }
 
     @Test
-    void consultaLog() throws IOException {
+    void consultaLog() throws IOException, LogNotFoundException {
         logs.add(log001);
         assertEquals(logs, json.consultaLog("10908", "12345678Z", dateFecha));
     }
@@ -214,7 +214,7 @@ class CasinoDAOFileJSONTest {
     }
 
     @Test
-    void actualizarCliente() throws IOException {
+    void actualizarCliente() throws IOException, ClientNotFoundException {
         cli001.setNombre("Alberto");
         String nombre = "Alberto";
         json.actualizarCliente("12345678Z",cli001);
@@ -227,7 +227,7 @@ class CasinoDAOFileJSONTest {
     }
 
     @Test
-    void actualizarServicio() throws IOException {
+    void actualizarServicio() throws IOException, ServiceNotFoundException {
         String nuevoNombre = "Mesa Actualizada";
         ser001.setNombreServicio(nuevoNombre);
         json.actualizarServicio("10908", ser001);
@@ -240,7 +240,7 @@ class CasinoDAOFileJSONTest {
     }
 
     @Test
-    void borrarServicio() throws IOException {
+    void borrarServicio() throws IOException, ServiceNotFoundException {
         json.borrarServicio(ser001);
         assertThrows(ServiceNotFoundException.class, () -> json.consultaServicio("10908"));
     }
@@ -252,7 +252,7 @@ class CasinoDAOFileJSONTest {
     }
 
     @Test
-    void borrarCliente() throws IOException {
+    void borrarCliente() throws IOException, ClientNotFoundException {
         json.borrarCliente(cli001);
         assertThrows(ClientNotFoundException.class, () -> json.consultaCliente("12345678Z"));
 
@@ -265,7 +265,7 @@ class CasinoDAOFileJSONTest {
     }
 
     @Test
-    void dineroInvertidoClienteEnDia() throws IOException {
+    void dineroInvertidoClienteEnDia() throws IOException, ClientNotFoundException {
         double totalInvertido = 35.0 + 15.0 + 50.0 - 200.0 + 100.0;
         assertEquals(totalInvertido, json.dineroInvertidoClienteEnDia("12345678Z", dateFecha));
 
@@ -277,7 +277,7 @@ class CasinoDAOFileJSONTest {
     }
 
     @Test
-    void gananciasAlimentos() throws IOException {
+    void gananciasAlimentos() throws IOException, ClientNotFoundException {
         double totalInvertido = 35.0 + 15.0;
         assertEquals(totalInvertido, json.gananciasAlimentos("12345678Z"));
     }
@@ -288,7 +288,7 @@ class CasinoDAOFileJSONTest {
     }
 
     @Test
-    void dineroGanadoClienteEnDia() throws IOException {
+    void dineroGanadoClienteEnDia() throws IOException, ClientNotFoundException {
         double totalInvertido = -100.0 - 50.0 + 200.0;
         assertEquals(totalInvertido, json.dineroGanadoClienteEnDia("12345678Z", dateFecha));
     }
@@ -299,7 +299,7 @@ class CasinoDAOFileJSONTest {
     }
 
     @Test
-    void vecesClienteJuegaMesa() throws IOException {
+    void vecesClienteJuegaMesa() throws IOException, ClientNotFoundException, ServiceNotFoundException {
         double contador = 3.0;
         assertEquals(contador, json.vecesClienteJuegaMesa(cli001.getDni(), ser001.getCodigo()));
     }
